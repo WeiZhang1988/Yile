@@ -30,7 +30,6 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
 	m_sptr_sys->add_subsys_whl_4disk(sptr_sub_whl_4disk);
     
     m_external_inputs = d_vec(Sys_Whl_4Disk::m_external_inputs_num,0.0);
-	m_external_inputs[1] = 10.0;
 }
 
 void Simulator_Whl_4Disk::run () {
