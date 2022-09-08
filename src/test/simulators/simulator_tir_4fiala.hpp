@@ -22,7 +22,7 @@
 using namespace boost::numeric::odeint;
 using namespace std::chrono;
 using namespace std;
-using namespace yile;
+using namespace Yile;
 
 class Simulator_Tir_4Fiala {
 public:

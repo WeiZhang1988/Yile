@@ -17,7 +17,7 @@
 #include "simulators/simulator_vehicle_body.hpp"
 #include "simulators/simulator_whl_4disk.hpp"
 
-using namespace yile;
+using namespace Yile;
 
 
 void run_Whl_Disk_Tir_Fiala() {
@@ -135,7 +135,7 @@ int main(){
 	//run_Whl_Disk_Tir_Fiala();
 	//run_Tir_4Fiala();
 	//run_Sus_2Ind();
-	run_Vehicle_Body();
-	//run_Whl_4Disk();
+	//run_Vehicle_Body();
+	run_Whl_4Disk();
 	return 0;
 }
