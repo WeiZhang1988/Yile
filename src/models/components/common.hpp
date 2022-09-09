@@ -20,6 +20,7 @@
 #include <cassert>
 #include <iostream>
 #include <algorithm>
+#include <boost/property_tree/json_parser.hpp>
 
 namespace NMSPC{
 typedef std::vector< double > d_vec;

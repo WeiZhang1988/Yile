@@ -79,7 +79,7 @@ public:
 	double z7I_yz=0.0, double z7I_zx=0.0, double z7I_zy=0.0, \
 	double z7I_zz=0.0, \
 	//aerodynamics
-	double Pabs=101325, double Cg=287.058, \
+	double Pabs=101325.0, double Cg=287.058, \
 	double Af=1.0, double Cd=1.0, double Cl=1.0, double Cpm=1.0, \
 	d_vec beta_w={0.0,0.01,0.02,0.03}, \
 	d_vec Cs	={0.0,0.03,0.06,0.09}, \
