@@ -58,6 +58,7 @@ void NMSPC::printvec(const d_vec &in_data, const char &l, const char &r) {
 }
 
 double NMSPC::piece_wise_linear::operator() (const double &x_in){
+	assert(m_n == m_y.size() && m_n>1);
 	if (x_in <= m_x[0]) {
 		if (m_x[0]<m_x[1])
 			return (x_in-m_x[1])/(m_x[0]-m_x[1])*m_y[0] + (x_in-m_x[0])/(m_x[1]-m_x[0])*m_y[1];

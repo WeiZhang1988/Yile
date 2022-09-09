@@ -14,11 +14,13 @@ add_library(
     interfaces/interface_sus_2ind.cpp
     interfaces/interface_vehicle_body.cpp
     interfaces/interface_whl_4disk.cpp
+    interfaces/interface_lpf.cpp
     systems/system_whl_disk_tir_fiala.cpp  
     systems/system_tir_4fiala.cpp 
     systems/system_sus_2ind.cpp 
     systems/system_vehicle_body.cpp
     systems/system_whl_4disk.cpp
+    systems/system_lpf.cpp
 )
 
 
@@ -38,11 +40,13 @@ install(FILES components/common.hpp
     		  interfaces/interface_sus_2ind.hpp
     		  interfaces/interface_vehicle_body.hpp
     		  interfaces/interface_whl_4disk.hpp
+    		  interfaces/interface_lpf.hpp
     		  systems/system_whl_disk_tir_fiala.hpp
     		  systems/system_tir_4fiala.hpp 
     		  systems/system_sus_2ind.hpp
     		  systems/system_vehicle_body.hpp
     		  systems/system_whl_4disk.hpp
+    		  systems/system_lpf.hpp
 			  DESTINATION ${PROJECT_SOURCE_DIR}/install/include)
 #install(TARGETS models ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/install/lib)
 #install(TARGETS models LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/install/share)

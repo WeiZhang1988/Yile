@@ -49,6 +49,7 @@ public:
 	m_Mroll(init_Mroll) {}
 	
 	Tire_Fiala (const d_vec &params, const d_vec &init_states);
+	Tire_Fiala (const std::string &filename);
 
 	void push_con_states (d_vec &con_states);
 	

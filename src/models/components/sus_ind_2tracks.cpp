@@ -51,6 +51,51 @@ NMSPC::Sus_Ind_2Tracks::Sus_Ind_2Tracks(const d_vec &params, const bool is_strg)
 	}
 }
 
+NMSPC::Sus_Ind_2Tracks::Sus_Ind_2Tracks (const std::string &filename) {
+	boost::property_tree::ptree tree;
+    if (std::filesystem::exists(filename)){
+        boost::property_tree::read_json(filename,tree);
+        if ("suspension-independent" == tree.get<std::string>("type")) {
+            m_F0z_l				= tree.get<double>("F0z_l");
+			m_Kz_l				= tree.get<double>("Kz_l");
+			m_Cz_l				= tree.get<double>("Cz_l"); 
+			m_Hmax_l			= tree.get<double>("Hmax_l"); 		
+			m_roll_strg_H_slp_l	= tree.get<double>("roll_strg_H_slp_l"); 	
+			m_toe_l				= tree.get<double>("toe_l");
+			m_toe_strg_slp_l	= tree.get<double>("toe_strg_slp_l"); 		
+			m_caster_l			= tree.get<double>("caster_l"); 
+			m_caster_H_slp_l	= tree.get<double>("caster_H_slp_l");
+			m_caster_strg_slp_l = tree.get<double>("caster_strg_slp_l");
+			m_camber_l			= tree.get<double>("camber_l"); 
+			m_camber_H_slp_l	= tree.get<double>("camber_H_slp_l"); 
+			m_camber_strg_slp_l	= tree.get<double>("camber_strg_slp_l"); 
+			m_strg_hgt_slp_l	= tree.get<double>("strg_hgt_slp_l");
+			m_F0z_r				= tree.get<double>("F0z_r");
+			m_Kz_r				= tree.get<double>("Kz_r");
+			m_Cz_r				= tree.get<double>("Cz_r"); 
+			m_Hmax_r			= tree.get<double>("Hmax_r"); 		
+			m_roll_strg_H_slp_r	= tree.get<double>("roll_strg_H_slp_r"); 	
+			m_toe_r				= tree.get<double>("toe_r");
+			m_toe_strg_slp_r	= tree.get<double>("toe_strg_slp_r"); 		
+			m_caster_r			= tree.get<double>("caster_r"); 
+			m_caster_H_slp_r	= tree.get<double>("caster_H_slp_r");
+			m_caster_strg_slp_r = tree.get<double>("caster_strg_slp_r");
+			m_camber_r			= tree.get<double>("camber_r"); 
+			m_camber_H_slp_r	= tree.get<double>("camber_H_slp_r"); 
+			m_camber_strg_slp_r	= tree.get<double>("camber_strg_slp_r"); 
+			m_strg_hgt_slp_r	= tree.get<double>("strg_hgt_slp_r");
+			if (!tree.get<bool>("is_strg")) {
+				m_strg_hgt_slp_l = 0.0;
+				m_strg_hgt_slp_r = 0.0;
+			}
+        } else {
+            Sus_Ind_2Tracks();
+        }
+    } else {
+        Sus_Ind_2Tracks();
+    }
+}
+
 void NMSPC::Sus_Ind_2Tracks::update_pv (const d_vec &inputs, d_vec &outputs) {
 	//pull inputs
 	//--left

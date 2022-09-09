@@ -57,7 +57,6 @@ class piece_wise_linear {
 public:
 	piece_wise_linear(const d_vec &x, const d_vec &y):m_x(x),m_y(y) {
 		m_n = m_x.size();
-		assert(m_n == m_y.size() && m_n>1);
 	}
 	double operator() (const double &x_in);
 private:
