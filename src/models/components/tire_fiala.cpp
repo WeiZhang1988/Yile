@@ -39,6 +39,40 @@ const d_vec &init_states) {
 	m_Mroll = init_states[2];
 }
 
+NMSPC::Tire_Fiala::Tire_Fiala (const std::string &filename) {
+	boost::property_tree::ptree tree;
+    if (std::filesystem::exists(filename)){
+        boost::property_tree::read_json(filename,tree);
+        if ("tire-fiala" == tree.get<std::string>("type")) {
+            m_Lrelx = tree.get<double>("Lrelx");
+            m_Lrely = tree.get<double>("Lrely");
+            m_alpha_min = tree.get<double>("alpha_min");
+            m_alpha_max = tree.get<double>("alpha_max");
+            m_mu_min = tree.get<double>("mu_min");
+            m_mu_max = tree.get<double>("mu_max");
+            m_aMy = tree.get<double>("aMy");
+            m_bMy = tree.get<double>("bMy");
+            m_cMy = tree.get<double>("cMy");
+            m_alphaMy = tree.get<double>("alphaMy");
+            m_betaMy = tree.get<double>("betaMy");
+            m_Fz_min = tree.get<double>("Fz_min");
+			m_Fz_max = tree.get<double>("Fz_max");
+			m_cKappa = tree.get<double>("cKappa");
+            m_cAlpha = tree.get<double>("cAlpha");
+            m_bMz = tree.get<double>("bMz");
+			m_width = tree.get<double>("width");
+			m_cGamma = tree.get<double>("cGamma");
+			m_kappa = tree.get<double>("init_kappa");
+			m_alpha_prime = tree.get<double>("init_alpha");
+			m_Mroll = tree.get<double>("init_Mroll");
+        } else {
+            Tire_Fiala();
+        }
+    } else {
+        Tire_Fiala();
+    }
+}
+
 void NMSPC::Tire_Fiala::push_con_states (d_vec &con_states) {
 	con_states[0] = m_kappa;
 	con_states[1] = m_alpha_prime;

@@ -165,6 +165,175 @@ NMSPC::Vehicle_Body::Vehicle_Body(const d_vec &params_d, const d_v_vec &params_v
 	m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cym);
 }
 
+NMSPC::Vehicle_Body::Vehicle_Body (const std::string &filename) {
+	boost::property_tree::ptree tree;
+    if (std::filesystem::exists(filename)){
+        boost::property_tree::read_json(filename,tree);
+        if ("vehicle-body" == tree.get<std::string>("type")) {
+        	//parameters
+			//chassis
+			m_mass 		= tree.get<double>("mass");
+			m_a 		= tree.get<double>("a");
+			m_b 		= tree.get<double>("b");
+			m_d 		= tree.get<double>("d");
+			m_h 		= tree.get<double>("h");
+			m_Ixx 		= tree.get<double>("Ixx");
+			m_Ixy 		= tree.get<double>("Ixy");
+			m_Ixz 		= tree.get<double>("Ixz");
+			m_Iyx 		= tree.get<double>("Iyx");
+			m_Iyy 		= tree.get<double>("Iyy");
+			m_Iyz 		= tree.get<double>("Iyz");
+			m_Izx 		= tree.get<double>("Izx");
+			m_Izy 		= tree.get<double>("Izy");
+			m_Izz 		= tree.get<double>("Izz");
+			m_w_f		= tree.get<double>("w_f");
+			m_w_r		= tree.get<double>("w_r");
+			//inertial loads
+			//z1
+			m_z1m 		= tree.get<double>("z1m");
+			m_z1R_x 	= tree.get<double>("z1R_x");
+			m_z1R_y 	= tree.get<double>("z1R_y");
+			m_z1R_z		= tree.get<double>("z1R_z");
+			m_z1I_xx 	= tree.get<double>("z1I_xx");
+			m_z1I_xy 	= tree.get<double>("z1I_xy");
+			m_z1I_xz 	= tree.get<double>("z1I_xz");
+			m_z1I_yx 	= tree.get<double>("z1I_yx");
+			m_z1I_yy 	= tree.get<double>("z1I_yy");
+			m_z1I_yz 	= tree.get<double>("z1I_yz");
+			m_z1I_zx 	= tree.get<double>("z1I_zx");
+			m_z1I_zy 	= tree.get<double>("z1I_zy");
+			m_z1I_zz 	= tree.get<double>("z1I_zz");
+			//z2
+			m_z2m 		= tree.get<double>("z2m");
+			m_z2R_x 	= tree.get<double>("z2R_x");
+			m_z2R_y 	= tree.get<double>("z2R_y");
+			m_z2R_z		= tree.get<double>("z2R_z");
+			m_z2I_xx 	= tree.get<double>("z2I_xx");
+			m_z2I_xy 	= tree.get<double>("z2I_xy");
+			m_z2I_xz 	= tree.get<double>("z2I_xz");
+			m_z2I_yx 	= tree.get<double>("z2I_yx");
+			m_z2I_yy 	= tree.get<double>("z2I_yy");
+			m_z2I_yz 	= tree.get<double>("z2I_yz");
+			m_z2I_zx 	= tree.get<double>("z2I_zx");
+			m_z2I_zy 	= tree.get<double>("z2I_zy");
+			m_z2I_zz 	= tree.get<double>("z2I_zz");
+			//z3
+			m_z3m 		= tree.get<double>("z3m");
+			m_z3R_x 	= tree.get<double>("z3R_x");
+			m_z3R_y 	= tree.get<double>("z3R_y");
+			m_z3R_z		= tree.get<double>("z3R_z");
+			m_z3I_xx 	= tree.get<double>("z3I_xx");
+			m_z3I_xy 	= tree.get<double>("z3I_xy");
+			m_z3I_xz 	= tree.get<double>("z3I_xz");
+			m_z3I_yx 	= tree.get<double>("z3I_yx");
+			m_z3I_yy 	= tree.get<double>("z3I_yy");
+			m_z3I_yz 	= tree.get<double>("z3I_yz");
+			m_z3I_zx 	= tree.get<double>("z3I_zx");
+			m_z3I_zy 	= tree.get<double>("z3I_zy");
+			m_z3I_zz 	= tree.get<double>("z3I_zz");
+			//z4
+			m_z4m 		= tree.get<double>("z4m");
+			m_z4R_x 	= tree.get<double>("z4R_x");
+			m_z4R_y 	= tree.get<double>("z4R_y");
+			m_z4R_z		= tree.get<double>("z4R_z");
+			m_z4I_xx 	= tree.get<double>("z4I_xx");
+			m_z4I_xy 	= tree.get<double>("z4I_xy");
+			m_z4I_xz 	= tree.get<double>("z4I_xz");
+			m_z4I_yx 	= tree.get<double>("z4I_yx");
+			m_z4I_yy 	= tree.get<double>("z4I_yy");
+			m_z4I_yz 	= tree.get<double>("z4I_yz");
+			m_z4I_zx 	= tree.get<double>("z4I_zx");
+			m_z4I_zy 	= tree.get<double>("z4I_zy");
+			m_z4I_zz 	= tree.get<double>("z4I_zz");
+			//z5
+			m_z5m 		= tree.get<double>("z5m");
+			m_z5R_x 	= tree.get<double>("z5R_x");
+			m_z5R_y 	= tree.get<double>("z5R_y");
+			m_z5R_z		= tree.get<double>("z5R_z");
+			m_z5I_xx 	= tree.get<double>("z5I_xx");
+			m_z5I_xy 	= tree.get<double>("z5I_xy");
+			m_z5I_xz 	= tree.get<double>("z5I_xz");
+			m_z5I_yx 	= tree.get<double>("z5I_yx");
+			m_z5I_yy 	= tree.get<double>("z5I_yy");
+			m_z5I_yz 	= tree.get<double>("z5I_yz");
+			m_z5I_zx 	= tree.get<double>("z5I_zx");
+			m_z5I_zy 	= tree.get<double>("z5I_zy");
+			m_z5I_zz 	= tree.get<double>("z5I_zz");
+			//z6
+			m_z6m 		= tree.get<double>("z6m");
+			m_z6R_x 	= tree.get<double>("z6R_x");
+			m_z6R_y 	= tree.get<double>("z6R_y");
+			m_z6R_z		= tree.get<double>("z6R_z");
+			m_z6I_xx 	= tree.get<double>("z6I_xx");
+			m_z6I_xy 	= tree.get<double>("z6I_xy");
+			m_z6I_xz 	= tree.get<double>("z6I_xz");
+			m_z6I_yx 	= tree.get<double>("z6I_yx");
+			m_z6I_yy 	= tree.get<double>("z6I_yy");
+			m_z6I_yz 	= tree.get<double>("z6I_yz");
+			m_z6I_zx 	= tree.get<double>("z6I_zx");
+			m_z6I_zy 	= tree.get<double>("z6I_zy");
+			m_z6I_zz 	= tree.get<double>("z6I_zz");
+			//z7
+			m_z7m 		= tree.get<double>("z7m");
+			m_z7R_x 	= tree.get<double>("z7R_x");
+			m_z7R_y 	= tree.get<double>("z7R_y");
+			m_z7R_z		= tree.get<double>("z7R_z");
+			m_z7I_xx 	= tree.get<double>("z7I_xx");
+			m_z7I_xy 	= tree.get<double>("z7I_xy");
+			m_z7I_xz 	= tree.get<double>("z7I_xz");
+			m_z7I_yx 	= tree.get<double>("z7I_yx");
+			m_z7I_yy 	= tree.get<double>("z7I_yy");
+			m_z7I_yz 	= tree.get<double>("z7I_yz");
+			m_z7I_zx 	= tree.get<double>("z7I_zx");
+			m_z7I_zy 	= tree.get<double>("z7I_zy");
+			m_z7I_zz 	= tree.get<double>("z7I_zz");
+			//aerodynamics
+			m_Pabs	 = tree.get<double>("Pabs");
+			m_Cg	 = tree.get<double>("Cg");
+			m_Af  	 = tree.get<double>("Af");
+			m_Cd  	 = tree.get<double>("Cd");
+			m_Cl  	 = tree.get<double>("Cl");
+			m_Cpm 	 = tree.get<double>("Cpm");
+			for (auto item : tree.get_child("beta_w")) {
+            	m_beta_w.push_back(item.second.get<double>(""));
+        	}
+			for (auto item : tree.get_child("Cs")) {
+            	m_Cs.push_back(item.second.get<double>(""));
+        	}
+			for (auto item : tree.get_child("Cym")) {
+            	m_Cym.push_back(item.second.get<double>(""));
+        	}
+			//simulation
+			m_xdot_tol = tree.get<double>("xdot_tol");
+			m_longOff  = tree.get<double>("longOff"); 
+			m_latOff   = tree.get<double>("latOff"); 
+			m_vertOff  = tree.get<double>("vertOff");
+			//initialize states
+			m_xe_x	= tree.get<double>("init_xe_x");
+			m_xe_y	= tree.get<double>("init_xe_y");
+			m_xe_z	= tree.get<double>("init_xe_z");
+			m_vb_x	= tree.get<double>("init_vb_x");
+			m_vb_y	= tree.get<double>("init_vb_y");
+			m_vb_z	= tree.get<double>("init_vb_z");
+			m_phai	= tree.get<double>("init_phai");
+			m_theta	= tree.get<double>("init_theta");
+			m_psi	= tree.get<double>("init_psi");
+			m_p		= tree.get<double>("init_p");
+			m_q		= tree.get<double>("init_q");
+			m_r		= tree.get<double>("init_r");
+			//caculate bar
+			calculate_bar();
+			//caculate table;
+			m_pwl_Cs = piece_wise_linear(m_beta_w,m_Cs);
+			m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cym);
+        } else {
+            Vehicle_Body();
+        }
+    } else {
+        Vehicle_Body();
+    }
+}
+
 void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {
 	con_states[0] = m_xe_x;
 	con_states[1] = m_xe_y;

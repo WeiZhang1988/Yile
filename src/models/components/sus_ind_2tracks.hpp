@@ -60,6 +60,7 @@ public:
 	}
 	
 	Sus_Ind_2Tracks (const d_vec &params, const bool is_strg);
+	Sus_Ind_2Tracks (const std::string &filename);
 
 	void push_con_states (d_vec &con_states) {};
 	void pull_con_states (const d_vec &con_states) {};

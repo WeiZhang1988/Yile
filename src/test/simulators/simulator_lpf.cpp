@@ -10,47 +10,46 @@
 // Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
 //
 // =============================================================================
-#include "simulator_vehicle_body.hpp"
+#include "simulator_lpf.hpp"
 
-Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, double t_step) {
+Simulator_LPF::Simulator_LPF(double t_start, double t_end, double t_step) {
 	m_steps = 0;
 	m_t_start = t_start;
 	m_t_end = t_end;
 	m_t_step = t_step;
 	m_t_step_micros = m_t_step/1e-6;
 
-	m_sptr_sys = make_shared<Sys_Vehicle_Body>();
-	shared_ptr<Vehicle_Body> sptr_vhl_bdy = make_shared<Vehicle_Body>("data/vhl_bdy_par_0.json");
+	m_sptr_sys = make_shared<Sys_LPF>();
+    shared_ptr<Low_Pass_Filter> sptr_lpf = make_shared<Low_Pass_Filter>();
  
-	m_sptr_sys->add_vhl_bdy(sptr_vhl_bdy);
+	m_sptr_sys->add_lpf(sptr_lpf);
     
-    m_external_inputs = d_vec(Sys_Vehicle_Body::m_external_inputs_num,10.0);
+    m_external_inputs = d_vec(Sys_LPF::m_external_inputs_num,0.0);
 }
 
-void Simulator_Vehicle_Body::run() {
+void Simulator_LPF::run () {
+
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
-	
+
 	m_tp_start = steady_clock::now();
-	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	for (int i=0; i<steps_num; i++) {
+		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_steps++;	
 		m_times.push_back(t);
 		m_outputs.push_back(m_sptr_sys->m_con_states);
 
 		m_sptr_sys->pull_external_inputs (m_external_inputs);
-		
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-	
+		
 		t += m_t_step;
 		spin(m_steps);
 	}
-	
 	m_times.push_back(t);
 	m_outputs.push_back(m_sptr_sys->m_con_states);
 }
 
-void Simulator_Vehicle_Body::spin (const int &steps) {
+void Simulator_LPF::spin (const int &steps) {
 	m_tp_end = steady_clock::now();
 	microseconds dur_micros = duration_cast<microseconds>(m_tp_end - m_tp_start);
 	int dur_micros_cnt = dur_micros.count();

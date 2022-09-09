@@ -139,6 +139,7 @@ public:
 	}
 	
 	Vehicle_Body (const d_vec &params_d, const d_v_vec &params_v, const d_vec &init_states);
+	Vehicle_Body (const std::string &filename);
 
 	void push_con_states (d_vec &con_states);
 	
@@ -284,8 +285,8 @@ private:
 	double m_Mb_y = NaN;
 	double m_Mb_z = NaN;
 	//--Cs Cym
-	piece_wise_linear m_pwl_Cs = piece_wise_linear(m_beta_w,m_Cs);;
-	piece_wise_linear m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cs);;
+	piece_wise_linear m_pwl_Cs = piece_wise_linear(m_beta_w,m_Cs);
+	piece_wise_linear m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cs);
 	//outputs
 	//--center of mass
 	double m_xe_x_c = NaN;
