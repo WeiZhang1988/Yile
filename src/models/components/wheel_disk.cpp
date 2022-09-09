@@ -27,7 +27,33 @@ const d_vec &init_states, const bool &init_locked_flag) {
     //initialize continuous and discrete states
     m_unlocked_omega = init_states[0];
     m_unlocked_omega_pre = init_states[0];
+    m_Pz = init_states[1];
 	m_locked_flag = init_locked_flag;
+}
+
+NMSPC::Wheel_Disk::Wheel_Disk (const std::string &filename) {
+    boost::property_tree::ptree tree;
+    if (std::filesystem::exists(filename)){
+        boost::property_tree::read_json(filename,tree);
+        if ("wheel-disk" == tree.get<std::string>("type")) {
+            m_unloaded_radius = tree.get<double>("unloaded_radius");
+            m_IYY = tree.get<double>("IYY");
+            m_br = tree.get<double>("br");
+            m_disk_abore = tree.get<double>("disk_abore");
+            m_num_pads = tree.get<double>("num_pads");
+            m_Rm = tree.get<double>("Rm");
+            m_mu_kinetic = tree.get<double>("mu_kinetic");
+            m_mu_static = tree.get<double>("mu_static");
+            m_unlocked_omega = tree.get<double>("init_omega");
+            m_unlocked_omega_pre = tree.get<double>("init_omega");
+            m_Pz = tree.get<double>("init_Pz");
+            m_locked_flag = tree.get<bool>("init_lock_flag");
+        } else {
+            Wheel_Disk();
+        }
+    } else {
+        Wheel_Disk();
+    }
 }
 
 void NMSPC::Wheel_Disk::push_con_states (d_vec &con_states) {

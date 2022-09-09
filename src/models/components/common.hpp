@@ -13,6 +13,7 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 #define NMSPC Yile
+#include <string>
 #include <vector>
 #include <math.h>
 #include <limits>
@@ -20,6 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <algorithm>
+#include <filesystem>
 #include <boost/property_tree/json_parser.hpp>
 
 namespace NMSPC{

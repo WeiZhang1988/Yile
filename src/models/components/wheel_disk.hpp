@@ -42,6 +42,7 @@ public:
 	m_locked_flag(init_locked_flag) {};
 	
 	Wheel_Disk (const d_vec &params, const d_vec &init_states, const bool &init_locked_flag);
+	Wheel_Disk (const std::string &filename);
 
 	void push_con_states (d_vec &con_states);
 	
