@@ -18,6 +18,7 @@
 #include <thread>
 #include <chrono>
 #include "systems/system_whl_4disk.hpp"
+#include "csv.hpp"
 
 using namespace boost::numeric::odeint;
 using namespace std::chrono;

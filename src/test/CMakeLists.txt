@@ -6,7 +6,8 @@ add_executable(vehicle_dynamics_test
 			   simulators/simulator_vehicle_body.cpp
 			   simulators/simulator_whl_4disk.cpp
 			   simulators/simulator_lpf.cpp)
-target_link_libraries(vehicle_dynamics_test PRIVATE models)
+target_link_libraries(vehicle_dynamics_test PRIVATE models
+													pthread)
 
 #install(TARGETS vehicle_dynamics_test DESTINATION ${PROJECT_SOURCE_DIR}/install/exe)
 install(TARGETS vehicle_dynamics_test DESTINATION ${PROJECT_SOURCE_DIR}/install)

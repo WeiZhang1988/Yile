@@ -21,8 +21,8 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
 
 	m_sptr_sys = make_shared<Sys_Sus_2Ind>();
 	shared_ptr<Subsys_Sus_2Ind> sptr_sub_sus_2ind = make_shared<Subsys_Sus_2Ind>();
-    shared_ptr<Sus_Ind_2Tracks> sptr_sus_f = make_shared<Sus_Ind_2Tracks>("data/sus_ind_par_0.json");
-	shared_ptr<Sus_Ind_2Tracks> sptr_sus_r = make_shared<Sus_Ind_2Tracks>("data/sus_ind_par_0.json");
+    shared_ptr<Sus_Ind_2Tracks> sptr_sus_f = make_shared<Sus_Ind_2Tracks>("data/params/sus_ind_par_0.json");
+	shared_ptr<Sus_Ind_2Tracks> sptr_sus_r = make_shared<Sus_Ind_2Tracks>("data/params/sus_ind_par_0.json");
  
     sptr_sub_sus_2ind->add_suses(sptr_sus_f, sptr_sus_r);
 	m_sptr_sys->add_subsys_sus_2ind(sptr_sub_sus_2ind);

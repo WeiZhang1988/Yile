@@ -20,7 +20,7 @@ Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, dou
 	m_t_step_micros = m_t_step/1e-6;
 
 	m_sptr_sys = make_shared<Sys_Vehicle_Body>();
-	shared_ptr<Vehicle_Body> sptr_vhl_bdy = make_shared<Vehicle_Body>("data/vhl_bdy_par_0.json");
+	shared_ptr<Vehicle_Body> sptr_vhl_bdy = make_shared<Vehicle_Body>("data/params/vhl_bdy_par_0.json");
  
 	m_sptr_sys->add_vhl_bdy(sptr_vhl_bdy);
     

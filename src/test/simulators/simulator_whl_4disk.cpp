@@ -12,6 +12,7 @@
 // =============================================================================
 #include "simulator_whl_4disk.hpp"
 
+
 Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_step) {
 	m_steps = 0;
 	m_t_start = t_start;
@@ -21,10 +22,10 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
 
 	m_sptr_sys = make_shared<Sys_Whl_4Disk>();
 	shared_ptr<Subsys_Wheel_4Disk> sptr_sub_whl_4disk = make_shared<Subsys_Wheel_4Disk>();
-    shared_ptr<Wheel_Disk> sptr_whl_fl = make_shared<Wheel_Disk>("data/whl_disk_par_0.json");
-	shared_ptr<Wheel_Disk> sptr_whl_fr = make_shared<Wheel_Disk>("data/whl_disk_par_0.json");
-	shared_ptr<Wheel_Disk> sptr_whl_rl = make_shared<Wheel_Disk>("data/whl_disk_par_0.json");
-	shared_ptr<Wheel_Disk> sptr_whl_rr = make_shared<Wheel_Disk>("data/whl_disk_par_0.json");
+    shared_ptr<Wheel_Disk> sptr_whl_fl = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
+	shared_ptr<Wheel_Disk> sptr_whl_fr = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
+	shared_ptr<Wheel_Disk> sptr_whl_rl = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
+	shared_ptr<Wheel_Disk> sptr_whl_rr = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
  
     sptr_sub_whl_4disk->add_whls(sptr_whl_fl,sptr_whl_fr,sptr_whl_rl,sptr_whl_rr);
 	m_sptr_sys->add_subsys_whl_4disk(sptr_sub_whl_4disk);
@@ -33,6 +34,7 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
 }
 
 void Simulator_Whl_4Disk::run () {
+	io::CSVReader<2> m_inputs("data/inputs/whl_4disk_inputs.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
@@ -44,11 +46,12 @@ void Simulator_Whl_4Disk::run () {
 		m_times.push_back(t);
 		m_outputs.push_back(m_sptr_sys->m_con_states);
 
+		m_inputs.read_row(m_external_inputs[2],m_external_inputs[1]); 
 		m_sptr_sys->pull_external_inputs (m_external_inputs);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
 		
 		t += m_t_step;
-		spin(m_steps);
+		//spin(m_steps);
 	}
 	m_times.push_back(t);
 	m_outputs.push_back(m_sptr_sys->m_con_states);
