@@ -30,7 +30,7 @@ void run_Whl_Disk_Tir_Fiala() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res/res_wheels_tires.csv");
+	of.open("res_wheels_tires.csv");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (size_t i=0;i<sim1.m_times.size();i++) {
 		of<<std::setprecision(7)<<sim1.m_times[i]<<',';
@@ -52,7 +52,7 @@ void run_Tir_4Fiala() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res/res_tire_4fiala.csv");
+	of.open("res_tire_4fiala.csv");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (size_t i=0;i<sim1.m_times.size();i++) {
 		of<<std::setprecision(7)<<sim1.m_times[i]<<',';
@@ -74,7 +74,7 @@ void run_Sus_2Ind() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res/res_sus_2ind.csv");
+	of.open("res_sus_2ind.csv");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (size_t i=0;i<sim1.m_times.size();i++) {
 		of<<std::setprecision(7)<<sim1.m_times[i]<<',';
@@ -96,7 +96,7 @@ void run_Vehicle_Body() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res/res_vehicle_body.csv");
+	of.open("res_vehicle_body.csv");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (size_t i=0;i<sim1.m_times.size();i++) {
 		of<<std::setprecision(7)<<sim1.m_times[i]<<',';
@@ -111,14 +111,14 @@ void run_Vehicle_Body() {
 
 void run_Whl_4Disk() {
 	std::ofstream of;
-	Simulator_Whl_4Disk sim1 = Simulator_Whl_4Disk(0.0,10.0,1e-4);
+	Simulator_Whl_4Disk sim1 = Simulator_Whl_4Disk(0.0,100.0,1e-4);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res/res_whl_4disk.csv");
+	of.open("res_whl_4disk.csv");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (size_t i=0;i<sim1.m_times.size();i++) {
 		of<<std::setprecision(7)<<sim1.m_times[i]<<',';
@@ -140,7 +140,7 @@ void run_LPF() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res/res_lpf.csv");
+	of.open("res_lpf.csv");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (size_t i=0;i<sim1.m_times.size();i++) {
 		of<<std::setprecision(7)<<sim1.m_times[i]<<',';
