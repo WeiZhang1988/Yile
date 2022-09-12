@@ -87,30 +87,30 @@ void NMSPC::Tire_Fiala::pull_con_states (const d_vec &con_states) {
 
 void NMSPC::Tire_Fiala::update_pv (const d_vec &inputs, d_vec &outputs) {
 	//pull inputs
-	m_omega = inputs[0];
-	m_vx = inputs[1];
-	m_vy = inputs[2];
-	m_gamma = inputs[3];
-	m_psidot = inputs[4];
-	m_Re = inputs[5];
-	m_rhoz = inputs[6];
+	m_Whl_omega = inputs[0];
+	m_Sus_vx = inputs[1];
+	m_Sus_vy = inputs[2];
+	m_Sus_gamma = inputs[3];
+	m_Sus_psidot = inputs[4];
+	m_Whl_Re = inputs[5];
+	m_Whl_rhoz = inputs[6];
 }
 
 void NMSPC::Tire_Fiala::update_fm (const d_vec &inputs, d_vec &outputs) {
 	//pull inputs
 	m_Sus_Fz = inputs[0];
-	m_scale = inputs[1];
+	m_Gnd_scale = inputs[1];
 	m_Tir_Prs = inputs[2];
-	m_Tamb = inputs[3];
+	m_Air_Tamb = inputs[3];
 	//process
 	m_sat_Fz = saturation(m_Sus_Fz, m_Fz_min, m_Fz_max);
-	m_alpha = saturation(m_alpha_prime * tanh(abs(m_vy)), m_alpha_min, \
+	m_alpha = saturation(m_alpha_prime * tanh(abs(m_Sus_vy)), m_alpha_min, \
     m_alpha_max);
     m_tan_alpha = tan(m_alpha);
     m_mu = (m_mu_max - (m_mu_max - m_mu_min) * saturation(sqrt(pow(\
-    m_kappa, 2.0) + pow(m_tan_alpha, 2.0)), 0.0, 1.0)) * m_scale;
-    m_My = -(m_aMy + abs(m_vx) * m_bMy + pow(m_vx, 2.0) * m_cMy) * \
-    tanh(4.0 * m_omega) * m_Re * pow(m_sat_Fz, m_betaMy) * \
+    m_kappa, 2.0) + pow(m_tan_alpha, 2.0)), 0.0, 1.0)) * m_Gnd_scale;
+    m_My = -(m_aMy + abs(m_Sus_vx) * m_bMy + pow(m_Sus_vx, 2.0) * m_cMy) * \
+    tanh(4.0 * m_Whl_omega) * m_Whl_Re * pow(m_sat_Fz, m_betaMy) * \
     pow(m_Tir_Prs, m_alphaMy);
     m_kappa_critical = m_mu * m_sat_Fz / 2.0 / m_cKappa;
     if (abs(m_kappa) <= m_kappa_critical) {
@@ -126,19 +126,19 @@ void NMSPC::Tire_Fiala::update_fm (const d_vec &inputs, d_vec &outputs) {
     m_alpha_critical = atan(m_mu * 3.0 * m_sat_Fz / m_cAlpha);
     if (abs(m_alpha) <= m_alpha_critical) {
     	m_H = 1.0 - abs(m_tan_alpha) * m_cAlpha / (m_mu * 3.0 * m_sat_Fz);
-    	m_Mz_stick = -m_psidot * m_bMz - m_width * (1.0 - m_H) * \
+    	m_Mz_stick = -m_Sus_psidot * m_bMz - m_width * (1.0 - m_H) * \
     	pow(m_H, 3.0) * m_mu * m_sat_Fz * tanh(4.0 * m_alpha);
-    	m_Fy_stick = m_gamma * m_cGamma - (1.0 - pow(m_H, 3.0)) * m_mu *\
+    	m_Fy_stick = m_Sus_gamma * m_cGamma - (1.0 - pow(m_H, 3.0)) * m_mu *\
     	m_sat_Fz * tanh(4.0 * m_alpha);
     	m_Tir_Mz = m_Mz_stick;
     	m_Tir_Fy = m_Fy_stick;
     } else {
-    	m_Mz_slide = m_psidot * m_bMz;
+    	m_Mz_slide = m_Sus_psidot * m_bMz;
     	m_Fy_slide = -m_sat_Fz * m_mu * tanh(4.0 * m_alpha);
     	m_Tir_Mz = m_Mz_slide;
     	m_Tir_Fy = m_Fy_slide;
     }
-    m_Tir_Mx = cos(m_gamma) * m_Tir_Fy * m_Re;
+    m_Tir_Mx = cos(m_Sus_gamma) * m_Tir_Fy * m_Whl_Re;
     m_Tir_Fz = m_sat_Fz;
     m_Tir_My = m_Mroll;
 
@@ -154,11 +154,11 @@ void NMSPC::Tire_Fiala::update_fm (const d_vec &inputs, d_vec &outputs) {
 
 void NMSPC::Tire_Fiala::update_drv (d_vec &outputs) {
 	//process
-	m_drv_kappa = (m_omega * m_Re - m_vx - abs(m_vx) * \
+	m_drv_kappa = (m_Whl_omega * m_Whl_Re - m_Sus_vx - abs(m_Sus_vx) * \
     m_kappa) / m_Lrelx;
-    m_drv_alpha_prime = (m_vy - abs(m_vx) * m_tan_alpha) / m_Lrely;
-    m_drv_Mroll = ((1.0 - abs(m_vx)) * 2 * pi + abs(m_vx - \
-    m_omega * m_Re) / saturation(m_Lrelx, 0.01, 10.0)) * \
+    m_drv_alpha_prime = (m_Sus_vy - abs(m_Sus_vx) * m_tan_alpha) / m_Lrely;
+    m_drv_Mroll = ((1.0 - abs(m_Sus_vx)) * 2 * pi + abs(m_Sus_vx - \
+    m_Whl_omega * m_Whl_Re) / saturation(m_Lrelx, 0.01, 10.0)) * \
     (m_My - m_Mroll);
 	//push outputs
     outputs[0] = m_drv_kappa;

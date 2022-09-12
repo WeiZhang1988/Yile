@@ -618,65 +618,65 @@ void NMSPC::Vehicle_Body::update_pv(const d_vec &inputs, d_vec &outputs) {
 
 void NMSPC::Vehicle_Body::update_fm (const d_vec &inputs, d_vec &outputs) {
 	//pull inputs
-	m_Wx = inputs[0];
-	m_Wy = inputs[1];
-	m_Wz = inputs[2];
-	m_Tair = inputs[3];
-	m_Fx_fl = inputs[4];
-	m_Fx_fr = inputs[5];
-	m_Fx_rl = inputs[6];
-	m_Fx_rr = inputs[7];
-	m_Fy_fl = inputs[8];
-	m_Fy_fr = inputs[9];
-	m_Fy_rl = inputs[10];
-	m_Fy_rr = inputs[11];
-	m_Fz_fl = inputs[12];
-	m_Fz_fr = inputs[13];
-	m_Fz_rl = inputs[14];
-	m_Fz_rr = inputs[15];
-	m_Mx_fl = inputs[16];
-	m_Mx_fr = inputs[17];
-	m_Mx_rl = inputs[18];
-	m_Mx_rr = inputs[19];
-	m_My_fl = inputs[20];
-	m_My_fr = inputs[21];
-	m_My_rl = inputs[22];
-	m_My_rr = inputs[23];
-	m_Mz_fl = inputs[24];
-	m_Mz_fr = inputs[25];
-	m_Mz_rl = inputs[26];
-	m_Mz_rr = inputs[27];
-	m_Fx_ext = inputs[28]; 
-	m_Fy_ext = inputs[29]; 
-	m_Fz_ext = inputs[30];
-	m_Mx_ext = inputs[31];
-	m_My_ext = inputs[32];
-	m_Mz_ext = inputs[33];
+	m_Air_Wx = inputs[0];
+	m_Air_Wy = inputs[1];
+	m_Air_Wz = inputs[2];
+	m_Air_Tair = inputs[3];
+	m_Sus_Fx_fl = inputs[4];
+	m_Sus_Fx_fr = inputs[5];
+	m_Sus_Fx_rl = inputs[6];
+	m_Sus_Fx_rr = inputs[7];
+	m_Sus_Fy_fl = inputs[8];
+	m_Sus_Fy_fr = inputs[9];
+	m_Sus_Fy_rl = inputs[10];
+	m_Sus_Fy_rr = inputs[11];
+	m_Sus_Fz_fl = inputs[12];
+	m_Sus_Fz_fr = inputs[13];
+	m_Sus_Fz_rl = inputs[14];
+	m_Sus_Fz_rr = inputs[15];
+	m_Sus_Mx_fl = inputs[16];
+	m_Sus_Mx_fr = inputs[17];
+	m_Sus_Mx_rl = inputs[18];
+	m_Sus_Mx_rr = inputs[19];
+	m_Sus_My_fl = inputs[20];
+	m_Sus_My_fr = inputs[21];
+	m_Sus_My_rl = inputs[22];
+	m_Sus_My_rr = inputs[23];
+	m_Sus_Mz_fl = inputs[24];
+	m_Sus_Mz_fr = inputs[25];
+	m_Sus_Mz_rl = inputs[26];
+	m_Sus_Mz_rr = inputs[27];
+	m_Ext_Fx_ext = inputs[28]; 
+	m_Ext_Fy_ext = inputs[29]; 
+	m_Ext_Fz_ext = inputs[30];
+	m_Ext_Mx_ext = inputs[31];
+	m_Ext_My_ext = inputs[32];
+	m_Ext_Mz_ext = inputs[33];
 	
 	//process
 	
-	m_F_VehiclB_x = m_Fx_fl + m_Fx_fr + m_Fx_rl + m_Fx_rr;
-	m_F_VehiclB_y = m_Fy_fl + m_Fy_fr + m_Fy_rl + m_Fy_rr;
-	m_F_VehiclB_z = m_Fz_fl + m_Fz_fr + m_Fz_rl + m_Fz_rr;
-	m_M_roll = -m_Fz_fl * m_Wbar_fl + m_Fz_fr * m_Wbar_fr - \
-	m_Fz_rl * m_Wbar_rl + m_Fz_rr * m_Wbar_rr - \
+	m_F_VehiclB_x = m_Sus_Fx_fl + m_Sus_Fx_fr + m_Sus_Fx_rl + m_Sus_Fx_rr;
+	m_F_VehiclB_y = m_Sus_Fy_fl + m_Sus_Fy_fr + m_Sus_Fy_rl + m_Sus_Fy_rr;
+	m_F_VehiclB_z = m_Sus_Fz_fl + m_Sus_Fz_fr + m_Sus_Fz_rl + m_Sus_Fz_rr;
+	m_M_roll = -m_Sus_Fz_fl * m_Wbar_fl + m_Sus_Fz_fr * m_Wbar_fr - \
+	m_Sus_Fz_rl * m_Wbar_rl + m_Sus_Fz_rr * m_Wbar_rr - \
 	m_F_VehiclB_y * m_Xbar_h;
-	m_M_pitch = -(m_Fz_fl + m_Fz_fr) * m_Xbar_a + \
-	(m_Fz_rl + m_Fz_rr) * m_Xbar_b + 
+	m_M_pitch = -(m_Sus_Fz_fl + m_Sus_Fz_fr) * m_Xbar_a + \
+	(m_Sus_Fz_rl + m_Sus_Fz_rr) * m_Xbar_b + 
 	m_F_VehiclB_x * m_Xbar_h;
-	m_M_yaw = m_Fx_fl * m_Wbar_fl - m_Fx_fr *  m_Wbar_fr + \
-	m_Fx_rl * m_Wbar_rl - m_Fx_rr * m_Wbar_rr + \
-	(m_Fy_fl + m_Fy_fr) * m_Xbar_a - (m_Fy_rl + m_Fy_rr) * m_Xbar_b;
+	m_M_yaw = m_Sus_Fx_fl * m_Wbar_fl - m_Sus_Fx_fr *  m_Wbar_fr + \
+	m_Sus_Fx_rl * m_Wbar_rl - m_Sus_Fx_rr * m_Wbar_rr + \
+	(m_Sus_Fy_fl + m_Sus_Fy_fr) * m_Xbar_a - (m_Sus_Fy_rl + m_Sus_Fy_rr) * m_Xbar_b;
 	
 	calculate_gravity();
 	calculate_aero_drag();
 	
-	m_Fb_x = m_Fx_ext + m_Fg_x + m_F_VehiclB_x - m_Fd_x;
-	m_Fb_y = m_Fy_ext + m_Fg_y + m_F_VehiclB_y - m_Fd_y;
-	m_Fb_z = m_Fz_ext + m_Fg_z + m_F_VehiclB_z - m_Fd_z;
-	m_Mb_x = m_Mx_ext + m_M_roll + m_Mx_fl + m_Mx_fr + m_Mx_rl + m_Mx_rr - m_Md_x;
-	m_Mb_y = m_My_ext + m_M_pitch + m_My_fl + m_My_fr + m_My_rl + m_My_rr - m_Md_y;
-	m_Mb_z = m_Mz_ext + m_M_yaw + m_Mz_fl + m_Mz_fr + m_Mz_rl + m_Mz_rr - m_Md_z;
+	m_Fb_x = m_Ext_Fx_ext + m_Fg_x + m_F_VehiclB_x - m_Fd_x;
+	m_Fb_y = m_Ext_Fy_ext + m_Fg_y + m_F_VehiclB_y - m_Fd_y;
+	m_Fb_z = m_Ext_Fz_ext + m_Fg_z + m_F_VehiclB_z - m_Fd_z;
+	m_Mb_x = m_Ext_Mx_ext + m_M_roll + m_Sus_Mx_fl + m_Sus_Mx_fr + m_Sus_Mx_rl + m_Sus_Mx_rr - m_Md_x;
+	m_Mb_y = m_Ext_My_ext + m_M_pitch + m_Sus_My_fl + m_Sus_My_fr + m_Sus_My_rl + m_Sus_My_rr - m_Md_y;
+	m_Mb_z = m_Ext_Mz_ext + m_M_yaw + m_Sus_Mz_fl + m_Sus_Mz_fr + m_Sus_Mz_rl + m_Sus_Mz_rr - m_Md_z;
 	
 }
 
@@ -850,14 +850,14 @@ void NMSPC::Vehicle_Body::calculate_gravity() {
 }
 
 void NMSPC::Vehicle_Body::calculate_aero_drag() {
-	double vdb_x = m_vb_x - (m_DCM_00 * m_Wx + m_DCM_01 * m_Wy + m_DCM_02 * m_Wz);
-	double vdb_y = m_vb_y - (m_DCM_10 * m_Wx + m_DCM_11 * m_Wy + m_DCM_12 * m_Wz);
-	double vdb_z = m_vb_z - (m_DCM_20 * m_Wx + m_DCM_21 * m_Wy + m_DCM_22 * m_Wz);
+	double vdb_x = m_vb_x - (m_DCM_00 * m_Air_Wx + m_DCM_01 * m_Air_Wy + m_DCM_02 * m_Air_Wz);
+	double vdb_y = m_vb_y - (m_DCM_10 * m_Air_Wx + m_DCM_11 * m_Air_Wy + m_DCM_12 * m_Air_Wz);
+	double vdb_z = m_vb_z - (m_DCM_20 * m_Air_Wx + m_DCM_21 * m_Air_Wy + m_DCM_22 * m_Air_Wz);
 	double sum = pow(vdb_x,2) + pow(vdb_y,2) + pow(vdb_z,2);
 	double wdir_x = tanh(4.0 * vdb_x);
 	double wdir_y = tanh(4.0 * vdb_y);
 	double wdir_z = tanh(4.0 * vdb_z);
-	double gain = sum *0.5 * m_Af * m_Pabs * m_Cg / div0protect(m_Tair,1e-5);
+	double gain = sum *0.5 * m_Af * m_Pabs * m_Cg / div0protect(m_Air_Tair,1e-5);
 	double ata2 = atan2(vdb_y,vdb_x);
 
 	m_Fd_x = m_Cd * gain * wdir_x;

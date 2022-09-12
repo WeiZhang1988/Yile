@@ -28,12 +28,12 @@ public:
 	static const int m_fm_outputs_num = 14;									//amount of fm outputs
 	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
-	Sus_Ind_2Tracks (double F0z=0.0, double Kz=52451.0, double Cz=1.0, \
-	double Hmax=0.1, double roll_strg_H_slp=0.0, \
-	double toe=0.0, double toe_strg_slp=0.0, \
-	double caster=0.0, double caster_H_slp=0.0, double caster_strg_slp=0.0, \
-	double camber=0.0, double camber_H_slp=0.0, double camber_strg_slp=0.0, \
-	double strg_hgt_slp=0.0, \
+	Sus_Ind_2Tracks (double F0z=9810.0, double Kz=64370.0, double Cz=10000.0, \
+	double Hmax=0.5, double roll_strg_H_slp=-0.2269, \
+	double toe=0.0349, double toe_strg_slp=0.01, \
+	double caster=0.0698, double caster_H_slp=-0.2269, double caster_strg_slp=0.01, \
+	double camber=0.0698, double camber_H_slp=-0.2269, double camber_strg_slp=0.01, \
+	double strg_hgt_slp=0.1432, \
 	bool is_strg=false) :
 	m_F0z_l(F0z), m_Kz_l(Kz), m_Cz_l(Cz), m_Hmax_l(Hmax), \
 	m_roll_strg_H_slp_l(roll_strg_H_slp), \
@@ -89,65 +89,65 @@ private:
 	
 	//inputs
 	//--left
-	double m_strg_ang_l = NaN;
-	double m_whl_Pz_l   = NaN;
-	double m_whl_Vz_l   = NaN;
-	double m_whl_Re_l   = NaN;
-	double m_veh_Pz_l   = NaN;
-	double m_veh_Vx_l   = NaN;
-	double m_veh_Vy_l   = NaN;
-	double m_veh_Vz_l   = NaN;
-	double m_whl_Fx_l   = NaN;
-	double m_whl_Fy_l   = NaN;
-	double m_whl_Mx_l   = NaN;
-	double m_whl_My_l   = NaN;
-	double m_whl_Mz_l   = NaN;
+	double m_Strg_ang_l = NaN;
+	double m_Whl_Pz_l   = NaN;
+	double m_Whl_Vz_l   = NaN;
+	double m_Whl_Re_l   = NaN;
+	double m_Veh_Pz_l   = NaN;
+	double m_Veh_Vx_l   = NaN;
+	double m_Veh_Vy_l   = NaN;
+	double m_Veh_Vz_l   = NaN;
+	double m_Whl_Fx_l   = NaN;
+	double m_Whl_Fy_l   = NaN;
+	double m_Whl_Mx_l   = NaN;
+	double m_Whl_My_l   = NaN;
+	double m_Whl_Mz_l   = NaN;
 	//--right
-	double m_strg_ang_r = NaN;
-	double m_whl_Pz_r   = NaN;
-	double m_whl_Vz_r   = NaN;
-	double m_whl_Re_r   = NaN;
-	double m_veh_Pz_r   = NaN;
-	double m_veh_Vx_r   = NaN;
-	double m_veh_Vy_r   = NaN;
-	double m_veh_Vz_r   = NaN;
-	double m_whl_Fx_r   = NaN;
-	double m_whl_Fy_r   = NaN;
-	double m_whl_Mx_r   = NaN;
-	double m_whl_My_r   = NaN;
-	double m_whl_Mz_r   = NaN;
+	double m_Strg_ang_r = NaN;
+	double m_Whl_Pz_r   = NaN;
+	double m_Whl_Vz_r   = NaN;
+	double m_Whl_Re_r   = NaN;
+	double m_Veh_Pz_r   = NaN;
+	double m_Veh_Vx_r   = NaN;
+	double m_Veh_Vy_r   = NaN;
+	double m_Veh_Vz_r   = NaN;
+	double m_Whl_Fx_r   = NaN;
+	double m_Whl_Fy_r   = NaN;
+	double m_Whl_Mx_r   = NaN;
+	double m_Whl_My_r   = NaN;
+	double m_Whl_Mz_r   = NaN;
 
 	//outputs
 	//--left
-	double m_whl_strg_l   = NaN;
-	double m_whl_camber_l = NaN;
-	double m_whl_caster_l = NaN;
-	double m_whl_Vx_l = NaN;
-	double m_whl_Vy_l = NaN;
-	double m_veh_Fx_l = NaN;
-	double m_veh_Fy_l = NaN;	
-	double m_veh_Fz_l = NaN;
-	double m_veh_Mx_l = NaN;
-	double m_veh_My_l = NaN;	
-	double m_veh_Mz_l = NaN;	
-	double m_whl_Fz_l = NaN;
+	double m_Whl_strg_l   = NaN;
+	double m_Whl_camber_l = NaN;
+	double m_Whl_caster_l = NaN;
+	double m_Whl_Vx_l = NaN;
+	double m_Whl_Vy_l = NaN;
+	double m_Veh_Fx_l = NaN;
+	double m_Veh_Fy_l = NaN;	
+	double m_Veh_Fz_l = NaN;
+	double m_Veh_Mx_l = NaN;
+	double m_Veh_My_l = NaN;	
+	double m_Veh_Mz_l = NaN;	
+	double m_Whl_Fz_l = NaN;
 	//--right
-	double m_whl_strg_r   = NaN;
-	double m_whl_camber_r = NaN;
-	double m_whl_caster_r = NaN;
-	double m_whl_Vx_r = NaN;
-	double m_whl_Vy_r = NaN;
-	double m_veh_Fx_r = NaN;
-	double m_veh_Fy_r = NaN;	
-	double m_veh_Fz_r = NaN;
-	double m_veh_Mx_r = NaN;
-	double m_veh_My_r = NaN;	
-	double m_veh_Mz_r = NaN;	
-	double m_whl_Fz_r = NaN;
+	double m_Whl_strg_r   = NaN;
+	double m_Whl_camber_r = NaN;
+	double m_Whl_caster_r = NaN;
+	double m_Whl_Vx_r = NaN;
+	double m_Whl_Vy_r = NaN;
+	double m_Veh_Fx_r = NaN;
+	double m_Veh_Fy_r = NaN;	
+	double m_Veh_Fz_r = NaN;
+	double m_Veh_Mx_r = NaN;
+	double m_Veh_My_r = NaN;	
+	double m_Veh_Mz_r = NaN;	
+	double m_Whl_Fz_r = NaN;
 
 	//middle variables
 	//--left
-	double m_veh_h_l  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
+	double m_Veh_h_l  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
 	double m_sus_h_l = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.
 	double m_x_dot_l = NaN;
 	double m_x_minus_hmax_l = NaN;
@@ -157,7 +157,7 @@ private:
 	double m_adjusted_toe_l = NaN;
 	double m_arm_l = NaN;
 	//--right
-	double m_veh_h_r  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
+	double m_Veh_h_r  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
 	double m_sus_h_r = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.
 	double m_x_dot_r = NaN;
 	double m_x_minus_hmax_r = NaN;

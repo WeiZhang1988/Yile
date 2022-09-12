@@ -27,7 +27,8 @@ const d_vec &init_states, const bool &init_locked_flag) {
     //initialize continuous and discrete states
     m_unlocked_omega = init_states[0];
     m_unlocked_omega_pre = init_states[0];
-    m_Pz = init_states[1];
+    m_Whl_Pz = init_states[1];
+    m_Whl_Vz = init_states[2];
 	m_locked_flag = init_locked_flag;
 }
 
@@ -46,7 +47,8 @@ NMSPC::Wheel_Disk::Wheel_Disk (const std::string &filename) {
             m_mu_static = tree.get<double>("mu_static");
             m_unlocked_omega = tree.get<double>("init_omega");
             m_unlocked_omega_pre = tree.get<double>("init_omega");
-            m_Pz = tree.get<double>("init_Pz");
+            m_Whl_Pz = tree.get<double>("init_Pz");
+            m_Whl_Vz = tree.get<double>("init_Vz");
             m_locked_flag = tree.get<bool>("init_lock_flag");
         } else {
             Wheel_Disk();
@@ -58,6 +60,9 @@ NMSPC::Wheel_Disk::Wheel_Disk (const std::string &filename) {
 
 void NMSPC::Wheel_Disk::push_con_states (d_vec &con_states) {
 	con_states[0] = m_unlocked_omega;
+    con_states[1] = m_Whl_Pz;
+    con_states[2] = m_Whl_Vz;
+    
 }
 
 void NMSPC::Wheel_Disk::pull_con_states (const d_vec &con_states) {
@@ -65,28 +70,30 @@ void NMSPC::Wheel_Disk::pull_con_states (const d_vec &con_states) {
     m_unlocked_omega_pre = m_unlocked_omega;
     //update current state
 	m_unlocked_omega = con_states[0];
+    m_Whl_Pz = con_states[1];
+    m_Whl_Vz = con_states[2];
 }
 
 void NMSPC::Wheel_Disk::update_pv(const d_vec &inputs, d_vec &outputs) {
 	//pull inputs
-	m_Gnd = inputs[0];
+	m_Gnd_Pz = inputs[0];
     //process
 	if (m_locked_flag) {
-        m_output_omega = 0.0;
-        m_unlocked_omega = m_output_omega;
+        m_Whl_omega = 0.0;
+        m_unlocked_omega = m_Whl_omega;
     } else { 
-        m_output_omega = m_unlocked_omega;
+        m_Whl_omega = m_unlocked_omega;
     } 
-    m_rhoz = 0.0;
-    m_Re = m_unloaded_radius - m_rhoz;
-    m_Pz = m_Gnd;
-    m_Vz = 0.0;
+    m_Whl_rhoz = 0.0;
+    m_Whl_Re = m_unloaded_radius - m_Whl_rhoz;
+    m_Whl_Pz = m_Gnd_Pz;
+    m_Whl_Vz = 0.0;
     //push outputs
-    outputs[0] = m_output_omega;
-    outputs[1] = m_Re;
-    outputs[2] = m_Pz;
-    outputs[3] = m_Vz;
-    outputs[4] = m_rhoz;
+    outputs[0] = m_Whl_omega;
+    outputs[1] = m_Whl_Re;
+    outputs[2] = m_Whl_Pz;
+    outputs[3] = m_Whl_Vz;
+    outputs[4] = m_Whl_rhoz;
 }
 
 void NMSPC::Wheel_Disk::update_fm (const d_vec &inputs, d_vec &outputs) {
@@ -98,12 +105,12 @@ void NMSPC::Wheel_Disk::update_fm (const d_vec &inputs, d_vec &outputs) {
 	m_Sus_Fz  = inputs[4];
 	m_Tir_Fz  = inputs[5];
 	//process
-	m_Tout = -m_Axl_Trq - m_Tir_My + m_Tir_Fx * saturation(m_Re, 0.0, inf);
+	m_Tout = -m_Axl_Trq - m_Tir_My + m_Tir_Fx * saturation(m_Whl_Re, 0.0, inf);
     m_Tfmaxk = m_Rm * m_mu_kinetic * saturation(m_Brk_Prs * m_disk_abore * m_disk_abore * m_num_pads * pi / 4.0, eps, inf);
     m_Tfmaxs = m_Tfmaxk * m_mu_static / m_mu_kinetic;
-    m_Brk_Trq = m_Tfmaxk;
+    m_Whl_Brk_Trq = m_Tfmaxk;
     //push outputs
-    outputs[0] = m_Brk_Trq;
+    outputs[0] = m_Whl_Brk_Trq;
 }
 
 
@@ -118,6 +125,10 @@ void NMSPC::Wheel_Disk::update_drv (d_vec &outputs) {
     } else {
         m_drv_unlocked_omega = (m_Tfmaxk * tanh(-4.0 * m_unlocked_omega) - m_Tout - m_br * m_unlocked_omega) / m_IYY;
     }
+    m_drv_Pz = 0.0;
+	m_drv_Vz = 0.0;
     //push output
     outputs[0] = m_drv_unlocked_omega;
+    outputs[1] = m_drv_Pz;
+    outputs[2] = m_drv_Vz;
 }
