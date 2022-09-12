@@ -11,5 +11,6 @@
 	"mu_static": 0.3,
 	"init_omega": 0.0,
 	"init_Pz": 0.0,
+	"init_Vz": 0.0,
 	"init_lock_flag": false
 }

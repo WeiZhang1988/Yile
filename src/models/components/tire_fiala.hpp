@@ -65,17 +65,17 @@ private:
 	m_alphaMy, m_betaMy, m_Fz_min, m_Fz_max, \
 	m_cKappa, m_cAlpha, m_bMz, m_width, m_cGamma;
 	//inputs
-	double m_omega = NaN;
-	double m_vx = NaN;
-	double m_vy = NaN;
-	double m_gamma = NaN;
-	double m_psidot = NaN;
-	double m_Re = NaN;
-	double m_rhoz = NaN;
+	double m_Whl_omega = NaN;
+	double m_Sus_vx = NaN;
+	double m_Sus_vy = NaN;
+	double m_Sus_gamma = NaN;
+	double m_Sus_psidot = NaN;
+	double m_Whl_Re = NaN;
+	double m_Whl_rhoz = NaN;
 	double m_Sus_Fz = NaN;
-	double m_scale = NaN;
+	double m_Gnd_scale = NaN;
 	double m_Tir_Prs = NaN;
-	double m_Tamb = NaN;
+	double m_Air_Tamb = NaN;
 	//continuous states
 	double m_kappa, m_alpha_prime, m_Mroll;
 	//continuous states derivatives

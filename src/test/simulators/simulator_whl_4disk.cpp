@@ -44,7 +44,7 @@ void Simulator_Whl_4Disk::run () {
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_steps++;	
 		m_times.push_back(t);
-		m_outputs.push_back(m_sptr_sys->m_con_states);
+		m_outputs.push_back(m_sptr_sys->interface.m_sub_whl_4disk_pv_outputs);
 
 		m_inputs.read_row(m_external_inputs[2],m_external_inputs[1]); 
 		m_sptr_sys->pull_external_inputs (m_external_inputs);
@@ -54,7 +54,7 @@ void Simulator_Whl_4Disk::run () {
 		//spin(m_steps);
 	}
 	m_times.push_back(t);
-	m_outputs.push_back(m_sptr_sys->m_con_states);
+	m_outputs.push_back(m_sptr_sys->interface.m_sub_whl_4disk_pv_outputs);
 }
 
 

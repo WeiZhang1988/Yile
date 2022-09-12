@@ -39,7 +39,7 @@ void Simulator_Whl_Disk_Tir_Fiala::run () {
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_steps++;	
 		m_times.push_back(t);
-		m_outputs.push_back(m_sptr_sys->m_con_states);
+		m_outputs.push_back(m_sptr_sys->interface.m_whl_pv_outputs);
 
 		m_sptr_sys->pull_external_inputs (m_external_inputs);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
@@ -48,7 +48,7 @@ void Simulator_Whl_Disk_Tir_Fiala::run () {
 		spin(m_steps);
 	}
 	m_times.push_back(t);
-	m_outputs.push_back(m_sptr_sys->m_con_states);
+	m_outputs.push_back(m_sptr_sys->interface.m_whl_pv_outputs);
 }
 
 void Simulator_Whl_Disk_Tir_Fiala::spin (const int &steps) {

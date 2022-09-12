@@ -190,21 +190,21 @@ private:
 	double m_xdot_tol, m_longOff, m_latOff, m_vertOff;
 	//inputs
 	//WindXYZ in inertial coordinate
-	double m_Wx = NaN, m_Wy = NaN, m_Wz = NaN;
+	double m_Air_Wx = NaN, m_Air_Wy = NaN, m_Air_Wz = NaN;
 	//AirTemp
-	double m_Tair = NaN;
+	double m_Air_Tair = NaN;
 	//FSusp
-	double m_Fx_fl = NaN, m_Fx_fr = NaN, m_Fx_rl = NaN, m_Fx_rr = NaN, \
-	m_Fy_fl = NaN, m_Fy_fr = NaN, m_Fy_rl = NaN, m_Fy_rr = NaN, \
-	m_Fz_fl = NaN, m_Fz_fr = NaN, m_Fz_rl = NaN, m_Fz_rr = NaN;
+	double m_Sus_Fx_fl = NaN, m_Sus_Fx_fr = NaN, m_Sus_Fx_rl = NaN, m_Sus_Fx_rr = NaN, \
+	m_Sus_Fy_fl = NaN, m_Sus_Fy_fr = NaN, m_Sus_Fy_rl = NaN, m_Sus_Fy_rr = NaN, \
+	m_Sus_Fz_fl = NaN, m_Sus_Fz_fr = NaN, m_Sus_Fz_rl = NaN, m_Sus_Fz_rr = NaN;
 	//MSusp
-	double m_Mx_fl = NaN, m_Mx_fr = NaN, m_Mx_rl = NaN, m_Mx_rr = NaN, \
-	m_My_fl = NaN, m_My_fr = NaN, m_My_rl = NaN, m_My_rr = NaN, \
-	m_Mz_fl = NaN, m_Mz_fr = NaN, m_Mz_rl = NaN, m_Mz_rr = NaN;
+	double m_Sus_Mx_fl = NaN, m_Sus_Mx_fr = NaN, m_Sus_Mx_rl = NaN, m_Sus_Mx_rr = NaN, \
+	m_Sus_My_fl = NaN, m_Sus_My_fr = NaN, m_Sus_My_rl = NaN, m_Sus_My_rr = NaN, \
+	m_Sus_Mz_fl = NaN, m_Sus_Mz_fr = NaN, m_Sus_Mz_rl = NaN, m_Sus_Mz_rr = NaN;
 	//FExt
-	double m_Fx_ext = NaN, m_Fy_ext = NaN, m_Fz_ext = NaN;
+	double m_Ext_Fx_ext = NaN, m_Ext_Fy_ext = NaN, m_Ext_Fz_ext = NaN;
 	//MExt
-	double m_Mx_ext = NaN, m_My_ext = NaN, m_Mz_ext = NaN;
+	double m_Ext_Mx_ext = NaN, m_Ext_My_ext = NaN, m_Ext_Mz_ext = NaN;
 	//continuous states
 	double m_xe_x, m_xe_y, m_xe_z, \
 	m_vb_x, m_vb_y, m_vb_z, \

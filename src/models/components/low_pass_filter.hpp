@@ -54,18 +54,18 @@ private:
 	//parameters
 	double m_wc;
 	//inputs
-	double m_input_toe_fl = NaN;
-	double m_input_toe_fr = NaN;
-	double m_input_toe_rl = NaN;
-	double m_input_toe_rr = NaN;
-	double m_input_camber_fl = NaN;
-	double m_input_camber_fr = NaN;
-	double m_input_camber_rl = NaN;
-	double m_input_camber_rr = NaN;
-	double m_input_Fz_fl = NaN;
-	double m_input_Fz_fr = NaN;
-	double m_input_Fz_rl = NaN;
-	double m_input_Fz_rr = NaN;
+	double m_input_Sus_toe_fl = NaN;
+	double m_input_Sus_toe_fr = NaN;
+	double m_input_Sus_toe_rl = NaN;
+	double m_input_Sus_toe_rr = NaN;
+	double m_input_Sus_camber_fl = NaN;
+	double m_input_Sus_camber_fr = NaN;
+	double m_input_Sus_camber_rl = NaN;
+	double m_input_Sus_camber_rr = NaN;
+	double m_input_Sus_Fz_fl = NaN;
+	double m_input_Sus_Fz_fr = NaN;
+	double m_input_Sus_Fz_rl = NaN;
+	double m_input_Sus_Fz_rr = NaN;
 	//continuous states
 	double m_toe_fl = NaN;
 	double m_toe_fr = NaN;
@@ -93,18 +93,18 @@ private:
 	double m_drv_Fz_rl = NaN;
 	double m_drv_Fz_rr = NaN;
 	//outputs
-	double m_output_toe_fl = NaN;
-	double m_output_toe_fr = NaN;
-	double m_output_toe_rl = NaN;
-	double m_output_toe_rr = NaN;
-	double m_output_camber_fl = NaN;
-	double m_output_camber_fr = NaN;
-	double m_output_camber_rl = NaN;
-	double m_output_camber_rr = NaN;
-	double m_output_Fz_fl = NaN;
-	double m_output_Fz_fr = NaN;
-	double m_output_Fz_rl = NaN;
-	double m_output_Fz_rr = NaN;
+	double m_output_LPF_toe_fl = NaN;
+	double m_output_LPF_toe_fr = NaN;
+	double m_output_LPF_toe_rl = NaN;
+	double m_output_LPF_toe_rr = NaN;
+	double m_output_LPF_camber_fl = NaN;
+	double m_output_LPF_camber_fr = NaN;
+	double m_output_LPF_camber_rl = NaN;
+	double m_output_LPF_camber_rr = NaN;
+	double m_output_LPF_Fz_fl = NaN;
+	double m_output_LPF_Fz_fr = NaN;
+	double m_output_LPF_Fz_rl = NaN;
+	double m_output_LPF_Fz_rr = NaN;
 };
 
 }	//end of name space

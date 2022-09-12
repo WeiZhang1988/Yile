@@ -27,7 +27,7 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
     sptr_sub_sus_2ind->add_suses(sptr_sus_f, sptr_sus_r);
 	m_sptr_sys->add_subsys_sus_2ind(sptr_sub_sus_2ind);
     
-    m_external_inputs = d_vec(Sys_Sus_2Ind::m_external_inputs_num,0.0);
+    m_external_inputs = d_vec(Sys_Sus_2Ind::m_external_inputs_num,1.0);
 }
 
 void Simulator_Sus_2Ind::run () {
@@ -37,19 +37,22 @@ void Simulator_Sus_2Ind::run () {
 
 	m_tp_start = steady_clock::now();
 	for (int i=0; i<steps_num; i++) {
-		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
+		m_sptr_sys->pull_external_inputs (m_external_inputs);
 		m_steps++;	
 		m_times.push_back(t);
-		m_outputs.push_back(m_sptr_sys->m_con_states);
+		m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
+		m_sptr_sys->update_pv();
+		m_sptr_sys->update_fm();
+		m_outputs.push_back(m_sptr_sys->interface.m_sub_sus_2ind_pv_outputs);
 
-		m_sptr_sys->pull_external_inputs (m_external_inputs);
+		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
 		
 		t += m_t_step;
-		spin(m_steps);
+		//spin(m_steps);
 	}
 	m_times.push_back(t);
-	m_outputs.push_back(m_sptr_sys->m_con_states);
+	m_outputs.push_back(m_sptr_sys->interface.m_sub_sus_2ind_pv_outputs);
 }
 
 void Simulator_Sus_2Ind::spin (const int &steps) {
