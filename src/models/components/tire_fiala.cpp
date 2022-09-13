@@ -113,9 +113,9 @@ void NMSPC::Tire_Fiala::update_pv (const d_vec &inputs, d_vec &outputs) {
 	m_DCM_20 = m_sin_c * m_sin_a;
 	m_DCM_21 = -m_sin_c * m_cos_a;
 	m_DCM_22 = m_cos_c;
-	m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_10 * m_Sus_vy + m_DCM_20 * m_Sus_vz;
-	m_Tir_vy = m_DCM_01 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_21 * m_Sus_vz;
-	m_Tir_vz = m_DCM_02 * m_Sus_vx + m_DCM_12 * m_Sus_vy + m_DCM_22 * m_Sus_vz;
+	m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_01 * m_Sus_vy + m_DCM_02 * m_Sus_vz;
+	m_Tir_vy = m_DCM_10 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_12 * m_Sus_vz;
+	m_Tir_vz = m_DCM_20 * m_Sus_vx + m_DCM_21 * m_Sus_vy + m_DCM_22 * m_Sus_vz;
 }
 
 void NMSPC::Tire_Fiala::update_fm (const d_vec &inputs, d_vec &outputs) {
