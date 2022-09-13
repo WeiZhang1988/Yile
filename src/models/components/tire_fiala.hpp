@@ -68,7 +68,7 @@ private:
 	double m_Whl_omega = NaN;
 	double m_Sus_vx = NaN;
 	double m_Sus_vy = NaN;
-	double m_Whl_vz = NaN;
+	double m_Sus_vz = NaN;
 	double m_Sus_gamma = NaN;
 	double m_Sus_str = NaN;
 	double m_Sus_psidot = NaN;
