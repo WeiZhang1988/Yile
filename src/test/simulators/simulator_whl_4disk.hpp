@@ -18,6 +18,7 @@
 #include <thread>
 #include <chrono>
 #include "systems/system_whl_4disk.hpp"
+#include "interfaces/interface_whl_4disk.hpp"
 #include "csv.hpp"
 
 using namespace boost::numeric::odeint;
@@ -31,6 +32,7 @@ public:
 	void run ();
 
     shared_ptr<Sys_Whl_4Disk> m_sptr_sys;
+    shared_ptr<Int_Whl_4Disk> m_sptr_interface;
     
     d_vec m_external_inputs = d_vec(Sys_Whl_4Disk::m_external_inputs_num,NaN);
 

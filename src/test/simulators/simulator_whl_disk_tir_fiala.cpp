@@ -20,11 +20,13 @@ Simulator_Whl_Disk_Tir_Fiala::Simulator_Whl_Disk_Tir_Fiala(double t_start, doubl
 	m_t_step_micros = m_t_step/1e-6;
 
 	m_sptr_sys = make_shared<Sys_Whl_Disk_Tir_Fiala>();
+	m_sptr_interface = make_shared<Int_Whl_Disk_Tir_Fiala>(int(Sys_Whl_Disk_Tir_Fiala::m_external_inputs_num));
 	shared_ptr<Wheel_Disk> sptr_whl = make_shared<Wheel_Disk>();
     shared_ptr<Tire_Fiala> sptr_tir = make_shared<Tire_Fiala>();
  
     m_sptr_sys->add_whl(sptr_whl);
     m_sptr_sys->add_tir(sptr_tir);
+	m_sptr_sys->add_interface(m_sptr_interface);
     
     m_external_inputs = {0.0,0.0,0.0,0.0,0.0,10.0,0.0,0.0,1.0,2e4,20.0};
 }
@@ -39,16 +41,19 @@ void Simulator_Whl_Disk_Tir_Fiala::run () {
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_steps++;	
 		m_times.push_back(t);
-		m_outputs.push_back(m_sptr_sys->interface.m_whl_pv_outputs);
 
 		m_sptr_sys->pull_external_inputs (m_external_inputs);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_outputs.push_back(m_sptr_interface->m_whl_pv_outputs);
 		
 		t += m_t_step;
 		spin(m_steps);
 	}
 	m_times.push_back(t);
-	m_outputs.push_back(m_sptr_sys->interface.m_whl_pv_outputs);
+	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
+	m_sptr_sys->update_pv();
+	m_sptr_sys->update_fm();
+	m_outputs.push_back(m_sptr_interface->m_whl_pv_outputs);
 }
 
 void Simulator_Whl_Disk_Tir_Fiala::spin (const int &steps) {

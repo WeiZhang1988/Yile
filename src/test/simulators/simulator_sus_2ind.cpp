@@ -20,11 +20,13 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
 	m_t_step_micros = m_t_step/1e-6;
 
 	m_sptr_sys = make_shared<Sys_Sus_2Ind>();
+	m_sptr_interface = make_shared<Int_Sus_2Ind>(int(Sys_Sus_2Ind::m_external_inputs_num));//very strange, link error without int() operation
 	shared_ptr<Subsys_Sus_2Ind> sptr_sub_sus_2ind = make_shared<Subsys_Sus_2Ind>();
     shared_ptr<Sus_Ind_2Tracks> sptr_sus_f = make_shared<Sus_Ind_2Tracks>("data/params/sus_ind_par_0.json");
 	shared_ptr<Sus_Ind_2Tracks> sptr_sus_r = make_shared<Sus_Ind_2Tracks>("data/params/sus_ind_par_0.json");
  
     sptr_sub_sus_2ind->add_suses(sptr_sus_f, sptr_sus_r);
+	m_sptr_sys->add_interface(m_sptr_interface);
 	m_sptr_sys->add_subsys_sus_2ind(sptr_sub_sus_2ind);
     
     m_external_inputs = d_vec(Sys_Sus_2Ind::m_external_inputs_num,1.0);
@@ -37,22 +39,21 @@ void Simulator_Sus_2Ind::run () {
 
 	m_tp_start = steady_clock::now();
 	for (int i=0; i<steps_num; i++) {
-		m_sptr_sys->pull_external_inputs (m_external_inputs);
 		m_steps++;	
 		m_times.push_back(t);
-		m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
-		m_sptr_sys->update_pv();
-		m_sptr_sys->update_fm();
-		m_outputs.push_back(m_sptr_sys->interface.m_sub_sus_2ind_pv_outputs);
-
+		m_sptr_sys->pull_external_inputs (m_external_inputs);
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_outputs.push_back(m_sptr_interface->m_sub_sus_2ind_pv_outputs);
 		
 		t += m_t_step;
 		//spin(m_steps);
 	}
 	m_times.push_back(t);
-	m_outputs.push_back(m_sptr_sys->interface.m_sub_sus_2ind_pv_outputs);
+	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
+	m_sptr_sys->update_pv();
+	m_sptr_sys->update_fm();
+	m_outputs.push_back(m_sptr_interface->m_sub_sus_2ind_pv_outputs);
 }
 
 void Simulator_Sus_2Ind::spin (const int &steps) {

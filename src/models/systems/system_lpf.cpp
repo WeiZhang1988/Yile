@@ -23,17 +23,17 @@ void NMSPC::Sys_LPF::pull_con_states (const d_vec &con_states) {
 }
 
 void NMSPC::Sys_LPF::pull_external_inputs (const d_vec &inputs) {
-	interface.m_external_inputs = inputs;
+	m_sptr_interface->m_external_inputs = inputs;
 }
 
 void NMSPC::Sys_LPF::update_pv() {
-	interface.map_lpf_pv();
-	m_sptr_lpf->update_pv(interface.m_lpf_pv_inputs,interface.m_lpf_pv_outputs);
+	m_sptr_interface->map_lpf_pv();
+	m_sptr_lpf->update_pv(m_sptr_interface->m_lpf_pv_inputs,m_sptr_interface->m_lpf_pv_outputs);
 }
 
 void NMSPC::Sys_LPF::update_fm() {
-	interface.map_lpf_fm();
-	m_sptr_lpf->update_fm(interface.m_lpf_fm_inputs,interface.m_lpf_fm_outputs);
+	m_sptr_interface->map_lpf_fm();
+	m_sptr_lpf->update_fm(m_sptr_interface->m_lpf_fm_inputs,m_sptr_interface->m_lpf_fm_outputs);
 }
 
 void NMSPC::Sys_LPF::update_drv() {

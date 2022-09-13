@@ -35,6 +35,8 @@ public:
 	
 	void add_lpf(std::shared_ptr<Low_Pass_Filter> sptr_lpf) \
     {m_sptr_lpf = sptr_lpf;}
+	void add_interface(std::shared_ptr<Int_LPF> sptr_interface) \
+    {m_sptr_interface = sptr_interface;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
@@ -47,6 +49,7 @@ public:
 
 private:
 	std::shared_ptr<Low_Pass_Filter> m_sptr_lpf;
+	std::shared_ptr<Int_LPF> m_sptr_interface;
 
 	//inputs
 	//continuous states
@@ -59,9 +62,6 @@ private:
 public:
 	//continuous states
 	d_vec m_con_states = d_vec(m_con_states_num,NaN);
-	//interface 
-    //stop here
-	Int_LPF interface = Int_LPF(m_external_inputs_num);
 };
 
 }	//end of name space

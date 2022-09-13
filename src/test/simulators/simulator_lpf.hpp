@@ -18,6 +18,7 @@
 #include <thread>
 #include <chrono>
 #include "systems/system_lpf.hpp"
+#include "interfaces/interface_lpf.hpp"
 
 using namespace boost::numeric::odeint;
 using namespace std::chrono;
@@ -30,6 +31,7 @@ public:
 	void run ();
 
     shared_ptr<Sys_LPF> m_sptr_sys;
+    shared_ptr<Int_LPF> m_sptr_interface;
     
     d_vec m_external_inputs = d_vec(Sys_LPF::m_external_inputs_num,NaN);
 

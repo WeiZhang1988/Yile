@@ -37,6 +37,7 @@ public:
 	
 	void add_whl(std::shared_ptr<Wheel_Disk> sptr_whl) {m_sptr_whl=sptr_whl;}
 	void add_tir(std::shared_ptr<Tire_Fiala> sptr_tir) {m_sptr_tir=sptr_tir;}
+	void add_interface(std::shared_ptr<Int_Whl_Disk_Tir_Fiala> sptr_interface) {m_sptr_interface=sptr_interface;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
@@ -50,6 +51,7 @@ public:
 private:
 	std::shared_ptr<Wheel_Disk> m_sptr_whl;
 	std::shared_ptr<Tire_Fiala> m_sptr_tir;
+	std::shared_ptr<Int_Whl_Disk_Tir_Fiala> m_sptr_interface;
 
 	//inputs
 	//external inputs are
@@ -68,8 +70,6 @@ private:
 public:
 	//continuous states
 	d_vec m_con_states = d_vec(m_con_states_num,NaN);
-	//interface
-	Int_Whl_Disk_Tir_Fiala interface = Int_Whl_Disk_Tir_Fiala(m_external_inputs_num);
 };
 
 }	//end of name space

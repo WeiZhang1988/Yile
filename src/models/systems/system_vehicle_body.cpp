@@ -23,17 +23,17 @@ void NMSPC::Sys_Vehicle_Body::pull_con_states (const d_vec &con_states) {
 }
 
 void NMSPC::Sys_Vehicle_Body::pull_external_inputs (const d_vec &inputs) {
-	interface.m_external_inputs = inputs;
+	m_sptr_interface->m_external_inputs = inputs;
 }
 
 void NMSPC::Sys_Vehicle_Body::update_pv() {
-	interface.map_vhl_bdy_pv();
-	m_sptr_vhl_bdy->update_pv(interface.m_vhl_bdy_pv_inputs,interface.m_vhl_bdy_pv_outputs);
+	m_sptr_interface->map_vhl_bdy_pv();
+	m_sptr_vhl_bdy->update_pv(m_sptr_interface->m_vhl_bdy_pv_inputs,m_sptr_interface->m_vhl_bdy_pv_outputs);
 }
 
 void NMSPC::Sys_Vehicle_Body::update_fm() {
-	interface.map_vhl_bdy_fm();
-	m_sptr_vhl_bdy->update_fm(interface.m_vhl_bdy_fm_inputs,interface.m_vhl_bdy_fm_outputs);
+	m_sptr_interface->map_vhl_bdy_fm();
+	m_sptr_vhl_bdy->update_fm(m_sptr_interface->m_vhl_bdy_fm_inputs,m_sptr_interface->m_vhl_bdy_fm_outputs);
 }
 
 void NMSPC::Sys_Vehicle_Body::update_drv() {
