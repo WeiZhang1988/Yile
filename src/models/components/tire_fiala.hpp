@@ -18,7 +18,7 @@ namespace NMSPC{
 class Tire_Fiala {
 public:
 	static const int m_params_num = 18;										//amount of parameters
-	static const int m_pv_inputs_num = 7;									//amount of pv inputs
+	static const int m_pv_inputs_num = 9;									//amount of pv inputs
 	static const int m_fm_inputs_num = 4;									//amount of fm inputs
 	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs
 	static const int m_con_states_num = 3;									//amount of continuous states;
@@ -68,7 +68,9 @@ private:
 	double m_Whl_omega = NaN;
 	double m_Sus_vx = NaN;
 	double m_Sus_vy = NaN;
+	double m_Whl_vz = NaN;
 	double m_Sus_gamma = NaN;
+	double m_Sus_str = NaN;
 	double m_Sus_psidot = NaN;
 	double m_Whl_Re = NaN;
 	double m_Whl_rhoz = NaN;
@@ -82,6 +84,15 @@ private:
 	double m_drv_kappa, m_drv_alpha_prime, m_drv_Mroll;
 	//discrete states
 	//middle variables
+	double m_Tir_vx = NaN;
+	double m_Tir_vy = NaN;
+	double m_Tir_vz = NaN;
+	double m_Tir_gamma = NaN;
+	double m_Tir_str = NaN;
+	double m_Tir_psidot = NaN;
+	double m_Tir_Fx = NaN;
+	double m_Tir_Fy = NaN;
+	double m_Tir_Fz = NaN;
 	double m_sat_Fz = NaN;
 	double m_My = NaN;
 	double m_mu = NaN;
@@ -98,10 +109,25 @@ private:
 	double m_Fy_stick = NaN;
 	double m_Mz_slide = NaN;
 	double m_Fy_slide = NaN;
+	double m_cos_a = NaN;
+	double m_cos_b = NaN;
+	double m_cos_c = NaN;
+	double m_sin_a = NaN;
+	double m_sin_b = NaN;
+	double m_sin_c = NaN;
+	double m_DCM_00	= NaN;
+	double m_DCM_01	= NaN;
+	double m_DCM_02	= NaN;
+	double m_DCM_10	= NaN;
+	double m_DCM_11	= NaN;
+	double m_DCM_12	= NaN;
+	double m_DCM_20	= NaN;
+	double m_DCM_21	= NaN;
+	double m_DCM_22	= NaN;
 	//outputs
-	double m_Tir_Fx = NaN;
-	double m_Tir_Fy = NaN;
-	double m_Tir_Fz = NaN;
+	double m_Sus_Fx = NaN;
+	double m_Sus_Fy = NaN;
+	//double m_Sus_Fz = NaN;
 	double m_Tir_Mx = NaN;
 	double m_Tir_My = NaN;
 	double m_Tir_Mz = NaN;
