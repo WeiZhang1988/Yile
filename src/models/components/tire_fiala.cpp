@@ -148,7 +148,7 @@ void NMSPC::Tire_Fiala::update_fm (const d_vec &inputs, d_vec &outputs) {
     outputs[2] = m_Tir_Fz;
     outputs[3] = m_Tir_Mx;
     outputs[4] = m_Tir_My;
-    outputs[6] = m_Tir_Mz;
+    outputs[5] = m_Tir_Mz;
     
 }
 

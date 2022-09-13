@@ -35,6 +35,8 @@ public:
 	
 	void add_vhl_bdy(std::shared_ptr<Vehicle_Body> sptr_vhl_bdy) \
     {m_sptr_vhl_bdy = sptr_vhl_bdy;}
+	void add_interface(std::shared_ptr<Int_Vehicle_Body> sptr_interface) \
+    {m_sptr_interface = sptr_interface;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
@@ -47,6 +49,7 @@ public:
 
 private:
 	std::shared_ptr<Vehicle_Body> m_sptr_vhl_bdy;
+	std::shared_ptr<Int_Vehicle_Body> m_sptr_interface;
 
 	//inputs
 	//continuous states
@@ -59,8 +62,6 @@ private:
 public:
 	//continuous states
 	d_vec m_con_states = d_vec(m_con_states_num,NaN);
-	//interface 
-	Int_Vehicle_Body interface = Int_Vehicle_Body(m_external_inputs_num);
 };
 
 }	//end of name space

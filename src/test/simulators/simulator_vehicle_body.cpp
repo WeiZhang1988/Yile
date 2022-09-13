@@ -20,9 +20,11 @@ Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, dou
 	m_t_step_micros = m_t_step/1e-6;
 
 	m_sptr_sys = make_shared<Sys_Vehicle_Body>();
+	m_sptr_interface = make_shared<Int_Vehicle_Body>(int(Sys_Vehicle_Body::m_external_inputs_num));
 	shared_ptr<Vehicle_Body> sptr_vhl_bdy = make_shared<Vehicle_Body>("data/params/vhl_bdy_par_0.json");
  
 	m_sptr_sys->add_vhl_bdy(sptr_vhl_bdy);
+	m_sptr_sys->add_interface(m_sptr_interface);
     
     m_external_inputs = d_vec(Sys_Vehicle_Body::m_external_inputs_num,10.0);
 }
@@ -36,18 +38,20 @@ void Simulator_Vehicle_Body::run() {
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
-		m_outputs.push_back(m_sptr_sys->m_con_states);
 
 		m_sptr_sys->pull_external_inputs (m_external_inputs);
-		
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_outputs.push_back(m_sptr_interface->m_vhl_bdy_pv_outputs);
 	
 		t += m_t_step;
-		spin(m_steps);
+		//spin(m_steps);
 	}
 	
 	m_times.push_back(t);
-	m_outputs.push_back(m_sptr_sys->m_con_states);
+	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
+	m_sptr_sys->update_pv();
+	m_sptr_sys->update_fm();
+	m_outputs.push_back(m_sptr_interface->m_vhl_bdy_pv_outputs);
 }
 
 void Simulator_Vehicle_Body::spin (const int &steps) {

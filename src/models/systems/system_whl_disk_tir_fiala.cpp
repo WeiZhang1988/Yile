@@ -27,21 +27,21 @@ void NMSPC::Sys_Whl_Disk_Tir_Fiala::pull_con_states (const d_vec &con_states) {
 }
 
 void NMSPC::Sys_Whl_Disk_Tir_Fiala::pull_external_inputs (const d_vec &inputs) {
-	interface.m_external_inputs = inputs;
+	m_sptr_interface->m_external_inputs = inputs;
 }
 
 void NMSPC::Sys_Whl_Disk_Tir_Fiala::update_pv() {
-	interface.map_whl_pv();
-	m_sptr_whl->update_pv(interface.m_whl_pv_inputs,interface.m_whl_pv_outputs);
-	interface.map_tir_pv();
-	m_sptr_tir->update_pv(interface.m_tir_pv_inputs,interface.m_tir_pv_outputs);
+	m_sptr_interface->map_whl_pv();
+	m_sptr_whl->update_pv(m_sptr_interface->m_whl_pv_inputs,m_sptr_interface->m_whl_pv_outputs);
+	m_sptr_interface->map_tir_pv();
+	m_sptr_tir->update_pv(m_sptr_interface->m_tir_pv_inputs,m_sptr_interface->m_tir_pv_outputs);
 }
 
 void NMSPC::Sys_Whl_Disk_Tir_Fiala::update_fm() {
-	interface.map_tir_fm();
-	m_sptr_tir->update_fm(interface.m_tir_fm_inputs,interface.m_tir_fm_outputs);
-	interface.map_whl_fm();
-	m_sptr_whl->update_fm(interface.m_whl_fm_inputs,interface.m_whl_fm_outputs);
+	m_sptr_interface->map_tir_fm();
+	m_sptr_tir->update_fm(m_sptr_interface->m_tir_fm_inputs,m_sptr_interface->m_tir_fm_outputs);
+	m_sptr_interface->map_whl_fm();
+	m_sptr_whl->update_fm(m_sptr_interface->m_whl_fm_inputs,m_sptr_interface->m_whl_fm_outputs);
 }
 
 void NMSPC::Sys_Whl_Disk_Tir_Fiala::update_drv() {

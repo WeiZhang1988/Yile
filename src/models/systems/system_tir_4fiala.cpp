@@ -23,17 +23,17 @@ void NMSPC::Sys_Tir_4Fiala::pull_con_states (const d_vec &con_states) {
 }
 
 void NMSPC::Sys_Tir_4Fiala::pull_external_inputs (const d_vec &inputs) {
-	interface.m_external_inputs = inputs;
+	m_sptr_interface->m_external_inputs = inputs;
 }
 
 void NMSPC::Sys_Tir_4Fiala::update_pv() {
-	interface.map_sub_tir_4fiala_pv();
-	m_sptr_subsys_tir_4fiala->update_pv(interface.m_sub_tir_4fiala_pv_inputs,interface.m_sub_tir_4fiala_pv_outputs);
+	m_sptr_interface->map_sub_tir_4fiala_pv();
+	m_sptr_subsys_tir_4fiala->update_pv(m_sptr_interface->m_sub_tir_4fiala_pv_inputs,m_sptr_interface->m_sub_tir_4fiala_pv_outputs);
 }
 
 void NMSPC::Sys_Tir_4Fiala::update_fm() {
-	interface.map_sub_tir_4fiala_fm();
-	m_sptr_subsys_tir_4fiala->update_fm(interface.m_sub_tir_4fiala_fm_inputs,interface.m_sub_tir_4fiala_fm_outputs);
+	m_sptr_interface->map_sub_tir_4fiala_fm();
+	m_sptr_subsys_tir_4fiala->update_fm(m_sptr_interface->m_sub_tir_4fiala_fm_inputs,m_sptr_interface->m_sub_tir_4fiala_fm_outputs);
 }
 
 void NMSPC::Sys_Tir_4Fiala::update_drv() {

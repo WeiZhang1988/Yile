@@ -36,6 +36,8 @@ public:
 	
 	void add_subsys_whl_4disk(std::shared_ptr<Subsys_Wheel_4Disk> sptr_subsys_whl_4disk) \
     {m_sptr_subsys_whl_4disk = sptr_subsys_whl_4disk;}
+	void add_interface(std::shared_ptr<Int_Whl_4Disk> sptr_interface) \
+    {m_sptr_interface = sptr_interface;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
@@ -48,6 +50,7 @@ public:
 
 private:
 	std::shared_ptr<Subsys_Wheel_4Disk> m_sptr_subsys_whl_4disk;
+	std::shared_ptr<Int_Whl_4Disk> m_sptr_interface;
 
 	//inputs
 	//continuous states
@@ -60,9 +63,6 @@ private:
 public:
 	//continuous states
 	d_vec m_con_states = d_vec(m_con_states_num,NaN);
-	//interface 
-    //stop here
-	Int_Whl_4Disk interface = Int_Whl_4Disk(m_external_inputs_num);
 };
 
 }	//end of name space

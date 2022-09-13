@@ -36,6 +36,8 @@ public:
 	
 	void add_subsys_sus_2ind(std::shared_ptr<Subsys_Sus_2Ind> sptr_subsys_sus_2ind) \
     {m_sptr_subsys_sus_2ind = sptr_subsys_sus_2ind;}
+	void add_interface(std::shared_ptr<Int_Sus_2Ind> sptr_interface) \
+    {m_sptr_interface = sptr_interface;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
@@ -48,6 +50,7 @@ public:
 
 private:
 	std::shared_ptr<Subsys_Sus_2Ind> m_sptr_subsys_sus_2ind;
+	std::shared_ptr<Int_Sus_2Ind> m_sptr_interface;
 
 	//inputs
 	//continuous states
@@ -60,9 +63,6 @@ private:
 public:
 	//continuous states
 	d_vec m_con_states = d_vec(m_con_states_num,NaN);
-	//interface 
-    //stop here
-	Int_Sus_2Ind interface = Int_Sus_2Ind(m_external_inputs_num);
 };
 
 }	//end of name space

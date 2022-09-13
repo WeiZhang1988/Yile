@@ -20,11 +20,13 @@ Simulator_LPF::Simulator_LPF(double t_start, double t_end, double t_step) {
 	m_t_step_micros = m_t_step/1e-6;
 
 	m_sptr_sys = make_shared<Sys_LPF>();
+	m_sptr_interface = make_shared<Int_LPF>(int(Sys_LPF::m_external_inputs_num));//very strange, link error without int() operation
     shared_ptr<Low_Pass_Filter> sptr_lpf = make_shared<Low_Pass_Filter>();
  
+	m_sptr_sys->add_interface(m_sptr_interface);
 	m_sptr_sys->add_lpf(sptr_lpf);
     
-    m_external_inputs = d_vec(Sys_LPF::m_external_inputs_num,0.0);
+    m_external_inputs = d_vec(Sys_LPF::m_external_inputs_num,2.0);
 }
 
 void Simulator_LPF::run () {
@@ -34,19 +36,20 @@ void Simulator_LPF::run () {
 
 	m_tp_start = steady_clock::now();
 	for (int i=0; i<steps_num; i++) {
-		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_steps++;	
 		m_times.push_back(t);
-		m_outputs.push_back(m_sptr_sys->m_con_states);
-
 		m_sptr_sys->pull_external_inputs (m_external_inputs);
+		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		
+		m_outputs.push_back(m_sptr_interface->m_lpf_pv_outputs);
 		t += m_t_step;
-		spin(m_steps);
+		//spin(m_steps);
 	}
 	m_times.push_back(t);
-	m_outputs.push_back(m_sptr_sys->m_con_states);
+	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
+	m_sptr_sys->update_pv();
+	m_sptr_sys->update_fm();
+	m_outputs.push_back(m_sptr_interface->m_lpf_pv_outputs);
 }
 
 void Simulator_LPF::spin (const int &steps) {

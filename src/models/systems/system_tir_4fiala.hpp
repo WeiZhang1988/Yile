@@ -36,6 +36,8 @@ public:
 	
 	void add_subsys_tir_4fiala(std::shared_ptr<Subsys_Tire_4Fiala> sptr_subsys_tir_4fiala) \
     {m_sptr_subsys_tir_4fiala = sptr_subsys_tir_4fiala;}
+	void add_interface(std::shared_ptr<Int_Tir_4Fiala> sptr_interface) \
+    {m_sptr_interface = sptr_interface;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
@@ -48,6 +50,7 @@ public:
 
 private:
 	std::shared_ptr<Subsys_Tire_4Fiala> m_sptr_subsys_tir_4fiala;
+	std::shared_ptr<Int_Tir_4Fiala> m_sptr_interface;
 
 	//inputs
 	//continuous states
@@ -60,9 +63,6 @@ private:
 public:
 	//continuous states
 	d_vec m_con_states = d_vec(m_con_states_num,NaN);
-	//interface 
-    //stop here
-	Int_Tir_4Fiala interface = Int_Tir_4Fiala(m_external_inputs_num);
 };
 
 }	//end of name space

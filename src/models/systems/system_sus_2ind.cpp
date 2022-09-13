@@ -23,17 +23,17 @@ void NMSPC::Sys_Sus_2Ind::pull_con_states (const d_vec &con_states) {
 }
 
 void NMSPC::Sys_Sus_2Ind::pull_external_inputs (const d_vec &inputs) {
-	interface.m_external_inputs = inputs;
+	m_sptr_interface->m_external_inputs = inputs;
 }
 
 void NMSPC::Sys_Sus_2Ind::update_pv() {
-	interface.map_sub_sus_2ind_pv();
-	m_sptr_subsys_sus_2ind->update_pv(interface.m_sub_sus_2ind_pv_inputs,interface.m_sub_sus_2ind_pv_outputs);
+	m_sptr_interface->map_sub_sus_2ind_pv();
+	m_sptr_subsys_sus_2ind->update_pv(m_sptr_interface->m_sub_sus_2ind_pv_inputs,m_sptr_interface->m_sub_sus_2ind_pv_outputs);
 }
 
 void NMSPC::Sys_Sus_2Ind::update_fm() {
-	interface.map_sub_sus_2ind_fm();
-	m_sptr_subsys_sus_2ind->update_fm(interface.m_sub_sus_2ind_fm_inputs,interface.m_sub_sus_2ind_fm_outputs);
+	m_sptr_interface->map_sub_sus_2ind_fm();
+	m_sptr_subsys_sus_2ind->update_fm(m_sptr_interface->m_sub_sus_2ind_fm_inputs,m_sptr_interface->m_sub_sus_2ind_fm_outputs);
 }
 
 void NMSPC::Sys_Sus_2Ind::update_drv() {
