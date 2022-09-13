@@ -1,3 +1,5 @@
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/output)
+
 add_executable(vehicle_dynamics_test 
 			   test.cpp 
 			   simulators/simulator_whl_disk_tir_fiala.cpp
@@ -9,5 +11,4 @@ add_executable(vehicle_dynamics_test
 target_link_libraries(vehicle_dynamics_test PRIVATE models
 													pthread)
 
-#install(TARGETS vehicle_dynamics_test DESTINATION ${PROJECT_SOURCE_DIR}/install/exe)
 install(TARGETS vehicle_dynamics_test DESTINATION ${PROJECT_SOURCE_DIR}/install)
