@@ -18,18 +18,62 @@
 namespace NMSPC{
 class Int_Whl_4Disk {
 public:
-	Int_Whl_4Disk(int ext_inputs_num);
-	
-	d_vec m_external_inputs;	// 
-	
-    d_vec  m_sub_whl_4disk_pv_inputs = d_vec(Subsys_Wheel_4Disk::m_pv_inputs_num, NaN);
-    d_vec  m_sub_whl_4disk_fm_inputs = d_vec(Subsys_Wheel_4Disk::m_fm_inputs_num, NaN);
-    
-    d_vec  m_sub_whl_4disk_pv_outputs = d_vec(Subsys_Wheel_4Disk::m_pv_outputs_num, NaN);
-    d_vec  m_sub_whl_4disk_fm_outputs = d_vec(Subsys_Wheel_4Disk::m_fm_outputs_num, NaN);
-
-	void map_sub_whl_4disk_pv();
-	void map_sub_whl_4disk_fm();
+    //whl pv pull
+	double m_Gnd_Pz_fl = NaN;
+    double m_Gnd_Pz_fr = NaN;
+    double m_Gnd_Pz_rl = NaN;
+    double m_Gnd_Pz_rr = NaN;
+    //whl pv push
+    double m_Tir_omega_fl = NaN;
+    double m_Tir_Pz_fl = NaN;
+    double m_Tir_vz_fl = NaN;
+    double m_Tir_rhoz_fl = NaN;
+    double m_Tir_Re_fl = NaN;
+    double m_Tir_omega_fr = NaN;
+    double m_Tir_Pz_fr = NaN;
+    double m_Tir_vz_fr = NaN;
+    double m_Tir_rhoz_fr = NaN;
+    double m_Tir_Re_fr = NaN;
+    double m_Tir_omega_rl = NaN;
+    double m_Tir_Pz_rl = NaN;
+    double m_Tir_vz_rl = NaN;
+    double m_Tir_rhoz_rl = NaN;
+    double m_Tir_Re_rl = NaN;
+    double m_Tir_omega_rr = NaN;
+    double m_Tir_Pz_rr = NaN;
+    double m_Tir_vz_rr = NaN;
+    double m_Tir_rhoz_rr = NaN;
+    double m_Tir_Re_rr = NaN;
+    //whl fm pull
+    double m_Axl_Trq_fl = NaN;
+    double m_Brk_Prs_fl = NaN;
+    double m_Tir_Fx_fl = NaN;
+    double m_Tir_My_fl = NaN;
+    double m_Tir_Fz_fl = NaN;
+    double m_Sus_Fz_fl = NaN;
+    double m_Axl_Trq_fr = NaN;
+    double m_Brk_Prs_fr = NaN;
+    double m_Tir_Fx_fr = NaN;
+    double m_Tir_My_fr = NaN;
+    double m_Tir_Fz_fr = NaN;
+    double m_Sus_Fz_fr = NaN;
+    double m_Axl_Trq_rl = NaN;
+    double m_Brk_Prs_rl = NaN;
+    double m_Tir_Fx_rl = NaN;
+    double m_Tir_My_rl = NaN;
+    double m_Tir_Fz_rl = NaN;
+    double m_Sus_Fz_rl = NaN;
+    double m_Axl_Trq_rr = NaN;
+    double m_Brk_Prs_rr = NaN;
+    double m_Tir_Fx_rr = NaN;
+    double m_Tir_My_rr = NaN;
+    double m_Tir_Fz_rr = NaN;
+    double m_Sus_Fz_rr = NaN;
+    //whl fm push
+    double m_Brk_Trq_fl = NaN;
+    double m_Brk_Trq_fr = NaN;
+    double m_Brk_Trq_rl = NaN;
+    double m_Brk_Trq_rr = NaN;
 };
 
 }//end of name space 
