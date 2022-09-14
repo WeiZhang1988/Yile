@@ -21,7 +21,7 @@ Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, dou
 
 	m_sptr_sys = make_shared<Sys_Vehicle_Body>();
 	m_sptr_interface = make_shared<Int_Vehicle_Body>(int(Sys_Vehicle_Body::m_external_inputs_num));
-	shared_ptr<Vehicle_Body> sptr_vhl_bdy = make_shared<Vehicle_Body>("data/params/vhl_bdy_par_0.json");
+	shared_ptr<Vehicle_Body> sptr_vhl_bdy = make_shared<Vehicle_Body>();
  
 	m_sptr_sys->add_vhl_bdy(sptr_vhl_bdy);
 	m_sptr_sys->add_interface(m_sptr_interface);

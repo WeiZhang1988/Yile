@@ -22,10 +22,10 @@ Simulator_Tir_4Fiala::Simulator_Tir_4Fiala(double t_start, double t_end, double 
 	m_sptr_sys = make_shared<Sys_Tir_4Fiala>();
 	m_sptr_interface = make_shared<Int_Tir_4Fiala>(int(Sys_Tir_4Fiala::m_external_inputs_num));
 	shared_ptr<Subsys_Tire_4Fiala> sptr_sub_tir_4fiala = make_shared<Subsys_Tire_4Fiala>();
-    shared_ptr<Tire_Fiala> sptr_tir_fl = make_shared<Tire_Fiala>("data/params/tir_fiala_par_0.json");
-	shared_ptr<Tire_Fiala> sptr_tir_fr = make_shared<Tire_Fiala>("data/params/tir_fiala_par_0.json");
-	shared_ptr<Tire_Fiala> sptr_tir_rl = make_shared<Tire_Fiala>("data/params/tir_fiala_par_0.json");
-	shared_ptr<Tire_Fiala> sptr_tir_rr = make_shared<Tire_Fiala>("data/params/tir_fiala_par_0.json");
+    shared_ptr<Tire_Fiala> sptr_tir_fl = make_shared<Tire_Fiala>();
+	shared_ptr<Tire_Fiala> sptr_tir_fr = make_shared<Tire_Fiala>();
+	shared_ptr<Tire_Fiala> sptr_tir_rl = make_shared<Tire_Fiala>();
+	shared_ptr<Tire_Fiala> sptr_tir_rr = make_shared<Tire_Fiala>();
  
     sptr_sub_tir_4fiala->add_tirs(sptr_tir_fl,sptr_tir_fr,sptr_tir_rl,sptr_tir_rr);
 	m_sptr_sys->add_subsys_tir_4fiala(sptr_sub_tir_4fiala);
