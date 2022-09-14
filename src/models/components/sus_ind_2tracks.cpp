@@ -119,8 +119,9 @@ void NMSPC::Sus_Ind_2Tracks::update_pv (const d_vec &inputs, d_vec &outputs) {
 	
 	//process	
 	//--left
-	m_Whl_Vx_l = m_Veh_Vx_l;
-	m_Whl_Vy_l = m_Veh_Vy_l;
+	m_Sus_Vx_l = m_Veh_Vx_l;
+	m_Sus_Vy_l = m_Veh_Vy_l;
+	m_Sus_Vz_l = -m_Whl_Vz_l;
 	m_Veh_h_l = -(abs(m_Strg_ang_l) * m_strg_hgt_slp_l - m_Whl_Pz_l + m_Veh_Pz_l);
 	m_sus_h_l = -(m_F0z_l / m_Kz_l - m_Veh_h_l);
 	m_x_minus_hmax_l = -m_sus_h_l - m_Hmax_l;
@@ -135,8 +136,9 @@ void NMSPC::Sus_Ind_2Tracks::update_pv (const d_vec &inputs, d_vec &outputs) {
 	m_caster_H_slp_l * m_sus_h_l;
 	m_arm_l = m_Veh_h_l + m_Whl_Re_l;
 	//--right
-	m_Whl_Vx_r = m_Veh_Vx_r;
-	m_Whl_Vy_r = m_Veh_Vy_r;
+	m_Sus_Vx_r = m_Veh_Vx_r;
+	m_Sus_Vy_r = m_Veh_Vy_r;
+	m_Sus_Vz_r = -m_Whl_Vz_r;
 	m_Veh_h_r = -(abs(m_Strg_ang_r) * m_strg_hgt_slp_r - m_Whl_Pz_r + m_Veh_Pz_r);
 	m_sus_h_r = -(m_F0z_r / m_Kz_r - m_Veh_h_r);
 	m_x_minus_hmax_r = -m_sus_h_r - m_Hmax_r;
@@ -155,13 +157,13 @@ void NMSPC::Sus_Ind_2Tracks::update_pv (const d_vec &inputs, d_vec &outputs) {
 	outputs[0] = m_Whl_strg_l;
 	outputs[1] = m_Whl_camber_l;
 	outputs[2] = m_Whl_caster_l;
-	outputs[3] = m_Whl_Vx_l;
-	outputs[4] = m_Whl_Vy_l;
+	outputs[3] = m_Veh_Vx_l;
+	outputs[4] = m_Veh_Vy_l;
 	outputs[5] = m_Whl_strg_r;
 	outputs[6] = m_Whl_camber_r;
 	outputs[7] = m_Whl_caster_r;
-	outputs[8] = m_Whl_Vx_r;
-	outputs[9] = m_Whl_Vy_r;
+	outputs[8] = m_Veh_Vx_r;
+	outputs[9] = m_Veh_Vy_r;
 }
 
 void NMSPC::Sus_Ind_2Tracks::update_fm (const d_vec &inputs, d_vec &outputs) {

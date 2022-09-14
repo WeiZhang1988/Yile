@@ -23,10 +23,10 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
 	m_sptr_sys = make_shared<Sys_Whl_4Disk>();
 	m_sptr_interface = make_shared<Int_Whl_4Disk>(int(Sys_Whl_4Disk::m_external_inputs_num));
 	shared_ptr<Subsys_Wheel_4Disk> sptr_sub_whl_4disk = make_shared<Subsys_Wheel_4Disk>();
-    shared_ptr<Wheel_Disk> sptr_whl_fl = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
-	shared_ptr<Wheel_Disk> sptr_whl_fr = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
-	shared_ptr<Wheel_Disk> sptr_whl_rl = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
-	shared_ptr<Wheel_Disk> sptr_whl_rr = make_shared<Wheel_Disk>("data/params/whl_disk_par_0.json");
+    shared_ptr<Wheel_Disk> sptr_whl_fl = make_shared<Wheel_Disk>();
+	shared_ptr<Wheel_Disk> sptr_whl_fr = make_shared<Wheel_Disk>();
+	shared_ptr<Wheel_Disk> sptr_whl_rl = make_shared<Wheel_Disk>();
+	shared_ptr<Wheel_Disk> sptr_whl_rr = make_shared<Wheel_Disk>();
  
     sptr_sub_whl_4disk->add_whls(sptr_whl_fl,sptr_whl_fr,sptr_whl_rl,sptr_whl_rr);
 	m_sptr_sys->add_subsys_whl_4disk(sptr_sub_whl_4disk);

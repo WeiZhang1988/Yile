@@ -24,7 +24,7 @@ public:
 	static const int m_con_states_num = 0;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
-	static const int m_pv_outputs_num = 10;									//amount of pv outputs
+	static const int m_pv_outputs_num = 12;									//amount of pv outputs
 	static const int m_fm_outputs_num = 14;									//amount of fm outputs
 	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
@@ -122,8 +122,9 @@ private:
 	double m_Whl_strg_l   = NaN;
 	double m_Whl_camber_l = NaN;
 	double m_Whl_caster_l = NaN;
-	double m_Whl_Vx_l = NaN;
-	double m_Whl_Vy_l = NaN;
+	double m_Sus_Vx_l = NaN;
+	double m_Sus_Vy_l = NaN;
+	double m_Sus_Vz_l = NaN;
 	double m_Veh_Fx_l = NaN;
 	double m_Veh_Fy_l = NaN;	
 	double m_Veh_Fz_l = NaN;
@@ -135,8 +136,9 @@ private:
 	double m_Whl_strg_r   = NaN;
 	double m_Whl_camber_r = NaN;
 	double m_Whl_caster_r = NaN;
-	double m_Whl_Vx_r = NaN;
-	double m_Whl_Vy_r = NaN;
+	double m_Sus_Vx_r = NaN;
+	double m_Sus_Vy_r = NaN;
+	double m_Sus_Vz_r = NaN;
 	double m_Veh_Fx_r = NaN;
 	double m_Veh_Fy_r = NaN;	
 	double m_Veh_Fz_r = NaN;
