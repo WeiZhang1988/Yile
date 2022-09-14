@@ -17,7 +17,7 @@
 namespace NMSPC{
 class Vehicle_Body {
 public:
-	static const int m_params_num = 120;										//amount of parameters
+	static const int m_params_num = 120;									//amount of parameters
 	static const int m_pv_inputs_num = 0;									//amount of pv inputs
 	static const int m_fm_inputs_num = 34;									//amount of fm inputs
 	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs

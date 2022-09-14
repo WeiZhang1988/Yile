@@ -84,7 +84,6 @@ void run_Sus_2Ind() {
 		of<<std::endl;
 	}
 	of.close();
-
 }
 
 void run_Vehicle_Body() {
@@ -156,8 +155,8 @@ void run_LPF() {
 
 int main(){
 	//run_Whl_Disk_Tir_Fiala();
-	run_Tir_4Fiala();
-	//run_Sus_2Ind();
+	//run_Tir_4Fiala();
+	run_Sus_2Ind();
 	//run_Vehicle_Body();
 	//run_Whl_4Disk();
 	//run_LPF();
