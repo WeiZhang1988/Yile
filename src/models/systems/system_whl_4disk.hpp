@@ -41,10 +41,12 @@ public:
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
-	void pull_external_inputs(const d_vec &inputs);
+
 	void update_pv();
 	void update_fm();
+
 	void update_drv();
+	
 	void operator() (const d_vec &x, d_vec &dxdt, const double &t);
 	
 
