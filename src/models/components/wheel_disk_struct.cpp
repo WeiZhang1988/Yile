@@ -13,25 +13,36 @@
 #include "wheel_disk.hpp"
 
 void NMSPC::Wheel_Disk::push_con_states (d_vec &con_states) {
-	con_states[0] = m_unlocked_omega;
-    con_states[1] = m_Tir_Pz;
-    con_states[2] = m_Tir_Vz;
-    con_states[3] = m_Sus_lpf_Fz;
+	// con_states[0] = m_unlocked_omega;
+    // con_states[1] = m_Tir_Pz;
+    // con_states[2] = m_Tir_Vz;
+    // con_states[3] = m_Sus_lpf_Fz;
+    con_states[0] = m_Wheel_X.unlocked_omega;
+    con_states[1] = m_Wheel_X.Tir_Pz; 
+    con_states[2] = m_Wheel_X.Tir_Vz;
+    con_states[3] = m_Wheel_X.Sus_lpf_Fz;
 }
 
 void NMSPC::Wheel_Disk::pull_con_states (const d_vec &con_states) {
     //store previous state
-    m_unlocked_omega_pre = m_unlocked_omega;
+    //m_unlocked_omega_pre = m_unlocked_omega;
+    m_Wheel_D.unlocked_omega_pre = m_Wheel_X.unlocked_omega;
     //update current state
-	m_unlocked_omega = con_states[0];
-    m_Tir_Pz = con_states[1];
-    m_Tir_Vz = con_states[2];
-    m_Sus_lpf_Fz = con_states[3];
+    m_Wheel_X.unlocked_omega = con_states[0];
+    m_Wheel_X.m_Tir_Pz = con_states[1];
+    m_Wheel_X.m_Tir_Vz = con_states[2];
+    m_Wheel_X.m_Sus_lpf_Fz = con_states[3];
+    
+	// m_unlocked_omega = con_states[0];
+    // m_Tir_Pz = con_states[1];
+    // m_Tir_Vz = con_states[2];
+    // m_Sus_lpf_Fz = con_states[3];
 }
 
 void NMSPC::Wheel_Disk::update_pv(const d_vec &inputs, d_vec &outputs) {
 	//pull inputs
-	m_Gnd_Pz = inputs[0];
+	//m_Gnd_Pz = inputs[0];
+    m_Wheel_O.m_Tir_Pz = inputs[0];
     //process
 	if (m_locked_flag) {
         m_Tir_omega = 0.0;
@@ -43,6 +54,7 @@ void NMSPC::Wheel_Disk::update_pv(const d_vec &inputs, d_vec &outputs) {
     m_Tir_Re = m_unloaded_radius - m_Tir_rhoz;
     m_Tir_Pz = m_Gnd_Pz;
     m_Tir_Vz = 0.0;
+    
     //push outputs
     outputs[0] = m_Tir_omega;
     outputs[1] = m_Tir_Re;
