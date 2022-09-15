@@ -21,6 +21,7 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
 	m_t_step_micros = m_t_step/1e-6;
 
 	m_sptr_sys = make_shared<Sys_Whl_4Disk>();
+	m_sptr_store = make_shared<d_v_vec>();
 	m_sptr_interface = make_shared<Int_Whl_4Disk>();
 	shared_ptr<Subsys_Wheel_4Disk> sptr_sub_whl_4disk = make_shared<Subsys_Wheel_4Disk>();
     shared_ptr<Wheel_Disk> sptr_whl_fl = make_shared<Wheel_Disk>();
@@ -31,6 +32,7 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
     sptr_sub_whl_4disk->add_whls(sptr_whl_fl,sptr_whl_fr,sptr_whl_rl,sptr_whl_rr);
 	m_sptr_sys->add_subsys_whl_4disk(sptr_sub_whl_4disk);
 	m_sptr_sys->add_interface(m_sptr_interface);
+	m_sptr_sys->add_store(m_sptr_store);
 }
 
 void Simulator_Whl_4Disk::run () {
@@ -40,13 +42,9 @@ void Simulator_Whl_4Disk::run () {
 	double t = m_t_start;
 
 	m_tp_start = steady_clock::now();
-	m_sptr_sys->update_pv();
-	m_sptr_sys->update_fm();
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
-		d_vec tmp = {m_sptr_interface->m_Tir_omega_fl, m_sptr_interface->m_Tir_Pz_fl, m_sptr_interface->m_Tir_vz_fl, m_sptr_interface->m_Tir_rhoz_fl, m_sptr_interface->m_Tir_rhoz_fl, m_sptr_interface->m_Tir_Re_fl, m_sptr_interface->m_Brk_Trq_fl};
-		m_outputs.push_back(tmp);
 		m_inputs.read_row(m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Tir_Fx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Sus_Fz_fl, m_sptr_interface->m_Tir_Fz_fl); 	//*
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
@@ -59,8 +57,7 @@ void Simulator_Whl_4Disk::run () {
 	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
 	m_sptr_sys->update_pv();
 	m_sptr_sys->update_fm();
-	d_vec tmp1 = {m_sptr_interface->m_Tir_omega_fl, m_sptr_interface->m_Tir_Pz_fl, m_sptr_interface->m_Tir_vz_fl, m_sptr_interface->m_Tir_rhoz_fl, m_sptr_interface->m_Tir_rhoz_fl, m_sptr_interface->m_Tir_Re_fl, m_sptr_interface->m_Brk_Trq_fl};
-	m_outputs.push_back(tmp1);
+	m_sptr_sys->store_data();
 }
 
 

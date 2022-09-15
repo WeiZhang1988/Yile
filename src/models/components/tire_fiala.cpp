@@ -33,7 +33,7 @@ void NMSPC::Tire_Fiala::pull_con_states(const d_vec &con_states) {
 }
 
 void NMSPC::Tire_Fiala::pull_pv(const double &Tir_omega, const double &Tir_rhoz, const double &Tir_Re, const double &Sus_vx, const double &Sus_vy, const double &Sus_vz,\
-const double &Sus_gamma, const double &Sus_str, const double &Sus_r); {
+const double &Sus_gamma, const double &Sus_str, const double &Sus_r) {
 	//pull inputs
 	m_Tir_omega = Tir_omega;
 	m_Tir_rhoz = Tir_rhoz;
@@ -114,9 +114,11 @@ void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, 
     m_Tir_My = m_Mroll;
 
 	//frame transfer
-	m_Sus_TirFx = m_DCM_00 * m_Tir_Fx + m_DCM_01 * m_Tir_Fy + m_DCM_02 * m_Tir_Fz;
-	m_Sus_TirFy = m_DCM_10 * m_Tir_Fx + m_DCM_11 * m_Tir_Fy + m_DCM_12 * m_Tir_Fz;
-	m_Sus_TirFz = m_DCM_20 * m_Tir_Fx + m_DCM_21 * m_Tir_Fy + m_DCM_22 * m_Tir_Fz;
+	double dead_zone_Tir_Fx = dead_zone(m_Tir_Fx,-5.0,5.0);
+	double dead_zone_Tir_Fy = dead_zone(m_Tir_Fy,-10.0,10.0);
+	m_Sus_TirFx = m_DCM_00 * dead_zone_Tir_Fx + m_DCM_01 * dead_zone_Tir_Fy + m_DCM_02 * m_Tir_Fz;
+	m_Sus_TirFy = m_DCM_10 * dead_zone_Tir_Fx + m_DCM_11 * dead_zone_Tir_Fy + m_DCM_12 * m_Tir_Fz;
+	m_Sus_TirFz = m_DCM_20 * dead_zone_Tir_Fx + m_DCM_21 * dead_zone_Tir_Fy + m_DCM_22 * m_Tir_Fz;
     
 }
 
@@ -133,7 +135,7 @@ double &Tir_Fx, double &Tir_Fy, double &Tir_Fz, double &Tir_Mx, double &Tir_My, 
     Tir_Mz = m_Tir_Mz;
 }
 
-void NMSPC::Tire_Fiala::update_drv (d_vec &derivatives) {
+void NMSPC::Tire_Fiala::push_drv (d_vec &derivatives) {
 	//process
 	m_drv_kappa = (m_Tir_omega * m_Tir_Re - m_Tir_vx - abs(m_Tir_vx) * \
     m_kappa) / m_Lrelx;
@@ -143,7 +145,7 @@ void NMSPC::Tire_Fiala::update_drv (d_vec &derivatives) {
     (m_My - m_Mroll);
 	m_drv_Sus_lpf_str = (m_Sus_str - m_Sus_lpf_str) * m_lpf_wc;
 	m_drv_Sus_lpf_gamma = (m_Sus_gamma - m_Sus_lpf_gamma) * m_lpf_wc;
-	m_drv_Sus_lfp_Fz = (m_Sus_Fz - m_Sus_lpf_Fz) * m_lpf_wc;
+	m_drv_Sus_lpf_Fz = (m_Sus_Fz - m_Sus_lpf_Fz) * m_lpf_wc;
 	//push outputs
     derivatives[0] = m_drv_kappa;
     derivatives[1] = m_drv_alpha_prime;

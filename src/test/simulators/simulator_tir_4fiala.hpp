@@ -19,6 +19,7 @@
 #include <chrono>
 #include "systems/system_tir_4fiala.hpp"
 #include "interfaces/interface_tir_4fiala.hpp"
+#include "csv.hpp"
 
 using namespace boost::numeric::odeint;
 using namespace std::chrono;
@@ -31,9 +32,8 @@ public:
 	void run ();
 
     shared_ptr<Sys_Tir_4Fiala> m_sptr_sys;
+    shared_ptr<d_v_vec> m_sptr_store;
     shared_ptr<Int_Tir_4Fiala> m_sptr_interface;
-    
-    d_vec m_external_inputs = d_vec(Sys_Tir_4Fiala::m_external_inputs_num,NaN);
 
     int m_steps;
     d_v_vec m_states, m_outputs;
