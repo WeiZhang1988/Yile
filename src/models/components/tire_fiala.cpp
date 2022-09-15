@@ -28,8 +28,6 @@ void NMSPC::Tire_Fiala::pull_con_states(const d_vec &con_states) {
 	m_Sus_lpf_str = con_states[3];
 	m_Sus_lpf_gamma = con_states[4];
 	m_Sus_lpf_Fz = con_states[5];
-	//process
-    m_Sus_lpf_Fz = saturation(m_Sus_lpf_Fz, -10.0*9.81*2000, inf);
 }
 
 void NMSPC::Tire_Fiala::pull_pv(const double &Tir_omega, const double &Tir_rhoz, const double &Tir_Re, const double &Sus_vx, const double &Sus_vy, const double &Sus_vz,\
@@ -48,22 +46,27 @@ const double &Sus_gamma, const double &Sus_str, const double &Sus_r) {
 	m_Tir_r = -m_Sus_r;
 	m_Tir_gamma = m_Sus_lpf_gamma + pi;
 	m_Tir_str = m_Sus_lpf_str;
+
 	m_cos_a = cos(m_Tir_gamma);
+	m_cos_b = cos(0.0);
 	m_cos_c	= cos(m_Tir_str);
 	m_sin_a = sin(m_Tir_gamma);
+	m_sin_b = sin(0.0);
 	m_sin_c	= sin(m_Tir_str);
-	m_DCM_00 = m_cos_a;
-	m_DCM_01 = m_sin_a;
-	m_DCM_02 = 0.0;
-	m_DCM_10 = -m_cos_c * m_sin_a;
-	m_DCM_11 = m_cos_c * m_cos_a;
-	m_DCM_12 = m_sin_c;
-	m_DCM_20 = m_sin_c * m_sin_a;
-	m_DCM_21 = -m_sin_c * m_cos_a;
-	m_DCM_22 = m_cos_c;
-	m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_01 * m_Sus_vy + m_DCM_02 * m_Sus_vz;
-	m_Tir_vy = m_DCM_10 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_12 * m_Sus_vz;
-	m_Tir_vz = m_DCM_20 * m_Sus_vx + m_DCM_21 * m_Sus_vy + m_DCM_22 * m_Sus_vz;
+
+	m_DCM_00 = m_cos_c * m_cos_b;
+	m_DCM_01 = m_sin_c * m_cos_b;
+	m_DCM_02 = -m_sin_b;
+	m_DCM_10 = m_cos_c * m_sin_b * m_sin_a - m_sin_c * m_cos_a;
+	m_DCM_11 = m_sin_c * m_sin_b * m_sin_a + m_cos_c * m_cos_a;
+	m_DCM_12 = m_cos_b * m_sin_a;
+	m_DCM_20 = m_cos_c * m_sin_b * m_cos_a + m_sin_c * m_sin_a;
+	m_DCM_21 = m_sin_c * m_sin_b * m_cos_a - m_cos_c * m_sin_a;
+	m_DCM_22 = m_cos_b * m_cos_a;
+
+	m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_10 * m_Sus_vy + m_DCM_20 * m_Sus_vz;
+	m_Tir_vy = m_DCM_01 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_21 * m_Sus_vz;
+	m_Tir_vz = m_DCM_02 * m_Sus_vx + m_DCM_12 * m_Sus_vy + m_DCM_22 * m_Sus_vz;
 }
 
 void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, const double &Tir_Prs, const double &Air_Tamb) {
@@ -74,7 +77,7 @@ void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, 
 	m_Air_Tamb = Air_Tamb;
 
 	//process
-	m_sat_Fz = saturation(m_Sus_lpf_Fz, m_Fz_min, m_Fz_max);
+	m_sat_Fz = saturation(saturation(m_Sus_lpf_Fz,-10.0*9.8*2000,inf), m_Fz_min, m_Fz_max);
 	m_alpha = saturation(m_alpha_prime * tanh(abs(m_Tir_vy)), m_alpha_min, \
     m_alpha_max);
     m_tan_alpha = tan(m_alpha);
@@ -99,7 +102,7 @@ void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, 
     	m_H = 1.0 - abs(m_tan_alpha) * m_cAlpha / (m_mu * 3.0 * m_sat_Fz);
     	m_Mz_stick = -m_Tir_r * m_bMz - m_width * (1.0 - m_H) * \
     	pow(m_H, 3.0) * m_mu * m_sat_Fz * tanh(4.0 * m_alpha);
-    	m_Fy_stick = m_Tir_gamma * m_cGamma - (1.0 - pow(m_H, 3.0)) * m_mu *\
+    	m_Fy_stick = m_Sus_lpf_gamma * m_cGamma - (1.0 - pow(m_H, 3.0)) * m_mu *\
     	m_sat_Fz * tanh(4.0 * m_alpha);
     	m_Tir_Mz = m_Mz_stick;
     	m_Tir_Fy = m_Fy_stick;
@@ -109,7 +112,7 @@ void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, 
     	m_Tir_Mz = m_Mz_slide;
     	m_Tir_Fy = m_Fy_slide;
     }
-    m_Tir_Mx = cos(m_Tir_gamma) * m_Tir_Fy * m_Tir_Re;
+    m_Tir_Mx = cos(m_Sus_lpf_gamma) * m_Tir_Fy * m_Tir_Re;
     m_Tir_Fz = m_sat_Fz;
     m_Tir_My = m_Mroll;
 
