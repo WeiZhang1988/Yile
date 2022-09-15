@@ -35,7 +35,7 @@ public:
 	double cMy=1.6e-4, double alphaMy=-3e-3, double betaMy=0.97, \
 	double Fz_min=100.0, double Fz_max=1e4, double cKappa=1e7, \
 	double cAlpha=4.5e4, double bMz=0.0, double width=0.209, \
-	double cGamma=1e3, \
+	double cGamma=0.0, \
 	double init_kappa=0.0, double init_alpha=0.0, \
 	double init_Mroll=0.0) :
 	m_Lrelx(Lrelx), m_Lrely(Lrely), \
@@ -71,8 +71,8 @@ private:
 	m_cKappa, m_cAlpha, m_bMz, m_width, m_cGamma;
 	//inputs
 	double m_Tir_omega = NaN;
-	double m_Tir_Re = NaN;
 	double m_Tir_rhoz = NaN;
+	double m_Tir_Re = NaN;
 	double m_Sus_vx = NaN;
 	double m_Sus_vy = NaN;
 	double m_Sus_vz = NaN;

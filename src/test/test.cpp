@@ -39,7 +39,7 @@ void run_Whl_4Disk() {
 
 void run_Tir_4Fiala() {
 	std::ofstream of;
-	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,100.0,1e-4);
+	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,10.0,1e-3);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -61,10 +61,10 @@ void run_Tir_4Fiala() {
 
 int main(){
 	//run_Whl_Disk_Tir_Fiala();
-	//run_Tir_4Fiala();
+	run_Tir_4Fiala();
 	//run_Sus_2Ind();
 	//run_Vehicle_Body();
-	run_Whl_4Disk();
+	//run_Whl_4Disk();
 	//run_LPF();
 	return 0;
 }
