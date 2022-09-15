@@ -21,11 +21,11 @@ public:
 	static const int m_pv_inputs_num = 9;									//amount of pv inputs
 	static const int m_fm_inputs_num = 4;									//amount of fm inputs
 	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs
-	static const int m_con_states_num = 3;									//amount of continuous states;
+	static const int m_con_states_num = 6;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
 	static const int m_pv_outputs_num = 0;									//amount of pv outputs
-	static const int m_fm_outputs_num = 6;									//amount of fm outputs
+	static const int m_fm_outputs_num = 9;									//amount of fm outputs
 	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
 	Tire_Fiala (\
@@ -35,7 +35,7 @@ public:
 	double cMy=1.6e-4, double alphaMy=-3e-3, double betaMy=0.97, \
 	double Fz_min=100.0, double Fz_max=1e4, double cKappa=1e7, \
 	double cAlpha=4.5e4, double bMz=0.0, double width=0.209, \
-	double cGamma=1e3, \
+	double cGamma=0.0, \
 	double init_kappa=0.0, double init_alpha=0.0, \
 	double init_Mroll=0.0) :
 	m_Lrelx(Lrelx), m_Lrely(Lrely), \
@@ -47,52 +47,64 @@ public:
 	m_width(width), m_cGamma(cGamma), \
 	m_kappa(init_kappa), m_alpha_prime(init_alpha), \
 	m_Mroll(init_Mroll) {}
-	
-	Tire_Fiala (const d_vec &params, const d_vec &init_states);
-	Tire_Fiala (const std::string &filename);
 
 	void push_con_states (d_vec &con_states);
-	
 	void pull_con_states (const d_vec &con_states);
-	void update_pv (const d_vec &inputs, d_vec &outputs);
-	void update_fm (const d_vec &inputs, d_vec &outputs);
-	void update_drv (d_vec &outputs);
+
+	void pull_pv (const double &Tir_omega, const double &Tir_rhoz, const double &Tir_Re, const double &Sus_vx, const double &Sus_vy, const double &Sus_vz,\
+	const double &Sus_gamma, const double &Sus_str, const double &Sus_r);
+	void push_pv () {};
+	void pull_fm (const double &Sus_Fz, const double &Gnd_scale, const double &Tir_Prs, const double &Air_Tamb);
+	void push_fm (double &Sus_TirFx, double &Sus_TirFy, double &Sus_TirFz, \
+	double &Tir_Fx, double &Tir_Fy, double &Tir_Fz, double &Tir_Mx, double &Tir_My, double &Tir_Mz);
+
+	void push_drv (d_vec &derivatives);
 
 private:
-	//parameters
+	//built-in parameters
+	const double m_lpf_wc = 200.0 * pi;
+	const double m_lpf_init = 0.0;
+	//configurable parameters
 	double m_Lrelx, m_Lrely, m_alpha_min, m_alpha_max, \
 	m_mu_min, m_mu_max, m_aMy, m_bMy, m_cMy, \
 	m_alphaMy, m_betaMy, m_Fz_min, m_Fz_max, \
 	m_cKappa, m_cAlpha, m_bMz, m_width, m_cGamma;
 	//inputs
-	double m_Whl_omega = NaN;
+	double m_Tir_omega = NaN;
+	double m_Tir_rhoz = NaN;
+	double m_Tir_Re = NaN;
 	double m_Sus_vx = NaN;
 	double m_Sus_vy = NaN;
 	double m_Sus_vz = NaN;
 	double m_Sus_gamma = NaN;
 	double m_Sus_str = NaN;
-	double m_Sus_psidot = NaN;
-	double m_Whl_Re = NaN;
-	double m_Whl_rhoz = NaN;
+	double m_Sus_r = NaN;
+
 	double m_Sus_Fz = NaN;
 	double m_Gnd_scale = NaN;
 	double m_Tir_Prs = NaN;
 	double m_Air_Tamb = NaN;
 	//continuous states
 	double m_kappa, m_alpha_prime, m_Mroll;
+	double m_Sus_lpf_str = m_lpf_init;
+	double m_Sus_lpf_gamma = m_lpf_init;
+	double m_Sus_lpf_Fz = m_lpf_init;
 	//continuous states derivatives
 	double m_drv_kappa, m_drv_alpha_prime, m_drv_Mroll;
+	double m_drv_Sus_lpf_str, m_drv_Sus_lpf_gamma, m_drv_Sus_lpf_Fz;
 	//discrete states
 	//middle variables
 	double m_Tir_vx = NaN;
 	double m_Tir_vy = NaN;
 	double m_Tir_vz = NaN;
+	double m_Tir_r = NaN;
 	double m_Tir_gamma = NaN;
 	double m_Tir_str = NaN;
-	double m_Tir_psidot = NaN;
+
 	double m_Tir_Fx = NaN;
 	double m_Tir_Fy = NaN;
 	double m_Tir_Fz = NaN;
+
 	double m_sat_Fz = NaN;
 	double m_My = NaN;
 	double m_mu = NaN;
@@ -125,9 +137,12 @@ private:
 	double m_DCM_21	= NaN;
 	double m_DCM_22	= NaN;
 	//outputs
-	double m_Sus_Fx = NaN;
-	double m_Sus_Fy = NaN;
-	//double m_Sus_Fz = NaN;
+	double m_Sus_TirFx = NaN;
+	double m_Sus_TirFy = NaN;
+	double m_Sus_TirFz = NaN;
+	//double m_Tir_Fx = NaN;
+	//double m_Tir_Fy = NaN;
+	//double m_Tir_Fz = NaN;
 	double m_Tir_Mx = NaN;
 	double m_Tir_My = NaN;
 	double m_Tir_Mz = NaN;

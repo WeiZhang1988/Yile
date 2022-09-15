@@ -38,19 +38,24 @@ public:
     {m_sptr_subsys_whl_4disk = sptr_subsys_whl_4disk;}
 	void add_interface(std::shared_ptr<Int_Whl_4Disk> sptr_interface) \
     {m_sptr_interface = sptr_interface;}
+	void add_store(std::shared_ptr<d_v_vec> sptr_store) {m_sptr_store=sptr_store;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
-	void pull_external_inputs(const d_vec &inputs);
+
 	void update_pv();
 	void update_fm();
+
 	void update_drv();
-	void operator() (const d_vec &x, d_vec &dxdt, const double &t);
+
+	void store_data();
 	
+	void operator() (const d_vec &x, d_vec &dxdt, const double &t);
 
 private:
 	std::shared_ptr<Subsys_Wheel_4Disk> m_sptr_subsys_whl_4disk;
 	std::shared_ptr<Int_Whl_4Disk> m_sptr_interface;
+	std::shared_ptr<d_v_vec> m_sptr_store;
 
 	//inputs
 	//continuous states
@@ -58,7 +63,6 @@ private:
 	//continuous states derivatives
 	d_vec m_subsys_whl_4disk_drvs = d_vec(Subsys_Wheel_4Disk::m_derivatives_num,NaN);
 	d_vec m_drvs = d_vec(m_derivatives_num,NaN);
-	//outputs
 	
 public:
 	//continuous states

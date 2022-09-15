@@ -32,9 +32,8 @@ public:
 	void run ();
 
     shared_ptr<Sys_Whl_4Disk> m_sptr_sys;
+    shared_ptr<d_v_vec> m_sptr_store;
     shared_ptr<Int_Whl_4Disk> m_sptr_interface;
-    
-    d_vec m_external_inputs = d_vec(Sys_Whl_4Disk::m_external_inputs_num,NaN);
 
     int m_steps;
     d_v_vec m_states, m_outputs;
