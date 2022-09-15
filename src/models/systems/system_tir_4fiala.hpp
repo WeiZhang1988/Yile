@@ -38,19 +38,25 @@ public:
     {m_sptr_subsys_tir_4fiala = sptr_subsys_tir_4fiala;}
 	void add_interface(std::shared_ptr<Int_Tir_4Fiala> sptr_interface) \
     {m_sptr_interface = sptr_interface;}
+	void add_store(std::shared_ptr<d_v_vec> sptr_store) {m_sptr_store=sptr_store;}
 	
 	void push_con_states(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
-	void pull_external_inputs(const d_vec &inputs);
+
 	void update_pv();
 	void update_fm();
+
 	void update_drv();
+
+	void store_data();
+	
 	void operator() (const d_vec &x, d_vec &dxdt, const double &t);
 	
 
 private:
 	std::shared_ptr<Subsys_Tire_4Fiala> m_sptr_subsys_tir_4fiala;
 	std::shared_ptr<Int_Tir_4Fiala> m_sptr_interface;
+	std::shared_ptr<d_v_vec> m_sptr_store;
 
 	//inputs
 	//continuous states

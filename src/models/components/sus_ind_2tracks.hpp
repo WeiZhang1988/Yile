@@ -21,10 +21,10 @@ public:
 	static const int m_pv_inputs_num = 16;									//amount of pv inputs
 	static const int m_fm_inputs_num = 10;									//amount of fm inputs
 	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs
-	static const int m_con_states_num = 0;									//amount of continuous states;
+	static const int m_con_states_num = 2;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
-	static const int m_pv_outputs_num = 10;									//amount of pv outputs
+	static const int m_pv_outputs_num = 12;									//amount of pv outputs
 	static const int m_fm_outputs_num = 14;									//amount of fm outputs
 	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
@@ -58,14 +58,13 @@ public:
 			m_strg_hgt_slp_r = 0.0;
 			}
 	}
-	
-	Sus_Ind_2Tracks (const d_vec &params, const bool is_strg);
-	Sus_Ind_2Tracks (const std::string &filename);
 
 	void push_con_states (d_vec &con_states) {};
 	void pull_con_states (const d_vec &con_states) {};
-	void update_pv (const d_vec &inputs, d_vec &outputs);
+
+	void pull_pv (const d_vec &inputs, d_vec &outputs);
 	void update_fm (const d_vec &inputs, d_vec &outputs);
+
 	void update_drv (d_vec &outputs) {};
 
 private:
@@ -89,19 +88,19 @@ private:
 	
 	//inputs
 	//--left
-	double m_Strg_ang_l = NaN;
-	double m_Whl_Pz_l   = NaN;
-	double m_Whl_Vz_l   = NaN;
-	double m_Whl_Re_l   = NaN;
+	double m_Strg_str_l = NaN;
+	double m_Tir_Pz_l   = NaN;
+	double m_Tir_vz_l   = NaN;
+	double m_Tir_Re_l   = NaN;
 	double m_Veh_Pz_l   = NaN;
-	double m_Veh_Vx_l   = NaN;
-	double m_Veh_Vy_l   = NaN;
-	double m_Veh_Vz_l   = NaN;
-	double m_Whl_Fx_l   = NaN;
-	double m_Whl_Fy_l   = NaN;
-	double m_Whl_Mx_l   = NaN;
-	double m_Whl_My_l   = NaN;
-	double m_Whl_Mz_l   = NaN;
+	double m_Veh_vx_l   = NaN;
+	double m_Veh_vy_l   = NaN;
+	double m_Veh_vz_l   = NaN;
+	double m_Sus_TirFx_l   = NaN;
+	double m_Sus_TirFy_l   = NaN;
+	double m_Sus_TirMx_l   = NaN;
+	double m_Sus_TirMy_l   = NaN;
+	double m_Sus_TirMz_l   = NaN;
 	//--right
 	double m_Strg_ang_r = NaN;
 	double m_Whl_Pz_r   = NaN;
@@ -122,21 +121,23 @@ private:
 	double m_Whl_strg_l   = NaN;
 	double m_Whl_camber_l = NaN;
 	double m_Whl_caster_l = NaN;
-	double m_Whl_Vx_l = NaN;
-	double m_Whl_Vy_l = NaN;
-	double m_Veh_Fx_l = NaN;
-	double m_Veh_Fy_l = NaN;	
-	double m_Veh_Fz_l = NaN;
-	double m_Veh_Mx_l = NaN;
-	double m_Veh_My_l = NaN;	
-	double m_Veh_Mz_l = NaN;	
-	double m_Whl_Fz_l = NaN;
+	double m_Sus_Vx_l = NaN;
+	double m_Sus_Vy_l = NaN;
+	double m_Sus_Vz_l = NaN;
+	double m_Sus_VehFx_l = NaN;
+	double m_Sus_VehFy_l = NaN;	
+	double m_Sus_VehFz_l = NaN;
+	double m_Sus_VehMx_l = NaN;
+	double m_Sus_VehMy_l = NaN;	
+	double m_Sus_VehMz_l = NaN;	
+	double m_Sus_TirFz_l = NaN;
 	//--right
 	double m_Whl_strg_r   = NaN;
 	double m_Whl_camber_r = NaN;
 	double m_Whl_caster_r = NaN;
-	double m_Whl_Vx_r = NaN;
-	double m_Whl_Vy_r = NaN;
+	double m_Sus_Vx_r = NaN;
+	double m_Sus_Vy_r = NaN;
+	double m_Sus_Vz_r = NaN;
 	double m_Veh_Fx_r = NaN;
 	double m_Veh_Fy_r = NaN;	
 	double m_Veh_Fz_r = NaN;
