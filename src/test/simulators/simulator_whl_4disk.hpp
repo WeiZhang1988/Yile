@@ -32,6 +32,7 @@ public:
 	void run ();
 
     shared_ptr<Sys_Whl_4Disk> m_sptr_sys;
+    shared_ptr<d_v_vec> m_sptr_store;
     shared_ptr<Int_Whl_4Disk> m_sptr_interface;
 
     int m_steps;

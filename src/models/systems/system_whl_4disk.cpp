@@ -43,10 +43,15 @@ void NMSPC::Sys_Whl_4Disk::update_drv() {
 	std::copy(m_subsys_whl_4disk_drvs.begin(), m_subsys_whl_4disk_drvs.end(), m_drvs.begin());
 }
 
+void NMSPC::Sys_Whl_4Disk::store_data() {
+	m_sptr_store->push_back(d_vec{m_sptr_interface->m_Tir_omega_fl, m_sptr_interface->m_Tir_Pz_fl, m_sptr_interface->m_Tir_vz_fl, m_sptr_interface->m_Tir_rhoz_fl, m_sptr_interface->m_Tir_Re_fl, m_sptr_interface->m_Brk_Trq_fl});
+}
+
 void NMSPC::Sys_Whl_4Disk::operator() (const d_vec &x, d_vec &dxdt, const double &t) {
 	pull_con_states(x);
 	update_pv();
 	update_fm();
 	update_drv();
+	store_data();
 	dxdt = m_drvs;
 }

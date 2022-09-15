@@ -25,7 +25,7 @@ public:
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
 	static const int m_pv_outputs_num = 0;									//amount of pv outputs
-	static const int m_fm_outputs_num = 6;									//amount of fm outputs
+	static const int m_fm_outputs_num = 9;									//amount of fm outputs
 	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
 	Tire_Fiala (\
