@@ -13,6 +13,7 @@
 #include <fstream>
 #include "simulators/simulator_whl_4disk.hpp"
 #include "simulators/simulator_tir_4fiala.hpp"
+#include "simulators/simulator_sus_2ind.hpp"
 
 using namespace Yile;
 
@@ -39,7 +40,7 @@ void run_Whl_4Disk() {
 
 void run_Tir_4Fiala() {
 	std::ofstream of;
-	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,10.0,1e-3/4);
+	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,10.0,1e-4);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -58,11 +59,32 @@ void run_Tir_4Fiala() {
 	
 }
 
+void run_Sus_2Ind() {
+	std::ofstream of;
+	Simulator_Sus_2Ind sim1 = Simulator_Sus_2Ind(0.0,10.0,1e-4);
+	steady_clock::time_point start = steady_clock::now();
+	sim1.run();
+	steady_clock::time_point end = steady_clock::now();
+	milliseconds dur= duration_cast<milliseconds>(end - start);
+	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
+	
+	of.open("res_sus_2ind.csv");
+	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
+	for (auto items : *sim1.m_sptr_store) {
+		for (auto item : items) {
+			of<<std::setw(30)<<std::setprecision(7)<<item<<',';
+		}
+		of<<std::endl;
+	}
+	of.close();
+	
+}
+
 
 int main(){
 	//run_Whl_Disk_Tir_Fiala();
-	run_Tir_4Fiala();
-	//run_Sus_2Ind();
+	//run_Tir_4Fiala();
+	run_Sus_2Ind();
 	//run_Vehicle_Body();
 	//run_Whl_4Disk();
 	//run_LPF();
