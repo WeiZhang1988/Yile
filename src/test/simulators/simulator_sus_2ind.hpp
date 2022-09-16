@@ -19,6 +19,7 @@
 #include <chrono>
 #include "systems/system_sus_2ind.hpp"
 #include "interfaces/interface_sus_2ind.hpp"
+#include "csv.hpp"
 
 using namespace boost::numeric::odeint;
 using namespace std::chrono;
@@ -31,9 +32,8 @@ public:
 	void run ();
 
     shared_ptr<Sys_Sus_2Ind> m_sptr_sys;
+    shared_ptr<d_v_vec> m_sptr_store;
     shared_ptr<Int_Sus_2Ind> m_sptr_interface;
-    
-    d_vec m_external_inputs = d_vec(Sys_Sus_2Ind::m_external_inputs_num,NaN);
 
     int m_steps;
     d_v_vec m_states, m_outputs;

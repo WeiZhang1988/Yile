@@ -32,7 +32,6 @@ Simulator_Tir_4Fiala::Simulator_Tir_4Fiala(double t_start, double t_end, double 
 	m_sptr_sys->add_subsys_tir_4fiala(sptr_sub_tir_4fiala);
 	m_sptr_sys->add_interface(m_sptr_interface);
 	m_sptr_sys->add_store(m_sptr_store);
-
 }
 
 void Simulator_Tir_4Fiala::run () {
