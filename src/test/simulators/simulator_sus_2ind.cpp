@@ -43,7 +43,7 @@ void Simulator_Sus_2Ind::run () {
 		m_steps++;	
 		m_times.push_back(t);
 		m_inputs.read_row(m_sptr_interface->m_Veh_hgt_cg, m_sptr_interface->m_Veh_r, \
-    	m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Tir_Pz_fl, m_sptr_interface->m_Tir_vz_fl,	m_sptr_interface->m_Tir_Re_fl, \
+    	m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Sus_TirPz_fl, m_sptr_interface->m_Sus_Tirvz_fl, m_sptr_interface->m_Tir_Re_fl, \
 		m_sptr_interface->m_Veh_Pz_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
 		m_sptr_interface->m_Sus_TirFx_fl, m_sptr_interface->m_Sus_TirFy_fl, m_sptr_interface->m_Tir_Mx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Tir_Mz_fl); 
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
