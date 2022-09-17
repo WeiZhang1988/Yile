@@ -24,7 +24,7 @@ public:
 	static const int m_con_states_num = 4;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 2;									//amount of discrete states;
-	static const int m_pv_outputs_num = 5;									//amount of pv outputs
+	static const int m_pv_outputs_num = 7;									//amount of pv outputs
 	static const int m_fm_outputs_num = 1;									//amount of fm outputs
 	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
@@ -45,7 +45,7 @@ public:
 	void pull_con_states (const d_vec &con_states);
 
 	void pull_pv (const double &Gnd_Pz);
-	void push_pv (double &Tir_omega, double &Tir_Pz, double &Tir_vz, double &Tir_rhoz, double &Tir_Re);
+	void push_pv (double &Tir_omega, double &Sus_TirPz, double &Sus_Tirvz, double &Tir_Pz, double &Tir_vz, double &Tir_rhoz, double &Tir_Re);
 	void pull_fm (const double &Axl_Trq, const double &Brk_Prs, const double &Tir_Fx, const double &Tir_My, const double &Tir_Fz, const double &Sus_Fz);
 	void push_fm (double &Brk_Trq);
 
@@ -87,8 +87,8 @@ private:
 	//outputs
 	double m_Tir_omega = NaN;
 	double m_Tir_Re = NaN;
-	//double m_Tir_Pz = NaN;
-	//double m_Tir_vz = NaN;
+	double m_Sus_TirPz = NaN;
+	double m_Sus_Tirvz = NaN;
 	double m_Tir_rhoz = NaN;
 	double m_Tir_Brk_Trq = NaN;
 };

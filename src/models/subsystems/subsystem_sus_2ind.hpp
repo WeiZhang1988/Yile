@@ -34,13 +34,13 @@ public:
 	void pull_con_states(const d_vec &con_states) {};
 
 	void pull_pv (const double &Veh_hgt_cg, const double &Veh_r, \
-    const double &Strg_str_fl, const double &Tir_Pz_fl, const double &Tir_vz_fl,	const double &Tir_Re_fl, \
+    const double &Strg_str_fl, const double &Sus_TirPz_fl, const double &Sus_Tirvz_fl,	const double &Tir_Re_fl, \
 	const double &Veh_Pz_fl, const double &Veh_vx_fl, const double &Veh_vy_fl, const double &Veh_vz_fl, \
-	const double &Strg_str_fr, const double &Tir_Pz_fr, const double &Tir_vz_fr,	const double &Tir_Re_fr, \
+	const double &Strg_str_fr, const double &Sus_TirPz_fr, const double &Sus_Tirvz_fr,	const double &Tir_Re_fr, \
 	const double &Veh_Pz_fr, const double &Veh_vx_fr, const double &Veh_vy_fr, const double &Veh_vz_fr, \
-    const double &Strg_str_rl, const double &Tir_Pz_rl, const double &Tir_vz_rl,	const double &Tir_Re_rl, \
+    const double &Strg_str_rl, const double &Sus_TirPz_rl, const double &Sus_Tirvz_rl,	const double &Tir_Re_rl, \
 	const double &Veh_Pz_rl, const double &Veh_vx_rl, const double &Veh_vy_rl, const double &Veh_vz_rl, \
-	const double &Strg_str_rr, const double &Tir_Pz_rr, const double &Tir_vz_rr,	const double &Tir_Re_rr, \
+	const double &Strg_str_rr, const double &Sus_TirPz_rr, const double &Sus_Tirvz_rr,	const double &Tir_Re_rr, \
 	const double &Veh_Pz_rr, const double &Veh_vx_rr, const double &Veh_vy_rr, const double &Veh_vz_rr);
     void push_pv (double &Sus_str_fl, double &Sus_gamma_fl, double &Sus_caster_fl, double &Sus_r_fl, double &Sus_vx_fl, double &Sus_vy_fl, double &Sus_vz_fl, \
 	double &Sus_str_fr, double &Sus_gamma_fr, double &Sus_caster_fr, double &Sus_r_fr, double &Sus_vx_fr, double &Sus_vy_fr, double &Sus_vz_fr, \

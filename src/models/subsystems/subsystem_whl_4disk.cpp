@@ -40,14 +40,14 @@ void NMSPC::Subsys_Wheel_4Disk::pull_pv(const double &Gnd_Pz_fl, const double &G
     m_sptr_whl_rl->pull_pv(Gnd_Pz_rl);
     m_sptr_whl_rr->pull_pv(Gnd_Pz_rr);
 }
-void NMSPC::Subsys_Wheel_4Disk::push_pv(double &Tir_omega_fl, double &Tir_Pz_fl, double &Tir_vz_fl, double &Tir_rhoz_fl, double &Tir_Re_fl, \
-double &Tir_omega_fr, double &Tir_Pz_fr, double &Tir_vz_fr, double &Tir_rhoz_fr, double &Tir_Re_fr, \
-double &Tir_omega_rl, double &Tir_Pz_rl, double &Tir_vz_rl, double &Tir_rhoz_rl, double &Tir_Re_rl, \
-double &Tir_omega_rr, double &Tir_Pz_rr, double &Tir_vz_rr, double &Tir_rhoz_rr, double &Tir_Re_rr) {
-    m_sptr_whl_fl->push_pv(Tir_omega_fl, Tir_Pz_fl, Tir_vz_fl, Tir_rhoz_fl, Tir_Re_fl);
-    m_sptr_whl_fr->push_pv(Tir_omega_fr, Tir_Pz_fr, Tir_vz_fr, Tir_rhoz_fr, Tir_Re_fr);
-    m_sptr_whl_rl->push_pv(Tir_omega_rl, Tir_Pz_rl, Tir_vz_rl, Tir_rhoz_rl, Tir_Re_rl);
-    m_sptr_whl_rr->push_pv(Tir_omega_rr, Tir_Pz_rr, Tir_vz_rr, Tir_rhoz_rr, Tir_Re_rr);
+void NMSPC::Subsys_Wheel_4Disk::push_pv(double &Tir_omega_fl, double &Sus_TirPz_fl, double &Sus_Tirvz_fl, double &Tir_Pz_fl, double &Tir_vz_fl, double &Tir_rhoz_fl, double &Tir_Re_fl, \
+double &Tir_omega_fr, double &Sus_TirPz_fr, double &Sus_Tirvz_fr, double &Tir_Pz_fr, double &Tir_vz_fr, double &Tir_rhoz_fr, double &Tir_Re_fr, \
+double &Tir_omega_rl, double &Sus_TirPz_rl, double &Sus_Tirvz_rl, double &Tir_Pz_rl, double &Tir_vz_rl, double &Tir_rhoz_rl, double &Tir_Re_rl, \
+double &Tir_omega_rr, double &Sus_TirPz_rr, double &Sus_Tirvz_rr, double &Tir_Pz_rr, double &Tir_vz_rr, double &Tir_rhoz_rr, double &Tir_Re_rr) {
+    m_sptr_whl_fl->push_pv(Tir_omega_fl, Sus_TirPz_fl, Sus_Tirvz_fl, Tir_Pz_fl, Tir_vz_fl, Tir_rhoz_fl, Tir_Re_fl);
+    m_sptr_whl_fr->push_pv(Tir_omega_fr, Sus_TirPz_fr, Sus_Tirvz_fr, Tir_Pz_fr, Tir_vz_fr, Tir_rhoz_fr, Tir_Re_fr);
+    m_sptr_whl_rl->push_pv(Tir_omega_rl, Sus_TirPz_rl, Sus_Tirvz_rl, Tir_Pz_rl, Tir_vz_rl, Tir_rhoz_rl, Tir_Re_rl);
+    m_sptr_whl_rr->push_pv(Tir_omega_rr, Sus_TirPz_rr, Sus_Tirvz_rr, Tir_Pz_rr, Tir_vz_rr, Tir_rhoz_rr, Tir_Re_rr);
 }
 
 void NMSPC::Subsys_Wheel_4Disk::pull_fm(const double &Axl_Trq_fl, const double &Brk_Prs_fl, const double &Tir_Fx_fl, const double &Tir_My_fl, const double &Tir_Fz_fl, const double &Sus_Fz_fl,\
