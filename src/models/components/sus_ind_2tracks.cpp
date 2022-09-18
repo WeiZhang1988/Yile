@@ -119,11 +119,11 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 	m_Sus_VehFy_l = m_Sus_TirFy_l;
 	if ((m_x_minus_hmax_l) > 0.0) {
 		// upper hard stop
-		m_hard_stop_force_l = calculate_hard_stop_force(m_x_minus_hmax_l, \
+		m_hard_stop_force_l = calculate_hard_stop_force_max_stop(m_x_minus_hmax_l, \
 		 m_x_dot_l, m_Hmax_l, m_Kz_l, m_Cz_l);
 	} else if ((m_x_plus_hmax_l) < 0.0) {
 		// lower hard stop
-		m_hard_stop_force_l = calculate_hard_stop_force(m_x_plus_hmax_l, \
+		m_hard_stop_force_l = calculate_hard_stop_force_min_stop(m_x_plus_hmax_l, \
 		 m_x_dot_l, m_Hmax_l, m_Kz_l, m_Cz_l);
 	} else {
 		m_hard_stop_force_l = 0.0;
@@ -140,11 +140,11 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 	m_Sus_VehFy_r = m_Sus_TirFy_r;
 	if ((m_x_minus_hmax_r) > 0.0) {
 		// upper hard stop
-		m_hard_stop_force_r = calculate_hard_stop_force(m_x_minus_hmax_r, \
+		m_hard_stop_force_r = calculate_hard_stop_force_max_stop(m_x_minus_hmax_r, \
 		 m_x_dot_r, m_Hmax_r, m_Kz_r, m_Cz_r);
 	} else if ((m_x_plus_hmax_r) < 0.0) {
 		// lower hard stop
-		m_hard_stop_force_r = calculate_hard_stop_force(m_x_plus_hmax_r, \
+		m_hard_stop_force_r = calculate_hard_stop_force_min_stop(m_x_plus_hmax_r, \
 		 m_x_dot_r, m_Hmax_r, m_Kz_r, m_Cz_r);
 	} else {
 		m_hard_stop_force_r = 0.0;
@@ -178,10 +178,18 @@ double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehFz_r, double &Sus_VehMx
 }
 
 
-double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force(const double \
-&x_morp_hmax, const double &x_dot, const double &Hmax, const double &Kz, const double &Cz){
-     double tmp = saturation(abs(4.0 * x_morp_hmax / (0.05 * Hmax)), \
+double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_max_stop(const double \
+&x_minus_hmax, const double &x_dot, const double &Hmax, const double &Kz, const double &Cz){
+     double tmp = saturation(abs(4.0 * x_minus_hmax / (0.05 * Hmax)), \
      0.0, 4.0);
-     return tanh(tmp) * pow(tmp, 3.0) * Kz * x_morp_hmax + tanh(tmp) \
+     return tanh(tmp) * pow(tmp, 3.0) * Kz * uhsbm(x_minus_hmax) + tanh(tmp) \
+     * Cz * x_dot;
+}
+
+double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_min_stop(const double \
+&x_plus_hmax, const double &x_dot, const double &Hmax, const double &Kz, const double &Cz){
+     double tmp = saturation(abs(4.0 * x_plus_hmax / (0.05 * Hmax)), \
+     0.0, 4.0);
+     return tanh(tmp) * pow(tmp, 3.0) * Kz * lhsbm(x_plus_hmax) + tanh(tmp) \
      * Cz * x_dot;
 }

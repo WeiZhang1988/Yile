@@ -17,7 +17,7 @@
 namespace NMSPC{
 class Sus_Ind_2Tracks {
 public:
-	static const int m_params_num = 29;										//amount of parameters
+	static const int m_params_num = 33;										//amount of parameters
 	static const int m_pv_inputs_num = 18;									//amount of pv inputs
 	static const int m_fm_inputs_num = 10;									//amount of fm inputs
 	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs
@@ -33,8 +33,8 @@ public:
 	double toe=0.0349, double toe_strg_slp=0.01, \
 	double caster=0.0698, double caster_H_slp=-0.2269, double caster_strg_slp=0.01, \
 	double camber=0.0698, double camber_H_slp=-0.2269, double camber_strg_slp=0.01, \
-	double strg_hgt_slp=0.1432, \
-	bool is_strg=false) :
+	double strg_hgt_slp=0.1432, double as_R=0.2, double as_ntrl_ang=0.5236, double as_trsK=8e2, \
+	bool has_anti_sway=false, bool is_strg=false) :
 	m_F0z_l(F0z), m_Kz_l(Kz), m_Cz_l(Cz), m_Hmax_l(Hmax), \
 	m_roll_strg_H_slp_l(roll_strg_H_slp), \
 	m_toe_l(toe), m_toe_strg_slp_l(toe_strg_slp), \
@@ -51,7 +51,8 @@ public:
 	m_camber_r(camber), m_camber_H_slp_r(camber_H_slp), \
 	m_camber_strg_slp_r(camber_strg_slp), \
 	m_strg_hgt_slp_r(strg_hgt_slp), \
-	m_is_strg(is_strg)
+	m_as_R(as_R), m_as_ntrl_ang(as_ntrl_ang), m_as_trsK(as_trsK), \
+	m_has_anti_sway(has_anti_sway), m_is_strg(is_strg)
 	{	
 		if (!is_strg) {
 			m_strg_hgt_slp_l = 0.0;
@@ -77,6 +78,10 @@ public:
 	void update_drv (d_vec &outputs) {};
 
 private:
+	//built-in parameters
+	piece_wise_linear uhsbm = piece_wise_linear({0.0, 0.01, 0.02},{0.0, 1.0, 1.0});
+	piece_wise_linear lhsbm = piece_wise_linear({-0.02, -0.01, 0.0},{1.0, 1.0, 0.0});
+	piece_wise_linear ang_tan_lmt = piece_wise_linear({-1.0, 1.0},{-1.0, 1.0});
 	//parameters	
 	// preload , spring constant , damping , maximum height
 	double m_F0z_l, m_Kz_l, m_Cz_l, m_Hmax_l, \
@@ -92,6 +97,9 @@ private:
 	m_camber_r, m_camber_H_slp_r, m_camber_strg_slp_r; 
 	//suspension height vs steering angle
 	double m_strg_hgt_slp_l, m_strg_hgt_slp_r;
+	//anti sway
+	double m_as_R, m_as_ntrl_ang, m_as_trsK;
+	bool m_has_anti_sway;
 	// is steering 			
 	bool m_is_strg; 				
 	
@@ -186,8 +194,10 @@ private:
 	double m_arm_r = NaN;
 
 	//
-	double calculate_hard_stop_force(const double &x_morp_hmax, \
+	double calculate_hard_stop_force_max_stop(const double &x_minus_hmax, \
 	const double &x_dot, const double &Hmax, const double &Kz, const double &Cz);	
+	double calculate_hard_stop_force_min_stop(const double &x_plus_hmax, \
+	const double &x_dot, const double &Hmax, const double &Kz, const double &Cz);
 };
 
 }	//end of name space
