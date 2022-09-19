@@ -26,7 +26,7 @@ void run_Whl_4Disk() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res_whl_4disk.csv");
+	of.open("res_whl_4disk.xlsx");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
@@ -47,14 +47,8 @@ void run_Tir_4Fiala() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res_tir_4fiala.csv");
+	of.open("res_tir_4fiala.xlsx");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
-
-	of<<"Veh_Fx"<<','<<"Veh_Fy"<<','<<"Veh_Fz"<<','<<"Veh_Mx"<<','<<"Veh_My"<<','<<"Veh_Mz"<<',';
-	of<<"Tir_Fx"<<',';
-	of<<"Spring_Effort"<<',';
-	of<<"Damper_Effort"<<',';
-	of<<"Hardstop_Effort"<<endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
 			of<<std::setw(30)<<std::setprecision(7)<<item<<',';
@@ -74,7 +68,7 @@ void run_Sus_2Ind() {
 	milliseconds dur= duration_cast<milliseconds>(end - start);
 	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
 	
-	of.open("res_sus_2ind.csv");
+	of.open("res_sus_2ind.xlsx");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
