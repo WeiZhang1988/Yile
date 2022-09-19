@@ -198,6 +198,8 @@ private:
 	const double &x_dot, const double &Hmax, const double &Kz, const double &Cz);	
 	double calculate_hard_stop_force_min_stop(const double &x_plus_hmax, \
 	const double &x_dot, const double &Hmax, const double &Kz, const double &Cz);
+	void calculate_anti_sway_force_in_position(double &whlFz_l, double &whlFz_r, double &vehFz_l, double &vehFz_r, \
+	const double &whlZ_l, const double &whlZ_r, const double &vehZ_l, const double &vehZ_r);
 };
 
 }	//end of name space

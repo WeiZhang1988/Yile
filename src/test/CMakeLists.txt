@@ -1,3 +1,4 @@
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/install)
 add_executable(vehicle_dynamics_test 
 			   test.cpp 
 			   simulators/simulator_whl_4disk.cpp
