@@ -61,7 +61,7 @@ void run_Tir_4Fiala() {
 
 void run_Sus_2Ind() {
 	std::ofstream of;
-	Simulator_Sus_2Ind sim1 = Simulator_Sus_2Ind(0.0,10.0,1e-3);
+	Simulator_Sus_2Ind sim1 = Simulator_Sus_2Ind(0.0,10.0,1e-4);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
