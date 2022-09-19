@@ -28,11 +28,18 @@ public:
 	static const int m_fm_outputs_num = 14;									//amount of fm outputs
 	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
-	Sus_Ind_2Tracks (double F0z=9810.0, double Kz=64370.0, double Cz=10000.0, \
-	double Hmax=0.5, double roll_strg_H_slp=-0.2269, \
-	double toe=0.0349, double toe_strg_slp=0.01, \
-	double caster=0.0698, double caster_H_slp=-0.2269, double caster_strg_slp=0.01, \
-	double camber=0.0698, double camber_H_slp=-0.2269, double camber_strg_slp=0.01, \
+	// Sus_Ind_2Tracks (double F0z=9810.0, double Kz=64370.0, double Cz=10000.0, \
+	// double Hmax=0.25, double roll_strg_H_slp=-0.2269, \
+	// double toe=0.0349, double toe_strg_slp=0.01, \
+	// double caster=0.0698, double caster_H_slp=-0.2269, double caster_strg_slp=0.01, \
+	// double camber=0.0698, double camber_H_slp=-0.2269, double camber_strg_slp=0.01, \
+	// double strg_hgt_slp=0.1432, double as_R=0.2, double as_ntrl_ang=0.5236, double as_trsK=8e2, \
+	// bool has_anti_sway=false, bool is_strg=false) :
+	Sus_Ind_2Tracks (double F0z=2886.0, double Kz=52451.006579283188, double Cz=5565.226438019838, \
+	double Hmax=0.25, double roll_strg_H_slp=-0.0, \
+	double toe=0.0, double toe_strg_slp=0.0, \
+	double caster=0.0, double caster_H_slp=-0.0, double caster_strg_slp=0.00, \
+	double camber=0.0, double camber_H_slp=-0.0, double camber_strg_slp=0.00, \
 	double strg_hgt_slp=0.1432, double as_R=0.2, double as_ntrl_ang=0.5236, double as_trsK=8e2, \
 	bool has_anti_sway=false, bool is_strg=false) :
 	m_F0z_l(F0z), m_Kz_l(Kz), m_Cz_l(Cz), m_Hmax_l(Hmax), \
