@@ -1,0 +1,3 @@
+build/*
+install/*
+dep/boost_1_80_0/*
