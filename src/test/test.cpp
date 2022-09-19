@@ -49,6 +49,12 @@ void run_Tir_4Fiala() {
 	
 	of.open("res_tir_4fiala.csv");
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
+
+	of<<"Veh_Fx"<<','<<"Veh_Fy"<<','<<"Veh_Fz"<<','<<"Veh_Mx"<<','<<"Veh_My"<<','<<"Veh_Mz"<<',';
+	of<<"Tir_Fx"<<',';
+	of<<"Spring_Effort"<<',';
+	of<<"Damper_Effort"<<',';
+	of<<"Hardstop_Effort"<<endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
 			of<<std::setw(30)<<std::setprecision(7)<<item<<',';
@@ -61,7 +67,7 @@ void run_Tir_4Fiala() {
 
 void run_Sus_2Ind() {
 	std::ofstream of;
-	Simulator_Sus_2Ind sim1 = Simulator_Sus_2Ind(0.0,10.0,1e-3);
+	Simulator_Sus_2Ind sim1 = Simulator_Sus_2Ind(0.0,10.0,1e-4);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
