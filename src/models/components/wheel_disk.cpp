@@ -43,14 +43,18 @@ void NMSPC::Wheel_Disk::pull_pv(const double &Gnd_Pz) {
     } 
     m_Tir_Pz = m_Gnd_Pz;
     m_Tir_vz = 0.0;
+    m_Sus_TirPz = -m_Tir_Pz;
+    m_Sus_Tirvz = -m_Tir_vz;
     m_Tir_rhoz = 0.0;
     m_Tir_Re = m_unloaded_radius - m_Tir_rhoz;
 }
 
-void NMSPC::Wheel_Disk::push_pv(double &Tir_omega, double &Tir_Pz, double &Tir_vz, double &Tir_rhoz, double &Tir_Re) {
+void NMSPC::Wheel_Disk::push_pv(double &Tir_omega, double &Sus_TirPz, double &Sus_Tirvz, double &Tir_Pz, double &Tir_vz, double &Tir_rhoz, double &Tir_Re) {
     Tir_omega = m_Tir_omega;
     Tir_Pz = m_Tir_Pz;
     Tir_vz = m_Tir_vz;
+    Sus_TirPz = m_Sus_TirPz;
+    Sus_Tirvz = m_Sus_Tirvz;
     Tir_rhoz = m_Tir_rhoz;
     Tir_Re = m_Tir_Re;
 }
