@@ -33,7 +33,7 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
 }
 
 void Simulator_Sus_2Ind::run () {
-	io::CSVReader<15> m_inputs("data/inputs/sus_2ind_inputs.csv");
+	io::CSVReader<15> m_inputs("sus_test_result/sus_2ind_inputs.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
