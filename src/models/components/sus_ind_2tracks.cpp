@@ -128,8 +128,10 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 	} else {
 		m_hard_stop_force_l = 0.0;
 	}
-	m_total_effort_l = (-m_Sus_hgt_l * m_Kz_l) + ((m_Veh_vx_l - m_Sus_Tirvz_l)*m_Cz_l) + \
-	m_hard_stop_force_l;
+	// m_total_effort_l = (-m_Sus_hgt_l * m_Kz_l) + ((m_Veh_vx_l - m_Sus_Tirvz_l)*m_Cz_l) + \ 
+	// m_hard_stop_force_l;//第二项应该是Veh_Vz吧？
+	m_total_effort_l = (-m_Sus_hgt_l * m_Kz_l) + ((m_Veh_vz_l - m_Sus_Tirvz_l) * m_Cz_l) +\
+	m_hard_stop_force_l;//第二项应该是Veh_Vz吧？
 	m_Sus_VehFz_l = -m_total_effort_l;
 	m_Sus_Fz_l = m_total_effort_l;
 	m_Sus_VehMx_l = -m_Sus_TirFy_l * m_arm_l + m_Tir_Mx_l;
@@ -149,8 +151,10 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 	} else {
 		m_hard_stop_force_r = 0.0;
 	}
-	m_total_effort_r = (-m_Sus_hgt_r * m_Kz_r) + ((m_Veh_vx_r - m_Sus_Tirvz_r)*m_Cz_r) + \
-	m_hard_stop_force_r;
+	// m_total_effort_r = (-m_Sus_hgt_r * m_Kz_r) + ((m_Veh_vx_r - m_Sus_Tirvz_r)*m_Cz_r) + \
+	// m_hard_stop_force_r;
+	m_total_effort_r = (-m_Sus_hgt_r * m_Kz_r) + ((m_Veh_vz_r - m_Sus_Tirvz_r)*m_Cz_r) + \
+	m_hard_stop_force_r;// 有修改
 	m_Sus_VehFz_r = -m_total_effort_r;
 	m_Sus_Fz_r = m_total_effort_r;
 	m_Sus_VehMx_r = -m_Sus_TirFy_r * m_arm_r + m_Tir_Mx_r;
@@ -185,16 +189,20 @@ double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_max_stop(const double \
 &x_minus_hmax, const double &x_dot, const double &Hmax, const double &Kz, const double &Cz){
      double tmp = saturation(abs(4.0 * x_minus_hmax / (0.05 * Hmax)), \
      0.0, 4.0);
-     return tanh(tmp) * pow(tmp, 3.0) * Kz * uhsbm(x_minus_hmax) + tanh(tmp) \
-     * Cz * x_dot;
+     //return tanh(tmp) * pow(tmp, 3.0) * Kz * uhsbm(x_minus_hmax) + tanh(tmp) \
+    // * Cz * x_dot;//这里第2项是不是不太对
+	 return (tanh(tmp) * pow(tmp, 3.0) * Kz * (x_minus_hmax) + tanh(tmp) \
+     * Cz * x_dot * 3.0) * uhsbm(x_minus_hmax);//这里第2项是不是不太对
 }
 
 double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_min_stop(const double \
 &x_plus_hmax, const double &x_dot, const double &Hmax, const double &Kz, const double &Cz){
      double tmp = saturation(abs(4.0 * x_plus_hmax / (0.05 * Hmax)), \
      0.0, 4.0);
-     return tanh(tmp) * pow(tmp, 3.0) * Kz * lhsbm(x_plus_hmax) + tanh(tmp) \
-     * Cz * x_dot;
+     //return tanh(tmp) * pow(tmp, 3.0) * Kz * lhsbm(x_plus_hmax) + tanh(tmp) \
+     //* Cz * x_dot;
+	  return (tanh(tmp) * pow(tmp, 3.0) * Kz * (x_plus_hmax) + tanh(tmp) \
+     * Cz * x_dot * 3.0) * lhsbm(x_plus_hmax);//这里第2项是不是不太对
 }
 
 
