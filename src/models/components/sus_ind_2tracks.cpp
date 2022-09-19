@@ -157,24 +157,27 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 	m_Sus_VehMy_r = m_Sus_TirFx_r * m_arm_r + m_Tir_My_r;
 	m_Sus_VehMz_r = 0.0 + m_Tir_Mz_r;
 
+	if (m_has_anti_sway)
+		calculate_anti_sway_force_in_position(m_Sus_Fz_l, m_Sus_Fz_r, m_Sus_VehFz_l, m_Sus_VehFz_r, \
+		m_Sus_TirPz_l, m_Sus_TirPz_r, m_Veh_Pz_l, m_Veh_Pz_r);
 }
 
 void NMSPC::Sus_Ind_2Tracks::push_fm(double &Sus_VehFx_l, double &Sus_VehFy_l, double &Sus_VehFz_l, double &Sus_VehMx_l, double &Sus_VehMy_l, double &Sus_VehMz_l, double &Sus_Fz_l, \
 double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehFz_r, double &Sus_VehMx_r, double &Sus_VehMy_r, double &Sus_VehMz_r, double &Sus_Fz_r) {
-	m_Sus_VehFx_l = Sus_VehFx_l;
-	m_Sus_VehFy_l = Sus_VehFy_l;
-	m_Sus_VehFz_l = Sus_VehFz_l;
-	m_Sus_VehMx_l = Sus_VehMx_l;
-	m_Sus_VehMy_l = Sus_VehMy_l;
-	m_Sus_VehMz_l = Sus_VehMz_l;
-	m_Sus_Fz_l 	  = Sus_Fz_l;
-	m_Sus_VehFx_r = Sus_VehFx_r;
-	m_Sus_VehFy_r = Sus_VehFy_r;
-	m_Sus_VehFz_r = Sus_VehFz_r;
-	m_Sus_VehMx_r = Sus_VehMx_r;
-	m_Sus_VehMy_r = Sus_VehMy_r;
-	m_Sus_VehMz_r = Sus_VehMz_r;
-	m_Sus_Fz_r 	  = Sus_Fz_r;
+	Sus_VehFx_l = m_Sus_VehFx_l;
+	Sus_VehFy_l = m_Sus_VehFy_l;
+	Sus_VehFz_l = m_Sus_VehFz_l;
+	Sus_VehMx_l = m_Sus_VehMx_l;
+	Sus_VehMy_l = m_Sus_VehMy_l;
+	Sus_VehMz_l = m_Sus_VehMz_l;
+	Sus_Fz_l 	= m_Sus_Fz_l;
+	Sus_VehFx_r = m_Sus_VehFx_r;
+	Sus_VehFy_r = m_Sus_VehFy_r;
+	Sus_VehFz_r = m_Sus_VehFz_r;
+	Sus_VehMx_r = m_Sus_VehMx_r;
+	Sus_VehMy_r = m_Sus_VehMy_r;
+	Sus_VehMz_r = m_Sus_VehMz_r;
+	Sus_Fz_r 	= m_Sus_Fz_r;
 }
 
 
@@ -192,4 +195,16 @@ double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_min_stop(const double \
      0.0, 4.0);
      return tanh(tmp) * pow(tmp, 3.0) * Kz * lhsbm(x_plus_hmax) + tanh(tmp) \
      * Cz * x_dot;
+}
+
+
+void NMSPC::Sus_Ind_2Tracks::calculate_anti_sway_force_in_position(double &whlFz_l, double &whlFz_r, double &vehFz_l, double &vehFz_r, \
+	const double &whlZ_l, const double &whlZ_r, const double &vehZ_l, const double &vehZ_r) {
+	double ang_l = m_as_ntrl_ang - atan(ang_tan_lmt((m_as_R * tan(m_as_ntrl_ang) - (whlZ_l - vehZ_l)) / m_as_R));
+	double ang_r = m_as_ntrl_ang - atan(ang_tan_lmt((m_as_R * tan(m_as_ntrl_ang) - (whlZ_r - vehZ_r)) / m_as_R));
+	double tmp = (ang_l - ang_r) * m_as_trsK / m_as_R;
+	whlFz_l -= tmp * cos(ang_l);
+	whlFz_r -= tmp * cos(ang_r);
+	vehFz_l += tmp * cos(ang_l);
+	vehFz_r += tmp * cos(ang_r);
 }
