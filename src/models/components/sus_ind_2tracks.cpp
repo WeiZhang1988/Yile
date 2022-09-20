@@ -50,9 +50,9 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_x_minus_hmax_l = -m_Sus_hgt_l - m_Hmax_l;
 	m_x_plus_hmax_l  = -m_Sus_hgt_l + m_Hmax_l;
 	m_x_dot_l 	     = m_Veh_vz_l - m_Sus_Tirvz_l;
-	m_adjusted_toe_l = -(abs(m_Strg_str_l) * m_toe_strg_slp_l + m_toe_l + 
-	m_roll_strg_H_slp_l * m_Sus_hgt_l);
-	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;
+	m_adjusted_toe_l = (abs(m_Strg_str_l) * m_toe_strg_slp_l + m_toe_l + 
+	m_roll_strg_H_slp_l * m_Sus_hgt_l);//左边是正的，右边是负的
+	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;//++++
 	m_Sus_gamma_l = abs(m_Strg_str_l) * m_camber_strg_slp_l + m_camber_l + \
 	m_camber_H_slp_l * m_Sus_hgt_l;
 	m_Sus_caster_l = abs(m_Strg_str_l) * m_caster_strg_slp_l + m_caster_l + \
@@ -69,8 +69,8 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_x_minus_hmax_r = -m_Sus_hgt_r - m_Hmax_r;
 	m_x_plus_hmax_r  = -m_Sus_hgt_r + m_Hmax_r;
 	m_x_dot_r 	     = m_Veh_vz_r - m_Sus_Tirvz_r;
-	m_adjusted_toe_r = abs(m_Strg_str_r) * m_toe_strg_slp_r + m_toe_r + \
-	m_roll_strg_H_slp_r * m_Sus_hgt_r;
+	m_adjusted_toe_r = -(abs(m_Strg_str_r) * m_toe_strg_slp_r + m_toe_r + \
+	m_roll_strg_H_slp_r * m_Sus_hgt_r);//右边是负的
 	m_Sus_str_r = m_adjusted_toe_r - m_toe_r + m_Strg_str_r;
 	m_Sus_gamma_r = abs(m_Strg_str_r) * m_camber_strg_slp_r + m_camber_r + \
 	m_camber_H_slp_r * m_Sus_hgt_r;
@@ -89,13 +89,13 @@ double &Sus_str_r, double &Sus_gamma_r, double &Sus_caster_r, double &Sus_r_r, d
 	Sus_vx_l = m_Sus_vx_l;
 	Sus_vy_l = m_Sus_vy_l;
 	Sus_vz_l = m_Sus_vz_l;
-	Sus_str_l = m_Sus_str_r;
-	Sus_gamma_l = m_Sus_gamma_r;
-	Sus_caster_l = m_Sus_caster_r;
-	Sus_r_l = m_Sus_r_r;
-	Sus_vx_l = m_Sus_vx_r;
-	Sus_vy_l = m_Sus_vy_r;
-	Sus_vz_l = m_Sus_vz_r;
+	Sus_str_r = m_Sus_str_r;
+	Sus_gamma_r = m_Sus_gamma_r;
+	Sus_caster_r = m_Sus_caster_r;
+	Sus_r_r = m_Sus_r_r;
+	Sus_vx_r = m_Sus_vx_r;
+	Sus_vy_r = m_Sus_vy_r;
+	Sus_vz_r = m_Sus_vz_r;
 }
 
 void NMSPC::Sus_Ind_2Tracks::pull_fm(const double &Sus_TirFx_l, const double &Sus_TirFy_l, const double &Tir_Mx_l, const double &Tir_My_l, const double &Tir_Mz_l, \
@@ -130,13 +130,16 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 	}
 	// m_total_effort_l = (-m_Sus_hgt_l * m_Kz_l) + ((m_Veh_vx_l - m_Sus_Tirvz_l)*m_Cz_l) + \ 
 	// m_hard_stop_force_l;//第二项应该是Veh_Vz吧？
-	m_total_effort_l = (-m_Sus_hgt_l * m_Kz_l) + ((m_Veh_vz_l - m_Sus_Tirvz_l) * m_Cz_l) +\
+	// m_total_effort_l = (-m_Sus_hgt_l * m_Kz_l) + ((m_Veh_vz_l - m_Sus_Tirvz_l) * m_Cz_l) +\
+	// m_hard_stop_force_l;//第二项应该是Veh_Vz吧？
+	m_total_effort_l = (-m_Sus_hgt_l * m_Kz_l) + (m_x_dot_l* m_Cz_l) +\
 	m_hard_stop_force_l;//第二项应该是Veh_Vz吧？
 	m_Sus_VehFz_l = -m_total_effort_l;
 	m_Sus_Fz_l = m_total_effort_l;
 	m_Sus_VehMx_l = -m_Sus_TirFy_l * m_arm_l + m_Tir_Mx_l;
 	m_Sus_VehMy_l = m_Sus_TirFx_l * m_arm_l + m_Tir_My_l;
 	m_Sus_VehMz_l = 0.0 + m_Tir_Mz_l;
+	
 	//--right
 	m_Sus_VehFx_r = m_Sus_TirFx_r;
 	m_Sus_VehFy_r = m_Sus_TirFy_r;
@@ -153,7 +156,9 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 	}
 	// m_total_effort_r = (-m_Sus_hgt_r * m_Kz_r) + ((m_Veh_vx_r - m_Sus_Tirvz_r)*m_Cz_r) + \
 	// m_hard_stop_force_r;
-	m_total_effort_r = (-m_Sus_hgt_r * m_Kz_r) + ((m_Veh_vz_r - m_Sus_Tirvz_r)*m_Cz_r) + \
+	// m_total_effort_r = (-m_Sus_hgt_r * m_Kz_r) + ((m_Veh_vz_r - m_Sus_Tirvz_r)*m_Cz_r) + \
+	// m_hard_stop_force_r;// 有修改
+	m_total_effort_r = (-m_Sus_hgt_r * m_Kz_r) + (m_x_dot_r*m_Cz_r) + \
 	m_hard_stop_force_r;// 有修改
 	m_Sus_VehFz_r = -m_total_effort_r;
 	m_Sus_Fz_r = m_total_effort_r;
