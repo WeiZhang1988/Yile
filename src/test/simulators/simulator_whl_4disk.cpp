@@ -12,7 +12,6 @@
 // =============================================================================
 #include "simulator_whl_4disk.hpp"
 
-
 Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_step) {
 	m_steps = 0;
 	m_t_start = t_start;
@@ -45,7 +44,7 @@ void Simulator_Whl_4Disk::run () {
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
-		m_inputs.read_row(m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Tir_Fx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Sus_Fz_fl, m_sptr_interface->m_Tir_Fz_fl); 	//*
+		m_inputs.read_row(m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Tir_Fx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Sus_Fz_fl, m_sptr_interface->m_Tir_Fz_fl); 
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
 		

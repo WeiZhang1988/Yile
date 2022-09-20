@@ -17,7 +17,7 @@
 namespace NMSPC{
 class Vehicle_Body {
 public:
-	static const int m_params_num = 120;										//amount of parameters
+	static const int m_params_num = 120;									//amount of parameters
 	static const int m_pv_inputs_num = 0;									//amount of pv inputs
 	static const int m_fm_inputs_num = 34;									//amount of fm inputs
 	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs
@@ -137,16 +137,35 @@ public:
 		m_pwl_Cs = piece_wise_linear(m_beta_w,m_Cs);
 		m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cym);
 	}
-	
-	Vehicle_Body (const d_vec &params_d, const d_v_vec &params_v, const d_vec &init_states);
-	Vehicle_Body (const std::string &filename);
 
 	void push_con_states (d_vec &con_states);
-	
 	void pull_con_states (const d_vec &con_states);
-	void update_pv (const d_vec &inputs, d_vec &outputs);
-	void update_fm (const d_vec &inputs, d_vec &outputs);
-	void update_drv (d_vec &outputs);
+
+	void pull_pv (const double &Air_Wx, const double &Air_Wy, const double &Air_Wz);
+	void push_pv(double &h_c, double &xe_x_c, double &xe_y_c, double &xe_z_c, double &ve_x_c, double &ve_y_c, double &ve_z_c, \
+	double &vb_x_c, double &vb_y_c, double &vb_z_c, double &phai_c, double &theta_c, double &psi_c, double &p_c, double &q_c, double &r_c, double &beta_c, \
+	double &xe_x_o, double &xe_y_o, double &xe_z_o, double &ve_x_o, double &ve_y_o, double &ve_z_o, \
+	double &xb_x_o, double &xb_y_o, double &xb_z_o, double &vb_x_o, double &vb_y_o, double &vb_z_o, double &beta_o, \
+	double &xe_x_fl, double &xe_y_fl, double &xe_z_fl, double &ve_x_fl, double &ve_y_fl, double &ve_z_fl, \
+	double &xb_x_fl, double &xb_y_fl, double &xb_z_fl, double &vb_x_fl, double &vb_y_fl, double &vb_z_fl, \
+	double &xe_x_fr, double &xe_y_fr, double &xe_z_fr, double &ve_x_fr, double &ve_y_fr, double &ve_z_fr, \
+	double &xb_x_fr, double &xb_y_fr, double &xb_z_fr, double &vb_x_fr, double &vb_y_fr, double &vb_z_fr, \
+	double &xe_x_rl, double &xe_y_rl, double &xe_z_rl, double &ve_x_rl, double &ve_y_rl, double &ve_z_rl, \
+	double &xb_x_rl, double &xb_y_rl, double &xb_z_rl, double &vb_x_rl, double &vb_y_rl, double &vb_z_rl, \
+	double &xe_x_rr, double &xe_y_rr, double &xe_z_rr, double &ve_x_rr, double &ve_y_rr, double &ve_z_rr, \
+	double &xb_x_rr, double &xb_y_rr, double &xb_z_rr, double &vb_x_rr, double &vb_y_rr, double &vb_z_rr);
+	void pull_fm (const double &Air_Tair, \
+	const double &Sus_Fx_fl, const double &Sus_Fx_fr, const double &Sus_Fx_rl, const double &Sus_Fx_rr, \
+	const double &Sus_Fy_fl, const double &Sus_Fy_fr, const double &Sus_Fy_rl, const double &Sus_Fy_rr, \
+	const double &Sus_Fz_fl, const double &Sus_Fz_fr, const double &Sus_Fz_rl, const double &Sus_Fz_rr, \
+	const double &Sus_Mx_fl, const double &Sus_Mx_fr, const double &Sus_Mx_rl, const double &Sus_Mx_rr ,\
+	const double &Sus_My_fl, const double &Sus_My_fr, const double &Sus_My_rl, const double &Sus_My_rr, \
+	const double &Sus_Mz_fl, const double &Sus_Mz_fr, const double &Sus_Mz_rl, const double &Sus_Mz_rr, \
+	const double &Ext_Fx_ext, const double &Ext_Fy_ext, const double &Ext_Fz_ext, \
+	const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext);
+	void push_fm () {};
+
+	void push_drv (d_vec &derivatives);
 
 private:
 	//parameters

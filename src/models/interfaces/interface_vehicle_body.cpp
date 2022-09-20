@@ -11,16 +11,3 @@
 //
 // =============================================================================
 #include "interface_vehicle_body.hpp"
-
-NMSPC::Int_Vehicle_Body::Int_Vehicle_Body(int ext_inputs_num) {
-	m_external_inputs = d_vec(ext_inputs_num, NaN);
-}
-
-void NMSPC::Int_Vehicle_Body::map_vhl_bdy_pv() {
-	
-}
-
-void NMSPC::Int_Vehicle_Body::map_vhl_bdy_fm() {
-	std::copy(m_external_inputs.begin(),m_external_inputs.end(),m_vhl_bdy_fm_inputs.begin());
-}
-

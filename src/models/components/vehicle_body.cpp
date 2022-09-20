@@ -12,328 +12,6 @@
 // =============================================================================
 #include "vehicle_body.hpp"
 
-NMSPC::Vehicle_Body::Vehicle_Body(const d_vec &params_d, const d_v_vec &params_v, const d_vec &init_states) {
-	//parameters
-	//chassis
-	m_mass 		= params_d[0];
-	m_a 		= params_d[1];
-	m_b 		= params_d[2];
-	m_d 		= params_d[3];
-	m_h 		= params_d[4];
-	m_Ixx 		= params_d[5];
-	m_Ixy 		= params_d[6];
-	m_Ixz 		= params_d[7];
-	m_Iyx 		= params_d[8];
-	m_Iyy 		= params_d[9];
-	m_Iyz 		= params_d[10];
-	m_Izx 		= params_d[11];
-	m_Izy 		= params_d[12];
-	m_Izz 		= params_d[13];
-	m_w_f	= params_d[14];
-	m_w_r	= params_d[15];
-	//inertial loads
-	//z1
-	m_z1m 		= params_d[16];
-	m_z1R_x 	= params_d[17];
-	m_z1R_y 	= params_d[18];
-	m_z1R_z		= params_d[19];
-	m_z1I_xx 	= params_d[20];
-	m_z1I_xy 	= params_d[21];
-	m_z1I_xz 	= params_d[22];
-	m_z1I_yx 	= params_d[23];
-	m_z1I_yy 	= params_d[24];
-	m_z1I_yz 	= params_d[25];
-	m_z1I_zx 	= params_d[26];
-	m_z1I_zy 	= params_d[27];
-	m_z1I_zz 	= params_d[28];
-	//z2
-	m_z2m 		= params_d[29];
-	m_z2R_x 	= params_d[30];
-	m_z2R_y 	= params_d[31];
-	m_z2R_z		= params_d[32];
-	m_z2I_xx 	= params_d[33];
-	m_z2I_xy 	= params_d[34];
-	m_z2I_xz 	= params_d[35];
-	m_z2I_yx 	= params_d[36];
-	m_z2I_yy 	= params_d[37];
-	m_z2I_yz 	= params_d[38];
-	m_z2I_zx 	= params_d[39];
-	m_z2I_zy 	= params_d[40];
-	m_z2I_zz 	= params_d[41];
-	//z3
-	m_z3m 		= params_d[42];
-	m_z3R_x 	= params_d[43];
-	m_z3R_y 	= params_d[44];
-	m_z3R_z		= params_d[45];
-	m_z3I_xx 	= params_d[46];
-	m_z3I_xy 	= params_d[47];
-	m_z3I_xz 	= params_d[48];
-	m_z3I_yx 	= params_d[49];
-	m_z3I_yy 	= params_d[50];
-	m_z3I_yz 	= params_d[51];
-	m_z3I_zx 	= params_d[52];
-	m_z3I_zy 	= params_d[53];
-	m_z3I_zz 	= params_d[54];
-	//z4
-	m_z4m 		= params_d[55];
-	m_z4R_x 	= params_d[56];
-	m_z4R_y 	= params_d[57];
-	m_z4R_z		= params_d[58];
-	m_z4I_xx 	= params_d[59];
-	m_z4I_xy 	= params_d[60];
-	m_z4I_xz 	= params_d[61];
-	m_z4I_yx 	= params_d[62];
-	m_z4I_yy 	= params_d[63];
-	m_z4I_yz 	= params_d[64];
-	m_z4I_zx 	= params_d[65];
-	m_z4I_zy 	= params_d[66];
-	m_z4I_zz 	= params_d[67];
-	//z5
-	m_z5m 		= params_d[68];
-	m_z5R_x 	= params_d[69];
-	m_z5R_y 	= params_d[70];
-	m_z5R_z		= params_d[71];
-	m_z5I_xx 	= params_d[72];
-	m_z5I_xy 	= params_d[73];
-	m_z5I_xz 	= params_d[74];
-	m_z5I_yx 	= params_d[75];
-	m_z5I_yy 	= params_d[76];
-	m_z5I_yz 	= params_d[77];
-	m_z5I_zx 	= params_d[78];
-	m_z5I_zy 	= params_d[79];
-	m_z5I_zz 	= params_d[80];
-	//z6
-	m_z6m 		= params_d[81];
-	m_z6R_x 	= params_d[82];
-	m_z6R_y 	= params_d[83];
-	m_z6R_z		= params_d[84];
-	m_z6I_xx 	= params_d[85];
-	m_z6I_xy 	= params_d[86];
-	m_z6I_xz 	= params_d[87];
-	m_z6I_yx 	= params_d[88];
-	m_z6I_yy 	= params_d[89];
-	m_z6I_yz 	= params_d[90];
-	m_z6I_zx 	= params_d[91];
-	m_z6I_zy 	= params_d[92];
-	m_z6I_zz 	= params_d[93];
-	//z7
-	m_z7m 		= params_d[94];
-	m_z7R_x 	= params_d[95];
-	m_z7R_y 	= params_d[96];
-	m_z7R_z		= params_d[97];
-	m_z7I_xx 	= params_d[98];
-	m_z7I_xy 	= params_d[99];
-	m_z7I_xz 	= params_d[100];
-	m_z7I_yx 	= params_d[101];
-	m_z7I_yy 	= params_d[102];
-	m_z7I_yz 	= params_d[103];
-	m_z7I_zx 	= params_d[104];
-	m_z7I_zy 	= params_d[105];
-	m_z7I_zz 	= params_d[106];
-	//aerodynamics
-	m_Pabs	 = params_d[107];
-	m_Cg	 = params_d[108];
-	m_Af  	 = params_d[109];
-	m_Cd  	 = params_d[110]; 
-	m_Cl  	 = params_d[111]; 
-	m_Cpm 	 = params_d[112]; 
-	m_beta_w = params_v[0];
-	m_Cs 	 = params_v[1];
-	m_Cym 	 = params_v[2];
-	//simulation
-	m_xdot_tol = params_d[113]; 
-	m_longOff  = params_d[114]; 
-	m_latOff   = params_d[115]; 
-	m_vertOff  = params_d[116];
-	//initialize states
-	m_xe_x	= init_states[0];
-	m_xe_y	= init_states[1];
-	m_xe_z	= init_states[2];
-	m_vb_x	= init_states[3];
-	m_vb_y	= init_states[4];
-	m_vb_z	= init_states[5];
-	m_phai	= init_states[6];
-	m_theta	= init_states[7];
-	m_psi	= init_states[8];
-	m_p		= init_states[9];
-	m_q		= init_states[10];
-	m_r		= init_states[11];
-	//caculate bar
-	calculate_bar();
-	//caculate table;
-	m_pwl_Cs = piece_wise_linear(m_beta_w,m_Cs);
-	m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cym);
-}
-
-NMSPC::Vehicle_Body::Vehicle_Body (const std::string &filename) {
-	boost::property_tree::ptree tree;
-    if (std::filesystem::exists(filename)){
-        boost::property_tree::read_json(filename,tree);
-        if ("vehicle-body" == tree.get<std::string>("type")) {
-        	//parameters
-			//chassis
-			m_mass 		= tree.get<double>("mass");
-			m_a 		= tree.get<double>("a");
-			m_b 		= tree.get<double>("b");
-			m_d 		= tree.get<double>("d");
-			m_h 		= tree.get<double>("h");
-			m_Ixx 		= tree.get<double>("Ixx");
-			m_Ixy 		= tree.get<double>("Ixy");
-			m_Ixz 		= tree.get<double>("Ixz");
-			m_Iyx 		= tree.get<double>("Iyx");
-			m_Iyy 		= tree.get<double>("Iyy");
-			m_Iyz 		= tree.get<double>("Iyz");
-			m_Izx 		= tree.get<double>("Izx");
-			m_Izy 		= tree.get<double>("Izy");
-			m_Izz 		= tree.get<double>("Izz");
-			m_w_f		= tree.get<double>("w_f");
-			m_w_r		= tree.get<double>("w_r");
-			//inertial loads
-			//z1
-			m_z1m 		= tree.get<double>("z1m");
-			m_z1R_x 	= tree.get<double>("z1R_x");
-			m_z1R_y 	= tree.get<double>("z1R_y");
-			m_z1R_z		= tree.get<double>("z1R_z");
-			m_z1I_xx 	= tree.get<double>("z1I_xx");
-			m_z1I_xy 	= tree.get<double>("z1I_xy");
-			m_z1I_xz 	= tree.get<double>("z1I_xz");
-			m_z1I_yx 	= tree.get<double>("z1I_yx");
-			m_z1I_yy 	= tree.get<double>("z1I_yy");
-			m_z1I_yz 	= tree.get<double>("z1I_yz");
-			m_z1I_zx 	= tree.get<double>("z1I_zx");
-			m_z1I_zy 	= tree.get<double>("z1I_zy");
-			m_z1I_zz 	= tree.get<double>("z1I_zz");
-			//z2
-			m_z2m 		= tree.get<double>("z2m");
-			m_z2R_x 	= tree.get<double>("z2R_x");
-			m_z2R_y 	= tree.get<double>("z2R_y");
-			m_z2R_z		= tree.get<double>("z2R_z");
-			m_z2I_xx 	= tree.get<double>("z2I_xx");
-			m_z2I_xy 	= tree.get<double>("z2I_xy");
-			m_z2I_xz 	= tree.get<double>("z2I_xz");
-			m_z2I_yx 	= tree.get<double>("z2I_yx");
-			m_z2I_yy 	= tree.get<double>("z2I_yy");
-			m_z2I_yz 	= tree.get<double>("z2I_yz");
-			m_z2I_zx 	= tree.get<double>("z2I_zx");
-			m_z2I_zy 	= tree.get<double>("z2I_zy");
-			m_z2I_zz 	= tree.get<double>("z2I_zz");
-			//z3
-			m_z3m 		= tree.get<double>("z3m");
-			m_z3R_x 	= tree.get<double>("z3R_x");
-			m_z3R_y 	= tree.get<double>("z3R_y");
-			m_z3R_z		= tree.get<double>("z3R_z");
-			m_z3I_xx 	= tree.get<double>("z3I_xx");
-			m_z3I_xy 	= tree.get<double>("z3I_xy");
-			m_z3I_xz 	= tree.get<double>("z3I_xz");
-			m_z3I_yx 	= tree.get<double>("z3I_yx");
-			m_z3I_yy 	= tree.get<double>("z3I_yy");
-			m_z3I_yz 	= tree.get<double>("z3I_yz");
-			m_z3I_zx 	= tree.get<double>("z3I_zx");
-			m_z3I_zy 	= tree.get<double>("z3I_zy");
-			m_z3I_zz 	= tree.get<double>("z3I_zz");
-			//z4
-			m_z4m 		= tree.get<double>("z4m");
-			m_z4R_x 	= tree.get<double>("z4R_x");
-			m_z4R_y 	= tree.get<double>("z4R_y");
-			m_z4R_z		= tree.get<double>("z4R_z");
-			m_z4I_xx 	= tree.get<double>("z4I_xx");
-			m_z4I_xy 	= tree.get<double>("z4I_xy");
-			m_z4I_xz 	= tree.get<double>("z4I_xz");
-			m_z4I_yx 	= tree.get<double>("z4I_yx");
-			m_z4I_yy 	= tree.get<double>("z4I_yy");
-			m_z4I_yz 	= tree.get<double>("z4I_yz");
-			m_z4I_zx 	= tree.get<double>("z4I_zx");
-			m_z4I_zy 	= tree.get<double>("z4I_zy");
-			m_z4I_zz 	= tree.get<double>("z4I_zz");
-			//z5
-			m_z5m 		= tree.get<double>("z5m");
-			m_z5R_x 	= tree.get<double>("z5R_x");
-			m_z5R_y 	= tree.get<double>("z5R_y");
-			m_z5R_z		= tree.get<double>("z5R_z");
-			m_z5I_xx 	= tree.get<double>("z5I_xx");
-			m_z5I_xy 	= tree.get<double>("z5I_xy");
-			m_z5I_xz 	= tree.get<double>("z5I_xz");
-			m_z5I_yx 	= tree.get<double>("z5I_yx");
-			m_z5I_yy 	= tree.get<double>("z5I_yy");
-			m_z5I_yz 	= tree.get<double>("z5I_yz");
-			m_z5I_zx 	= tree.get<double>("z5I_zx");
-			m_z5I_zy 	= tree.get<double>("z5I_zy");
-			m_z5I_zz 	= tree.get<double>("z5I_zz");
-			//z6
-			m_z6m 		= tree.get<double>("z6m");
-			m_z6R_x 	= tree.get<double>("z6R_x");
-			m_z6R_y 	= tree.get<double>("z6R_y");
-			m_z6R_z		= tree.get<double>("z6R_z");
-			m_z6I_xx 	= tree.get<double>("z6I_xx");
-			m_z6I_xy 	= tree.get<double>("z6I_xy");
-			m_z6I_xz 	= tree.get<double>("z6I_xz");
-			m_z6I_yx 	= tree.get<double>("z6I_yx");
-			m_z6I_yy 	= tree.get<double>("z6I_yy");
-			m_z6I_yz 	= tree.get<double>("z6I_yz");
-			m_z6I_zx 	= tree.get<double>("z6I_zx");
-			m_z6I_zy 	= tree.get<double>("z6I_zy");
-			m_z6I_zz 	= tree.get<double>("z6I_zz");
-			//z7
-			m_z7m 		= tree.get<double>("z7m");
-			m_z7R_x 	= tree.get<double>("z7R_x");
-			m_z7R_y 	= tree.get<double>("z7R_y");
-			m_z7R_z		= tree.get<double>("z7R_z");
-			m_z7I_xx 	= tree.get<double>("z7I_xx");
-			m_z7I_xy 	= tree.get<double>("z7I_xy");
-			m_z7I_xz 	= tree.get<double>("z7I_xz");
-			m_z7I_yx 	= tree.get<double>("z7I_yx");
-			m_z7I_yy 	= tree.get<double>("z7I_yy");
-			m_z7I_yz 	= tree.get<double>("z7I_yz");
-			m_z7I_zx 	= tree.get<double>("z7I_zx");
-			m_z7I_zy 	= tree.get<double>("z7I_zy");
-			m_z7I_zz 	= tree.get<double>("z7I_zz");
-			//aerodynamics
-			m_Pabs	 = tree.get<double>("Pabs");
-			m_Cg	 = tree.get<double>("Cg");
-			m_Af  	 = tree.get<double>("Af");
-			m_Cd  	 = tree.get<double>("Cd");
-			m_Cl  	 = tree.get<double>("Cl");
-			m_Cpm 	 = tree.get<double>("Cpm");
-			for (auto item : tree.get_child("beta_w")) {
-            	m_beta_w.push_back(item.second.get<double>(""));
-        	}
-			for (auto item : tree.get_child("Cs")) {
-            	m_Cs.push_back(item.second.get<double>(""));
-        	}
-			for (auto item : tree.get_child("Cym")) {
-            	m_Cym.push_back(item.second.get<double>(""));
-        	}
-			//simulation
-			m_xdot_tol = tree.get<double>("xdot_tol");
-			m_longOff  = tree.get<double>("longOff"); 
-			m_latOff   = tree.get<double>("latOff"); 
-			m_vertOff  = tree.get<double>("vertOff");
-			//initialize states
-			m_xe_x	= tree.get<double>("init_xe_x");
-			m_xe_y	= tree.get<double>("init_xe_y");
-			m_xe_z	= tree.get<double>("init_xe_z");
-			m_vb_x	= tree.get<double>("init_vb_x");
-			m_vb_y	= tree.get<double>("init_vb_y");
-			m_vb_z	= tree.get<double>("init_vb_z");
-			m_phai	= tree.get<double>("init_phai");
-			m_theta	= tree.get<double>("init_theta");
-			m_psi	= tree.get<double>("init_psi");
-			m_p		= tree.get<double>("init_p");
-			m_q		= tree.get<double>("init_q");
-			m_r		= tree.get<double>("init_r");
-			//caculate bar
-			calculate_bar();
-			//caculate table;
-			m_pwl_Cs = piece_wise_linear(m_beta_w,m_Cs);
-			m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cym);
-        } else {
-            Vehicle_Body();
-        }
-    } else {
-        Vehicle_Body();
-    }
-}
-
 void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {
 	con_states[0] = m_xe_x;
 	con_states[1] = m_xe_y;
@@ -364,9 +42,11 @@ void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {
 	m_r		= con_states[11];
 }
 
-void NMSPC::Vehicle_Body::update_pv(const d_vec &inputs, d_vec &outputs) { 
-	//pull inputs: 
-	//no inputs are required here
+void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, const double &Air_Wz) {
+	m_Air_Wx = Air_Wx;
+	m_Air_Wy = Air_Wy;
+	m_Air_Wz = Air_Wz;
+
 	//process
 	m_cos_phai 	= cos(m_phai);
 	m_cos_theta	= cos(m_theta);
@@ -535,123 +215,143 @@ void NMSPC::Vehicle_Body::update_pv(const d_vec &inputs, d_vec &outputs) {
 	m_vb_y_rr = tmpRes1_y + m_vb_y_c;
 	m_vb_z_rr = tmpRes1_z + m_vb_z_c;
 
+}
+
+void NMSPC::Vehicle_Body::push_pv(double &h_c, double &xe_x_c, double &xe_y_c, double &xe_z_c, double &ve_x_c, double &ve_y_c, double &ve_z_c, \
+double &vb_x_c, double &vb_y_c, double &vb_z_c, double &phai_c, double &theta_c, double &psi_c, double &p_c, double &q_c, double &r_c, double &beta_c, \
+double &xe_x_o, double &xe_y_o, double &xe_z_o, double &ve_x_o, double &ve_y_o, double &ve_z_o, \
+double &xb_x_o, double &xb_y_o, double &xb_z_o, double &vb_x_o, double &vb_y_o, double &vb_z_o, double &beta_o, \
+double &xe_x_fl, double &xe_y_fl, double &xe_z_fl, double &ve_x_fl, double &ve_y_fl, double &ve_z_fl, \
+double &xb_x_fl, double &xb_y_fl, double &xb_z_fl, double &vb_x_fl, double &vb_y_fl, double &vb_z_fl, \
+double &xe_x_fr, double &xe_y_fr, double &xe_z_fr, double &ve_x_fr, double &ve_y_fr, double &ve_z_fr, \
+double &xb_x_fr, double &xb_y_fr, double &xb_z_fr, double &vb_x_fr, double &vb_y_fr, double &vb_z_fr, \
+double &xe_x_rl, double &xe_y_rl, double &xe_z_rl, double &ve_x_rl, double &ve_y_rl, double &ve_z_rl, \
+double &xb_x_rl, double &xb_y_rl, double &xb_z_rl, double &vb_x_rl, double &vb_y_rl, double &vb_z_rl, \
+double &xe_x_rr, double &xe_y_rr, double &xe_z_rr, double &ve_x_rr, double &ve_y_rr, double &ve_z_rr, \
+double &xb_x_rr, double &xb_y_rr, double &xb_z_rr, double &vb_x_rr, double &vb_y_rr, double &vb_z_rr) { 
 	//push outputs
-	outputs[0] = m_xe_x_c;
-	outputs[1] = m_xe_y_c;
-	outputs[2] = m_xe_z_c;
-	outputs[3] = m_ve_x_c;
-	outputs[4] = m_ve_y_c;
-	outputs[5] = m_ve_z_c;
-	outputs[6] = m_vb_x_c;
-	outputs[7] = m_vb_y_c;
-	outputs[8] = m_vb_z_c;
-	outputs[9] = m_phai_c;
-	outputs[10] = m_theta_c;
-	outputs[11] = m_psi_c;
-	outputs[12] = m_p_c;
-	outputs[13] = m_q_c;
-	outputs[14] = m_r_c;
-	outputs[15] = m_beta_c;
-	outputs[16] = m_xe_x_o;
-	outputs[17] = m_xe_y_o;
-	outputs[18] = m_xe_z_o;
-	outputs[19] = m_ve_x_o;
-	outputs[20] = m_ve_y_o;
-	outputs[21] = m_ve_z_o;
-	outputs[22] = m_xb_x_o;
-	outputs[23] = m_xb_y_o;
-	outputs[24] = m_xb_z_o;
-	outputs[25] = m_vb_x_o;
-	outputs[26] = m_vb_y_o;
-	outputs[27] = m_vb_z_o;
-	outputs[28] = m_beta_o;
-	outputs[29] = m_xe_x_fl;
-	outputs[30] = m_xe_y_fl;
-	outputs[31] = m_xe_z_fl;
-	outputs[32] = m_ve_x_fl;
-	outputs[33] = m_ve_y_fl;
-	outputs[34] = m_ve_z_fl;
-	outputs[35] = m_xb_x_fl;
-	outputs[36] = m_xb_y_fl;
-	outputs[37] = m_xb_z_fl;
-	outputs[38] = m_vb_x_fl;
-	outputs[39] = m_vb_y_fl;
-	outputs[40] = m_vb_z_fl;
-	outputs[41] = m_xe_x_fr;
-	outputs[42] = m_xe_y_fr;
-	outputs[43] = m_xe_z_fr;
-	outputs[44] = m_ve_x_fr;
-	outputs[45] = m_ve_y_fr;
-	outputs[46] = m_ve_z_fr;
-	outputs[47] = m_xb_x_fr;
-	outputs[48] = m_xb_y_fr;
-	outputs[49] = m_xb_z_fr;
-	outputs[50] = m_vb_x_fr;
-	outputs[51] = m_vb_y_fr;
-	outputs[52] = m_vb_z_fr;
-	outputs[53] = m_xe_x_rl;
-	outputs[54] = m_xe_y_rl;
-	outputs[55] = m_xe_z_rl;
-	outputs[56] = m_ve_x_rl;
-	outputs[57] = m_ve_y_rl;
-	outputs[58] = m_ve_z_rl;
-	outputs[59] = m_xb_x_rl;
-	outputs[60] = m_xb_y_rl;
-	outputs[61] = m_xb_z_rl;
-	outputs[62] = m_vb_x_rl;
-	outputs[63] = m_vb_y_rl;
-	outputs[64] = m_vb_z_rl;
-	outputs[65] = m_xe_x_rr;
-	outputs[66] = m_xe_y_rr;
-	outputs[67] = m_xe_z_rr;
-	outputs[68] = m_ve_x_rr;
-	outputs[69] = m_ve_y_rr;
-	outputs[70] = m_ve_z_rr;
-	outputs[71] = m_xb_x_rr;
-	outputs[72] = m_xb_y_rr;
-	outputs[73] = m_xb_z_rr;
-	outputs[74] = m_vb_x_rr;
-	outputs[75] = m_vb_y_rr;
-	outputs[76] = m_vb_z_rr;
+	h_c = m_h;
+	xe_x_c = m_xe_x_c;
+	xe_y_c = m_xe_y_c;
+	xe_z_c = m_xe_z_c;
+	ve_x_c = m_ve_x_c;
+	ve_y_c = m_ve_y_c;
+	ve_z_c = m_ve_z_c;
+	vb_x_c = m_vb_x_c;
+	vb_y_c = m_vb_y_c;
+	vb_z_c = m_vb_z_c;
+	phai_c = m_phai_c;
+	theta_c = m_theta_c;
+	psi_c = m_psi_c;
+	p_c = m_p_c;
+	q_c = m_q_c;
+	r_c = m_r_c;
+	beta_c = m_beta_c;
+	xe_x_o = m_xe_x_o;
+	xe_y_o = m_xe_y_o;
+	xe_z_o = m_xe_z_o;
+	ve_x_o = m_ve_x_o;
+	ve_y_o = m_ve_y_o;
+	ve_z_o = m_ve_z_o;
+	xb_x_o = m_xb_x_o;
+	xb_y_o = m_xb_y_o;
+	xb_z_o = m_xb_z_o;
+	vb_x_o = m_vb_x_o;
+	vb_y_o = m_vb_y_o;
+	vb_z_o = m_vb_z_o;
+	beta_o = m_beta_o;
+	xe_x_fl = m_xe_x_fl;
+	xe_y_fl = m_xe_y_fl;
+	xe_z_fl = m_xe_z_fl;
+	ve_x_fl = m_ve_x_fl;
+	ve_y_fl = m_ve_y_fl;
+	ve_z_fl = m_ve_z_fl;
+	xb_x_fl = m_xb_x_fl;
+	xb_y_fl = m_xb_y_fl;
+	xb_z_fl = m_xb_z_fl;
+	vb_x_fl = m_vb_x_fl;
+	vb_y_fl = m_vb_y_fl;
+	vb_z_fl = m_vb_z_fl;
+	xe_x_fr = m_xe_x_fr;
+	xe_y_fr = m_xe_y_fr;
+	xe_z_fr = m_xe_z_fr;
+	ve_x_fr = m_ve_x_fr;
+	ve_y_fr = m_ve_y_fr;
+	ve_z_fr = m_ve_z_fr;
+	xb_x_fr = m_xb_x_fr;
+	xb_y_fr = m_xb_y_fr;
+	xb_z_fr = m_xb_z_fr;
+	vb_x_fr = m_vb_x_fr;
+	vb_y_fr = m_vb_y_fr;
+	vb_z_fr = m_vb_z_fr;
+	xe_x_rl = m_xe_x_rl;
+	xe_y_rl = m_xe_y_rl;
+	xe_z_rl = m_xe_z_rl;
+	ve_x_rl = m_ve_x_rl;
+	ve_y_rl = m_ve_y_rl;
+	ve_z_rl = m_ve_z_rl;
+	xb_x_rl = m_xb_x_rl;
+	xb_y_rl = m_xb_y_rl;
+	xb_z_rl = m_xb_z_rl;
+	vb_x_rl = m_vb_x_rl;
+	vb_y_rl = m_vb_y_rl;
+	vb_z_rl = m_vb_z_rl;
+	xe_x_rr = m_xe_x_rr;
+	xe_y_rr = m_xe_y_rr;
+	xe_z_rr = m_xe_z_rr;
+	ve_x_rr = m_ve_x_rr;
+	ve_y_rr = m_ve_y_rr;
+	ve_z_rr = m_ve_z_rr;
+	xb_x_rr = m_xb_x_rr;
+	xb_y_rr = m_xb_y_rr;
+	xb_z_rr = m_xb_z_rr;
+	vb_x_rr = m_vb_x_rr;
+	vb_y_rr = m_vb_y_rr;
+	vb_z_rr = m_vb_z_rr;
 	
 }
 
-void NMSPC::Vehicle_Body::update_fm (const d_vec &inputs, d_vec &outputs) {
+void NMSPC::Vehicle_Body::pull_fm(const double &Air_Tair, \
+const double &Sus_Fx_fl, const double &Sus_Fx_fr, const double &Sus_Fx_rl, const double &Sus_Fx_rr, \
+const double &Sus_Fy_fl, const double &Sus_Fy_fr, const double &Sus_Fy_rl, const double &Sus_Fy_rr, \
+const double &Sus_Fz_fl, const double &Sus_Fz_fr, const double &Sus_Fz_rl, const double &Sus_Fz_rr, \
+const double &Sus_Mx_fl, const double &Sus_Mx_fr, const double &Sus_Mx_rl, const double &Sus_Mx_rr ,\
+const double &Sus_My_fl, const double &Sus_My_fr, const double &Sus_My_rl, const double &Sus_My_rr, \
+const double &Sus_Mz_fl, const double &Sus_Mz_fr, const double &Sus_Mz_rl, const double &Sus_Mz_rr, \
+const double &Ext_Fx_ext, const double &Ext_Fy_ext, const double &Ext_Fz_ext, \
+const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext) {
 	//pull inputs
-	m_Air_Wx = inputs[0];
-	m_Air_Wy = inputs[1];
-	m_Air_Wz = inputs[2];
-	m_Air_Tair = inputs[3];
-	m_Sus_Fx_fl = inputs[4];
-	m_Sus_Fx_fr = inputs[5];
-	m_Sus_Fx_rl = inputs[6];
-	m_Sus_Fx_rr = inputs[7];
-	m_Sus_Fy_fl = inputs[8];
-	m_Sus_Fy_fr = inputs[9];
-	m_Sus_Fy_rl = inputs[10];
-	m_Sus_Fy_rr = inputs[11];
-	m_Sus_Fz_fl = inputs[12];
-	m_Sus_Fz_fr = inputs[13];
-	m_Sus_Fz_rl = inputs[14];
-	m_Sus_Fz_rr = inputs[15];
-	m_Sus_Mx_fl = inputs[16];
-	m_Sus_Mx_fr = inputs[17];
-	m_Sus_Mx_rl = inputs[18];
-	m_Sus_Mx_rr = inputs[19];
-	m_Sus_My_fl = inputs[20];
-	m_Sus_My_fr = inputs[21];
-	m_Sus_My_rl = inputs[22];
-	m_Sus_My_rr = inputs[23];
-	m_Sus_Mz_fl = inputs[24];
-	m_Sus_Mz_fr = inputs[25];
-	m_Sus_Mz_rl = inputs[26];
-	m_Sus_Mz_rr = inputs[27];
-	m_Ext_Fx_ext = inputs[28]; 
-	m_Ext_Fy_ext = inputs[29]; 
-	m_Ext_Fz_ext = inputs[30];
-	m_Ext_Mx_ext = inputs[31];
-	m_Ext_My_ext = inputs[32];
-	m_Ext_Mz_ext = inputs[33];
+	m_Air_Tair  = Air_Tair;
+	m_Sus_Fx_fl = Sus_Fx_fl;
+	m_Sus_Fx_fr = Sus_Fx_fr;
+	m_Sus_Fx_rl = Sus_Fx_rl;
+	m_Sus_Fx_rr = Sus_Fx_rr;
+	m_Sus_Fy_fl = Sus_Fy_fl;
+	m_Sus_Fy_fr = Sus_Fy_fr;
+	m_Sus_Fy_rl = Sus_Fy_rl;
+	m_Sus_Fy_rr = Sus_Fy_rr;
+	m_Sus_Fz_fl = Sus_Fz_fl;
+	m_Sus_Fz_fr = Sus_Fz_fr;
+	m_Sus_Fz_rl = Sus_Fz_rl;
+	m_Sus_Fz_rr = Sus_Fz_rr;
+	m_Sus_Mx_fl = Sus_Mx_fl;
+	m_Sus_Mx_fr = Sus_Mx_fr;
+	m_Sus_Mx_rl = Sus_Mx_rl;
+	m_Sus_Mx_rr = Sus_Mx_rr;
+	m_Sus_My_fl = Sus_My_fl;
+	m_Sus_My_fr = Sus_My_fr;
+	m_Sus_My_rl = Sus_My_rl;
+	m_Sus_My_rr = Sus_My_rr;
+	m_Sus_Mz_fl = Sus_Mz_fl;
+	m_Sus_Mz_fr = Sus_Mz_fr;
+	m_Sus_Mz_rl = Sus_Mz_rl;
+	m_Sus_Mz_rr = Sus_Mz_rr;
+	m_Ext_Fx_ext = Ext_Fx_ext;
+	m_Ext_Fy_ext = Ext_Fy_ext; 
+	m_Ext_Fz_ext = Ext_Fz_ext;
+	m_Ext_Mx_ext = Ext_Mx_ext;
+	m_Ext_My_ext = Ext_My_ext;
+	m_Ext_Mz_ext = Ext_Mz_ext;
 	
 	//process
 	
@@ -680,7 +380,7 @@ void NMSPC::Vehicle_Body::update_fm (const d_vec &inputs, d_vec &outputs) {
 	
 }
 
-void NMSPC::Vehicle_Body::update_drv (d_vec &outputs) {
+void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_xe_x = m_ve_x_c;
 	m_drv_xe_y = m_ve_y_c;
 	m_drv_xe_z = m_ve_z_c;
@@ -715,18 +415,18 @@ void NMSPC::Vehicle_Body::update_drv (d_vec &outputs) {
 	m_drv_r = invIbar_zx * tmpRes2_x + invIbar_zy * tmpRes2_y + invIbar_zz * tmpRes2_z;
 	
 	//push outputs
-	outputs[0] = m_drv_xe_x;
-	outputs[1] = m_drv_xe_y;
-	outputs[2] = m_drv_xe_z;
-	outputs[3] = m_drv_vb_x;
-	outputs[4] = m_drv_vb_y;
-	outputs[5] = m_drv_vb_z;
-	outputs[6] = m_drv_phai;
-	outputs[7] = m_drv_theta;
-	outputs[8] = m_drv_psi;
-	outputs[9] = m_drv_p;
-	outputs[10] = m_drv_q;
-	outputs[11] = m_drv_r;
+	derivatives[0] = m_drv_xe_x;
+	derivatives[1] = m_drv_xe_y;
+	derivatives[2] = m_drv_xe_z;
+	derivatives[3] = m_drv_vb_x;
+	derivatives[4] = m_drv_vb_y;
+	derivatives[5] = m_drv_vb_z;
+	derivatives[6] = m_drv_phai;
+	derivatives[7] = m_drv_theta;
+	derivatives[8] = m_drv_psi;
+	derivatives[9] = m_drv_p;
+	derivatives[10] = m_drv_q;
+	derivatives[11] = m_drv_r;
 }
 
 void NMSPC::Vehicle_Body::calculate_bar() {

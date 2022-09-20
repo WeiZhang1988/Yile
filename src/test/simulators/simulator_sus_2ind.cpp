@@ -33,7 +33,7 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
 }
 
 void Simulator_Sus_2Ind::run () {
-	io::CSVReader<15> m_inputs("data/inputs/sus_2ind_inputs.csv");
+	io::CSVReader<28> m_inputs("sus_test_result/sus_2ind_ramp_inputs.csv");// 1:0 2: sine 3 :ramp
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
@@ -45,7 +45,12 @@ void Simulator_Sus_2Ind::run () {
 		m_inputs.read_row(m_sptr_interface->m_Veh_hgt_cg, m_sptr_interface->m_Veh_r, \
     	m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Sus_TirPz_fl, m_sptr_interface->m_Sus_Tirvz_fl, m_sptr_interface->m_Tir_Re_fl, \
 		m_sptr_interface->m_Veh_Pz_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
-		m_sptr_interface->m_Sus_TirFx_fl, m_sptr_interface->m_Sus_TirFy_fl, m_sptr_interface->m_Tir_Mx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Tir_Mz_fl); 
+		m_sptr_interface->m_Sus_TirFx_fl, m_sptr_interface->m_Sus_TirFy_fl, m_sptr_interface->m_Tir_Mx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Tir_Mz_fl,\
+		
+		m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Sus_TirPz_fr, m_sptr_interface->m_Sus_Tirvz_fr, m_sptr_interface->m_Tir_Re_fr, \
+		m_sptr_interface->m_Veh_Pz_fr, m_sptr_interface->m_Veh_vx_fr, m_sptr_interface->m_Veh_vy_fr, m_sptr_interface->m_Veh_vz_fr, \
+		m_sptr_interface->m_Sus_TirFx_fr, m_sptr_interface->m_Sus_TirFy_fr, m_sptr_interface->m_Tir_Mx_fr, m_sptr_interface->m_Tir_My_fr, m_sptr_interface->m_Tir_Mz_fr
+		); 
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
 
@@ -65,6 +70,6 @@ void Simulator_Sus_2Ind::spin (const int &steps) {
 	int dur_micros_cnt = dur_micros.count();
 	int dur_micros_cnt_trgt = steps * static_cast<int>(m_t_step_micros);
 	if (dur_micros_cnt<dur_micros_cnt_trgt) {
-		this_thread::sleep_for(microseconds(dur_micros_cnt_trgt - dur_micros_cnt));
+	this_thread::sleep_for(microseconds(dur_micros_cnt_trgt - dur_micros_cnt));
 	}
 }
