@@ -32,63 +32,62 @@ public:
 	//chassis
 	double mass=1181.0, \
 	double a=1.515, double b=1.504, double d=0.0, double h=0.134, \
-	double Ixx=1.0, double Ixy=0.0, double Ixz=0.0, \
-	double Iyx=0.0, double Iyy=1.0, double Iyz=0.0, \
-	double Izx=0.0, double Izy=0.0, double Izz=1.0, \
-	double w_f=1.0, double w_r=1.0, \
+	double Ixx=4.323333333333333e2, double Ixy=0.0, double Ixz=0.0, \
+	double Iyx=0.0, double Iyy=1.922666666666667e3, double Iyz=0.0, \
+	double Izx=0.0, double Izy=0.0, double Izz=2066.0, \
+	double w_f=1.9220, double w_r=1.9220, \
 	//z1
-	double z1m=0.0, double z1R_x=0.0, double z1R_y=0.0, \
-	double z1R_z = 0.0, double z1I_xx=0.0, double z1I_xy=0.0, \
-	double z1I_xz=0.0, double z1I_yx=0.0, double z1I_yy=0.0, \
-	double z1I_yz=0.0, double z1I_zx=0.0, double z1I_zy=0.0, \
-	double z1I_zz=0.0, \
+	double z1m=0.0, \
+	double z1R_x=-0.25, double z1R_y=0.125,double z1R_z = 0.15, \
+	double z1I_xx=0.0, double z1I_xy=0.0, double z1I_xz=0.0, \
+	double z1I_yx=0.0, double z1I_yy=0.0, double z1I_yz=0.0, 
+	double z1I_zx=0.0, double z1I_zy=0.0, double z1I_zz=0.0, \
 	//z2
-	double z2m=0.0, double z2R_x=0.0, double z2R_y=0.0, \
-	double z2R_z = 0.0, double z2I_xx=0.0, double z2I_xy=0.0, \
-	double z2I_xz=0.0, double z2I_yx=0.0, double z2I_yy=0.0, \
-	double z2I_yz=0.0, double z2I_zx=0.0, double z2I_zy=0.0, \
-	double z2I_zz=0.0, \
+	double z2m=0.0, double z2R_x=1.4, double z2R_y=0.0, double z2R_z = 0.8, \
+	double z2I_xx=0.0, double z2I_xy=0.0, double z2I_xz=0.0, \
+	double z2I_yx=0.0, double z2I_yy=0.0, double z2I_yz=0.0, \
+	double z2I_zx=0.0, double z2I_zy=0.0, double z2I_zz=0.0, \
 	//z3
-	double z3m=0.0, double z3R_x=0.0, double z3R_y=0.0, \
-	double z3R_z = 0.0, double z3I_xx=0.0, double z3I_xy=0.0, \
-	double z3I_xz=0.0, double z3I_yx=0.0, double z3I_yy=0.0, \
-	double z3I_yz=0.0, double z3I_zx=0.0, double z3I_zy=0.0, \
-	double z3I_zz=0.0, \
+	double z3m=0.0, double z3R_x=0.75, double z3R_y=-0.5, double z3R_z = 0.4, \
+	double z3I_xx=0.0, double z3I_xy=0.0, double z3I_xz=0.0, \
+	double z3I_yx=0.0, double z3I_yy=0.0, double z3I_yz=0.0, \
+	double z3I_zx=0.0, double z3I_zy=0.0, double z3I_zz=0.0, \
 	//z4
-	double z4m=0.0, double z4R_x=0.0, double z4R_y=0.0, \
-	double z4R_z = 0.0, double z4I_xx=0.0, double z4I_xy=0.0, \
-	double z4I_xz=0.0, double z4I_yx=0.0, double z4I_yy=0.0, \
-	double z4I_yz=0.0, double z4I_zx=0.0, double z4I_zy=0.0, \
-	double z4I_zz=0.0, \
+	double z4m=0.0, double z4R_x=0.75, double z4R_y=0.5, double z4R_z = 0.4, \
+	double z4I_xx=0.0, double z4I_xy=0.0, double z4I_xz=0.0, \
+	double z4I_yx=0.0, double z4I_yy=0.0, double z4I_yz=0.0, \
+	double z4I_zx=0.0, double z4I_zy=0.0, double z4I_zz=0.0, \
 	//z5
-	double z5m=0.0, double z5R_x=0.0, double z5R_y=0.0, \
-	double z5R_z = 0.0, double z5I_xx=0.0, double z5I_xy=0.0, \
-	double z5I_xz=0.0, double z5I_yx=0.0, double z5I_yy=0.0, \
-	double z5I_yz=0.0, double z5I_zx=0.0, double z5I_zy=0.0, \
-	double z5I_zz=0.0, \
+	double z5m=0.0, double z5R_x=1.25, double z5R_y=-0.5, double z5R_z = 0.4, 
+	double z5I_xx=0.0, double z5I_xy=0.0, double z5I_xz=0.0, 
+	double z5I_yx=0.0, double z5I_yy=0.0, double z5I_yz=0.0, 
+	double z5I_zx=0.0, double z5I_zy=0.0, double z5I_zz=0.0, \
 	//z6
-	double z6m=0.0, double z6R_x=0.0, double z6R_y=0.0, \
-	double z6R_z = 0.0, double z6I_xx=0.0, double z6I_xy=0.0, \
-	double z6I_xz=0.0, double z6I_yx=0.0, double z6I_yy=0.0, \
-	double z6I_yz=0.0, double z6I_zx=0.0, double z6I_zy=0.0, \
-	double z6I_zz=0.0, \
+	double z6m=0.0, double z6R_x=1.25, double z6R_y=-0.5, double z6R_z = 0.4, 
+	double z6I_xx=0.0, double z6I_xy=0.0, double z6I_xz=0.0, 
+	double z6I_yx=0.0, double z6I_yy=0.0, double z6I_yz=0.0, 
+	double z6I_zx=0.0, double z6I_zy=0.0, double z6I_zz=0.0, \
 	//z7
-	double z7m=0.0, double z7R_x=0.0, double z7R_y=0.0, \
-	double z7R_z = 0.0, double z7I_xx=0.0, double z7I_xy=0.0, \
-	double z7I_xz=0.0, double z7I_yx=0.0, double z7I_yy=0.0, \
-	double z7I_yz=0.0, double z7I_zx=0.0, double z7I_zy=0.0, \
-	double z7I_zz=0.0, \
+	double z7m=0.0, double z7R_x=2.0, double z7R_y=0.0, double z7R_z = 0.25, 
+	double z7I_xx=0.0, double z7I_xy=0.0, double z7I_xz=0.0, 
+	double z7I_yx=0.0, double z7I_yy=0.0, double z7I_yz=0.0, 
+	double z7I_zx=0.0, double z7I_zy=0.0, double z7I_zz=0.0, \
 	//aerodynamics
 	double Pabs=101325.0, double Cg=287.058, \
-	double Af=1.0, double Cd=1.0, double Cl=1.0, double Cpm=1.0, \
-	d_vec beta_w={0.0,0.01,0.02,0.03}, \
-	d_vec Cs	={0.0,0.03,0.06,0.09}, \
-	d_vec Cym	={0.0,0.01,0.02,0.03}, \
+	double Af=2.110, double Cd=0.3, double Cl=0.1, double Cpm=0.1, \
+	d_vec beta_w={0.0,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,\
+	0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20,\
+	0.21,0.22,0.23,0.24,0.25,0.26,0.27,0.28,0.29,0.30}, \
+	d_vec Cs	={0.0,0.03,0.06,0.09,0.12,0.15,0.18,0.21,0.24,0.27,0.30,\
+	0.33,0.36,0.39,0.42,0.45,0.48,0.51,0.54,0.57,0.60,\
+	0.63,0.66,0.69,0.72,0.75,0.78,0.81,0.84,0.87,0.90}, \
+	d_vec Cym	={0.0,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,\
+	0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20,\
+	0.21,0.22,0.23,0.24,0.25,0.26,0.27,0.28,0.29,0.30}, \
 	//simulation
-	double xdot_tol=0.1, double longOff=0.1, double latOff=0.1, \
-	double vertOff=0.1, \
+	double xdot_tol=0.1, double longOff=0.0, double latOff=0.0, double vertOff=0.0112, \
 	//init states
-	double init_xe_x=0.0, double init_xe_y=0.0, double init_xe_z=0.0, \
+	double init_xe_x=0.0, double init_xe_y=3.125, double init_xe_z=0.0, \
 	double init_vb_x=0.0, double init_vb_y=0.0, double init_vb_z=0.0, \
 	double init_phai=0.0, double init_theta=0.0, double init_psi=0.0, \
 	double init_p=0.0, double init_q=0.0, double init_r=0.0) :
@@ -137,16 +136,34 @@ public:
 		m_pwl_Cs = piece_wise_linear(m_beta_w,m_Cs);
 		m_pwl_Cym = piece_wise_linear(m_beta_w,m_Cym);
 	}
-	
-	Vehicle_Body (const d_vec &params_d, const d_v_vec &params_v, const d_vec &init_states);
-	Vehicle_Body (const std::string &filename);
-
 	void push_con_states (d_vec &con_states);
-	
 	void pull_con_states (const d_vec &con_states);
-	void update_pv (const d_vec &inputs, d_vec &outputs);
-	void update_fm (const d_vec &inputs, d_vec &outputs);
-	void update_drv (d_vec &outputs);
+
+	void pull_pv (const double &Air_Wx, const double &Air_Wy, const double &Air_Wz);
+	void push_pv(double &h_c, double &xe_x_c, double &xe_y_c, double &xe_z_c, double &ve_x_c, double &ve_y_c, double &ve_z_c, \
+	double &vb_x_c, double &vb_y_c, double &vb_z_c, double &phai_c, double &theta_c, double &psi_c, double &p_c, double &q_c, double &r_c, double &beta_c, \
+	double &xe_x_o, double &xe_y_o, double &xe_z_o, double &ve_x_o, double &ve_y_o, double &ve_z_o, \
+	double &xb_x_o, double &xb_y_o, double &xb_z_o, double &vb_x_o, double &vb_y_o, double &vb_z_o, double &beta_o, \
+	double &xe_x_fl, double &xe_y_fl, double &xe_z_fl, double &ve_x_fl, double &ve_y_fl, double &ve_z_fl, \
+	double &xb_x_fl, double &xb_y_fl, double &xb_z_fl, double &vb_x_fl, double &vb_y_fl, double &vb_z_fl, \
+	double &xe_x_fr, double &xe_y_fr, double &xe_z_fr, double &ve_x_fr, double &ve_y_fr, double &ve_z_fr, \
+	double &xb_x_fr, double &xb_y_fr, double &xb_z_fr, double &vb_x_fr, double &vb_y_fr, double &vb_z_fr, \
+	double &xe_x_rl, double &xe_y_rl, double &xe_z_rl, double &ve_x_rl, double &ve_y_rl, double &ve_z_rl, \
+	double &xb_x_rl, double &xb_y_rl, double &xb_z_rl, double &vb_x_rl, double &vb_y_rl, double &vb_z_rl, \
+	double &xe_x_rr, double &xe_y_rr, double &xe_z_rr, double &ve_x_rr, double &ve_y_rr, double &ve_z_rr, \
+	double &xb_x_rr, double &xb_y_rr, double &xb_z_rr, double &vb_x_rr, double &vb_y_rr, double &vb_z_rr);
+	void pull_fm (const double &Air_Tair, \
+	const double &Sus_Fx_fl, const double &Sus_Fx_fr, const double &Sus_Fx_rl, const double &Sus_Fx_rr, \
+	const double &Sus_Fy_fl, const double &Sus_Fy_fr, const double &Sus_Fy_rl, const double &Sus_Fy_rr, \
+	const double &Sus_Fz_fl, const double &Sus_Fz_fr, const double &Sus_Fz_rl, const double &Sus_Fz_rr, \
+	const double &Sus_Mx_fl, const double &Sus_Mx_fr, const double &Sus_Mx_rl, const double &Sus_Mx_rr ,\
+	const double &Sus_My_fl, const double &Sus_My_fr, const double &Sus_My_rl, const double &Sus_My_rr, \
+	const double &Sus_Mz_fl, const double &Sus_Mz_fr, const double &Sus_Mz_rl, const double &Sus_Mz_rr, \
+	const double &Ext_Fx_ext, const double &Ext_Fy_ext, const double &Ext_Fz_ext, \
+	const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext);
+	void push_fm () {};
+
+	void push_drv (d_vec &derivatives);
 
 private:
 	//parameters

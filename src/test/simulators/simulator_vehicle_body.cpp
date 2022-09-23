@@ -20,16 +20,19 @@ Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, dou
 	m_t_step_micros = m_t_step/1e-6;
 
 	m_sptr_sys = make_shared<Sys_Vehicle_Body>();
-	m_sptr_interface = make_shared<Int_Vehicle_Body>(int(Sys_Vehicle_Body::m_external_inputs_num));
+	m_sptr_store = make_shared<d_v_vec>();
+	m_sptr_interface = make_shared<Int_Vehicle_Body>();
 	shared_ptr<Vehicle_Body> sptr_vhl_bdy = make_shared<Vehicle_Body>();
  
 	m_sptr_sys->add_vhl_bdy(sptr_vhl_bdy);
 	m_sptr_sys->add_interface(m_sptr_interface);
+	m_sptr_sys->add_store(m_sptr_store);
     
-    m_external_inputs = d_vec(Sys_Vehicle_Body::m_external_inputs_num,10.0);
 }
 
 void Simulator_Vehicle_Body::run() {
+	io::CSVReader<34> m_inputs("veh_test_result/veh_vb_sine_inputs.csv");
+
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
 	
@@ -38,10 +41,50 @@ void Simulator_Vehicle_Body::run() {
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
+		m_inputs.read_row(
+		m_sptr_interface->m_Air_Wx, 
+		m_sptr_interface->m_Air_Wy, 
+		m_sptr_interface->m_Air_Wz, 
+		m_sptr_interface->m_Air_Tair, \
 
-		m_sptr_sys->pull_external_inputs (m_external_inputs);
+		m_sptr_interface->m_Sus_VehFx_fl, 
+		m_sptr_interface->m_Sus_VehFx_fr, 
+		m_sptr_interface->m_Sus_VehFx_rl, 
+		m_sptr_interface->m_Sus_VehFx_rr, \
+
+		m_sptr_interface->m_Sus_VehFy_fl, 
+		m_sptr_interface->m_Sus_VehFy_fr, 
+		m_sptr_interface->m_Sus_VehFy_rl, 
+		m_sptr_interface->m_Sus_VehFy_rr, \
+
+		m_sptr_interface->m_Sus_VehFz_fl, 
+		m_sptr_interface->m_Sus_VehFz_fr, 
+		m_sptr_interface->m_Sus_VehFz_rl, 
+		m_sptr_interface->m_Sus_VehFz_rr, \
+
+		m_sptr_interface->m_Sus_VehMx_fl, 
+		m_sptr_interface->m_Sus_VehMx_fr, 
+		m_sptr_interface->m_Sus_VehMx_rl, 
+		m_sptr_interface->m_Sus_VehMx_rr, \
+
+		m_sptr_interface->m_Sus_VehMy_fl, 
+		m_sptr_interface->m_Sus_VehMy_fr, 
+		m_sptr_interface->m_Sus_VehMy_rl, 
+		m_sptr_interface->m_Sus_VehMy_rr, \
+
+		m_sptr_interface->m_Sus_VehMz_fl, 
+		m_sptr_interface->m_Sus_VehMz_fr, 
+		m_sptr_interface->m_Sus_VehMz_rl, 
+		m_sptr_interface->m_Sus_VehMz_rr, \
+
+		m_sptr_interface->m_Ext_Fx_ext, 
+		m_sptr_interface->m_Ext_Fy_ext, 
+		m_sptr_interface->m_Ext_Fz_ext, \
+		m_sptr_interface->m_Ext_Mx_ext, 
+		m_sptr_interface->m_Ext_My_ext, 
+		m_sptr_interface->m_Ext_Mz_ext
+		); 
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		m_outputs.push_back(m_sptr_interface->m_vhl_bdy_pv_outputs);
 	
 		t += m_t_step;
 		//spin(m_steps);
@@ -51,7 +94,7 @@ void Simulator_Vehicle_Body::run() {
 	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
 	m_sptr_sys->update_pv();
 	m_sptr_sys->update_fm();
-	m_outputs.push_back(m_sptr_interface->m_vhl_bdy_pv_outputs);
+	m_sptr_sys->store_data();
 }
 
 void Simulator_Vehicle_Body::spin (const int &steps) {
