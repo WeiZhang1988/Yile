@@ -54,20 +54,22 @@ void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, co
 	m_sin_phai 	= sin(m_phai);
 	m_sin_theta	= sin(m_theta);
 	m_sin_psi	= sin(m_psi);
-	m_DCM_00	= m_cos_theta * m_cos_phai;
-	m_DCM_01	= m_cos_theta * m_sin_phai;
+
+	m_DCM_00	= m_cos_theta * m_cos_psi;
+	m_DCM_01	= m_cos_theta * m_sin_psi;
 	m_DCM_02	= -m_sin_theta;
-	m_DCM_10	= m_sin_psi * m_sin_theta * m_cos_phai - m_cos_psi * m_sin_phai;
-	m_DCM_11	= m_sin_psi * m_sin_theta * m_sin_phai + m_cos_psi * m_cos_phai;
-	m_DCM_12	= m_sin_psi * m_cos_theta;
-	m_DCM_20	= m_cos_psi * m_sin_theta * m_cos_phai + m_sin_psi * m_sin_phai;
-	m_DCM_21	= m_cos_psi * m_sin_theta * m_sin_phai - m_sin_psi * m_cos_phai;
-	m_DCM_22	= m_cos_psi * m_cos_theta;
+	m_DCM_10	= m_sin_phai * m_sin_theta * m_cos_psi - m_cos_phai * m_sin_psi;
+	m_DCM_11	= m_sin_phai * m_sin_theta * m_sin_psi + m_cos_phai * m_cos_psi;
+	m_DCM_12	= m_sin_phai * m_cos_theta;
+	m_DCM_20	= m_cos_phai * m_sin_theta * m_cos_psi + m_sin_phai * m_sin_psi;
+	m_DCM_21	= m_cos_phai * m_sin_theta * m_sin_psi - m_sin_phai * m_cos_psi;
+	m_DCM_22	= m_cos_phai * m_cos_theta;
+
 
 	m_ve_x = m_DCM_00 * m_vb_x + m_DCM_10 * m_vb_y + m_DCM_20 * m_vb_z;
 	m_ve_y = m_DCM_01 * m_vb_x + m_DCM_11 * m_vb_y + m_DCM_21 * m_vb_z;
 	m_ve_z = m_DCM_02 * m_vb_x + m_DCM_12 * m_vb_y + m_DCM_22 * m_vb_z;
-	
+
 	m_xe_x_c = m_xe_x;
 	m_xe_y_c = m_xe_y;
 	m_xe_z_c = m_xe_z;
@@ -358,12 +360,15 @@ const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext) {
 	m_F_VehiclB_x = m_Sus_Fx_fl + m_Sus_Fx_fr + m_Sus_Fx_rl + m_Sus_Fx_rr;
 	m_F_VehiclB_y = m_Sus_Fy_fl + m_Sus_Fy_fr + m_Sus_Fy_rl + m_Sus_Fy_rr;
 	m_F_VehiclB_z = m_Sus_Fz_fl + m_Sus_Fz_fr + m_Sus_Fz_rl + m_Sus_Fz_rr;
+
 	m_M_roll = -m_Sus_Fz_fl * m_Wbar_fl + m_Sus_Fz_fr * m_Wbar_fr - \
 	m_Sus_Fz_rl * m_Wbar_rl + m_Sus_Fz_rr * m_Wbar_rr - \
 	m_F_VehiclB_y * m_Xbar_h;
+
 	m_M_pitch = -(m_Sus_Fz_fl + m_Sus_Fz_fr) * m_Xbar_a + \
 	(m_Sus_Fz_rl + m_Sus_Fz_rr) * m_Xbar_b + 
 	m_F_VehiclB_x * m_Xbar_h;
+
 	m_M_yaw = m_Sus_Fx_fl * m_Wbar_fl - m_Sus_Fx_fr *  m_Wbar_fr + \
 	m_Sus_Fx_rl * m_Wbar_rl - m_Sus_Fx_rr * m_Wbar_rr + \
 	(m_Sus_Fy_fl + m_Sus_Fy_fr) * m_Xbar_a - (m_Sus_Fy_rl + m_Sus_Fy_rr) * m_Xbar_b;
@@ -388,11 +393,11 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_vb_x = m_Fb_x/m_Mbar + m_vb_y * m_r - m_vb_z * m_q;
 	m_drv_vb_y = m_Fb_y/m_Mbar + m_vb_z * m_p - m_vb_x * m_r;
 	m_drv_vb_z = m_Fb_z/m_Mbar + m_vb_x * m_q - m_vb_y * m_p;
-	
+
+
 	m_drv_phai = m_p + (m_q * m_sin_phai + m_r * m_cos_phai) * m_sin_theta / m_cos_theta;
 	m_drv_theta = m_q * m_cos_phai - m_r * m_sin_phai;
 	m_drv_psi = (m_q * m_sin_phai + m_r * m_cos_phai) / m_cos_theta;
-
 	double tmpRes1_x = m_Ibar_xx * m_p + m_Ibar_xy * m_q + m_Ibar_xz * m_r;
 	double tmpRes1_y = m_Ibar_yx * m_p + m_Ibar_yy * m_q + m_Ibar_yz * m_r;
 	double tmpRes1_z = m_Ibar_zx * m_p + m_Ibar_zy * m_q + m_Ibar_zz * m_r;
@@ -415,16 +420,16 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_r = invIbar_zx * tmpRes2_x + invIbar_zy * tmpRes2_y + invIbar_zz * tmpRes2_z;
 	
 	//push outputs
-	derivatives[0] = m_drv_xe_x;
-	derivatives[1] = m_drv_xe_y;
-	derivatives[2] = m_drv_xe_z;
-	derivatives[3] = m_drv_vb_x;
-	derivatives[4] = m_drv_vb_y;
-	derivatives[5] = m_drv_vb_z;
-	derivatives[6] = m_drv_phai;
-	derivatives[7] = m_drv_theta;
-	derivatives[8] = m_drv_psi;
-	derivatives[9] = m_drv_p;
+	derivatives[0] 	= m_drv_xe_x;
+	derivatives[1] 	= m_drv_xe_y;
+	derivatives[2] 	= m_drv_xe_z;
+	derivatives[3] 	= m_drv_vb_x;
+	derivatives[4] 	= m_drv_vb_y;
+	derivatives[5] 	= m_drv_vb_z;
+	derivatives[6] 	= m_drv_phai;
+	derivatives[7] 	= m_drv_theta;
+	derivatives[8] 	= m_drv_psi;
+	derivatives[9] 	= m_drv_p;
 	derivatives[10] = m_drv_q;
 	derivatives[11] = m_drv_r;
 }
@@ -447,7 +452,7 @@ void NMSPC::Vehicle_Body::calculate_bar() {
 	m_Wbar_fr = m_w_f / 2.0 - D;
 	m_Wbar_rl = m_w_r / 2.0 + D;
 	m_Wbar_rr = m_w_r / 2.0 - D;
-	m_HPbar_fl_x = A;
+	m_HPbar_fl_x = A;;
 	m_HPbar_fr_x = A;
 	m_HPbar_rl_x = A - (m_a + m_b);
 	m_HPbar_rr_x = A - (m_a + m_b);
@@ -549,6 +554,7 @@ void NMSPC::Vehicle_Body::calculate_gravity() {
 	m_Fg_z = m_DCM_22 * m_Mbar * g;
 }
 
+
 void NMSPC::Vehicle_Body::calculate_aero_drag() {
 	double vdb_x = m_vb_x - (m_DCM_00 * m_Air_Wx + m_DCM_01 * m_Air_Wy + m_DCM_02 * m_Air_Wz);
 	double vdb_y = m_vb_y - (m_DCM_10 * m_Air_Wx + m_DCM_11 * m_Air_Wy + m_DCM_12 * m_Air_Wz);
@@ -557,7 +563,7 @@ void NMSPC::Vehicle_Body::calculate_aero_drag() {
 	double wdir_x = tanh(4.0 * vdb_x);
 	double wdir_y = tanh(4.0 * vdb_y);
 	double wdir_z = tanh(4.0 * vdb_z);
-	double gain = sum *0.5 * m_Af * m_Pabs * m_Cg / div0protect(m_Air_Tair,1e-5);
+	double gain = sum *0.5 * m_Af * m_Pabs / m_Cg / div0protect(m_Air_Tair,1e-5);
 	double ata2 = atan2(vdb_y,vdb_x);
 
 	m_Fd_x = m_Cd * gain * wdir_x;

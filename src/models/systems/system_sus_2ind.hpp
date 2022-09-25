@@ -13,26 +13,15 @@
 #ifndef SYSTEM_SUS_2IND_HPP
 #define SYSTEM_SUS_2IND_HPP
 #include "components/common.hpp"
-#include "components/tire_fiala.hpp"
 #include "subsystems/subsystem_sus_2ind.hpp"
 #include "interfaces/interface_sus_2ind.hpp"
 
 namespace NMSPC{
 class Sys_Sus_2Ind {
 public:
-    static const int m_pv_inters_num = 0;
-	static const int m_fm_inters_num = 0;
-
-	static const int m_pv_inputs_num = Subsys_Sus_2Ind::m_pv_inputs_num - m_pv_inters_num;
-	static const int m_fm_inputs_num = Subsys_Sus_2Ind::m_fm_inputs_num - m_fm_inters_num;
-	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;
-    static const int m_external_inputs_num = m_inputs_num - m_pv_inters_num - m_fm_inters_num;
 	static const int m_con_states_num = Subsys_Sus_2Ind::m_con_states_num;						
 	static const int m_derivatives_num = Subsys_Sus_2Ind::m_derivatives_num;
 	static const int m_dis_states_num = Subsys_Sus_2Ind::m_dis_states_num;
-	static const int m_pv_outputs_num = Subsys_Sus_2Ind::m_pv_outputs_num;
-	static const int m_fm_outputs_num = Subsys_Sus_2Ind::m_fm_outputs_num;
-	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;
 	
 	void add_subsys_sus_2ind(std::shared_ptr<Subsys_Sus_2Ind> sptr_subsys_sus_2ind) \
     {m_sptr_subsys_sus_2ind = sptr_subsys_sus_2ind;}

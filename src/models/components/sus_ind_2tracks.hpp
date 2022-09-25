@@ -17,31 +17,10 @@
 namespace NMSPC{
 class Sus_Ind_2Tracks {
 public:
-	static const int m_params_num = 33;										//amount of parameters
-	static const int m_pv_inputs_num = 18;									//amount of pv inputs
-	static const int m_fm_inputs_num = 10;									//amount of fm inputs
-	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs
 	static const int m_con_states_num = 0;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
-	static const int m_pv_outputs_num = 14;									//amount of pv outputs
-	static const int m_fm_outputs_num = 14;									//amount of fm outputs
-	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
-	// Sus_Ind_2Tracks (double F0z=9810.0, double Kz=64370.0, double Cz=10000.0, \
-	// double Hmax=0.25, double roll_strg_H_slp=-0.2269, \
-	// double toe=0.0349, double toe_strg_slp=0.01, \
-	// double caster=0.0698, double caster_H_slp=-0.2269, double caster_strg_slp=0.01, \
-	// double camber=0.0698, double camber_H_slp=-0.2269, double camber_strg_slp=0.01, \
-	// double strg_hgt_slp=0.1432, double as_R=0.2, double as_ntrl_ang=0.5236, double as_trsK=8e2, \
-	// bool has_anti_sway=false, bool is_strg=false) :
-	// Sus_Ind_2Tracks (double F0z=2886.0, double Kz=52451.006579283188, double Cz=5565.226438019838, \
-	// double Hmax=0.25, double roll_strg_H_slp=-0.0, \
-	// double toe=0.0, double toe_strg_slp=0.0, \
-	// double caster=0.0, double caster_H_slp=-0.0, double caster_strg_slp=0.00, \
-	// double camber=0.0, double camber_H_slp=-0.0, double camber_strg_slp=0.00, \
-	// double strg_hgt_slp=0.1432, double as_R=0.2, double as_ntrl_ang=0.5236, double as_trsK=8e2, \
-	// bool has_anti_sway=false, bool is_strg=true) :
 	Sus_Ind_2Tracks (double F0z=2886.0, double Kz=52451.006579283188, double Cz=5565.226438019838, \
 	double Hmax=0.25, double roll_strg_H_slp=-0.2269, \
 	double toe=0.0349, double toe_strg_slp=0.01, \
@@ -85,6 +64,12 @@ public:
 	const double &Veh_Pz_r, const double &Veh_vx_r, const double &Veh_vy_r, const double &Veh_vz_r);
 	void push_pv (double &Sus_str_l, double &Sus_gamma_l, double &Sus_caster_l, double &Sus_r_l, double &Sus_vx_l, double &Sus_vy_l, double &Sus_vz_l, \
 	double &Sus_str_r, double &Sus_gamma_r, double &Sus_caster_r, double &Sus_r_r, double &Sus_vx_r, double &Sus_vy_r, double &Sus_vz_r);
+	void pull_fm_z ();
+	void push_fm_z (double &Sus_VehFz_l, double &Sus_Fz_l, double &Sus_VehFz_r, double &Sus_Fz_r);
+	void pull_fm_o (const double &Sus_TirFx_l, const double &Sus_TirFy_l, const double &Tir_Mx_l, const double &Tir_My_l, const double &Tir_Mz_l, \
+	const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, const double &Tir_My_r, const double &Tir_Mz_r);
+	void push_fm_o (double &Sus_VehFx_l, double &Sus_VehFy_l, double &Sus_VehMx_l, double &Sus_VehMy_l, double &Sus_VehMz_l, \
+	double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehMx_r, double &Sus_VehMy_r, double &Sus_VehMz_r);
 	void pull_fm (const double &Sus_TirFx_l, const double &Sus_TirFy_l, const double &Tir_Mx_l, const double &Tir_My_l, const double &Tir_Mz_l, \
 	const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, const double &Tir_My_r, const double &Tir_Mz_r);
 	void push_fm (double &Sus_VehFx_l, double &Sus_VehFy_l, double &Sus_VehFz_l, double &Sus_VehMx_l, double &Sus_VehMy_l, double &Sus_VehMz_l, double &Sus_Fz_l, \
