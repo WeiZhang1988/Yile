@@ -17,15 +17,9 @@
 namespace NMSPC{
 class Subsys_Tire_4Fiala {
 public:
-    static const int m_pv_inputs_num = Tire_Fiala::m_pv_inputs_num + Tire_Fiala::m_pv_inputs_num + Tire_Fiala::m_pv_inputs_num + Tire_Fiala::m_pv_inputs_num;
-    static const int m_fm_inputs_num = Tire_Fiala::m_fm_inputs_num + Tire_Fiala::m_fm_inputs_num + Tire_Fiala::m_fm_inputs_num + Tire_Fiala::m_fm_inputs_num;
-    static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;
     static const int m_con_states_num = Tire_Fiala::m_con_states_num + Tire_Fiala::m_con_states_num + Tire_Fiala::m_con_states_num + Tire_Fiala::m_con_states_num;
 	static const int m_derivatives_num = m_con_states_num;
 	static const int m_dis_states_num = Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num;
-    static const int m_pv_outputs_num = Tire_Fiala::m_pv_outputs_num + Tire_Fiala::m_pv_outputs_num + Tire_Fiala::m_pv_outputs_num + Tire_Fiala::m_pv_outputs_num;
-    static const int m_fm_outputs_num = Tire_Fiala::m_fm_outputs_num + Tire_Fiala::m_fm_outputs_num + Tire_Fiala::m_fm_outputs_num + Tire_Fiala::m_fm_outputs_num;
-    static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;
 
     void add_tirs (std::shared_ptr<Tire_Fiala> sptr_tir_fl, std::shared_ptr<Tire_Fiala> sptr_tir_fr,\
     std::shared_ptr<Tire_Fiala> sptr_tir_rl, std::shared_ptr<Tire_Fiala> sptr_tir_rr) 

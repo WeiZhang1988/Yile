@@ -17,15 +17,9 @@
 namespace NMSPC{
 class Subsys_Wheel_4Disk {
 public:
-    static const int m_pv_inputs_num = Wheel_Disk::m_pv_inputs_num + Wheel_Disk::m_pv_inputs_num + Wheel_Disk::m_pv_inputs_num + Wheel_Disk::m_pv_inputs_num;
-    static const int m_fm_inputs_num = Wheel_Disk::m_fm_inputs_num + Wheel_Disk::m_fm_inputs_num + Wheel_Disk::m_fm_inputs_num + Wheel_Disk::m_fm_inputs_num;
-    static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;
     static const int m_con_states_num = Wheel_Disk::m_con_states_num + Wheel_Disk::m_con_states_num + Wheel_Disk::m_con_states_num + Wheel_Disk::m_con_states_num;
 	static const int m_derivatives_num = m_con_states_num;
 	static const int m_dis_states_num = Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num;
-    static const int m_pv_outputs_num = Wheel_Disk::m_pv_outputs_num + Wheel_Disk::m_pv_outputs_num + Wheel_Disk::m_pv_outputs_num + Wheel_Disk::m_pv_outputs_num;
-    static const int m_fm_outputs_num = Wheel_Disk::m_fm_outputs_num + Wheel_Disk::m_fm_outputs_num + Wheel_Disk::m_fm_outputs_num + Wheel_Disk::m_fm_outputs_num;
-    static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;
 
     void add_whls (std::shared_ptr<Wheel_Disk> sptr_whl_fl, std::shared_ptr<Wheel_Disk> sptr_whl_fr,\
     std::shared_ptr<Wheel_Disk> sptr_whl_rl, std::shared_ptr<Wheel_Disk> sptr_whl_rr) 

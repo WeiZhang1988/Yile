@@ -18,7 +18,6 @@
 #include <thread>
 #include <chrono>
 #include "systems/system_sus_2ind.hpp"
-#include "interfaces/interface_sus_2ind.hpp"
 #include "csv.hpp"
 
 using namespace boost::numeric::odeint;
