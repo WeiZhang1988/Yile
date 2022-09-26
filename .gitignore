@@ -6,3 +6,4 @@ LICENSE
 vehicle_*
 *.csv
 houtest/*
+.gutignore

@@ -21,9 +21,27 @@ public:
 	static const int m_derivatives_num = m_con_states_num;
 	static const int m_dis_states_num = Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num;
 
-    void add_whls (std::shared_ptr<Wheel_Disk> sptr_whl_fl, std::shared_ptr<Wheel_Disk> sptr_whl_fr,\
-    std::shared_ptr<Wheel_Disk> sptr_whl_rl, std::shared_ptr<Wheel_Disk> sptr_whl_rr) 
-    {m_sptr_whl_fl=sptr_whl_fl; m_sptr_whl_fr=sptr_whl_fr;m_sptr_whl_rl=sptr_whl_rl; m_sptr_whl_rr=sptr_whl_rr;}
+    Subsys_Wheel_4Disk (\
+	double unloaded_radius_f=0.31, double IYY_f=0.74, double mass_f=5.0,\
+	double br_f=1e-3, double disk_abore_f=0.05, double num_pads_f=2.0, \
+	double Rm_f=0.177, double mu_kinetic_f=0.2, double mu_static_f=0.3, \
+	double init_omega_f=0.0, double init_Pz_f=0.0, double init_vz_f=0.0, \
+	bool init_locked_flag_f=false, \
+    double unloaded_radius_r=0.31, double IYY_r=0.74, double mass_r=5.0,\
+	double br_r=1e-3, double disk_abore_r=0.05, double num_pads_r=2.0, \
+	double Rm_r=0.177, double mu_kinetic_r=0.2, double mu_static_r=0.3, \
+	double init_omega_r=0.0, double init_Pz_r=0.0, double init_vz_r=0.0, \
+	bool init_locked_flag_r=false) {
+        m_whl_fl = Wheel_Disk(unloaded_radius_f, IYY_f, mass_f,br_f, disk_abore_f, num_pads_f, \
+        Rm_f, mu_kinetic_f, mu_static_f, init_omega_f, init_Pz_f, init_vz_f, init_locked_flag_f);
+        m_whl_fr = Wheel_Disk(unloaded_radius_f, IYY_f, mass_f,br_f, disk_abore_f, num_pads_f, \
+        Rm_f, mu_kinetic_f, mu_static_f, init_omega_f, init_Pz_f, init_vz_f, init_locked_flag_f);
+        m_whl_rl = Wheel_Disk(unloaded_radius_r, IYY_r, mass_r,br_r, disk_abore_r, num_pads_r, \
+        Rm_r, mu_kinetic_r, mu_static_r, init_omega_r, init_Pz_r, init_vz_r, init_locked_flag_r);
+        m_whl_rr = Wheel_Disk(unloaded_radius_r, IYY_r, mass_r,br_r, disk_abore_r, num_pads_r, \
+        Rm_r, mu_kinetic_r, mu_static_r, init_omega_r, init_Pz_r, init_vz_r, init_locked_flag_r);
+    };
+
 
     void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
@@ -42,7 +60,7 @@ public:
 	void push_drv (d_vec &derivatives);
 
     private:
-    std::shared_ptr<Wheel_Disk> m_sptr_whl_fl, m_sptr_whl_fr, m_sptr_whl_rl, m_sptr_whl_rr;
+    Wheel_Disk m_whl_fl, m_whl_fr, m_whl_rl, m_whl_rr;
     d_vec m_whl_con_states_fl = d_vec(Wheel_Disk::m_con_states_num, NaN);
     d_vec m_whl_con_states_fr = d_vec(Wheel_Disk::m_con_states_num, NaN);
     d_vec m_whl_con_states_rl = d_vec(Wheel_Disk::m_con_states_num, NaN);
