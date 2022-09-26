@@ -13,26 +13,15 @@
 #ifndef SYSTEM_WHEEL_4DISK_HPP
 #define SYSTEM_WHEEL_4DISK_HPP
 #include "components/common.hpp"
-#include "components/wheel_disk.hpp"
 #include "subsystems/subsystem_whl_4disk.hpp"
 #include "interfaces/interface_whl_4disk.hpp"
 
 namespace NMSPC{
 class Sys_Whl_4Disk {
 public:
-    static const int m_pv_inters_num = 0;
-	static const int m_fm_inters_num = 0;
-
-	static const int m_pv_inputs_num = Subsys_Wheel_4Disk::m_pv_inputs_num - m_pv_inters_num;
-	static const int m_fm_inputs_num = Subsys_Wheel_4Disk::m_fm_inputs_num - m_fm_inters_num;
-	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;
-    static const int m_external_inputs_num = m_inputs_num - m_pv_inters_num - m_fm_inters_num;
 	static const int m_con_states_num = Subsys_Wheel_4Disk::m_con_states_num;						
 	static const int m_derivatives_num = Subsys_Wheel_4Disk::m_derivatives_num;
 	static const int m_dis_states_num = Subsys_Wheel_4Disk::m_dis_states_num;
-	static const int m_pv_outputs_num = Subsys_Wheel_4Disk::m_pv_outputs_num;
-	static const int m_fm_outputs_num = Subsys_Wheel_4Disk::m_fm_outputs_num;
-	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;
 	
 	void add_subsys_whl_4disk(std::shared_ptr<Subsys_Wheel_4Disk> sptr_subsys_whl_4disk) \
     {m_sptr_subsys_whl_4disk = sptr_subsys_whl_4disk;}

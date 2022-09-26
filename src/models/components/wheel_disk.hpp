@@ -17,16 +17,9 @@
 namespace NMSPC{
 class Wheel_Disk {
 public:
-	static const int m_params_num = 9;										//amount of parameters
-	static const int m_pv_inputs_num = 1;									//amount of pv inputs
-	static const int m_fm_inputs_num = 6;									//amount of fm inputs
-	static const int m_inputs_num = m_pv_inputs_num + m_fm_inputs_num;		//amount of inputs
 	static const int m_con_states_num = 4;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 2;									//amount of discrete states;
-	static const int m_pv_outputs_num = 7;									//amount of pv outputs
-	static const int m_fm_outputs_num = 1;									//amount of fm outputs
-	static const int m_outputs_num = m_pv_outputs_num + m_fm_outputs_num;	//amount of outputs
 
 	Wheel_Disk (\
 	double unloaded_radius=0.31, double IYY=0.74, double mass = 5.0,\
