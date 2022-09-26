@@ -22,12 +22,12 @@ public:
 	static const int m_dis_states_num = Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num;
 
     Subsys_Wheel_4Disk (\
-	double unloaded_radius_f=0.31, double IYY_f=0.74, double mass_f=5.0,\
+	double unloaded_radius_f=0.309384029954441, double IYY_f=0.740633832792491, double mass_f=5.0,\
 	double br_f=1e-3, double disk_abore_f=0.05, double num_pads_f=2.0, \
 	double Rm_f=0.177, double mu_kinetic_f=0.2, double mu_static_f=0.3, \
 	double init_omega_f=0.0, double init_Pz_f=0.0, double init_vz_f=0.0, \
 	bool init_locked_flag_f=false, \
-    double unloaded_radius_r=0.31, double IYY_r=0.74, double mass_r=5.0,\
+    double unloaded_radius_r=0.309384029954441, double IYY_r=0.740633832792491, double mass_r=5.0,\
 	double br_r=1e-3, double disk_abore_r=0.05, double num_pads_r=2.0, \
 	double Rm_r=0.177, double mu_kinetic_r=0.2, double mu_static_r=0.3, \
 	double init_omega_r=0.0, double init_Pz_r=0.0, double init_vz_r=0.0, \

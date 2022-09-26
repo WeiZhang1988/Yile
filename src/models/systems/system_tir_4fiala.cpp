@@ -51,7 +51,47 @@ void NMSPC::Sys_Tir_4Fiala::update_drv() {
 }
 
 void NMSPC::Sys_Tir_4Fiala::store_data() {
-	m_sptr_store->push_back(d_vec{m_sptr_interface->m_Sus_TirFx_fl, m_sptr_interface->m_Sus_TirFy_fl, m_sptr_interface->m_Sus_TirFz_fl, m_sptr_interface->m_Tir_Fx_fl, m_sptr_interface->m_Tir_Fy_fl, m_sptr_interface->m_Tir_Fz_fl, m_sptr_interface->m_Tir_Mx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Tir_Mz_fl});
+	m_sptr_store->push_back(d_vec{
+		m_sptr_interface->m_Sus_TirFx_fl, 
+		m_sptr_interface->m_Sus_TirFy_fl, 
+		m_sptr_interface->m_Sus_TirFz_fl, 
+		m_sptr_interface->m_Tir_Fx_fl, 
+		m_sptr_interface->m_Tir_Fy_fl, 
+		m_sptr_interface->m_Tir_Fz_fl, 
+		m_sptr_interface->m_Tir_Mx_fl, 
+		m_sptr_interface->m_Tir_My_fl, 
+		m_sptr_interface->m_Tir_Mz_fl,
+
+		m_sptr_interface->m_Sus_TirFx_fr, 
+		m_sptr_interface->m_Sus_TirFy_fr, 
+		m_sptr_interface->m_Sus_TirFz_fr, 
+		m_sptr_interface->m_Tir_Fx_fr, 
+		m_sptr_interface->m_Tir_Fy_fr, 
+		m_sptr_interface->m_Tir_Fz_fr, 
+		m_sptr_interface->m_Tir_Mx_fr, 
+		m_sptr_interface->m_Tir_My_fr, 
+		m_sptr_interface->m_Tir_Mz_fr,
+
+		m_sptr_interface->m_Sus_TirFx_rl, 
+		m_sptr_interface->m_Sus_TirFy_rl, 
+		m_sptr_interface->m_Sus_TirFz_rl, 
+		m_sptr_interface->m_Tir_Fx_rl, 
+		m_sptr_interface->m_Tir_Fy_rl, 
+		m_sptr_interface->m_Tir_Fz_rl, 
+		m_sptr_interface->m_Tir_Mx_rl, 
+		m_sptr_interface->m_Tir_My_rl, 
+		m_sptr_interface->m_Tir_Mz_rl,
+
+		m_sptr_interface->m_Sus_TirFx_rr, 
+		m_sptr_interface->m_Sus_TirFy_rr, 
+		m_sptr_interface->m_Sus_TirFz_rr, 
+		m_sptr_interface->m_Tir_Fx_rr, 
+		m_sptr_interface->m_Tir_Fy_rr, 
+		m_sptr_interface->m_Tir_Fz_rr, 
+		m_sptr_interface->m_Tir_Mx_rr, 
+		m_sptr_interface->m_Tir_My_rr, 
+		m_sptr_interface->m_Tir_Mz_rr
+		});
 }
 
 void NMSPC::Sys_Tir_4Fiala::operator() (const d_vec &x, d_vec &dxdt, const double &t) {

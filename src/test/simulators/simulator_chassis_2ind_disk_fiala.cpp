@@ -108,7 +108,7 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
 						m_sptr_interface->m_Ext_Mz_ext\
 		);
 			
-			/*(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr, \
+		/*(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr, \
     	m_sptr_interface->m_Gnd_scale_fl, m_sptr_interface->m_Tir_Prs_fl, m_sptr_interface->m_Air_Tamb_fl, \
         m_sptr_interface->m_Gnd_scale_fr, m_sptr_interface->m_Tir_Prs_fr, m_sptr_interface->m_Air_Tamb_fr, \
         m_sptr_interface->m_Gnd_scale_rl, m_sptr_interface->m_Tir_Prs_rl, m_sptr_interface->m_Air_Tamb_rl, \
@@ -119,7 +119,7 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
         m_sptr_interface->m_Ext_Mx_ext, m_sptr_interface->m_Ext_My_ext, m_sptr_interface->m_Ext_Mz_ext, \
         m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fr, m_sptr_interface->m_Brk_Prs_fr, \
         m_sptr_interface->m_Axl_Trq_rl, m_sptr_interface->m_Brk_Prs_rl, m_sptr_interface->m_Axl_Trq_rr, m_sptr_interface->m_Brk_Prs_rr, \
-        m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Strg_str_rl, m_sptr_interface->m_Strg_str_rr); 
+        m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Strg_str_rl, m_sptr_interface->m_Strg_str_rr);*/ 
 		m_sptr_sys->push_con_states_omega_only(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
 
