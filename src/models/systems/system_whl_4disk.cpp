@@ -44,7 +44,43 @@ void NMSPC::Sys_Whl_4Disk::update_drv() {
 }
 
 void NMSPC::Sys_Whl_4Disk::store_data() {
-	m_sptr_store->push_back(d_vec{m_sptr_interface->m_Tir_omega_fl, m_sptr_interface->m_Sus_TirPz_fl, m_sptr_interface->m_Sus_Tirvz_fl, m_sptr_interface->m_Tir_Pz_fl, m_sptr_interface->m_Tir_vz_fl, m_sptr_interface->m_Tir_rhoz_fl, m_sptr_interface->m_Tir_Re_fl, m_sptr_interface->m_Brk_Trq_fl});
+	m_sptr_store->push_back(d_vec{
+		m_sptr_interface->m_Tir_omega_fl, 
+		m_sptr_interface->m_Sus_TirPz_fl, 
+		m_sptr_interface->m_Sus_Tirvz_fl,
+		m_sptr_interface->m_Tir_Pz_fl, 
+		m_sptr_interface->m_Tir_vz_fl, 
+		m_sptr_interface->m_Tir_rhoz_fl, 
+		m_sptr_interface->m_Tir_Re_fl, 
+		m_sptr_interface->m_Brk_Trq_fl,
+
+		m_sptr_interface->m_Tir_omega_fr, 
+		m_sptr_interface->m_Sus_TirPz_fr, 
+		m_sptr_interface->m_Sus_Tirvz_fr,
+		m_sptr_interface->m_Tir_Pz_fr, 
+		m_sptr_interface->m_Tir_vz_fr, 
+		m_sptr_interface->m_Tir_rhoz_fr, 
+		m_sptr_interface->m_Tir_Re_fr, 
+		m_sptr_interface->m_Brk_Trq_fr,
+
+		m_sptr_interface->m_Tir_omega_rl, 
+		m_sptr_interface->m_Sus_TirPz_rl, 
+		m_sptr_interface->m_Sus_Tirvz_rl,
+		m_sptr_interface->m_Tir_Pz_rl, 
+		m_sptr_interface->m_Tir_vz_rl, 
+		m_sptr_interface->m_Tir_rhoz_rl, 
+		m_sptr_interface->m_Tir_Re_rl, 
+		m_sptr_interface->m_Brk_Trq_rl,
+
+		m_sptr_interface->m_Tir_omega_rr, 
+		m_sptr_interface->m_Sus_TirPz_rr, 
+		m_sptr_interface->m_Sus_Tirvz_rr,
+		m_sptr_interface->m_Tir_Pz_rr, 
+		m_sptr_interface->m_Tir_vz_rr, 
+		m_sptr_interface->m_Tir_rhoz_rr, 
+		m_sptr_interface->m_Tir_Re_rr, 
+		m_sptr_interface->m_Brk_Trq_rr
+		});
 }
 
 void NMSPC::Sys_Whl_4Disk::operator() (const d_vec &x, d_vec &dxdt, const double &t) {

@@ -30,14 +30,14 @@ public:
 	double strg_hgt_slp_f=0.1432,\
 	double as_R_f=0.2, double as_ntrl_ang_f=0.5236, double as_trsK_f=8e2, \
 	bool has_anti_sway_f=true, bool is_strg_f=true, \
-	double F0z_r=2886.0, double Kz_r=52451.006579283188, double Cz_r=5565.226438019838, \
+	double F0z_r=2907.0, double Kz_r=52451.006579283188, double Cz_r=5565.226438019838, \
 	double Hmax_r=0.25, double roll_strg_H_slp_r=-0.2269, \
 	double toe_r=0.0349, double toe_strg_slp_r=0.01, \
 	double caster_r=0.0698, double caster_H_slp_r=-0.2269, double caster_strg_slp_r=0.01, \
 	double camber_r=0.0698, double camber_H_slp_r=-0.2269, double camber_strg_slp_r=0.01, \
 	double strg_hgt_slp_r=0.1432,\
 	double as_R_r=0.2, double as_ntrl_ang_r=0.5236, double as_trsK_r=8e2, \
-	bool has_anti_sway_r=true, bool is_strg_r=true)
+	bool has_anti_sway_r=false, bool is_strg_r=false)
 	{	
 		m_sus_f = Sus_Ind_2Tracks(F0z_f, Kz_f, Cz_f, \
 		Hmax_f, roll_strg_H_slp_f, \
