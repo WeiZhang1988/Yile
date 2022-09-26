@@ -54,6 +54,8 @@ public:
 			}
 	}
 
+	Sus_Ind_2Tracks &operator= (const Sus_Ind_2Tracks &org);
+
 	void push_con_states (d_vec &con_states) {};
 	void pull_con_states (const d_vec &con_states) {};
 

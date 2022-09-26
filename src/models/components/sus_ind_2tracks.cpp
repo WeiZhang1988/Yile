@@ -12,6 +12,47 @@
 // =============================================================================
 #include "sus_ind_2tracks.hpp"
 
+NMSPC::Sus_Ind_2Tracks &NMSPC::Sus_Ind_2Tracks::operator= (const Sus_Ind_2Tracks &org) {
+    m_F0z_l = org.m_F0z_l;
+	m_Kz_l = org.m_Kz_l;
+	m_Cz_l = org.m_Cz_l ;
+	m_Hmax_l = org.m_Hmax_l;
+	m_roll_strg_H_slp_l = org.m_roll_strg_H_slp_l;
+	m_toe_l = org.m_toe_l;
+	m_toe_strg_slp_l = org.m_toe_strg_slp_l;
+	m_caster_l = org.m_caster_l; 
+	m_caster_H_slp_l = org.m_caster_H_slp_l;
+	m_caster_strg_slp_l = org.m_caster_strg_slp_l;
+	m_camber_l = org.m_camber_l;
+	m_camber_H_slp_l = org.m_camber_H_slp_l;
+	m_camber_strg_slp_l = org.m_camber_strg_slp_l;
+	m_strg_hgt_slp_l = org.m_strg_hgt_slp_l;
+	m_F0z_r = org.m_F0z_r;
+	m_Kz_r = org.m_Kz_r;
+	m_Cz_r = org.m_Cz_r;
+	m_Hmax_r = org.m_Hmax_r;
+	m_roll_strg_H_slp_r = org.m_roll_strg_H_slp_r;
+	m_toe_r = org.m_toe_r; 
+	m_toe_strg_slp_r = org.m_toe_strg_slp_r;
+	m_caster_r = org.m_caster_r;
+	m_caster_H_slp_r = org.m_caster_H_slp_r;
+	m_caster_strg_slp_r = org.m_caster_strg_slp_r;
+	m_camber_r = org.m_camber_r;
+	m_camber_H_slp_r = org.m_camber_H_slp_r;
+	m_camber_strg_slp_r = org.m_camber_strg_slp_r;
+	m_strg_hgt_slp_r = org.m_strg_hgt_slp_r;
+	m_as_R = org.m_as_R;
+	m_as_ntrl_ang = org.m_as_ntrl_ang;
+	m_as_trsK = org.m_as_trsK;
+	m_has_anti_sway = org.m_has_anti_sway;
+	m_is_strg = org.m_is_strg;
+	if (!m_is_strg) {
+		m_strg_hgt_slp_l = 0.0;
+		m_strg_hgt_slp_r = 0.0;
+	}
+    return *this;
+}
+
 void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Veh_r, const double &Strg_str_l, const double &Sus_TirPz_l, const double &Sus_Tirvz_l,	const double &Tir_Re_l, \
 	const double &Veh_Pz_l, const double &Veh_vx_l, const double &Veh_vy_l, const double &Veh_vz_l, \
 	const double &Strg_str_r, const double &Sus_TirPz_r, const double &Sus_Tirvz_r,	const double &Tir_Re_r, \
