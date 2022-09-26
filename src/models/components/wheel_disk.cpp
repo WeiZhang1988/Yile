@@ -12,6 +12,24 @@
 // =============================================================================
 #include "wheel_disk.hpp"
 
+NMSPC::Wheel_Disk &NMSPC::Wheel_Disk::operator= (const Wheel_Disk &org) {
+    m_unloaded_radius = org.m_unloaded_radius;
+    m_IYY = org.m_IYY;
+    m_mass = org.m_mass;
+    m_br = org.m_br;
+    m_disk_abore = org.m_disk_abore;
+    m_num_pads = org.m_num_pads;
+	m_Rm = org.m_Rm;
+    m_mu_kinetic = org.m_mu_kinetic;
+    m_mu_static = org.m_mu_static;
+	m_unlocked_omega = org.m_unlocked_omega;
+    m_unlocked_omega_pre = org.m_unlocked_omega_pre;
+	m_Tir_Pz = org.m_Tir_Pz;
+    m_Tir_vz = org.m_Tir_vz;
+	m_locked_flag = org.m_locked_flag;
+    return *this;
+}
+
 void NMSPC::Wheel_Disk::push_con_states(d_vec &con_states) {
 	con_states[0] = m_unlocked_omega;
     con_states[1] = m_Tir_Pz;

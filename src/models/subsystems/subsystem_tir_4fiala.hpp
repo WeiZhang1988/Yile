@@ -21,9 +21,45 @@ public:
 	static const int m_derivatives_num = m_con_states_num;
 	static const int m_dis_states_num = Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num;
 
-    void add_tirs (std::shared_ptr<Tire_Fiala> sptr_tir_fl, std::shared_ptr<Tire_Fiala> sptr_tir_fr,\
-    std::shared_ptr<Tire_Fiala> sptr_tir_rl, std::shared_ptr<Tire_Fiala> sptr_tir_rr) 
-    {m_sptr_tir_fl=sptr_tir_fl; m_sptr_tir_fr=sptr_tir_fr;m_sptr_tir_rl=sptr_tir_rl; m_sptr_tir_rr=sptr_tir_rr;}
+    Subsys_Tire_4Fiala (double Lrelx_f=0.05, double Lrely_f=0.15, \
+	double alpha_min_f=-1.5708, double alpha_max_f=1.5708, double mu_min_f=0.8, \
+	double mu_max_f=1.0, double aMy_f=8e-4, double bMy_f=1e-3, \
+	double cMy_f=1.6e-4, double alphaMy_f=-3e-3, double betaMy_f=0.97, \
+	double Fz_min_f=100.0, double Fz_max_f=1e4, double cKappa_f=1e7, \
+	double cAlpha_f=4.5e4, double bMz_f=0.0, double width_f=0.209, \
+	double cGamma_f=0.0, \
+	double init_kappa_f=0.0, double init_alpha_f=0.0, \
+	double init_Mroll_f=0.0, \
+    double Lrelx_r=0.05, double Lrely_r=0.15, \
+	double alpha_min_r=-1.5708, double alpha_max_r=1.5708, double mu_min_r=0.8, \
+	double mu_max_r=1.0, double aMy_r=8e-4, double bMy_r=1e-3, \
+	double cMy_r=1.6e-4, double alphaMy_r=-3e-3, double betaMy_r=0.97, \
+	double Fz_min_r=100.0, double Fz_max_r=1e4, double cKappa_r=1e7, \
+	double cAlpha_r=4.5e4, double bMz_r=0.0, double width_r=0.209, \
+	double cGamma_r=0.0, \
+	double init_kappa_r=0.0, double init_alpha_r=0.0, \
+	double init_Mroll_r=0.0) {
+        m_tir_fl = Tire_Fiala(Lrelx_f, Lrely_f, \
+        alpha_min_f, alpha_max_f, mu_min_f, mu_max_f, \
+        aMy_f, bMy_f, cMy_f, alphaMy_f, betaMy_f, Fz_min_f, Fz_max_f, \
+        cKappa_f, cAlpha_f, bMz_f, width_f, cGamma_f, \
+        init_kappa_f, init_alpha_f, init_Mroll_f);
+        m_tir_fr = Tire_Fiala(Lrelx_f, Lrely_f, \
+        alpha_min_f, alpha_max_f, mu_min_f, mu_max_f, \
+        aMy_f, bMy_f, cMy_f, alphaMy_f, betaMy_f, Fz_min_f, Fz_max_f, \
+        cKappa_f, cAlpha_f, bMz_f, width_f, cGamma_f, \
+        init_kappa_f, init_alpha_f, init_Mroll_f);
+        m_tir_rl = Tire_Fiala(Lrelx_r, Lrely_r, \
+        alpha_min_r, alpha_max_r, mu_min_r, mu_max_r, \
+        aMy_r, bMy_r, cMy_r, alphaMy_r, betaMy_r, Fz_min_r, Fz_max_r, \
+        cKappa_r, cAlpha_r, bMz_r, width_r, cGamma_r, \
+        init_kappa_r, init_alpha_r, init_Mroll_r);
+        m_tir_rr = Tire_Fiala(Lrelx_r, Lrely_r, \
+        alpha_min_r, alpha_max_r, mu_min_r, mu_max_r, \
+        aMy_r, bMy_r, cMy_r, alphaMy_r, betaMy_r, Fz_min_r, Fz_max_r, \
+        cKappa_r, cAlpha_r, bMz_r, width_r, cGamma_r, \
+        init_kappa_r, init_alpha_r, init_Mroll_r);
+    };
 
     void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
@@ -49,7 +85,7 @@ public:
 	void push_drv (d_vec &derivatives);
 
     private:
-    std::shared_ptr<Tire_Fiala> m_sptr_tir_fl, m_sptr_tir_fr, m_sptr_tir_rl, m_sptr_tir_rr;
+    Tire_Fiala m_tir_fl, m_tir_fr, m_tir_rl, m_tir_rr;
     d_vec m_tir_con_states_fl = d_vec(Tire_Fiala::m_con_states_num, NaN);
     d_vec m_tir_con_states_fr = d_vec(Tire_Fiala::m_con_states_num, NaN);
     d_vec m_tir_con_states_rl = d_vec(Tire_Fiala::m_con_states_num, NaN);
