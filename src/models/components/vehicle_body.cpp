@@ -400,7 +400,6 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_phai = m_p + (m_q * m_sin_phai + m_r * m_cos_phai) * m_sin_theta / m_cos_theta;
 	m_drv_theta = m_q * m_cos_phai - m_r * m_sin_phai;
 	m_drv_psi = (m_q * m_sin_phai + m_r * m_cos_phai) / m_cos_theta;
-
 	double tmpRes1_x = m_Ibar_xx * m_p + m_Ibar_xy * m_q + m_Ibar_xz * m_r;
 	double tmpRes1_y = m_Ibar_yx * m_p + m_Ibar_yy * m_q + m_Ibar_yz * m_r;
 	double tmpRes1_z = m_Ibar_zx * m_p + m_Ibar_zy * m_q + m_Ibar_zz * m_r;
@@ -423,16 +422,16 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_r = invIbar_xz * tmpRes2_x + invIbar_yz * tmpRes2_y + invIbar_zz * tmpRes2_z;
 	
 	//push outputs
-	derivatives[0] = m_drv_xe_x;
-	derivatives[1] = m_drv_xe_y;
-	derivatives[2] = m_drv_xe_z;
-	derivatives[3] = m_drv_vb_x;
-	derivatives[4] = m_drv_vb_y;
-	derivatives[5] = m_drv_vb_z;
-	derivatives[6] = m_drv_phai;
-	derivatives[7] = m_drv_theta;
-	derivatives[8] = m_drv_psi;
-	derivatives[9] = m_drv_p;
+	derivatives[0] 	= m_drv_xe_x;
+	derivatives[1] 	= m_drv_xe_y;
+	derivatives[2] 	= m_drv_xe_z;
+	derivatives[3] 	= m_drv_vb_x;
+	derivatives[4] 	= m_drv_vb_y;
+	derivatives[5] 	= m_drv_vb_z;
+	derivatives[6] 	= m_drv_phai;
+	derivatives[7] 	= m_drv_theta;
+	derivatives[8] 	= m_drv_psi;
+	derivatives[9] 	= m_drv_p;
 	derivatives[10] = m_drv_q;
 	derivatives[11] = m_drv_r;
 }

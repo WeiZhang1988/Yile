@@ -54,10 +54,6 @@ void NMSPC::Sys_Sus_2Ind::update_drv() {
 }
 
 void NMSPC::Sys_Sus_2Ind::store_data() {
-	
-	//double m_Sus_str_fl   = NaN;            //to tire
-    //double m_Sus_gamma_fl = NaN;            //to tire
-    //double m_Sus_caster_fl= NaN; 
 	m_sptr_store->push_back(d_vec{	m_sptr_interface->m_Sus_VehFx_fl, 
 									m_sptr_interface->m_Sus_VehFy_fl, 
 									m_sptr_interface->m_Sus_VehFz_fl, 
