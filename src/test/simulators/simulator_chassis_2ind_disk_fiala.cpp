@@ -24,25 +24,12 @@ Simulator_Chassis_2Ind_Disk_Fiala::Simulator_Chassis_2Ind_Disk_Fiala(double t_st
 	m_sptr_interface    = make_shared<Int_Chassis_2Ind_Disk_Fiala>();
     shared_ptr<Vehicle_Body> sptr_vhl_bdy               = make_shared<Vehicle_Body>();
     shared_ptr<Subsys_Wheel_4Disk> sptr_sub_whl_4disk   = make_shared<Subsys_Wheel_4Disk>();
-    shared_ptr<Wheel_Disk> sptr_whl_fl                  = make_shared<Wheel_Disk>();
-	shared_ptr<Wheel_Disk> sptr_whl_fr                  = make_shared<Wheel_Disk>();
-	shared_ptr<Wheel_Disk> sptr_whl_rl                  = make_shared<Wheel_Disk>();
-	shared_ptr<Wheel_Disk> sptr_whl_rr                  = make_shared<Wheel_Disk>();
 	shared_ptr<Subsys_Sus_2Ind> sptr_sub_sus_2ind       = make_shared<Subsys_Sus_2Ind>();
-    shared_ptr<Sus_Ind_2Tracks> sptr_sus_f              = make_shared<Sus_Ind_2Tracks>();
-	shared_ptr<Sus_Ind_2Tracks> sptr_sus_r              = make_shared<Sus_Ind_2Tracks>();
     shared_ptr<Subsys_Tire_4Fiala> sptr_sub_tir_4fiala  = make_shared<Subsys_Tire_4Fiala>();
-    shared_ptr<Tire_Fiala> sptr_tir_fl                  = make_shared<Tire_Fiala>();
-	shared_ptr<Tire_Fiala> sptr_tir_fr                  = make_shared<Tire_Fiala>();
-	shared_ptr<Tire_Fiala> sptr_tir_rl                  = make_shared<Tire_Fiala>();
-	shared_ptr<Tire_Fiala> sptr_tir_rr                  = make_shared<Tire_Fiala>();
  
     m_sptr_sys->add_vhl_bdy(sptr_vhl_bdy);
-    sptr_sub_whl_4disk->add_whls(sptr_whl_fl,sptr_whl_fr,sptr_whl_rl,sptr_whl_rr);
 	m_sptr_sys->add_subsys_whl_4disk(sptr_sub_whl_4disk);
-    sptr_sub_sus_2ind->add_suses(sptr_sus_f, sptr_sus_r);
 	m_sptr_sys->add_subsys_sus_2ind(sptr_sub_sus_2ind);
-    sptr_sub_tir_4fiala->add_tirs(sptr_tir_fl,sptr_tir_fr,sptr_tir_rl,sptr_tir_rr);
 	m_sptr_sys->add_subsys_tir_4fiala(sptr_sub_tir_4fiala);
 
     m_sptr_sys->add_interface(m_sptr_interface);
@@ -50,16 +37,78 @@ Simulator_Chassis_2Ind_Disk_Fiala::Simulator_Chassis_2Ind_Disk_Fiala(double t_st
 }
 
 void Simulator_Chassis_2Ind_Disk_Fiala::run () {
-	io::CSVReader<38> m_inputs("sus_test_result/sus_2ind_ramp_inputs.csv"); //need modification
+	io::CSVReader<38> m_inputs("chassis_2ind_wheels/14dof_inputs.csv"); //need modification
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
 
 	m_tp_start = steady_clock::now();
+	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
-		m_inputs.read_row(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr, \
+		m_inputs.read_row(
+						//1-WhlAng 0000
+						m_sptr_interface->m_Strg_str_fl, 
+						m_sptr_interface->m_Strg_str_fr, 
+						m_sptr_interface->m_Strg_str_rl, 
+						m_sptr_interface->m_Strg_str_rr,\
+						
+						//2-AxlTrq 0000
+						m_sptr_interface->m_Axl_Trq_fl, 
+						m_sptr_interface->m_Axl_Trq_fr, 
+						m_sptr_interface->m_Axl_Trq_rl,
+						m_sptr_interface->m_Axl_Trq_rr, \
+						
+						//3-BrkPrs 0000
+						m_sptr_interface->m_Brk_Prs_fl, 
+						m_sptr_interface->m_Brk_Prs_fr, 
+						m_sptr_interface->m_Brk_Prs_rl, 
+						m_sptr_interface->m_Brk_Prs_rr, \
+						
+						//4-WindXYZ 000
+						m_sptr_interface->m_Air_Wx, 
+						m_sptr_interface->m_Air_Wy, 
+						m_sptr_interface->m_Air_Wz, \
+						
+						//5-Ground 0000
+						m_sptr_interface->m_Gnd_Pz_fl, 
+						m_sptr_interface->m_Gnd_Pz_fr, 
+						m_sptr_interface->m_Gnd_Pz_rl, 
+						m_sptr_interface->m_Gnd_Pz_rr, \
+						
+						//6-Friction 1
+						m_sptr_interface->m_Gnd_scale_fl,
+						m_sptr_interface->m_Gnd_scale_fr, 
+						m_sptr_interface->m_Gnd_scale_rl, 
+						m_sptr_interface->m_Gnd_scale_rr, \
+						
+						//Other-parameters 220000
+						m_sptr_interface->m_Tir_Prs_fl, 
+						m_sptr_interface->m_Tir_Prs_fr, 
+						m_sptr_interface->m_Tir_Prs_rl, 
+						m_sptr_interface->m_Tir_Prs_rr, \
+						
+						// Air temperature Constant: Tair=273
+						m_sptr_interface->m_Air_Tair,
+						
+						// Tire temperature Constant: Tamb=0
+						m_sptr_interface->m_Air_Tamb_fl, 
+						m_sptr_interface->m_Air_Tamb_fr, 
+						m_sptr_interface->m_Air_Tamb_rl, 
+						m_sptr_interface->m_Air_Tamb_rr, \
+						
+						//000
+						m_sptr_interface->m_Ext_Fx_ext, 
+						m_sptr_interface->m_Ext_Fy_ext, 
+						m_sptr_interface->m_Ext_Fz_ext, 
+						//000
+						m_sptr_interface->m_Ext_Mx_ext, 
+						m_sptr_interface->m_Ext_My_ext,
+						m_sptr_interface->m_Ext_Mz_ext\
+		);
+			
+			/*(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr, \
     	m_sptr_interface->m_Gnd_scale_fl, m_sptr_interface->m_Tir_Prs_fl, m_sptr_interface->m_Air_Tamb_fl, \
         m_sptr_interface->m_Gnd_scale_fr, m_sptr_interface->m_Tir_Prs_fr, m_sptr_interface->m_Air_Tamb_fr, \
         m_sptr_interface->m_Gnd_scale_rl, m_sptr_interface->m_Tir_Prs_rl, m_sptr_interface->m_Air_Tamb_rl, \
@@ -71,7 +120,7 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
         m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fr, m_sptr_interface->m_Brk_Prs_fr, \
         m_sptr_interface->m_Axl_Trq_rl, m_sptr_interface->m_Brk_Prs_rl, m_sptr_interface->m_Axl_Trq_rr, m_sptr_interface->m_Brk_Prs_rr, \
         m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Strg_str_rl, m_sptr_interface->m_Strg_str_rr); 
-		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
+		m_sptr_sys->push_con_states_omega_only(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
 
 		t += m_t_step;

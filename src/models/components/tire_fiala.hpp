@@ -41,6 +41,8 @@ public:
 	m_kappa(init_kappa), m_alpha_prime(init_alpha), \
 	m_Mroll(init_Mroll) {}
 
+	Tire_Fiala &operator= (const Tire_Fiala &org);
+
 	void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
 

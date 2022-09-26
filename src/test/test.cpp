@@ -42,7 +42,7 @@ void run_Whl_4Disk() {
 
 void run_Tir_4Fiala() {
 	std::ofstream of;
-	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,10.0,1e-4);
+	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,10.0,1e-3/4);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -115,7 +115,7 @@ void run_Chassis_2Ind_Disk_Fiala() {
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
-			of<<std::setw(30)<<std::setprecision(7)<<item<<',';
+			of<<std::setprecision(7)<<item<<',';
 		}
 		of<<std::endl;
 	}

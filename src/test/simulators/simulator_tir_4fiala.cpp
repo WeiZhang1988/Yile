@@ -23,12 +23,7 @@ Simulator_Tir_4Fiala::Simulator_Tir_4Fiala(double t_start, double t_end, double 
 	m_sptr_store = make_shared<d_v_vec>();
 	m_sptr_interface = make_shared<Int_Tir_4Fiala>();
 	shared_ptr<Subsys_Tire_4Fiala> sptr_sub_tir_4fiala = make_shared<Subsys_Tire_4Fiala>();
-    shared_ptr<Tire_Fiala> sptr_tir_fl = make_shared<Tire_Fiala>();
-	shared_ptr<Tire_Fiala> sptr_tir_fr = make_shared<Tire_Fiala>();
-	shared_ptr<Tire_Fiala> sptr_tir_rl = make_shared<Tire_Fiala>();
-	shared_ptr<Tire_Fiala> sptr_tir_rr = make_shared<Tire_Fiala>();
  
-    sptr_sub_tir_4fiala->add_tirs(sptr_tir_fl,sptr_tir_fr,sptr_tir_rl,sptr_tir_rr);
 	m_sptr_sys->add_subsys_tir_4fiala(sptr_sub_tir_4fiala);
 	m_sptr_sys->add_interface(m_sptr_interface);
 	m_sptr_sys->add_store(m_sptr_store);
