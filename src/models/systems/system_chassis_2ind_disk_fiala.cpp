@@ -137,6 +137,16 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::update_drv() {
 	m_sptr_subsys_whl_4disk->push_drv(m_subsys_whl_4disk_drvs);
 	m_sptr_subsys_sus_2ind->push_drv(m_subsys_sus_2ind_drvs);
 	m_sptr_subsys_tir_4fiala->push_drv(m_subsys_tir_4fiala_drvs);
+	std::copy(m_vhl_bdy_drvs.begin(),m_vhl_bdy_drvs.end(),m_drvs.begin());
+	std::copy(m_subsys_whl_4disk_drvs.begin(),m_subsys_whl_4disk_drvs.end(),m_drvs.begin() + \
+	Vehicle_Body::m_derivative_num);
+	std::copy(m_subsys_sus_2ind_drvs.begin(),m_subsys_sus_2ind_drvs.end(),m_drvs.begin() + \
+	Vehicle_Body::m_derivative_num + \
+	Subsys_Wheel_4Disk::m_derivative_num);
+	std::copy(m_subsys_tir_4fiala_drvs.begin(),m_subsys_tir_4fiala_drvs.end(),m_drvs.begin() + \
+	Vehicle_Body::m_derivative_num + \
+	Subsys_Wheel_4Disk::m_derivative_num + \
+	Subsys_Sus_2Ind::m_derivative_num);
 }
 
 void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {

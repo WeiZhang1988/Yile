@@ -12,6 +12,31 @@
 // =============================================================================
 #include "tire_fiala.hpp"
 
+NMSPC::Tire_Fiala &NMSPC::Tire_Fiala::operator= (const Tire_Fiala &org) {
+    m_Lrelx = org.m_Lrelx;
+	m_Lrely = org.m_Lrely;
+	m_alpha_min = org.m_alpha_min;
+	m_alpha_max = org.m_alpha_max;
+	m_mu_min = org.m_mu_min;
+	m_mu_max = org.m_mu_max;
+	m_aMy = org.m_aMy;
+	m_bMy = org.m_bMy;
+	m_cMy = org.m_cMy;
+	m_alphaMy = org.m_alphaMy;
+	m_betaMy = org.m_betaMy;
+	m_Fz_min = org.m_Fz_min;
+	m_Fz_max = org.m_Fz_max;
+	m_cKappa = org.m_cKappa;
+	m_cAlpha = org.m_cAlpha;
+	m_bMz = org.m_bMz;
+	m_width = org.m_width;
+	m_cGamma = org.m_cGamma;
+	m_kappa = org.m_kappa;
+	m_alpha_prime = org.m_alpha_prime;
+	m_Mroll = org.m_Mroll;
+    return *this;
+}
+
 void NMSPC::Tire_Fiala::push_con_states(d_vec &con_states) {
 	con_states[0] = m_kappa;
 	con_states[1] = m_alpha_prime;

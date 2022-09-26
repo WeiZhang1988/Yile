@@ -17,12 +17,12 @@
 namespace NMSPC{
 class Wheel_Disk {
 public:
-	static const int m_con_states_num = 4;									//amount of continuous states;
+	static const int m_con_states_num  = 4;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
-	static const int m_dis_states_num = 2;									//amount of discrete states;
+	static const int m_dis_states_num  = 2;									//amount of discrete states;
 
 	Wheel_Disk (\
-	double unloaded_radius=0.31, double IYY=0.74, double mass = 5.0,\
+	double unloaded_radius=0.31, double IYY=0.74, double mass=5.0,\
 	double br=1e-3, double disk_abore=0.05, double num_pads=2.0, \
 	double Rm=0.177, double mu_kinetic=0.2, double mu_static=0.3, \
 	double init_omega=0.0, double init_Pz=0.0, double init_vz=0.0, \
@@ -33,6 +33,8 @@ public:
 	m_unlocked_omega(init_omega), m_unlocked_omega_pre(init_omega), \
 	m_Tir_Pz(init_Pz), m_Tir_vz(init_vz), \
 	m_locked_flag(init_locked_flag) {};
+
+	Wheel_Disk &operator= (const Wheel_Disk &org);
 
 	void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
