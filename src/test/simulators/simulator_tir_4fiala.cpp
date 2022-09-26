@@ -30,7 +30,7 @@ Simulator_Tir_4Fiala::Simulator_Tir_4Fiala(double t_start, double t_end, double 
 }
 
 void Simulator_Tir_4Fiala::run () {
-	io::CSVReader<13> m_inputs("data/inputs/14dof_tir_input_4.csv");
+	io::CSVReader<13> m_inputs("data/inputs/14dof_tir_input_3.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;

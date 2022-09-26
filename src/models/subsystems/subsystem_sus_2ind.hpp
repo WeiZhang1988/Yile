@@ -22,7 +22,40 @@ public:
 	static const int m_derivatives_num = m_con_states_num;
 	static const int m_dis_states_num = Sus_Ind_2Tracks::m_dis_states_num + Sus_Ind_2Tracks::m_dis_states_num;
 
-    void add_suses(std::shared_ptr<Sus_Ind_2Tracks> sptr_sus_f, std::shared_ptr<Sus_Ind_2Tracks> sptr_sus_r) {m_sptr_sus_f=sptr_sus_f; m_sptr_sus_r=sptr_sus_r;}
+	Subsys_Sus_2Ind (double F0z_f=2886.0, double Kz_f=52451.006579283188, double Cz_f=5565.226438019838, \
+	double Hmax_f=0.25, double roll_strg_H_slp_f=-0.2269, \
+	double toe_f=0.0349, double toe_strg_slp_f=0.01, \
+	double caster_f=0.0698, double caster_H_slp_f=-0.2269, double caster_strg_slp_f=0.01, \
+	double camber_f=0.0698, double camber_H_slp_f=-0.2269, double camber_strg_slp_f=0.01, \
+	double strg_hgt_slp_f=0.1432,\
+	double as_R_f=0.2, double as_ntrl_ang_f=0.5236, double as_trsK_f=8e2, \
+	bool has_anti_sway_f=true, bool is_strg_f=true, \
+	double F0z_r=2886.0, double Kz_r=52451.006579283188, double Cz_r=5565.226438019838, \
+	double Hmax_r=0.25, double roll_strg_H_slp_r=-0.2269, \
+	double toe_r=0.0349, double toe_strg_slp_r=0.01, \
+	double caster_r=0.0698, double caster_H_slp_r=-0.2269, double caster_strg_slp_r=0.01, \
+	double camber_r=0.0698, double camber_H_slp_r=-0.2269, double camber_strg_slp_r=0.01, \
+	double strg_hgt_slp_r=0.1432,\
+	double as_R_r=0.2, double as_ntrl_ang_r=0.5236, double as_trsK_r=8e2, \
+	bool has_anti_sway_r=true, bool is_strg_r=true)
+	{	
+		m_sus_f = Sus_Ind_2Tracks(F0z_f, Kz_f, Cz_f, \
+		Hmax_f, roll_strg_H_slp_f, \
+		toe_f, toe_strg_slp_f, \
+		caster_f, caster_H_slp_f, caster_strg_slp_f, \
+		camber_f, camber_H_slp_f, camber_strg_slp_f, \
+		strg_hgt_slp_f,\
+		as_R_f, as_ntrl_ang_f, as_trsK_f, \
+		has_anti_sway_f, is_strg_f);
+		m_sus_r = Sus_Ind_2Tracks(F0z_r, Kz_r, Cz_r, \
+		Hmax_r, roll_strg_H_slp_r, \
+		toe_r, toe_strg_slp_r, \
+		caster_r, caster_H_slp_r, caster_strg_slp_r, \
+		camber_r, camber_H_slp_r, camber_strg_slp_r, \
+		strg_hgt_slp_r,\
+		as_R_r, as_ntrl_ang_r, as_trsK_r, \
+		has_anti_sway_r, is_strg_r);
+	}
 
     void push_con_states(d_vec &con_states) {};
 	void pull_con_states(const d_vec &con_states) {};
@@ -62,8 +95,9 @@ public:
     void push_drv(d_vec &derivatives) {};
 
 private:
-    std::shared_ptr<Sus_Ind_2Tracks> m_sptr_sus_f;
-    std::shared_ptr<Sus_Ind_2Tracks> m_sptr_sus_r;
+    Sus_Ind_2Tracks m_sus_f, m_sus_r;
+	d_vec m_sus_con_states_f = d_vec(Sus_Ind_2Tracks::m_con_states_num, NaN);
+    d_vec m_sus_con_states_r = d_vec(Sus_Ind_2Tracks::m_con_states_num, NaN);
 };
 } //end of name space
 #endif //SUBSYSTEM_SUS_2INDEPENDENT_HPP

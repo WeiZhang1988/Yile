@@ -23,17 +23,14 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
 	m_sptr_store = make_shared<d_v_vec>();
 	m_sptr_interface = make_shared<Int_Sus_2Ind>();
 	shared_ptr<Subsys_Sus_2Ind> sptr_sub_sus_2ind = make_shared<Subsys_Sus_2Ind>();
-    shared_ptr<Sus_Ind_2Tracks> sptr_sus_f = make_shared<Sus_Ind_2Tracks>();
-	shared_ptr<Sus_Ind_2Tracks> sptr_sus_r = make_shared<Sus_Ind_2Tracks>();
- 
-    sptr_sub_sus_2ind->add_suses(sptr_sus_f, sptr_sus_r);
+    
 	m_sptr_sys->add_interface(m_sptr_interface);
 	m_sptr_sys->add_subsys_sus_2ind(sptr_sub_sus_2ind);
 	m_sptr_sys->add_store(m_sptr_store);
 }
 
 void Simulator_Sus_2Ind::run () {
-	io::CSVReader<28> m_inputs("sus_test_result/sus_2ind_ramp_inputs.csv");// 1:0 2: sine 3 :ramp
+	io::CSVReader<28> m_inputs("data/inputs/sus_2ind_zero_inputs.csv");// 1:0 2: sine 3 :ramp
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
