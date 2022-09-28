@@ -59,7 +59,7 @@ private:
 	//built-in parameters
 	const double m_lpf_wc = 200.0 * pi;
 	const double m_lpf_init = 0.0;
-	piece_wise_linear low_speed = piece_wise_linear(d_vec{0,1},d_vec{1,0});
+	const piece_wise_linear low_speed = piece_wise_linear(d_vec{0,1},d_vec{1,0});
 	//configurable parameters
 	double m_Lrelx, m_Lrely, m_alpha_min, m_alpha_max, \
 	m_mu_min, m_mu_max, m_aMy, m_bMy, m_cMy, \
