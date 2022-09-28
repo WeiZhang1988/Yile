@@ -32,16 +32,16 @@ public:
 	//z1
 	double z1m=0.0, \
 	double z1R_x=-0.25, double z1R_y=0.125,double z1R_z = 0.15, \
-	double z1I_xx=0.0, double z1I_xy=0.0, double z1I_xz=0.0, \
-	double z1I_yx=0.0, double z1I_yy=0.0, double z1I_yz=0.0, 
-	double z1I_zx=0.0, double z1I_zy=0.0, double z1I_zz=0.0, \
+	double z1I_xx=0.0,  double z1I_xy=0.0, double z1I_xz=0.0, \
+	double z1I_yx=0.0,  double z1I_yy=0.0, double z1I_yz=0.0, 
+	double z1I_zx=0.0,  double z1I_zy=0.0, double z1I_zz=0.0, \
 	//z2
-	double z2m=0.0, double z2R_x=1.4, double z2R_y=0.0, double z2R_z = 0.8, \
+	double z2m=0.0,    double z2R_x=1.4,  double z2R_y=0.0, double z2R_z = 0.8, \
 	double z2I_xx=0.0, double z2I_xy=0.0, double z2I_xz=0.0, \
 	double z2I_yx=0.0, double z2I_yy=0.0, double z2I_yz=0.0, \
 	double z2I_zx=0.0, double z2I_zy=0.0, double z2I_zz=0.0, \
 	//z3
-	double z3m=0.0, double z3R_x=0.75, double z3R_y=-0.5, double z3R_z = 0.4, \
+	double z3m=0.0,    double z3R_x=0.75, double z3R_y=-0.5, double z3R_z = 0.4, \
 	double z3I_xx=0.0, double z3I_xy=0.0, double z3I_xz=0.0, \
 	double z3I_yx=0.0, double z3I_yy=0.0, double z3I_yz=0.0, \
 	double z3I_zx=0.0, double z3I_zy=0.0, double z3I_zz=0.0, \

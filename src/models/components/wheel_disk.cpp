@@ -54,11 +54,9 @@ void NMSPC::Wheel_Disk::pull_pv(const double &Gnd_Pz) {
 	m_Gnd_Pz = Gnd_Pz;
     //process
 	if (m_locked_flag) {
-        m_Tir_omega = 0.0;
-        m_unlocked_omega = m_Tir_omega;
-    } else { 
-        m_Tir_omega = m_unlocked_omega;
-    } 
+        m_unlocked_omega = 0.0;
+    }
+    m_Tir_omega = m_unlocked_omega;
     m_Tir_Pz = m_Gnd_Pz;
     m_Tir_vz = 0.0;
     m_Sus_TirPz = -m_Tir_Pz;

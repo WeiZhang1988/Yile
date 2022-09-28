@@ -88,7 +88,7 @@ void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, co
 	m_r_c = m_r;
 	m_beta_c = atan(m_vb_y_c / div0protect_abs(m_vb_x_c, m_xdot_tol));
 	
-	double tmpR_x, tmpR_y, tmpR_z;
+	double tmpR_x,    tmpR_y,    tmpR_z;
 	double tmpRes1_x, tmpRes1_y, tmpRes1_z;
 	double tmpRes2_x, tmpRes2_y, tmpRes2_z;
 	
@@ -249,20 +249,20 @@ double &xb_x_rr, double &xb_y_rr, double &xb_z_rr, double &vb_x_rr, double &vb_y
 	p_c = m_p_c;
 	q_c = m_q_c;
 	r_c = m_r_c;
-	beta_c = m_beta_c;
-	xe_x_o = m_xe_x_o;
-	xe_y_o = m_xe_y_o;
-	xe_z_o = m_xe_z_o;
-	ve_x_o = m_ve_x_o;
-	ve_y_o = m_ve_y_o;
-	ve_z_o = m_ve_z_o;
-	xb_x_o = m_xb_x_o;
-	xb_y_o = m_xb_y_o;
-	xb_z_o = m_xb_z_o;
-	vb_x_o = m_vb_x_o;
-	vb_y_o = m_vb_y_o;
-	vb_z_o = m_vb_z_o;
-	beta_o = m_beta_o;
+	beta_c  = m_beta_c;
+	xe_x_o  = m_xe_x_o;
+	xe_y_o  = m_xe_y_o;
+	xe_z_o  = m_xe_z_o;
+	ve_x_o  = m_ve_x_o;
+	ve_y_o  = m_ve_y_o;
+	ve_z_o  = m_ve_z_o;
+	xb_x_o  = m_xb_x_o;
+	xb_y_o  = m_xb_y_o;
+	xb_z_o  = m_xb_z_o;
+	vb_x_o  = m_vb_x_o;
+	vb_y_o  = m_vb_y_o;
+	vb_z_o  = m_vb_z_o;
+	beta_o  = m_beta_o;
 	xe_x_fl = m_xe_x_fl;
 	xe_y_fl = m_xe_y_fl;
 	xe_z_fl = m_xe_z_fl;
@@ -315,40 +315,40 @@ double &xb_x_rr, double &xb_y_rr, double &xb_z_rr, double &vb_x_rr, double &vb_y
 }
 
 void NMSPC::Vehicle_Body::pull_fm(const double &Air_Tair, \
-const double &Sus_Fx_fl, const double &Sus_Fx_fr, const double &Sus_Fx_rl, const double &Sus_Fx_rr, \
-const double &Sus_Fy_fl, const double &Sus_Fy_fr, const double &Sus_Fy_rl, const double &Sus_Fy_rr, \
-const double &Sus_Fz_fl, const double &Sus_Fz_fr, const double &Sus_Fz_rl, const double &Sus_Fz_rr, \
-const double &Sus_Mx_fl, const double &Sus_Mx_fr, const double &Sus_Mx_rl, const double &Sus_Mx_rr ,\
-const double &Sus_My_fl, const double &Sus_My_fr, const double &Sus_My_rl, const double &Sus_My_rr, \
-const double &Sus_Mz_fl, const double &Sus_Mz_fr, const double &Sus_Mz_rl, const double &Sus_Mz_rr, \
+const double &Sus_Fx_fl,  const double &Sus_Fx_fr,  const double &Sus_Fx_rl, const double &Sus_Fx_rr, \
+const double &Sus_Fy_fl,  const double &Sus_Fy_fr,  const double &Sus_Fy_rl, const double &Sus_Fy_rr, \
+const double &Sus_Fz_fl,  const double &Sus_Fz_fr,  const double &Sus_Fz_rl, const double &Sus_Fz_rr, \
+const double &Sus_Mx_fl,  const double &Sus_Mx_fr,  const double &Sus_Mx_rl, const double &Sus_Mx_rr ,\
+const double &Sus_My_fl,  const double &Sus_My_fr,  const double &Sus_My_rl, const double &Sus_My_rr, \
+const double &Sus_Mz_fl,  const double &Sus_Mz_fr,  const double &Sus_Mz_rl, const double &Sus_Mz_rr, \
 const double &Ext_Fx_ext, const double &Ext_Fy_ext, const double &Ext_Fz_ext, \
 const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext) {
 	//pull inputs
-	m_Air_Tair  = Air_Tair;
-	m_Sus_Fx_fl = Sus_Fx_fl;
-	m_Sus_Fx_fr = Sus_Fx_fr;
-	m_Sus_Fx_rl = Sus_Fx_rl;
-	m_Sus_Fx_rr = Sus_Fx_rr;
-	m_Sus_Fy_fl = Sus_Fy_fl;
-	m_Sus_Fy_fr = Sus_Fy_fr;
-	m_Sus_Fy_rl = Sus_Fy_rl;
-	m_Sus_Fy_rr = Sus_Fy_rr;
-	m_Sus_Fz_fl = Sus_Fz_fl;
-	m_Sus_Fz_fr = Sus_Fz_fr;
-	m_Sus_Fz_rl = Sus_Fz_rl;
-	m_Sus_Fz_rr = Sus_Fz_rr;
-	m_Sus_Mx_fl = Sus_Mx_fl;
-	m_Sus_Mx_fr = Sus_Mx_fr;
-	m_Sus_Mx_rl = Sus_Mx_rl;
-	m_Sus_Mx_rr = Sus_Mx_rr;
-	m_Sus_My_fl = Sus_My_fl;
-	m_Sus_My_fr = Sus_My_fr;
-	m_Sus_My_rl = Sus_My_rl;
-	m_Sus_My_rr = Sus_My_rr;
-	m_Sus_Mz_fl = Sus_Mz_fl;
-	m_Sus_Mz_fr = Sus_Mz_fr;
-	m_Sus_Mz_rl = Sus_Mz_rl;
-	m_Sus_Mz_rr = Sus_Mz_rr;
+	m_Air_Tair   = Air_Tair;
+	m_Sus_Fx_fl  = Sus_Fx_fl;
+	m_Sus_Fx_fr  = Sus_Fx_fr;
+	m_Sus_Fx_rl  = Sus_Fx_rl;
+	m_Sus_Fx_rr  = Sus_Fx_rr;
+	m_Sus_Fy_fl  = Sus_Fy_fl;
+	m_Sus_Fy_fr  = Sus_Fy_fr;
+	m_Sus_Fy_rl  = Sus_Fy_rl;
+	m_Sus_Fy_rr  = Sus_Fy_rr;
+	m_Sus_Fz_fl  = Sus_Fz_fl;
+	m_Sus_Fz_fr  = Sus_Fz_fr;
+	m_Sus_Fz_rl  = Sus_Fz_rl;
+	m_Sus_Fz_rr  = Sus_Fz_rr;
+	m_Sus_Mx_fl  = Sus_Mx_fl;
+	m_Sus_Mx_fr  = Sus_Mx_fr;
+	m_Sus_Mx_rl  = Sus_Mx_rl;
+	m_Sus_Mx_rr  = Sus_Mx_rr;
+	m_Sus_My_fl  = Sus_My_fl;
+	m_Sus_My_fr  = Sus_My_fr;
+	m_Sus_My_rl  = Sus_My_rl;
+	m_Sus_My_rr  = Sus_My_rr;
+	m_Sus_Mz_fl  = Sus_Mz_fl;
+	m_Sus_Mz_fr  = Sus_Mz_fr;
+	m_Sus_Mz_rl  = Sus_Mz_rl;
+	m_Sus_Mz_rr  = Sus_Mz_rr;
 	m_Ext_Fx_ext = Ext_Fx_ext;
 	m_Ext_Fy_ext = Ext_Fy_ext; 
 	m_Ext_Fz_ext = Ext_Fz_ext;
@@ -380,10 +380,10 @@ const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext) {
 	m_Fb_x = m_Ext_Fx_ext + m_Fg_x + m_F_VehiclB_x - m_Fd_x;
 	m_Fb_y = m_Ext_Fy_ext + m_Fg_y + m_F_VehiclB_y - m_Fd_y;
 	m_Fb_z = m_Ext_Fz_ext + m_Fg_z + m_F_VehiclB_z - m_Fd_z;
-	// 空气阻力 已经修改为减
-	m_Mb_x = m_Ext_Mx_ext + m_M_roll + m_Sus_Mx_fl + m_Sus_Mx_fr + m_Sus_Mx_rl + m_Sus_Mx_rr - m_Md_x;
+
+	m_Mb_x = m_Ext_Mx_ext + m_M_roll  + m_Sus_Mx_fl + m_Sus_Mx_fr + m_Sus_Mx_rl + m_Sus_Mx_rr - m_Md_x;
 	m_Mb_y = m_Ext_My_ext + m_M_pitch + m_Sus_My_fl + m_Sus_My_fr + m_Sus_My_rl + m_Sus_My_rr - m_Md_y;
-	m_Mb_z = m_Ext_Mz_ext + m_M_yaw + m_Sus_Mz_fl + m_Sus_Mz_fr + m_Sus_Mz_rl + m_Sus_Mz_rr - m_Md_z;
+	m_Mb_z = m_Ext_Mz_ext + m_M_yaw   + m_Sus_Mz_fl + m_Sus_Mz_fr + m_Sus_Mz_rl + m_Sus_Mz_rr - m_Md_z;
 	
 }
 
@@ -397,9 +397,9 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_vb_z = m_Fb_z/m_Mbar + m_vb_x * m_q - m_vb_y * m_p;
 
 
-	m_drv_phai = m_p + (m_q * m_sin_phai + m_r * m_cos_phai) * m_sin_theta / m_cos_theta;
+	m_drv_phai  = m_p + (m_q * m_sin_phai + m_r * m_cos_phai) * m_sin_theta / m_cos_theta;
 	m_drv_theta = m_q * m_cos_phai - m_r * m_sin_phai;
-	m_drv_psi = (m_q * m_sin_phai + m_r * m_cos_phai) / m_cos_theta;
+	m_drv_psi   = (m_q * m_sin_phai + m_r * m_cos_phai) / m_cos_theta;
 	double tmpRes1_x = m_Ibar_xx * m_p + m_Ibar_xy * m_q + m_Ibar_xz * m_r;
 	double tmpRes1_y = m_Ibar_yx * m_p + m_Ibar_yy * m_q + m_Ibar_yz * m_r;
 	double tmpRes1_z = m_Ibar_zx * m_p + m_Ibar_zy * m_q + m_Ibar_zz * m_r;

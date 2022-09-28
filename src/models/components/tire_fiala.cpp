@@ -168,7 +168,11 @@ void NMSPC::Tire_Fiala::push_drv (d_vec &derivatives) {
 	m_drv_kappa = (m_Tir_omega * m_Tir_Re - m_Tir_vx - abs(m_Tir_vx) * \
     m_kappa) / m_Lrelx;
     m_drv_alpha_prime = (m_Tir_vy - abs(m_Tir_vx) * m_tan_alpha) / m_Lrely;
-    m_drv_Mroll = ((1.0 - abs(m_Tir_vx)) * 2 * pi + abs(m_Tir_vx - \
+    // m_drv_Mroll = ((1.0 - abs(m_Tir_vx)) * 2 * pi + abs(m_Tir_vx - \
+    // m_Tir_omega * m_Tir_Re) / saturation(m_Lrelx, 0.01, 10.0)) * \
+    // (m_My - m_Mroll);
+
+	m_drv_Mroll = (low_speed(abs(m_Tir_vx)) * 2 * pi + abs(m_Tir_vx - \
     m_Tir_omega * m_Tir_Re) / saturation(m_Lrelx, 0.01, 10.0)) * \
     (m_My - m_Mroll);
 	m_drv_Sus_lpf_str = (m_Sus_str - m_Sus_lpf_str) * m_lpf_wc;
@@ -181,4 +185,8 @@ void NMSPC::Tire_Fiala::push_drv (d_vec &derivatives) {
 	derivatives[3] = m_drv_Sus_lpf_str;
 	derivatives[4] = m_drv_Sus_lpf_gamma;
 	derivatives[5] = m_drv_Sus_lpf_Fz;
+
+	static int i{0};
+	i++;
+	
 }
