@@ -31,7 +31,7 @@ Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, dou
 }
 
 void Simulator_Vehicle_Body::run() {
-	io::CSVReader<34> m_inputs("veh_test_result/veh_vb_sine_inputs.csv");
+	io::CSVReader<34> m_inputs("veh_test_result/veh_vb_sine_inputs926.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;

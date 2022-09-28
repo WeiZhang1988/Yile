@@ -30,7 +30,7 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
 }
 
 void Simulator_Whl_4Disk::run () {
-	io::CSVReader<28> m_inputs("data/inputs/whl_4disk_inputs.csv");
+	io::CSVReader<28> m_inputs("wheel_test_result/whl_inputs_9271614.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
@@ -40,36 +40,39 @@ void Simulator_Whl_4Disk::run () {
 		m_steps++;	
 		m_times.push_back(t);
 		m_inputs.read_row(
-		m_sptr_interface->m_Brk_Prs_fl, 
-		m_sptr_interface->m_Axl_Trq_fl, 
-		m_sptr_interface->m_Tir_Fx_fl, 
-		m_sptr_interface->m_Tir_My_fl, 
-		m_sptr_interface->m_Gnd_Pz_fl, 
-		m_sptr_interface->m_Sus_Fz_fl, 
-		m_sptr_interface->m_Tir_Fz_fl,
-
+		m_sptr_interface->m_Brk_Prs_fl,
 		m_sptr_interface->m_Brk_Prs_fr, 
-		m_sptr_interface->m_Axl_Trq_fr, 
-		m_sptr_interface->m_Tir_Fx_fr, 
-		m_sptr_interface->m_Tir_My_fr, 
-		m_sptr_interface->m_Gnd_Pz_fr, 
-		m_sptr_interface->m_Sus_Fz_fr, 
-		m_sptr_interface->m_Tir_Fz_fr,
-
-		m_sptr_interface->m_Brk_Prs_rl, 
-		m_sptr_interface->m_Axl_Trq_rl, 
-		m_sptr_interface->m_Tir_Fx_rl, 
-		m_sptr_interface->m_Tir_My_rl, 
-		m_sptr_interface->m_Gnd_Pz_rl, 
-		m_sptr_interface->m_Sus_Fz_rl, 
-		m_sptr_interface->m_Tir_Fz_rl,
-
+		m_sptr_interface->m_Brk_Prs_rl,
 		m_sptr_interface->m_Brk_Prs_rr, 
+
+		m_sptr_interface->m_Axl_Trq_fl, 
+		m_sptr_interface->m_Axl_Trq_fr,
+		m_sptr_interface->m_Axl_Trq_rl,
 		m_sptr_interface->m_Axl_Trq_rr, 
+
+		m_sptr_interface->m_Tir_Fx_fl, 
+		m_sptr_interface->m_Tir_Fx_fr, 
+		m_sptr_interface->m_Tir_Fx_rl,
 		m_sptr_interface->m_Tir_Fx_rr, 
+
+		m_sptr_interface->m_Tir_My_fl, 
+		m_sptr_interface->m_Tir_My_fr, 
+		m_sptr_interface->m_Tir_My_rl, 
 		m_sptr_interface->m_Tir_My_rr, 
+
+		m_sptr_interface->m_Gnd_Pz_fl, 
+		m_sptr_interface->m_Gnd_Pz_fr,
+		m_sptr_interface->m_Gnd_Pz_rl, 
 		m_sptr_interface->m_Gnd_Pz_rr, 
+
+		m_sptr_interface->m_Sus_Fz_fl, 
+		m_sptr_interface->m_Sus_Fz_fr, 
+		m_sptr_interface->m_Sus_Fz_rl, 
 		m_sptr_interface->m_Sus_Fz_rr, 
+
+		m_sptr_interface->m_Tir_Fz_fl,
+		m_sptr_interface->m_Tir_Fz_fr,
+		m_sptr_interface->m_Tir_Fz_rl,
 		m_sptr_interface->m_Tir_Fz_rr
 		); 
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);

@@ -21,7 +21,7 @@ using namespace Yile;
 
 void run_Whl_4Disk() {
 	std::ofstream of;
-	Simulator_Whl_4Disk sim1 = Simulator_Whl_4Disk(0.0,100.0,1e-4);
+	Simulator_Whl_4Disk sim1 = Simulator_Whl_4Disk(0.0,100.0,1e-3);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -32,17 +32,16 @@ void run_Whl_4Disk() {
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
-			of<<std::setw(30)<<std::setprecision(7)<<item<<',';
+			of<<std::setprecision(15)<<item<<',';
 		}
 		of<<std::endl;
 	}
 	of.close();
-	
 }
 
 void run_Tir_4Fiala() {
 	std::ofstream of;
-	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,10.0,1e-3/4);
+	Simulator_Tir_4Fiala sim1 = Simulator_Tir_4Fiala(0.0,100.0,1e-3);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -53,7 +52,7 @@ void run_Tir_4Fiala() {
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
-			of<<std::setw(30)<<std::setprecision(7)<<item<<',';
+			of<<std::setprecision(7)<<item<<',';
 		}
 		of<<std::endl;
 	}
@@ -63,7 +62,7 @@ void run_Tir_4Fiala() {
 
 void run_Sus_2Ind() {
 	std::ofstream of;
-	Simulator_Sus_2Ind sim1 = Simulator_Sus_2Ind(0.0,10.0,1e-4);
+	Simulator_Sus_2Ind sim1 = Simulator_Sus_2Ind(0.0,100,1e-3);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -74,7 +73,7 @@ void run_Sus_2Ind() {
 	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
 	for (auto items : *sim1.m_sptr_store) {
 		for (auto item : items) {
-			of<<std::setw(30)<<std::setprecision(7)<<item<<',';
+			of<<std::setprecision(7)<<item<<',';
 		}
 		of<<std::endl;
 	}
@@ -83,7 +82,7 @@ void run_Sus_2Ind() {
 
 void run_Vehicle_Body() {
 	std::ofstream of;
-	Simulator_Vehicle_Body sim1 = Simulator_Vehicle_Body(0.0,10.0,1e-4);
+	Simulator_Vehicle_Body sim1 = Simulator_Vehicle_Body(0.0,100.0,1e-3);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -120,15 +119,14 @@ void run_Chassis_2Ind_Disk_Fiala() {
 		of<<std::endl;
 	}
 	of.close();
-	
 }
 
 
 int main(){
 	//run_Whl_Disk_Tir_Fiala();
-	//run_Tir_4Fiala();
+	run_Tir_4Fiala();
 	//run_Sus_2Ind();
-	run_Vehicle_Body();
+	//run_Vehicle_Body();
 	//run_Whl_4Disk();
 	//run_LPF();
 	//run_Chassis_2Ind_Disk_Fiala();
