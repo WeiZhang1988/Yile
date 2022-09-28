@@ -58,7 +58,7 @@ public:
 	piece_wise_linear(const d_vec &x, const d_vec &y):m_x(x),m_y(y) {
 		m_n = m_x.size();
 	}
-	double operator() (const double &x_in);
+	double operator() (const double &x_in) const;
 private:
 	d_vec m_x, m_y;
 	int m_n;
