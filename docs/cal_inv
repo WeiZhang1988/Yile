@@ -1,9 +1,0 @@
-[ (yy*zz - yz*zy)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx), -(xy*zz - xz*zy)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx),  (xy*yz - xz*yy)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx)]
-
-
-
-[-(yx*zz - yz*zx)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx),  (xx*zz - xz*zx)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx), -(xx*yz - xz*yx)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx)]
-
-
-
-[ (yx*zy - yy*zx)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx), -(xx*zy - xy*zx)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx),  (xx*yy - xy*yx)/(xx*yy*zz - xx*yz*zy - xy*yx*zz + xy*yz*zx + xz*yx*zy - xz*yy*zx)]

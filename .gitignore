@@ -1,9 +1,0 @@
-dep/*
-README.md
-build/*
-LICENSE
-.vscode/
-vehicle_*
-*.csv
-houtest/*
-.gutignore
