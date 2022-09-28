@@ -30,7 +30,7 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
 }
 
 void Simulator_Sus_2Ind::run () {
-	io::CSVReader<28> m_inputs("data/inputs/sus_2ind_zero_inputs.csv");// 1:0 2: sine 3 :ramp
+	io::CSVReader<54> m_inputs("sus_test_result/sus_2ind_inputs09281352.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
@@ -39,14 +39,76 @@ void Simulator_Sus_2Ind::run () {
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
-		m_inputs.read_row(m_sptr_interface->m_Veh_hgt_cg, m_sptr_interface->m_Veh_r, \
-    	m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Sus_TirPz_fl, m_sptr_interface->m_Sus_Tirvz_fl, m_sptr_interface->m_Tir_Re_fl, \
-		m_sptr_interface->m_Veh_Pz_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
-		m_sptr_interface->m_Sus_TirFx_fl, m_sptr_interface->m_Sus_TirFy_fl, m_sptr_interface->m_Tir_Mx_fl, m_sptr_interface->m_Tir_My_fl, m_sptr_interface->m_Tir_Mz_fl,\
+		m_inputs.read_row(\
+		m_sptr_interface->m_Veh_hgt_cg, 
+		m_sptr_interface->m_Veh_r, \
+
+    	m_sptr_interface->m_Strg_str_fl, 
+		m_sptr_interface->m_Strg_str_fr,
+		m_sptr_interface->m_Strg_str_rl,
+		m_sptr_interface->m_Strg_str_rr,
+
+		m_sptr_interface->m_Sus_TirPz_fl, 
+		m_sptr_interface->m_Sus_TirPz_fr, 
+		m_sptr_interface->m_Sus_TirPz_rl, 
+		m_sptr_interface->m_Sus_TirPz_rr, 
+
+		m_sptr_interface->m_Sus_Tirvz_fl,
+		m_sptr_interface->m_Sus_Tirvz_fr,
+		m_sptr_interface->m_Sus_Tirvz_rl,
+		m_sptr_interface->m_Sus_Tirvz_rr,
+
+		m_sptr_interface->m_Tir_Re_fl, 
+		m_sptr_interface->m_Tir_Re_fr, 
+		m_sptr_interface->m_Tir_Re_rl, 
+		m_sptr_interface->m_Tir_Re_rr, 
 		
-		m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Sus_TirPz_fr, m_sptr_interface->m_Sus_Tirvz_fr, m_sptr_interface->m_Tir_Re_fr, \
-		m_sptr_interface->m_Veh_Pz_fr, m_sptr_interface->m_Veh_vx_fr, m_sptr_interface->m_Veh_vy_fr, m_sptr_interface->m_Veh_vz_fr, \
-		m_sptr_interface->m_Sus_TirFx_fr, m_sptr_interface->m_Sus_TirFy_fr, m_sptr_interface->m_Tir_Mx_fr, m_sptr_interface->m_Tir_My_fr, m_sptr_interface->m_Tir_Mz_fr
+		m_sptr_interface->m_Veh_Pz_fl, 
+		m_sptr_interface->m_Veh_Pz_fr,
+		m_sptr_interface->m_Veh_Pz_rl,
+		m_sptr_interface->m_Veh_Pz_rr,
+
+
+		m_sptr_interface->m_Veh_vx_fl, 
+		m_sptr_interface->m_Veh_vx_fr, 
+		m_sptr_interface->m_Veh_vx_rl, 
+		m_sptr_interface->m_Veh_vx_rr, 
+		
+		m_sptr_interface->m_Veh_vy_fl,
+		m_sptr_interface->m_Veh_vy_fr,
+		m_sptr_interface->m_Veh_vy_rl,
+		m_sptr_interface->m_Veh_vy_rr,
+
+		m_sptr_interface->m_Veh_vz_fl, 
+		m_sptr_interface->m_Veh_vz_fr, 
+		m_sptr_interface->m_Veh_vz_rl, 
+		m_sptr_interface->m_Veh_vz_rr, 
+
+		m_sptr_interface->m_Sus_TirFx_fl, 
+		m_sptr_interface->m_Sus_TirFx_fr, 
+		m_sptr_interface->m_Sus_TirFx_rl, 
+		m_sptr_interface->m_Sus_TirFx_rr, 
+
+		m_sptr_interface->m_Sus_TirFy_fl,
+		m_sptr_interface->m_Sus_TirFy_fr,
+		m_sptr_interface->m_Sus_TirFy_rl,
+		m_sptr_interface->m_Sus_TirFy_rr,
+		
+		m_sptr_interface->m_Tir_Mx_fl, 
+		m_sptr_interface->m_Tir_Mx_fr,
+		m_sptr_interface->m_Tir_Mx_rl,
+		m_sptr_interface->m_Tir_Mx_rr,
+
+		m_sptr_interface->m_Tir_My_fl, 
+		m_sptr_interface->m_Tir_My_fr, 
+		m_sptr_interface->m_Tir_My_rl, 
+		m_sptr_interface->m_Tir_My_rr, 
+
+		m_sptr_interface->m_Tir_Mz_fl,
+		m_sptr_interface->m_Tir_Mz_fr,
+		m_sptr_interface->m_Tir_Mz_rl,
+		m_sptr_interface->m_Tir_Mz_rr
+		
 		); 
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
