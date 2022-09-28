@@ -61,6 +61,7 @@ void NMSPC::Sys_Sus_2Ind::store_data() {
 									m_sptr_interface->m_Sus_VehMy_fl, 
 									m_sptr_interface->m_Sus_VehMz_fl, 
 									m_sptr_interface->m_Sus_Fz_fl ,
+
 								  	m_sptr_interface->m_Sus_gamma_fl,
 								  	m_sptr_interface->m_Sus_caster_fl,
 									m_sptr_interface->m_Sus_str_fl,
@@ -72,9 +73,35 @@ void NMSPC::Sys_Sus_2Ind::store_data() {
 									m_sptr_interface->m_Sus_VehMy_fr, 
 									m_sptr_interface->m_Sus_VehMz_fr, 
 									m_sptr_interface->m_Sus_Fz_fr ,
+
 								  	m_sptr_interface->m_Sus_gamma_fr,
 								  	m_sptr_interface->m_Sus_caster_fr,
-									m_sptr_interface->m_Sus_str_fr
+									m_sptr_interface->m_Sus_str_fr,
+
+									m_sptr_interface->m_Sus_VehFx_rl, 
+									m_sptr_interface->m_Sus_VehFy_rl, 
+									m_sptr_interface->m_Sus_VehFz_rl, 
+									m_sptr_interface->m_Sus_VehMx_rl, 
+									m_sptr_interface->m_Sus_VehMy_rl, 
+									m_sptr_interface->m_Sus_VehMz_rl, 
+									m_sptr_interface->m_Sus_Fz_rl,
+
+								  	m_sptr_interface->m_Sus_gamma_rl,
+								  	m_sptr_interface->m_Sus_caster_rl,
+									m_sptr_interface->m_Sus_str_rl,
+
+									m_sptr_interface->m_Sus_VehFx_rr, 
+									m_sptr_interface->m_Sus_VehFy_rr, 
+									m_sptr_interface->m_Sus_VehFz_rr, 
+									m_sptr_interface->m_Sus_VehMx_rr, 
+									m_sptr_interface->m_Sus_VehMy_rr, 
+									m_sptr_interface->m_Sus_VehMz_rr, 
+									m_sptr_interface->m_Sus_Fz_rr ,
+									
+								  	m_sptr_interface->m_Sus_gamma_rr,
+								  	m_sptr_interface->m_Sus_caster_rr,
+									m_sptr_interface->m_Sus_str_rr
+
 									});
 }
 

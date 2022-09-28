@@ -30,6 +30,7 @@ public:
 	double strg_hgt_slp_f=0.1432,\
 	double as_R_f=0.2, double as_ntrl_ang_f=0.5236, double as_trsK_f=8e2, \
 	bool has_anti_sway_f=true, bool is_strg_f=true, \
+	
 	double F0z_r=2907.0, double Kz_r=52451.006579283188, double Cz_r=5565.226438019838, \
 	double Hmax_r=0.25, double roll_strg_H_slp_r=-0.2269, \
 	double toe_r=0.0349, double toe_strg_slp_r=0.01, \
