@@ -33,9 +33,9 @@ double NMSPC::dead_zone(const double &in_data, const double &lower, const double
 double NMSPC::div0protect(const double &in_data, const double &thresh) {
 	if (in_data >= -thresh && in_data <= thresh) {
 		if (in_data >= 0.0) {
-			return 2.0 * thresh / (3 - pow(in_data / thresh, 2.0));
+			return 2.0 * thresh / (3.0 - pow(in_data / thresh, 2.0));
 		} else {
-			return -2.0 * thresh / (3 - pow(in_data / thresh, 2.0));
+			return -2.0 * thresh / (3.0 - pow(in_data / thresh, 2.0));
 		}
 	} else {
 		return in_data;
@@ -44,7 +44,7 @@ double NMSPC::div0protect(const double &in_data, const double &thresh) {
 
 double NMSPC::div0protect_abs(const double &in_data, const double &thresh) {
 	if (in_data >= -thresh && in_data <= thresh) {
-		return 2.0 * thresh / (3 - pow(in_data / thresh, 2.0));
+		return 2.0 * thresh / (3.0 - pow(in_data / thresh, 2.0));
 	} else {
 		return abs(in_data);
 	}

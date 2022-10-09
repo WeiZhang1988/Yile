@@ -13,6 +13,21 @@
 #include "vehicle_body.hpp"
 
 void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {
+	int q = int(floor((m_phai + pi) / (2.0 * pi)));
+	if (q) {
+		m_phai -= q * 2.0 * pi;
+	}
+
+	q = int(floor((m_theta + pi) / (2.0 * pi)));
+	if (q) {
+		m_theta -= q * 2.0 * pi;
+	}
+
+	q = int(floor((m_psi + pi) / (2.0 * pi)));
+	if (q) {
+		m_psi -= q * 2.0 * pi;
+	}
+
 	con_states[0] = m_xe_x;
 	con_states[1] = m_xe_y;
 	con_states[2] = m_xe_z;
@@ -40,6 +55,21 @@ void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {
 	m_p		= con_states[9];
 	m_q		= con_states[10];
 	m_r		= con_states[11];
+
+	int q = int(floor((m_phai + pi) / (2.0 * pi)));
+	if (q) {
+		m_phai -= q * 2.0 * pi;
+	}
+
+	q = int(floor((m_theta + pi) / (2.0 * pi)));
+	if (q) {
+		m_theta -= q * 2.0 * pi;
+	}
+
+	q = int(floor((m_psi + pi) / (2.0 * pi)));
+	if (q) {
+		m_psi -= q * 2.0 * pi;
+	}
 }
 
 void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, const double &Air_Wz) {
@@ -434,6 +464,16 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	derivatives[9] 	= m_drv_p;
 	derivatives[10] = m_drv_q;
 	derivatives[11] = m_drv_r;
+
+	static int step = 0;
+	
+	if(step%4==0){
+		//printf("%d step.\n",step/4);
+	}
+
+
+	step++;
+	
 }
 
 void NMSPC::Vehicle_Body::calculate_bar() {

@@ -33,6 +33,7 @@ public:
 
     shared_ptr<Sys_Vehicle_Body> m_sptr_sys;
     shared_ptr<d_v_vec> m_sptr_store;
+    d_v_vec m_sptr_store_states;
     shared_ptr<Int_Vehicle_Body> m_sptr_interface;
 
     int m_steps;

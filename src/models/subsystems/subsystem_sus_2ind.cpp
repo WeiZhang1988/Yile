@@ -75,16 +75,26 @@ void NMSPC::Subsys_Sus_2Ind::pull_fm(const double &Sus_TirFx_fl, const double &S
 const double &Sus_TirFx_fr, const double &Sus_TirFy_fr, const double &Tir_Mx_fr, const double &Tir_My_fr, const double &Tir_Mz_fr, \
 const double &Sus_TirFx_rl, const double &Sus_TirFy_rl, const double &Tir_Mx_rl, const double &Tir_My_rl, const double &Tir_Mz_rl, \
 const double &Sus_TirFx_rr, const double &Sus_TirFy_rr, const double &Tir_Mx_rr, const double &Tir_My_rr, const double &Tir_Mz_rr) {
-    m_sus_f.pull_fm(Sus_TirFx_fl, Sus_TirFy_fl, Tir_Mx_fl, Tir_My_fl, Tir_Mz_fl, Sus_TirFx_fr, Sus_TirFy_fr, Tir_Mx_fr, Tir_My_fr, Tir_Mz_fr);
-    m_sus_r.pull_fm(Sus_TirFx_rl, Sus_TirFy_rl, Tir_Mx_rl, Tir_My_rl, Tir_Mz_rl, Sus_TirFx_rr, Sus_TirFy_rr, Tir_Mx_rr, Tir_My_rr, Tir_Mz_rr);
+    //m_sus_f.pull_fm(Sus_TirFx_fl, Sus_TirFy_fl, Tir_Mx_fl, Tir_My_fl, Tir_Mz_fl, Sus_TirFx_fr, Sus_TirFy_fr, Tir_Mx_fr, Tir_My_fr, Tir_Mz_fr);
+    //m_sus_r.pull_fm(Sus_TirFx_rl, Sus_TirFy_rl, Tir_Mx_rl, Tir_My_rl, Tir_Mz_rl, Sus_TirFx_rr, Sus_TirFy_rr, Tir_Mx_rr, Tir_My_rr, Tir_Mz_rr);
+    pull_fm_z();
+    pull_fm_o(Sus_TirFx_fl, Sus_TirFy_fl, Tir_Mx_fl, Tir_My_fl, Tir_Mz_fl, \
+    Sus_TirFx_fr, Sus_TirFy_fr, Tir_Mx_fr, Tir_My_fr, Tir_Mz_fr, \
+    Sus_TirFx_rl, Sus_TirFy_rl, Tir_Mx_rl, Tir_My_rl, Tir_Mz_rl, \
+    Sus_TirFx_rr, Sus_TirFy_rr, Tir_Mx_rr, Tir_My_rr, Tir_Mz_rr);
 }
 
 void NMSPC::Subsys_Sus_2Ind::push_fm(double &Sus_VehFx_fl, double &Sus_VehFy_fl, double &Sus_VehFz_fl, double &Sus_VehMx_fl, double &Sus_VehMy_fl, double &Sus_VehMz_fl, double &Sus_Fz_fl, \
 double &Sus_VehFx_fr, double &Sus_VehFy_fr, double &Sus_VehFz_fr, double &Sus_VehMx_fr, double &Sus_VehMy_fr, double &Sus_VehMz_fr, double &Sus_Fz_fr, \
 double &Sus_VehFx_rl, double &Sus_VehFy_rl, double &Sus_VehFz_rl, double &Sus_VehMx_rl, double &Sus_VehMy_rl, double &Sus_VehMz_rl, double &Sus_Fz_rl, \
 double &Sus_VehFx_rr, double &Sus_VehFy_rr, double &Sus_VehFz_rr, double &Sus_VehMx_rr, double &Sus_VehMy_rr, double &Sus_VehMz_rr, double &Sus_Fz_rr) {
-    m_sus_f.push_fm(Sus_VehFx_fl, Sus_VehFy_fl, Sus_VehFz_fl, Sus_VehMx_fl, Sus_VehMy_fl, Sus_VehMz_fl, Sus_Fz_fl, \
+    //m_sus_f.push_fm(Sus_VehFx_fl, Sus_VehFy_fl, Sus_VehFz_fl, Sus_VehMx_fl, Sus_VehMy_fl, Sus_VehMz_fl, Sus_Fz_fl, \
     Sus_VehFx_fr, Sus_VehFy_fr, Sus_VehFz_fr, Sus_VehMx_fr, Sus_VehMy_fr, Sus_VehMz_fr, Sus_Fz_fr);
-    m_sus_r.push_fm(Sus_VehFx_rl, Sus_VehFy_rl, Sus_VehFz_rl, Sus_VehMx_rl, Sus_VehMy_rl, Sus_VehMz_rl, Sus_Fz_rl, \
+    //m_sus_r.push_fm(Sus_VehFx_rl, Sus_VehFy_rl, Sus_VehFz_rl, Sus_VehMx_rl, Sus_VehMy_rl, Sus_VehMz_rl, Sus_Fz_rl, \
     Sus_VehFx_rr, Sus_VehFy_rr, Sus_VehFz_rr, Sus_VehMx_rr, Sus_VehMy_rr, Sus_VehMz_rr, Sus_Fz_rr);
+    push_fm_z (Sus_VehFz_fl,Sus_Fz_fl, Sus_VehFz_fr, Sus_Fz_fr, Sus_VehFz_rl, Sus_Fz_rl, Sus_VehFz_rr, Sus_Fz_rr);
+    push_fm_o (Sus_VehFx_fl, Sus_VehFy_fl, Sus_VehMx_fl, Sus_VehMy_fl, Sus_VehMz_fl, \
+    Sus_VehFx_fr, Sus_VehFy_fr, Sus_VehMx_fr, Sus_VehMy_fr, Sus_VehMz_fr, \
+    Sus_VehFx_rl, Sus_VehFy_rl, Sus_VehMx_rl, Sus_VehMy_rl, Sus_VehMz_rl, \
+    Sus_VehFx_rr, Sus_VehFy_rr, Sus_VehMx_rr, Sus_VehMy_rr, Sus_VehMz_rr);
 }

@@ -174,7 +174,7 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {
 
 		m_sptr_interface->m_ve_x_c, \
 		m_sptr_interface->m_ve_y_c, \
-		m_sptr_interface->m_ve_z_c/*, \
+		m_sptr_interface->m_ve_z_c, \
 
 		m_sptr_interface->m_beta_c, \
 		m_sptr_interface->m_xe_x_o, 
@@ -246,7 +246,7 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_Veh_Pz_rr, 
 		m_sptr_interface->m_Veh_vx_rr, 
 		m_sptr_interface->m_Veh_vy_rr, 
-		m_sptr_interface->m_Veh_vz_rr*/
+		m_sptr_interface->m_Veh_vz_rr, 
 		});
 }
 

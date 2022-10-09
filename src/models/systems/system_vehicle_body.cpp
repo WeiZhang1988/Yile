@@ -20,6 +20,9 @@ void NMSPC::Sys_Vehicle_Body::push_con_states (d_vec &con_states) {
 void NMSPC::Sys_Vehicle_Body::pull_con_states (const d_vec &con_states) {
 	std::copy(con_states.begin(), con_states.begin() + Vehicle_Body::m_con_states_num, m_vhl_bdy_con_states.begin());
 	m_sptr_vhl_bdy->pull_con_states(m_vhl_bdy_con_states);
+	m_sptr_interface->m_phai = con_states[6];
+	m_sptr_interface->m_theta = con_states[7];
+	m_sptr_interface->m_psi = con_states[8];
 }
 
 void NMSPC::Sys_Vehicle_Body::update_pv() {
@@ -54,6 +57,9 @@ void NMSPC::Sys_Vehicle_Body::update_fm() {
 void NMSPC::Sys_Vehicle_Body::update_drv() {
 	m_sptr_vhl_bdy->push_drv(m_vhl_bdy_drvs);
 	std::copy(m_vhl_bdy_drvs.begin(), m_vhl_bdy_drvs.end(), m_drvs.begin());
+	m_sptr_interface->m_drv_phai = m_vhl_bdy_drvs[6];
+	m_sptr_interface->m_drv_theta = m_vhl_bdy_drvs[7];
+	m_sptr_interface->m_drv_psi = m_vhl_bdy_drvs[8];
 
 }
 
@@ -152,7 +158,15 @@ void NMSPC::Sys_Vehicle_Body::store_data() {
 		m_sptr_interface->m_Veh_Pz_rr, 
 		m_sptr_interface->m_Veh_vx_rr, 
 		m_sptr_interface->m_Veh_vy_rr, 
-		m_sptr_interface->m_Veh_vz_rr
+		m_sptr_interface->m_Veh_vz_rr,
+/*
+		m_sptr_interface->m_drv_phai,
+		m_sptr_interface->m_drv_theta,
+		m_sptr_interface->m_drv_psi,
+
+		m_sptr_interface->m_phai,
+		m_sptr_interface->m_theta,
+		m_sptr_interface->m_psi*/
 		});
 }
 

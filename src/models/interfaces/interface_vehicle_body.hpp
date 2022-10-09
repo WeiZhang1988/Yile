@@ -138,6 +138,15 @@ public:
 
     //vb fm push
     //nothing to push
+
+
+    //for test only
+    double m_drv_phai = NaN;
+    double m_drv_theta = NaN;
+    double m_drv_psi = NaN;
+    double m_phai = NaN;
+    double m_theta = NaN;
+    double m_psi = NaN;
 };
 
 }//end of name space 

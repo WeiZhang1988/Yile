@@ -51,7 +51,7 @@ void NMSPC::Tire_Fiala::pull_con_states(const d_vec &con_states) {
 	m_alpha_prime = con_states[1];
 	m_Mroll = con_states[2];
 	m_Sus_lpf_str = con_states[3];
-	m_Sus_lpf_gamma = con_states[4];
+	m_Sus_lpf_gamma = 0.0;//con_states[4];
 	m_Sus_lpf_Fz = con_states[5];
 }
 
@@ -89,9 +89,12 @@ const double &Sus_gamma, const double &Sus_str, const double &Sus_r) {
 	m_DCM_21 = m_sin_c * m_sin_b * m_cos_a - m_cos_c * m_sin_a;
 	m_DCM_22 = m_cos_b * m_cos_a;
 
-	m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_10 * m_Sus_vy + m_DCM_20 * m_Sus_vz;
+	/*m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_10 * m_Sus_vy + m_DCM_20 * m_Sus_vz;
 	m_Tir_vy = m_DCM_01 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_21 * m_Sus_vz;
-	m_Tir_vz = m_DCM_02 * m_Sus_vx + m_DCM_12 * m_Sus_vy + m_DCM_22 * m_Sus_vz;
+	m_Tir_vz = m_DCM_02 * m_Sus_vx + m_DCM_12 * m_Sus_vy + m_DCM_22 * m_Sus_vz;*/
+	m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_01 * m_Sus_vy + m_DCM_02 * m_Sus_vz;
+	m_Tir_vy = m_DCM_10 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_12 * m_Sus_vz;
+	m_Tir_vz = m_DCM_20 * m_Sus_vx + m_DCM_21 * m_Sus_vy + m_DCM_22 * m_Sus_vz;
 }
 
 void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, const double &Tir_Prs, const double &Air_Tamb) {

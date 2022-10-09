@@ -20,7 +20,7 @@ public:
 	static const int m_con_states_num = 12;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
-
+	//double a=1.515, double b=1.504, double d=0.0, double h=0.134, 
 	Vehicle_Body (\
 	//chassis
 	double mass=1181.0, \
@@ -66,7 +66,8 @@ public:
 	double z7I_yx=0.0, double z7I_yy=0.0, double z7I_yz=0.0, 
 	double z7I_zx=0.0, double z7I_zy=0.0, double z7I_zz=0.0, \
 	//aerodynamics
-	double Pabs=101325.0, double Cg=287.058, \
+	//double Pabs=101325.0, double Cg=287.058;
+	double Pabs=0.0, double Cg=287.058, \
 	double Af=2.110, double Cd=0.3, double Cl=0.1, double Cpm=0.1, \
 	d_vec beta_w={0.0,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,\
 	0.10,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.20,\

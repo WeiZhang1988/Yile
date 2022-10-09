@@ -37,7 +37,7 @@ Simulator_Chassis_2Ind_Disk_Fiala::Simulator_Chassis_2Ind_Disk_Fiala(double t_st
 }
 
 void Simulator_Chassis_2Ind_Disk_Fiala::run () {
-	io::CSVReader<38> m_inputs("chassis_2ind_wheels/14dof_inputs.csv"); //need modification
+	io::CSVReader<38> m_inputs("chassis_2ind_wheels/PassVeh14DOF_inputs10091343.csv"); //need modification
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
