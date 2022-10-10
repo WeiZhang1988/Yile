@@ -45,8 +45,6 @@ void NMSPC::Wheel_Disk::pull_con_states(const d_vec &con_states) {
     m_Tir_Pz = con_states[1];
     m_Tir_vz = con_states[2];
     m_Sus_lpf_Fz = con_states[3];
-    //process
-    m_Sus_lpf_Fz = saturation(m_Sus_lpf_Fz, -10.0*9.81*2000, inf);
 }
 
 void NMSPC::Wheel_Disk::pull_pv(const double &Gnd_Pz) {
@@ -107,7 +105,7 @@ void NMSPC::Wheel_Disk::push_drv(d_vec &derivatives) {
         m_drv_unlocked_omega = (m_Tfmaxk * tanh(-4.0 * m_unlocked_omega) - m_Tout - m_br * m_unlocked_omega) / m_IYY;
     }
     m_drv_Tir_Pz = m_Tir_vz;
-	m_drv_Tir_vz = (m_Tir_Fz - m_Sus_lpf_Fz) / m_mass;
+	m_drv_Tir_vz = (m_Tir_Fz - saturation(m_Sus_lpf_Fz, -10.0*9.81*2000, inf)) / m_mass;
     m_drv_Sus_lfp_Fz = (m_Sus_Fz - m_Sus_lpf_Fz) * m_lpf_wc;
 
     //push output

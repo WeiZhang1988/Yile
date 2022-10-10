@@ -188,8 +188,4 @@ void NMSPC::Tire_Fiala::push_drv (d_vec &derivatives) {
 	derivatives[3] = m_drv_Sus_lpf_str;
 	derivatives[4] = m_drv_Sus_lpf_gamma;
 	derivatives[5] = m_drv_Sus_lpf_Fz;
-
-	static int i{0};
-	i++;
-	
 }

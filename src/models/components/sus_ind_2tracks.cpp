@@ -61,7 +61,11 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_Veh_hgt_cg = Veh_hgt_cg;
 	m_Veh_r 	 = Veh_r;
 	//--left
-	m_Strg_str_l = Strg_str_l;
+	if (m_is_strg) {
+		m_Strg_str_l = Strg_str_l;
+	} else {
+		m_Strg_str_l = 0.0;
+	}
 	m_Sus_TirPz_l= Sus_TirPz_l;
 	m_Sus_Tirvz_l= Sus_Tirvz_l;
 	m_Tir_Re_l   = Tir_Re_l;
@@ -70,7 +74,11 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_Veh_vy_l   = Veh_vy_l;
 	m_Veh_vz_l   = Veh_vz_l;
 	//--right
-	m_Strg_str_r = Strg_str_r;
+	if (m_is_strg) {
+		m_Strg_str_r = Strg_str_r;
+	} else {
+		m_Strg_str_r = 0.0;
+	}
 	m_Sus_TirPz_r= Sus_TirPz_r;
 	m_Sus_Tirvz_r= Sus_Tirvz_r;
 	m_Tir_Re_r   = Tir_Re_r;

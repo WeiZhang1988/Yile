@@ -18,6 +18,7 @@ add_library(
     systems/system_sus_2ind.cpp
     systems/system_vehicle_body.cpp
     systems/system_chassis_2ind_disk_fiala.cpp
+    systems/system_wheel_tire_4disk_fiala.cpp
 )
 
 
@@ -41,6 +42,7 @@ install(FILES components/common.hpp
     		  systems/system_sus_2ind.hpp
     		  systems/system_vehicle_body.hpp
     		  systems/system_chassis_2ind_disk_fiala.hpp
+              systems/system_wheel_tire_4disk_fiala.hpp
 			  DESTINATION ${PROJECT_SOURCE_DIR}/install/include)
 #install(TARGETS models ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/install/lib)
 #install(TARGETS models LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/install/share)

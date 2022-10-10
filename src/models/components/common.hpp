@@ -34,7 +34,7 @@ constexpr double eps = std::numeric_limits<double>::epsilon();
 constexpr double NaN = std::numeric_limits<double>::quiet_NaN();
 constexpr double g = 9.81;
 constexpr double pi = 2.0 * acos(0.0);
-
+//constexpr double pi = 3.141592653589793;
 struct push_back_state_and_time {
 	d_v_vec &m_states;
 	d_vec &m_times;

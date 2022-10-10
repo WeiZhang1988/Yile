@@ -23,11 +23,11 @@ public:
 
 	Tire_Fiala (\
 	double Lrelx=0.05, double Lrely=0.15, \
-	double alpha_min=-1.5708, double alpha_max=1.5708, double mu_min=0.8, \
-	double mu_max=1.0, double aMy=8e-4, double bMy=1e-3, \
+	double alpha_min=-1.50806269049027, double alpha_max=1.47424202250808, double mu_min=0.5, \
+	double mu_max=0.8, double aMy=8e-4, double bMy=1e-3, \
 	double cMy=1.6e-4, double alphaMy=-3e-3, double betaMy=0.97, \
 	double Fz_min=100.0, double Fz_max=1e4, double cKappa=1e7, \
-	double cAlpha=4.5e4, double bMz=0.0, double width=0.209, \
+	double cAlpha=4.5e4, double bMz=0.0, double width=0.209045013245853, \
 	double cGamma=0.0, \
 	double init_kappa=0.0, double init_alpha=0.0, \
 	double init_Mroll=0.0) :

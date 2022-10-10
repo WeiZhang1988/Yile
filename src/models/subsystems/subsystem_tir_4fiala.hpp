@@ -22,20 +22,20 @@ public:
 	static const int m_dis_states_num = Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num + Tire_Fiala::m_dis_states_num;
 
     Subsys_Tire_4Fiala (double Lrelx_f=0.05, double Lrely_f=0.15, \
-	double alpha_min_f=-1.5708, double alpha_max_f=1.5708, double mu_min_f=0.5, \
+	double alpha_min_f=-1.50806269049027, double alpha_max_f=1.47424202250808, double mu_min_f=0.5, \
 	double mu_max_f=0.8, double aMy_f=8e-4, double bMy_f=1e-3, \
 	double cMy_f=1.6e-4, double alphaMy_f=-3e-3, double betaMy_f=0.97, \
 	double Fz_min_f=100.0, double Fz_max_f=1e4, double cKappa_f=1e7, \
-	double cAlpha_f=4.5e4, double bMz_f=0.0, double width_f=0.209, \
+	double cAlpha_f=4.5e4, double bMz_f=0.0, double width_f=0.209045013245853, \
 	double cGamma_f=0.0, \
 	double init_kappa_f=0.0, double init_alpha_f=0.0, \
 	double init_Mroll_f=0.0, \
     double Lrelx_r=0.15, double Lrely_r=0.01, \
-	double alpha_min_r=-1.5708, double alpha_max_r=1.5708, double mu_min_r=0.8, \
+	double alpha_min_r=-1.50806269049027, double alpha_max_r=1.47424202250808, double mu_min_r=0.8, \
 	double mu_max_r=1.0, double aMy_r=8e-4, double bMy_r=1e-3, \
 	double cMy_r=1.6e-4, double alphaMy_r=-3e-3, double betaMy_r=0.97, \
 	double Fz_min_r=100.0, double Fz_max_r=1e4, double cKappa_r=1e7, \
-	double cAlpha_r=4.5e4, double bMz_r=0.0, double width_r=0.209, \
+	double cAlpha_r=4.5e4, double bMz_r=0.0, double width_r=0.209045013245853, \
 	double cGamma_r=0.0, \
 	double init_kappa_r=0.0, double init_alpha_r=0.0, \
 	double init_Mroll_r=0.0) {

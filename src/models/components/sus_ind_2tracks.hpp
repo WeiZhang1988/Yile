@@ -21,7 +21,7 @@ public:
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
 
-	Sus_Ind_2Tracks (double F0z=2886.0, double Kz=52451.006579283188, double Cz=5565.226438019838, \
+	Sus_Ind_2Tracks (double F0z=2886.0, double Kz=52451.006579283188, double Cz=5565.224638019838, \
 	double Hmax=0.25, double roll_strg_H_slp=-0.2269, \
 	double toe=0.0349, double toe_strg_slp=0.01, \
 	double caster=0.0698, double caster_H_slp=-0.2269, double caster_strg_slp=0.01, \
