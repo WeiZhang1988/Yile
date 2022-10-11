@@ -117,7 +117,7 @@ void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::store_data() {
             m_sptr_interface->m_Sus_TirFy_rr, 
             m_sptr_interface->m_Tir_Mx_rr,    
             m_sptr_interface->m_Tir_My_rr,    
-            m_sptr_interface->m_Tir_Mz_rr,
+            m_sptr_interface->m_Tir_Mz_rr
 /*
             m_subsys_tir_4fiala_con_states[5],
             m_subsys_tir_4fiala_con_states[11],
@@ -133,6 +133,7 @@ void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::store_data() {
 }
 
 void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::operator() (const d_vec &x, d_vec &dxdt, const double &t) {
+    m_t = t;
 	pull_con_states(x);
 	update_pv();
 	update_fm();

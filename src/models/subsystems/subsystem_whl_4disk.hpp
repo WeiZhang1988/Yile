@@ -27,11 +27,13 @@ public:
 	double Rm_f=0.177, double mu_kinetic_f=0.2, double mu_static_f=0.3, \
 	double init_omega_f=0.0, double init_Pz_f=0.0, double init_vz_f=0.0, \
 	bool init_locked_flag_f=false, \
+    
     double unloaded_radius_r=0.309384029954441, double IYY_r=0.740633832792491, double mass_r=5.0,\
 	double br_r=1e-3, double disk_abore_r=0.05, double num_pads_r=2.0, \
 	double Rm_r=0.177, double mu_kinetic_r=0.2, double mu_static_r=0.3, \
 	double init_omega_r=0.0, double init_Pz_r=0.0, double init_vz_r=0.0, \
-	bool init_locked_flag_r=false) {
+	bool init_locked_flag_r=false) 
+    {
         m_whl_fl = Wheel_Disk(unloaded_radius_f, IYY_f, mass_f,br_f, disk_abore_f, num_pads_f, \
         Rm_f, mu_kinetic_f, mu_static_f, init_omega_f, init_Pz_f, init_vz_f, init_locked_flag_f);
         m_whl_fr = Wheel_Disk(unloaded_radius_f, IYY_f, mass_f,br_f, disk_abore_f, num_pads_f, \
@@ -45,6 +47,9 @@ public:
 
     void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
+
+    void push_dis_states (b_vec &dis_states);
+    void pull_dis_states (const b_vec &dis_states);
 
 	void pull_pv (const double &Gnd_Pz_fl, const double &Gnd_Pz_fr, const double &Gnd_Pz_rl, const double &Gnd_Pz_rr);
     void push_pv (double &Tir_omega_fl, double &Sus_TirPz_fl, double &Sus_Tirvz_fl, double &Tir_Pz_fl, double &Tir_vz_fl, double &Tir_rhoz_fl, double &Tir_Re_fl, \
@@ -69,6 +74,11 @@ public:
     d_vec m_whl_drvs_fr = d_vec(Wheel_Disk::m_derivatives_num, NaN);
     d_vec m_whl_drvs_rl = d_vec(Wheel_Disk::m_derivatives_num, NaN);
     d_vec m_whl_drvs_rr = d_vec(Wheel_Disk::m_derivatives_num, NaN);
+
+    b_vec m_whl_dis_states_fl = b_vec(Wheel_Disk::m_dis_states_num, NaN);
+    b_vec m_whl_dis_states_fr = b_vec(Wheel_Disk::m_dis_states_num, NaN);
+    b_vec m_whl_dis_states_rl = b_vec(Wheel_Disk::m_dis_states_num, NaN);
+    b_vec m_whl_dis_states_rr = b_vec(Wheel_Disk::m_dis_states_num, NaN);
 };
 
 } //end of name space
