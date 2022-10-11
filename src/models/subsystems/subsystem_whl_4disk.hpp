@@ -27,21 +27,22 @@ public:
 	double Rm_f=0.177, double mu_kinetic_f=0.2, double mu_static_f=0.3, \
 	double init_omega_f=0.0, double init_Pz_f=0.0, double init_vz_f=0.0, \
 	bool init_locked_flag_f=false, \
-    
+    bool init_locked_state_f=false, \
     double unloaded_radius_r=0.309384029954441, double IYY_r=0.740633832792491, double mass_r=5.0,\
 	double br_r=1e-3, double disk_abore_r=0.05, double num_pads_r=2.0, \
 	double Rm_r=0.177, double mu_kinetic_r=0.2, double mu_static_r=0.3, \
 	double init_omega_r=0.0, double init_Pz_r=0.0, double init_vz_r=0.0, \
-	bool init_locked_flag_r=false) 
+	bool init_locked_flag_r=false, \
+    bool init_locked_state_r=false) 
     {
         m_whl_fl = Wheel_Disk(unloaded_radius_f, IYY_f, mass_f,br_f, disk_abore_f, num_pads_f, \
-        Rm_f, mu_kinetic_f, mu_static_f, init_omega_f, init_Pz_f, init_vz_f, init_locked_flag_f);
+        Rm_f, mu_kinetic_f, mu_static_f, init_omega_f, init_Pz_f, init_vz_f, init_locked_flag_f, init_locked_state_f);
         m_whl_fr = Wheel_Disk(unloaded_radius_f, IYY_f, mass_f,br_f, disk_abore_f, num_pads_f, \
-        Rm_f, mu_kinetic_f, mu_static_f, init_omega_f, init_Pz_f, init_vz_f, init_locked_flag_f);
+        Rm_f, mu_kinetic_f, mu_static_f, init_omega_f, init_Pz_f, init_vz_f, init_locked_flag_f, init_locked_state_f);
         m_whl_rl = Wheel_Disk(unloaded_radius_r, IYY_r, mass_r,br_r, disk_abore_r, num_pads_r, \
-        Rm_r, mu_kinetic_r, mu_static_r, init_omega_r, init_Pz_r, init_vz_r, init_locked_flag_r);
+        Rm_r, mu_kinetic_r, mu_static_r, init_omega_r, init_Pz_r, init_vz_r, init_locked_flag_r, init_locked_state_r);
         m_whl_rr = Wheel_Disk(unloaded_radius_r, IYY_r, mass_r,br_r, disk_abore_r, num_pads_r, \
-        Rm_r, mu_kinetic_r, mu_static_r, init_omega_r, init_Pz_r, init_vz_r, init_locked_flag_r);
+        Rm_r, mu_kinetic_r, mu_static_r, init_omega_r, init_Pz_r, init_vz_r, init_locked_flag_r, init_locked_state_r);
     };
 
 
@@ -63,6 +64,8 @@ public:
     void push_fm (double &Brk_Trq_fl, double &Brk_Trq_fr, double &Brk_Trq_rl, double &Brk_Trq_rr);
 
 	void push_drv (d_vec &derivatives);
+
+    void update_dis_states();
 
     private:
     Wheel_Disk m_whl_fl, m_whl_fr, m_whl_rl, m_whl_rr;

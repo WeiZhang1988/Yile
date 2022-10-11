@@ -114,6 +114,7 @@ void Simulator_Wheel_Tire_4Disk_Fiala::run () {
 			); 
 		//m_sptr_sys->push_con_states_omega_only(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_sptr_sys->update_dis_states();
 
 		t += m_t_step;
 		//spin(m_steps);

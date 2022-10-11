@@ -26,13 +26,15 @@ public:
 	double br=1e-3, double disk_abore=0.05, double num_pads=2.0, \
 	double Rm=0.177, double mu_kinetic=0.2, double mu_static=0.3, \
 	double init_omega=0.0, double init_Pz=0.0, double init_vz=0.0, \
-	bool init_locked_flag=false) :
+	bool init_locked_flag=false, \
+	bool init_locked_state=false) :
 	m_unloaded_radius(unloaded_radius),m_IYY(IYY), m_mass(mass), \
 	m_br(br), m_disk_abore(disk_abore), m_num_pads(num_pads), \
 	m_Rm(Rm), m_mu_kinetic(mu_kinetic), m_mu_static(mu_static), \
 	m_unlocked_omega(init_omega), m_unlocked_omega_pre(init_omega), \
 	m_Tir_Pz(init_Pz), m_Tir_vz(init_vz), \
-	m_locked_flag(init_locked_flag) {};
+	m_locked_flag(init_locked_flag), \
+	m_locked_state(init_locked_state) {};
 
 	Wheel_Disk &operator= (const Wheel_Disk &org);
 
@@ -45,6 +47,8 @@ public:
 	void push_fm (double &Brk_Trq);
 
 	void push_drv (d_vec &derivatives);
+
+	void update_dis_states();
 private:
 	//built in table
 	const int m_truth_table[8] = {0,1,0,0,1,1,1,0};	//for lock logic
@@ -76,6 +80,7 @@ private:
 	double m_unlocked_omega_pre;
 	//discrete states
 	bool m_locked_flag;
+	bool m_locked_state;
 	//middle variables
 	double m_Tout = NaN;
 	double m_Tfmaxk = NaN;
