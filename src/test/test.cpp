@@ -155,11 +155,11 @@ void run_Wheel_Tire_4Disk_Fiala() {
 int main(){
 	//run_Whl_Disk_Tir_Fiala();
 	//run_Tir_4Fiala();
-	run_Sus_2Ind();
+	//run_Sus_2Ind();
 	//run_Vehicle_Body();
 	//run_Whl_4Disk();
 	//run_LPF();
 	//run_Chassis_2Ind_Disk_Fiala();
-	//run_Wheel_Tire_4Disk_Fiala();
+	run_Wheel_Tire_4Disk_Fiala();
 	return 0;
 }

@@ -47,6 +47,7 @@ public:
 	
 
 private:
+	double m_t = 0.0;
 	std::shared_ptr<Subsys_Wheel_4Disk> 			m_sptr_subsys_whl_4disk;
 	std::shared_ptr<Subsys_Tire_4Fiala> 			m_sptr_subsys_tir_4fiala;
 	std::shared_ptr<Int_Chassis_2Ind_Disk_Fiala> 	m_sptr_interface;
@@ -60,7 +61,7 @@ private:
 	d_vec m_subsys_whl_4disk_drvs 		 = d_vec(Subsys_Wheel_4Disk::m_derivatives_num,NaN);
 	d_vec m_subsys_tir_4fiala_drvs 		 = d_vec(Subsys_Tire_4Fiala::m_derivatives_num,NaN);
 	d_vec m_drvs = d_vec(m_derivatives_num,NaN);
-	
+
 public:
 	//continuous states
 	d_vec m_con_states = d_vec(m_con_states_num,NaN);
