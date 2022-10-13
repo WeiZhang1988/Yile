@@ -77,10 +77,3 @@ void NMSPC::Subsys_Wheel_4Disk::push_drv(d_vec &derivatives) {
     std::copy(m_whl_drvs_rl.begin(),m_whl_drvs_rl.end(),derivatives.begin() + 2 * Wheel_Disk::m_derivatives_num);
     std::copy(m_whl_drvs_rr.begin(),m_whl_drvs_rr.end(),derivatives.begin() + 3 * Wheel_Disk::m_derivatives_num);
 }
-
-void NMSPC::Subsys_Wheel_4Disk::update_dis_states() {
-    m_whl_fl.update_dis_states();
-    m_whl_fr.update_dis_states();
-    m_whl_rl.update_dis_states();
-    m_whl_rr.update_dis_states();
-}

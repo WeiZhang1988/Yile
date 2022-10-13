@@ -37,6 +37,7 @@ void Simulator_Tir_4Fiala::run () {
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
 
+	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	m_tp_start = steady_clock::now();
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
@@ -108,7 +109,6 @@ void Simulator_Tir_4Fiala::run () {
 		m_sptr_interface->m_Air_Tamb_rl,
 		m_sptr_interface->m_Air_Tamb_rr
 	); 
-		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
 		
 		

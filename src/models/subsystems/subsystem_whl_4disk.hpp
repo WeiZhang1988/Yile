@@ -17,6 +17,7 @@
 namespace NMSPC{
 class Subsys_Wheel_4Disk {
 public:
+    static const int m_whls_num = 4;
     static const int m_con_states_num = Wheel_Disk::m_con_states_num + Wheel_Disk::m_con_states_num + Wheel_Disk::m_con_states_num + Wheel_Disk::m_con_states_num;
 	static const int m_derivatives_num = m_con_states_num;
 	static const int m_dis_states_num = Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num;
@@ -65,8 +66,6 @@ public:
 
 	void push_drv (d_vec &derivatives);
 
-    void update_dis_states();
-
     private:
     Wheel_Disk m_whl_fl, m_whl_fr, m_whl_rl, m_whl_rr;
     d_vec m_whl_con_states_fl = d_vec(Wheel_Disk::m_con_states_num, NaN);
@@ -77,11 +76,6 @@ public:
     d_vec m_whl_drvs_fr = d_vec(Wheel_Disk::m_derivatives_num, NaN);
     d_vec m_whl_drvs_rl = d_vec(Wheel_Disk::m_derivatives_num, NaN);
     d_vec m_whl_drvs_rr = d_vec(Wheel_Disk::m_derivatives_num, NaN);
-
-    b_vec m_whl_dis_states_fl = b_vec(Wheel_Disk::m_dis_states_num, NaN);
-    b_vec m_whl_dis_states_fr = b_vec(Wheel_Disk::m_dis_states_num, NaN);
-    b_vec m_whl_dis_states_rl = b_vec(Wheel_Disk::m_dis_states_num, NaN);
-    b_vec m_whl_dis_states_rr = b_vec(Wheel_Disk::m_dis_states_num, NaN);
 };
 
 } //end of name space

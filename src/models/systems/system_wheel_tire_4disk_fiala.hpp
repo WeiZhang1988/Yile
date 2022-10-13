@@ -30,18 +30,17 @@ public:
 	void add_subsys_whl_4disk(std::shared_ptr<Subsys_Wheel_4Disk> sptr_subsys_whl_4disk) 	{m_sptr_subsys_whl_4disk = sptr_subsys_whl_4disk;}
 	void add_subsys_tir_4fiala(std::shared_ptr<Subsys_Tire_4Fiala> sptr_subsys_tir_4fiala) 	{m_sptr_subsys_tir_4fiala = sptr_subsys_tir_4fiala;}
 	void add_interface(std::shared_ptr<Int_Chassis_2Ind_Disk_Fiala> sptr_interface) 		{m_sptr_interface = sptr_interface;}
-	void add_store(std::shared_ptr<d_v_vec> sptr_store) 									{m_sptr_store=sptr_store;}
+	void add_store(std::shared_ptr<d_v_vec> sptr_store) 									{m_sptr_store = sptr_store;}
 	
 	void push_con_states(d_vec &con_states);
-	void push_con_states_omega_only(d_vec &con_states);
+	void push_con_states_whl_only(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
+	void pull_con_states_whl_only(const d_vec &con_states);
 
 	void update_pv();
 	void update_fm();
 
 	void update_drv();
-
-	void update_dis_states();
 
 	void store_data();
 
@@ -55,7 +54,6 @@ private:
 	std::shared_ptr<Int_Chassis_2Ind_Disk_Fiala> 	m_sptr_interface;
 	std::shared_ptr<d_v_vec> 						m_sptr_store;
 
-	//inputs
 	//continuous states 
 	d_vec m_subsys_whl_4disk_con_states  = d_vec(Subsys_Wheel_4Disk::m_con_states_num,NaN);
 	d_vec m_subsys_tir_4fiala_con_states = d_vec(Subsys_Tire_4Fiala::m_con_states_num,NaN);

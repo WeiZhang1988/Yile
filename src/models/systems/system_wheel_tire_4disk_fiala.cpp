@@ -19,7 +19,7 @@ void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::push_con_states (d_vec &con_states) {
     std::copy(m_subsys_tir_4fiala_con_states.begin(), m_subsys_tir_4fiala_con_states.end(), con_states.begin() + Subsys_Wheel_4Disk::m_con_states_num);
 }
 
-void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::push_con_states_omega_only (d_vec &con_states) {
+void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::push_con_states_whl_only (d_vec &con_states) {
     m_sptr_subsys_whl_4disk->push_con_states(m_subsys_whl_4disk_con_states);
     std::copy(m_subsys_whl_4disk_con_states.begin(), m_subsys_whl_4disk_con_states.end(), con_states.begin());
 }
@@ -33,8 +33,11 @@ void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::pull_con_states (const d_vec &con_states
               m_subsys_tir_4fiala_con_states.begin());
     m_sptr_subsys_whl_4disk->pull_con_states(m_subsys_whl_4disk_con_states);
     m_sptr_subsys_tir_4fiala->pull_con_states(m_subsys_tir_4fiala_con_states);
+}
 
-
+void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::pull_con_states_whl_only(const d_vec &con_states) {
+    std::copy(con_states.begin(), con_states.begin() + Subsys_Wheel_4Disk::m_con_states_num, m_subsys_whl_4disk_con_states.begin());
+    m_sptr_subsys_whl_4disk->pull_con_states(m_subsys_whl_4disk_con_states);
 }
 
 void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::update_pv() {
@@ -79,10 +82,6 @@ void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::update_drv() {
 	m_sptr_subsys_tir_4fiala->push_drv(m_subsys_tir_4fiala_drvs);
 	std::copy(m_subsys_whl_4disk_drvs.begin(),m_subsys_whl_4disk_drvs.end(),m_drvs.begin());
 	std::copy(m_subsys_tir_4fiala_drvs.begin(),m_subsys_tir_4fiala_drvs.end(),m_drvs.begin() + Subsys_Wheel_4Disk::m_derivatives_num);
-}
-
-void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::update_dis_states() {
-    m_sptr_subsys_whl_4disk->update_dis_states();
 }
 
 void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::store_data() {

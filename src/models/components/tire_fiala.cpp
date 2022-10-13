@@ -89,9 +89,6 @@ const double &Sus_gamma, const double &Sus_str, const double &Sus_r) {
 	m_DCM_21 = m_sin_c * m_sin_b * m_cos_a - m_cos_c * m_sin_a;
 	m_DCM_22 = m_cos_b * m_cos_a;
 
-	/*m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_10 * m_Sus_vy + m_DCM_20 * m_Sus_vz;
-	m_Tir_vy = m_DCM_01 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_21 * m_Sus_vz;
-	m_Tir_vz = m_DCM_02 * m_Sus_vx + m_DCM_12 * m_Sus_vy + m_DCM_22 * m_Sus_vz;*/
 	m_Tir_vx = m_DCM_00 * m_Sus_vx + m_DCM_01 * m_Sus_vy + m_DCM_02 * m_Sus_vz;
 	m_Tir_vy = m_DCM_10 * m_Sus_vx + m_DCM_11 * m_Sus_vy + m_DCM_12 * m_Sus_vz;
 	m_Tir_vz = m_DCM_20 * m_Sus_vx + m_DCM_21 * m_Sus_vy + m_DCM_22 * m_Sus_vz;

@@ -27,14 +27,16 @@ Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_
 	m_sptr_sys->add_subsys_whl_4disk(sptr_sub_whl_4disk);
 	m_sptr_sys->add_interface(m_sptr_interface);
 	m_sptr_sys->add_store(m_sptr_store);
+
 }
 
 void Simulator_Whl_4Disk::run () {
-	io::CSVReader<28> m_inputs("wheel_test_result/whl_inputs_9271614.csv");
+	io::CSVReader<28> m_inputs("wheel_test_result/whl_inputs_10121430.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
 
+	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	m_tp_start = steady_clock::now();
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
@@ -75,10 +77,11 @@ void Simulator_Whl_4Disk::run () {
 		m_sptr_interface->m_Tir_Fz_rl,
 		m_sptr_interface->m_Tir_Fz_rr
 		); 
+		
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		
-		
+		m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);	
+			
 		t += m_t_step;
 		//spin(m_steps);
 	}

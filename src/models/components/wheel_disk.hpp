@@ -47,8 +47,6 @@ public:
 	void push_fm (double &Brk_Trq);
 
 	void push_drv (d_vec &derivatives);
-
-	void update_dis_states();
 private:
 	//built in table
 	const int m_truth_table[8] = {0,1,0,0,1,1,1,0};	//for lock logic

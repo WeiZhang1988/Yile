@@ -60,12 +60,14 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	//pull inputs
 	m_Veh_hgt_cg = Veh_hgt_cg;
 	m_Veh_r 	 = Veh_r;
-	//--left
 	if (m_is_strg) {
 		m_Strg_str_l = Strg_str_l;
+		m_Strg_str_r = Strg_str_r;
 	} else {
 		m_Strg_str_l = 0.0;
+		m_Strg_str_r = 0.0;
 	}
+	//--left
 	m_Sus_TirPz_l= Sus_TirPz_l;
 	m_Sus_Tirvz_l= Sus_Tirvz_l;
 	m_Tir_Re_l   = Tir_Re_l;
@@ -74,11 +76,6 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_Veh_vy_l   = Veh_vy_l;
 	m_Veh_vz_l   = Veh_vz_l;
 	//--right
-	if (m_is_strg) {
-		m_Strg_str_r = Strg_str_r;
-	} else {
-		m_Strg_str_r = 0.0;
-	}
 	m_Sus_TirPz_r= Sus_TirPz_r;
 	m_Sus_Tirvz_r= Sus_Tirvz_r;
 	m_Tir_Re_r   = Tir_Re_r;
@@ -183,7 +180,7 @@ void NMSPC::Sus_Ind_2Tracks::pull_fm_z() {
 
 	if (m_has_anti_sway)
 		calculate_anti_sway_force_in_position(m_Sus_Fz_l, m_Sus_Fz_r, m_Sus_VehFz_l, m_Sus_VehFz_r, \
-		m_Sus_TirPz_l, m_Sus_TirPz_r, m_Veh_Pz_l, m_Veh_Pz_r);
+		m_Sus_TirPz_l, m_Sus_TirPz_r, m_Sus_VehPz_l, m_Sus_VehPz_r);
 
 }
 
