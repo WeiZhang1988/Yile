@@ -98,7 +98,7 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_x_dot_l 	     = m_Veh_vz_l - m_Sus_Tirvz_l;
 	m_adjusted_toe_l = (abs(m_Strg_str_l) * m_toe_strg_slp_l + m_toe_l + 
 	m_roll_strg_H_slp_l * m_Sus_hgt_l);//左边是正的，右边是负的
-	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;//++++
+	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;
 	m_Sus_gamma_l = abs(m_Strg_str_l) * m_camber_strg_slp_l + m_camber_l + \
 	m_camber_H_slp_l * m_Sus_hgt_l;
 	m_Sus_caster_l = abs(m_Strg_str_l) * m_caster_strg_slp_l + m_caster_l + \
