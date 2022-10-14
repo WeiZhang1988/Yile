@@ -112,9 +112,9 @@ void Simulator_Wheel_Tire_4Disk_Fiala::run () {
 			m_sptr_interface->m_Gnd_scale_rl,
 			m_sptr_interface->m_Gnd_scale_rr
 			); 
-		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states);
+		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states); //接 line 117 : 然后将components中的数据传递到simulator中
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states);
+		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states); //如果dostep计算结果Omega在阈值内，则通过一步pull的操作，将components内数据修改为0 
 
 		t += m_t_step;
 		//spin(m_steps);

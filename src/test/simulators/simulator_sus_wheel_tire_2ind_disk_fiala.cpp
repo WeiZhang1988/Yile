@@ -35,7 +35,7 @@ Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::Simulator_Sus_Wheel_Tire_2Ind_Disk_Fia
 }
 
 void Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::run () {
-	io::CSVReader<38> m_inputs("sus_test_result/sus_2ind_ramp_inputs.csv"); //need modification
+	io::CSVReader<50> m_inputs("wheel_tire_sus_test_result/Wheel_tire_sus_inputs10141615.csv"); //need modification
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
@@ -45,20 +45,78 @@ void Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::run () {
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
-		m_inputs.read_row(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr, \
-    	m_sptr_interface->m_Gnd_scale_fl, m_sptr_interface->m_Tir_Prs_fl, m_sptr_interface->m_Air_Tamb_fl, \
-        m_sptr_interface->m_Gnd_scale_fr, m_sptr_interface->m_Tir_Prs_fr, m_sptr_interface->m_Air_Tamb_fr, \
-        m_sptr_interface->m_Gnd_scale_rl, m_sptr_interface->m_Tir_Prs_rl, m_sptr_interface->m_Air_Tamb_rl, \
-        m_sptr_interface->m_Gnd_scale_rr, m_sptr_interface->m_Tir_Prs_rr, m_sptr_interface->m_Air_Tamb_rr, \
-        m_sptr_interface->m_Air_Wx, m_sptr_interface->m_Air_Wy, m_sptr_interface->m_Air_Wz, \
-        m_sptr_interface->m_Air_Tair, \
-        m_sptr_interface->m_Ext_Fx_ext, m_sptr_interface->m_Ext_Fy_ext, m_sptr_interface->m_Ext_Fz_ext, \
-        m_sptr_interface->m_Ext_Mx_ext, m_sptr_interface->m_Ext_My_ext, m_sptr_interface->m_Ext_Mz_ext, \
-        m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fr, m_sptr_interface->m_Brk_Prs_fr, \
-        m_sptr_interface->m_Axl_Trq_rl, m_sptr_interface->m_Brk_Prs_rl, m_sptr_interface->m_Axl_Trq_rr, m_sptr_interface->m_Brk_Prs_rr, \
-        m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Strg_str_rl, m_sptr_interface->m_Strg_str_rr); 
-		m_sptr_sys->push_con_states_omega_only(m_sptr_sys->m_con_states);
+		m_inputs.read_row( 
+			/*Wheel tire inputs*/
+			m_sptr_interface->m_Axl_Trq_fl,
+			m_sptr_interface->m_Axl_Trq_fr,
+			m_sptr_interface->m_Axl_Trq_rl,
+			m_sptr_interface->m_Axl_Trq_rr,
+
+			m_sptr_interface->m_Brk_Prs_fl,
+			m_sptr_interface->m_Brk_Prs_fr,
+			m_sptr_interface->m_Brk_Prs_rl,
+			m_sptr_interface->m_Brk_Prs_rr,
+
+			m_sptr_interface->m_Gnd_Pz_fl,
+			m_sptr_interface->m_Gnd_Pz_fr,
+			m_sptr_interface->m_Gnd_Pz_rl,
+			m_sptr_interface->m_Gnd_Pz_rr,
+
+			m_sptr_interface->m_Gnd_scale_fl,
+			m_sptr_interface->m_Gnd_scale_fr,
+			m_sptr_interface->m_Gnd_scale_rl,
+			m_sptr_interface->m_Gnd_scale_rr,
+
+			m_sptr_interface->m_Tir_Prs_fl,
+			m_sptr_interface->m_Tir_Prs_fr,
+			m_sptr_interface->m_Tir_Prs_rl,
+			m_sptr_interface->m_Tir_Prs_rr,
+
+			m_sptr_interface->m_Air_Tamb_fl,
+			m_sptr_interface->m_Air_Tamb_fr,
+			m_sptr_interface->m_Air_Tamb_rl,
+			m_sptr_interface->m_Air_Tamb_rr,
+
+			/*suspension*/
+
+			m_sptr_interface->m_Veh_hgt_cg,
+			m_sptr_interface->m_Veh_r,
+
+
+			m_sptr_interface->m_Int_Pz_fl,
+			m_sptr_interface->m_Int_Pz_fr,
+			m_sptr_interface->m_Int_Pz_rl,
+			m_sptr_interface->m_Int_Pz_rr,
+
+			m_sptr_interface->m_Int_Vz_fl,
+			m_sptr_interface->m_Int_Vz_fr,
+			m_sptr_interface->m_Int_Vz_rl,
+			m_sptr_interface->m_Int_Vz_rr,
+
+			m_sptr_interface->m_Strg_str_fl,
+			m_sptr_interface->m_Strg_str_fr,
+			m_sptr_interface->m_Strg_str_rl,
+			m_sptr_interface->m_Strg_str_rr,
+
+			m_sptr_interface->m_Veh_vx_fl,
+			m_sptr_interface->m_Veh_vx_fr,
+			m_sptr_interface->m_Veh_vx_rl,
+			m_sptr_interface->m_Veh_vx_rr,
+
+			m_sptr_interface->m_Veh_vy_fl,
+			m_sptr_interface->m_Veh_vy_fr,
+			m_sptr_interface->m_Veh_vy_rl,
+			m_sptr_interface->m_Veh_vy_rr,
+
+			m_sptr_interface->m_Veh_vz_fl,
+			m_sptr_interface->m_Veh_vz_fr,
+			m_sptr_interface->m_Veh_vz_rl,
+			m_sptr_interface->m_Veh_vz_rr
+
+		);
+		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states);
 
 		t += m_t_step;
 		//spin(m_steps);

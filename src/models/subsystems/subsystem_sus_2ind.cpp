@@ -13,24 +13,32 @@
 #include "subsystem_sus_2ind.hpp"
 
 void NMSPC::Subsys_Sus_2Ind::pull_pv(const double &Veh_hgt_cg, const double &Veh_r, \
-const double &Strg_str_fl, const double &Sus_TirPz_fl, const double &Sus_Tirvz_fl,	const double &Tir_Re_fl, \
-const double &Veh_Pz_fl, const double &Veh_vx_fl, const double &Veh_vy_fl, const double &Veh_vz_fl, \
-const double &Strg_str_fr, const double &Sus_TirPz_fr, const double &Sus_Tirvz_fr,	const double &Tir_Re_fr, \
-const double &Veh_Pz_fr, const double &Veh_vx_fr, const double &Veh_vy_fr, const double &Veh_vz_fr, \
-const double &Strg_str_rl, const double &Sus_TirPz_rl, const double &Sus_Tirvz_rl,	const double &Tir_Re_rl, \
-const double &Veh_Pz_rl, const double &Veh_vx_rl, const double &Veh_vy_rl, const double &Veh_vz_rl, \
-const double &Strg_str_rr, const double &Sus_TirPz_rr, const double &Sus_Tirvz_rr,	const double &Tir_Re_rr, \
-const double &Veh_Pz_rr, const double &Veh_vx_rr, const double &Veh_vy_rr, const double &Veh_vz_rr) {
+    const double &Strg_str_fl, const double &Sus_TirPz_fl, const double &Sus_Tirvz_fl,	const double &Tir_Re_fl, \
+	const double &Int_Pz_fl, const double &Int_Vz_fl, \
+	const double &Veh_vx_fl, const double &Veh_vy_fl, const double &Veh_vz_fl, \
+	const double &Strg_str_fr, const double &Sus_TirPz_fr, const double &Sus_Tirvz_fr,	const double &Tir_Re_fr, \
+	const double &Int_Pz_fr, const double &Int_Vz_fr, \
+	const double &Veh_vx_fr, const double &Veh_vy_fr, const double &Veh_vz_fr, \
+    const double &Strg_str_rl, const double &Sus_TirPz_rl, const double &Sus_Tirvz_rl,	const double &Tir_Re_rl, \
+	const double &Int_Pz_rl, const double &Int_Vz_rl, \
+	const double &Veh_vx_rl, const double &Veh_vy_rl, const double &Veh_vz_rl, \
+	const double &Strg_str_rr, const double &Sus_TirPz_rr, const double &Sus_Tirvz_rr,	const double &Tir_Re_rr, \
+	const double &Int_Pz_rr, const double &Int_Vz_rr, \
+	const double &Veh_vx_rr, const double &Veh_vy_rr, const double &Veh_vz_rr) {
     m_sus_f.pull_pv(Veh_hgt_cg, Veh_r, \
     Strg_str_fl, Sus_TirPz_fl, Sus_Tirvz_fl, Tir_Re_fl, \
-    Veh_Pz_fl, Veh_vx_fl, Veh_vy_fl, Veh_vz_fl, \
+    Int_Pz_fl, Int_Vz_fl, \
+    Veh_vx_fl, Veh_vy_fl, Veh_vz_fl, \
     Strg_str_fr, Sus_TirPz_fr, Sus_Tirvz_fr, Tir_Re_fr, \
-    Veh_Pz_fr, Veh_vx_fr, Veh_vy_fr, Veh_vz_fr);
+    Int_Pz_fr, Int_Vz_fr, \
+    Veh_vx_fr, Veh_vy_fr, Veh_vz_fr);
     m_sus_r.pull_pv(Veh_hgt_cg, Veh_r, \
     Strg_str_rl, Sus_TirPz_rl, Sus_Tirvz_rl,	Tir_Re_rl, \
-    Veh_Pz_rl, Veh_vx_rl, Veh_vy_rl, Veh_vz_rl, \
+    Int_Pz_rl, Int_Vz_rl, \
+    Veh_vx_rl, Veh_vy_rl, Veh_vz_rl, \
     Strg_str_rr, Sus_TirPz_rr, Sus_Tirvz_rr,	Tir_Re_rr, \
-    Veh_Pz_rr, Veh_vx_rr, Veh_vy_rr, Veh_vz_rr);
+    Int_Pz_rr, Int_Vz_rr, \
+    Veh_vx_rr, Veh_vy_rr, Veh_vz_rr);
 }
 
 void NMSPC::Subsys_Sus_2Ind::push_pv(double &Sus_str_fl, double &Sus_gamma_fl, double &Sus_caster_fl, double &Sus_r_fl, double &Sus_vx_fl, double &Sus_vy_fl, double &Sus_vz_fl, \

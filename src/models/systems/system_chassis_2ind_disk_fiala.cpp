@@ -53,14 +53,14 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::update_pv() {
 	m_sptr_interface->m_vb_x_c,  m_sptr_interface->m_vb_y_c,  m_sptr_interface->m_vb_z_c,    m_sptr_interface->m_phai_c,    m_sptr_interface->m_theta_c,   m_sptr_interface->m_psi_c,    m_sptr_interface->m_p_c, m_sptr_interface->m_q_c, m_sptr_interface->m_Veh_r, m_sptr_interface->m_beta_c, \
 	m_sptr_interface->m_xe_x_o,  m_sptr_interface->m_xe_y_o,  m_sptr_interface->m_xe_z_o,    m_sptr_interface->m_ve_x_o,    m_sptr_interface->m_ve_y_o,    m_sptr_interface->m_ve_z_o, \
 	m_sptr_interface->m_xb_x_o,  m_sptr_interface->m_xb_y_o,  m_sptr_interface->m_xb_z_o,    m_sptr_interface->m_vb_x_o,    m_sptr_interface->m_vb_y_o,    m_sptr_interface->m_vb_z_o,   m_sptr_interface->m_beta_o, \
-	m_sptr_interface->m_xe_x_fl, m_sptr_interface->m_xe_y_fl, m_sptr_interface->m_xe_z_fl,   m_sptr_interface->m_ve_x_fl,   m_sptr_interface->m_ve_y_fl,   m_sptr_interface->m_ve_z_fl, \
-	m_sptr_interface->m_xb_x_fl, m_sptr_interface->m_xb_y_fl, m_sptr_interface->m_Veh_Pz_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
-	m_sptr_interface->m_xe_x_fr, m_sptr_interface->m_xe_y_fr, m_sptr_interface->m_xe_z_fr,   m_sptr_interface->m_ve_x_fr,   m_sptr_interface->m_ve_y_fr,   m_sptr_interface->m_ve_z_fr, \
-	m_sptr_interface->m_xb_x_fr, m_sptr_interface->m_xb_y_fr, m_sptr_interface->m_Veh_Pz_fr, m_sptr_interface->m_Veh_vx_fr, m_sptr_interface->m_Veh_vy_fr, m_sptr_interface->m_Veh_vz_fr, \
-	m_sptr_interface->m_xe_x_rl, m_sptr_interface->m_xe_y_rl, m_sptr_interface->m_xe_z_rl,   m_sptr_interface->m_ve_x_rl,   m_sptr_interface->m_ve_y_rl,   m_sptr_interface->m_ve_z_rl, \
-	m_sptr_interface->m_xb_x_rl, m_sptr_interface->m_xb_y_rl, m_sptr_interface->m_Veh_Pz_rl, m_sptr_interface->m_Veh_vx_rl, m_sptr_interface->m_Veh_vy_rl, m_sptr_interface->m_Veh_vz_rl, \
-	m_sptr_interface->m_xe_x_rr, m_sptr_interface->m_xe_y_rr, m_sptr_interface->m_xe_z_rr,   m_sptr_interface->m_ve_x_rr,   m_sptr_interface->m_ve_y_rr,   m_sptr_interface->m_ve_z_rr, \
-	m_sptr_interface->m_xb_x_rr, m_sptr_interface->m_xb_y_rr, m_sptr_interface->m_Veh_Pz_rr, m_sptr_interface->m_Veh_vx_rr, m_sptr_interface->m_Veh_vy_rr, m_sptr_interface->m_Veh_vz_rr);
+	m_sptr_interface->m_xe_x_fl, m_sptr_interface->m_xe_y_fl, m_sptr_interface->m_Int_Pz_fl,   m_sptr_interface->m_ve_x_fl,   m_sptr_interface->m_ve_y_fl,   m_sptr_interface->m_Int_Vz_fl, \
+	m_sptr_interface->m_xb_x_fl, m_sptr_interface->m_xb_y_fl, m_sptr_interface->m_xb_z_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
+	m_sptr_interface->m_xe_x_fr, m_sptr_interface->m_xe_y_fr, m_sptr_interface->m_Int_Pz_fr,   m_sptr_interface->m_ve_x_fr,   m_sptr_interface->m_ve_y_fr,   m_sptr_interface->m_Veh_vz_fr, \
+	m_sptr_interface->m_xb_x_fr, m_sptr_interface->m_xb_y_fr, m_sptr_interface->m_xb_z_fr, m_sptr_interface->m_Veh_vx_fr, m_sptr_interface->m_Veh_vy_fr, m_sptr_interface->m_Veh_vz_fr, \
+	m_sptr_interface->m_xe_x_rl, m_sptr_interface->m_xe_y_rl, m_sptr_interface->m_Int_Pz_rl,   m_sptr_interface->m_ve_x_rl,   m_sptr_interface->m_ve_y_rl,   m_sptr_interface->m_Veh_vz_rl, \
+	m_sptr_interface->m_xb_x_rl, m_sptr_interface->m_xb_y_rl, m_sptr_interface->m_xb_z_rl, m_sptr_interface->m_Veh_vx_rl, m_sptr_interface->m_Veh_vy_rl, m_sptr_interface->m_Veh_vz_rl, \
+	m_sptr_interface->m_xe_x_rr, m_sptr_interface->m_xe_y_rr, m_sptr_interface->m_Int_Pz_rr,   m_sptr_interface->m_ve_x_rr,   m_sptr_interface->m_ve_y_rr,   m_sptr_interface->m_Veh_vz_rr, \
+	m_sptr_interface->m_xb_x_rr, m_sptr_interface->m_xb_y_rr, m_sptr_interface->m_xb_z_rr, m_sptr_interface->m_Veh_vx_rr, m_sptr_interface->m_Veh_vy_rr, m_sptr_interface->m_Veh_vz_rr);
 
     m_sptr_subsys_whl_4disk->pull_pv(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr);
 	m_sptr_subsys_whl_4disk->push_pv(m_sptr_interface->m_Tir_omega_fl, m_sptr_interface->m_Sus_TirPz_fl, m_sptr_interface->m_Sus_Tirvz_fl, m_sptr_interface->m_Tir_Pz_fl, m_sptr_interface->m_Tir_vz_fl, m_sptr_interface->m_Tir_rhoz_fl, m_sptr_interface->m_Tir_Re_fl, \
@@ -70,13 +70,13 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::update_pv() {
 
 	m_sptr_subsys_sus_2ind->pull_pv(m_sptr_interface->m_Veh_hgt_cg, m_sptr_interface->m_Veh_r, \
     m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Sus_TirPz_fl, m_sptr_interface->m_Sus_Tirvz_fl, m_sptr_interface->m_Tir_Re_fl, \
-	m_sptr_interface->m_Veh_Pz_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
+	m_sptr_interface->m_Int_Pz_fl, m_sptr_interface->m_Int_Vz_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
 	m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Sus_TirPz_fr, m_sptr_interface->m_Sus_Tirvz_fr, m_sptr_interface->m_Tir_Re_fr, \
-	m_sptr_interface->m_Veh_Pz_fr, m_sptr_interface->m_Veh_vx_fr, m_sptr_interface->m_Veh_vy_fr, m_sptr_interface->m_Veh_vz_fr, \
+	m_sptr_interface->m_Int_Pz_fr, m_sptr_interface->m_Int_Vz_fr, m_sptr_interface->m_Veh_vx_fr, m_sptr_interface->m_Veh_vy_fr, m_sptr_interface->m_Veh_vz_fr, \
     m_sptr_interface->m_Strg_str_rl, m_sptr_interface->m_Sus_TirPz_rl, m_sptr_interface->m_Sus_Tirvz_rl, m_sptr_interface->m_Tir_Re_rl, \
-	m_sptr_interface->m_Veh_Pz_rl, m_sptr_interface->m_Veh_vx_rl, m_sptr_interface->m_Veh_vy_rl, m_sptr_interface->m_Veh_vz_rl, \
+	m_sptr_interface->m_Int_Pz_rl, m_sptr_interface->m_Int_Vz_rl, m_sptr_interface->m_Veh_vx_rl, m_sptr_interface->m_Veh_vy_rl, m_sptr_interface->m_Veh_vz_rl, \
 	m_sptr_interface->m_Strg_str_rr, m_sptr_interface->m_Sus_TirPz_rr, m_sptr_interface->m_Sus_Tirvz_rr, m_sptr_interface->m_Tir_Re_rr, \
-	m_sptr_interface->m_Veh_Pz_rr, m_sptr_interface->m_Veh_vx_rr, m_sptr_interface->m_Veh_vy_rr, m_sptr_interface->m_Veh_vz_rr);
+	m_sptr_interface->m_Int_Pz_rr, m_sptr_interface->m_Int_Vz_rr, m_sptr_interface->m_Veh_vx_rr, m_sptr_interface->m_Veh_vy_rr, m_sptr_interface->m_Veh_vz_rr);
 	m_sptr_subsys_sus_2ind->push_pv(m_sptr_interface->m_Sus_str_fl, m_sptr_interface->m_Sus_gamma_fl, m_sptr_interface->m_Sus_caster_fl, m_sptr_interface->m_Sus_r_fl, m_sptr_interface->m_Sus_vx_fl, m_sptr_interface->m_Sus_vy_fl, m_sptr_interface->m_Sus_vz_fl, \
 	m_sptr_interface->m_Sus_str_fr, m_sptr_interface->m_Sus_gamma_fr, m_sptr_interface->m_Sus_caster_fr, m_sptr_interface->m_Sus_r_fr, m_sptr_interface->m_Sus_vx_fr, m_sptr_interface->m_Sus_vy_fr, m_sptr_interface->m_Sus_vz_fr, \
     m_sptr_interface->m_Sus_str_rl, m_sptr_interface->m_Sus_gamma_rl, m_sptr_interface->m_Sus_caster_rl, m_sptr_interface->m_Sus_r_rl, m_sptr_interface->m_Sus_vx_rl, m_sptr_interface->m_Sus_vy_rl, m_sptr_interface->m_Sus_vz_rl, \
@@ -194,56 +194,56 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {
 		//ineritial_frame
 		m_sptr_interface->m_xe_x_fl, 
 		m_sptr_interface->m_xe_y_fl, 
-		m_sptr_interface->m_xe_z_fl, 
+		m_sptr_interface->m_Int_Pz_fl, 
 		m_sptr_interface->m_ve_x_fl, 
 		m_sptr_interface->m_ve_y_fl, 
-		m_sptr_interface->m_ve_z_fl, \
+		m_sptr_interface->m_Int_Vz_fl, \
 
 		m_sptr_interface->m_xe_x_fr, 
 		m_sptr_interface->m_xe_y_fr,
-		m_sptr_interface->m_xe_z_fr, 
+		m_sptr_interface->m_Int_Pz_fr, 
 		m_sptr_interface->m_ve_x_fr,
 		m_sptr_interface->m_ve_y_fr, 
-		m_sptr_interface->m_ve_z_fr, \
+		m_sptr_interface->m_Int_Vz_fr, \
 
 		m_sptr_interface->m_xe_x_rl, 
 		m_sptr_interface->m_xe_y_rl, 
-		m_sptr_interface->m_xe_z_rl, 
+		m_sptr_interface->m_Int_Pz_rl, 
 		m_sptr_interface->m_ve_x_rl, 
 		m_sptr_interface->m_ve_y_rl, 
-		m_sptr_interface->m_ve_z_rl, \
+		m_sptr_interface->m_Int_Vz_rl, \
 
 		m_sptr_interface->m_xe_x_rr, 
 		m_sptr_interface->m_xe_y_rr, 
-		m_sptr_interface->m_xe_z_rr, 
+		m_sptr_interface->m_Int_Pz_rr, 
 		m_sptr_interface->m_ve_x_rr, 
 		m_sptr_interface->m_ve_y_rr, 
-		m_sptr_interface->m_ve_z_rr, \
+		m_sptr_interface->m_Int_Vz_rr, \
 		//body_frame
 		m_sptr_interface->m_xb_x_fl,
 		m_sptr_interface->m_xb_y_fl, 
-		m_sptr_interface->m_Veh_Pz_fl, 
+		m_sptr_interface->m_xb_z_fl, 
 		m_sptr_interface->m_Veh_vx_fl, 
 		m_sptr_interface->m_Veh_vy_fl, 
 		m_sptr_interface->m_Veh_vz_fl, \
 
 		m_sptr_interface->m_xb_x_fr, 
 		m_sptr_interface->m_xb_y_fr, 
-		m_sptr_interface->m_Veh_Pz_fr, 
+		m_sptr_interface->m_xb_z_fr, 
 		m_sptr_interface->m_Veh_vx_fr, 
 		m_sptr_interface->m_Veh_vy_fr, 
 		m_sptr_interface->m_Veh_vz_fr, \
 
 		m_sptr_interface->m_xb_x_rl, 
 		m_sptr_interface->m_xb_y_rl, 
-		m_sptr_interface->m_Veh_Pz_rl, 
+		m_sptr_interface->m_xb_z_rl, 
 		m_sptr_interface->m_Veh_vx_rl, 
 		m_sptr_interface->m_Veh_vy_rl, 
 		m_sptr_interface->m_Veh_vz_rl, \
 
 		m_sptr_interface->m_xb_x_rr,
 		m_sptr_interface->m_xb_y_rr, 
-		m_sptr_interface->m_Veh_Pz_rr, 
+		m_sptr_interface->m_xb_z_rr, 
 		m_sptr_interface->m_Veh_vx_rr, 
 		m_sptr_interface->m_Veh_vy_rr, 
 		m_sptr_interface->m_Veh_vz_rr, 

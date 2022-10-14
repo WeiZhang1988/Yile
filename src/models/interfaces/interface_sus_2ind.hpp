@@ -25,7 +25,8 @@ public:
     double m_Sus_TirPz_fl = NaN;            //from wheel
     double m_Sus_Tirvz_fl = NaN;            //from wheel
     double m_Tir_Re_fl    = NaN;            //from wheel
-    double m_Veh_Pz_fl    = NaN;            //from vehicle body
+    double m_Int_Pz_fl    = NaN;            //from vehicle body
+    double m_Int_Vz_fl    = NaN;            //from vehicle body
     double m_Veh_vx_fl    = NaN;            //from vehicle body
     double m_Veh_vy_fl    = NaN;            //from vehicle body
     double m_Veh_vz_fl    = NaN;            //from vehicle body
@@ -33,7 +34,8 @@ public:
     double m_Sus_TirPz_fr = NaN;            //from wheel
     double m_Sus_Tirvz_fr = NaN;            //from wheel
     double m_Tir_Re_fr    = NaN;            //from wheel
-    double m_Veh_Pz_fr    = NaN;            //from vehicle body
+    double m_Int_Pz_fr    = NaN;            //from vehicle body
+    double m_Int_Vz_fr    = NaN;            //from vehicle body
     double m_Veh_vx_fr    = NaN;            //from vehicle body
     double m_Veh_vy_fr    = NaN;            //from vehicle body
     double m_Veh_vz_fr    = NaN;            //from vehicle body
@@ -41,7 +43,8 @@ public:
     double m_Sus_TirPz_rl = NaN;            //from wheel
     double m_Sus_Tirvz_rl = NaN;            //from wheel
     double m_Tir_Re_rl    = NaN;            //from wheel
-    double m_Veh_Pz_rl    = NaN;            //from vehicle body
+    double m_Int_Pz_rl    = NaN;            //from vehicle body
+    double m_Int_Vz_rl    = NaN;            //from vehicle body
     double m_Veh_vx_rl    = NaN;            //from vehicle body
     double m_Veh_vy_rl    = NaN;            //from vehicle body
     double m_Veh_vz_rl    = NaN;            //from vehicle body
@@ -49,7 +52,8 @@ public:
     double m_Sus_TirPz_rr = NaN;            //from wheel
     double m_Sus_Tirvz_rr = NaN;            //from wheel
     double m_Tir_Re_rr    = NaN;            //from wheel
-    double m_Veh_Pz_rr    = NaN;            //from vehicle body
+    double m_Int_Pz_rr    = NaN;            //from vehicle body
+    double m_Int_Vz_rr    = NaN;            //from vehicle body
     double m_Veh_vx_rr    = NaN;            //from vehicle body
     double m_Veh_vy_rr    = NaN;            //from vehicle body
     double m_Veh_vz_rr    = NaN;            //from vehicle body

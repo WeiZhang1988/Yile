@@ -54,9 +54,11 @@ NMSPC::Sus_Ind_2Tracks &NMSPC::Sus_Ind_2Tracks::operator= (const Sus_Ind_2Tracks
 }
 
 void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Veh_r, const double &Strg_str_l, const double &Sus_TirPz_l, const double &Sus_Tirvz_l,	const double &Tir_Re_l, \
-	const double &Veh_Pz_l, const double &Veh_vx_l, const double &Veh_vy_l, const double &Veh_vz_l, \
+	const double &Int_Pz_l, const double &Int_Vz_l, \
+	const double &Veh_vx_l, const double &Veh_vy_l, const double &Veh_vz_l, \
 	const double &Strg_str_r, const double &Sus_TirPz_r, const double &Sus_Tirvz_r,	const double &Tir_Re_r, \
-	const double &Veh_Pz_r, const double &Veh_vx_r, const double &Veh_vy_r, const double &Veh_vz_r) {
+	const double &Int_Pz_r, const double &Int_Vz_r, \
+	const double &Veh_vx_r, const double &Veh_vy_r, const double &Veh_vz_r) {
 	//pull inputs
 	m_Veh_hgt_cg = Veh_hgt_cg;
 	m_Veh_r 	 = Veh_r;
@@ -71,7 +73,8 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_Sus_TirPz_l= Sus_TirPz_l;
 	m_Sus_Tirvz_l= Sus_Tirvz_l;
 	m_Tir_Re_l   = Tir_Re_l;
-	m_Veh_Pz_l   = Veh_Pz_l;
+	m_Int_Pz_l   = Int_Pz_l;
+	m_Int_Vz_l   = Int_Vz_l;
 	m_Veh_vx_l   = Veh_vx_l;
 	m_Veh_vy_l   = Veh_vy_l;
 	m_Veh_vz_l   = Veh_vz_l;
@@ -79,7 +82,8 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_Sus_TirPz_r= Sus_TirPz_r;
 	m_Sus_Tirvz_r= Sus_Tirvz_r;
 	m_Tir_Re_r   = Tir_Re_r;
-	m_Veh_Pz_r   = Veh_Pz_r;
+	m_Int_Pz_r   = Int_Pz_r;
+	m_Int_Vz_r   = Int_Vz_r;
 	m_Veh_vx_r   = Veh_vx_r;
 	m_Veh_vy_r   = Veh_vy_r;
 	m_Veh_vz_r   = Veh_vz_r;
@@ -89,13 +93,14 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_Sus_r_l  = m_Veh_r;			// direct output
 	m_Sus_vx_l = m_Veh_vx_l;		// direct output
 	m_Sus_vy_l = m_Veh_vy_l;		// direct output
-	m_Sus_vz_l = m_Sus_Tirvz_l;		// direct output
-	m_Sus_VehPz_l = m_Veh_Pz_l - m_Veh_hgt_cg;
-	m_Veh_hgt_l = -(abs(m_Strg_str_l) * m_strg_hgt_slp_l - m_Sus_TirPz_l + m_Sus_VehPz_l);
+	m_Sus_vz_l = m_Veh_vz_l;		// direct output
+	m_Sus_IntPz_l = m_Int_Pz_l - m_Veh_hgt_cg;
+	m_Sus_IntVz_l = m_Int_Vz_l;
+	m_Veh_hgt_l = -(abs(m_Strg_str_l) * m_strg_hgt_slp_l - m_Sus_TirPz_l + m_Sus_IntPz_l);
 	m_Sus_hgt_l = -(m_F0z_l / m_Kz_l - m_Veh_hgt_l);
 	m_x_minus_hmax_l = -m_Sus_hgt_l - m_Hmax_l;
 	m_x_plus_hmax_l  = -m_Sus_hgt_l + m_Hmax_l;
-	m_x_dot_l 	     = m_Veh_vz_l - m_Sus_Tirvz_l;
+	m_x_dot_l 	     = m_Sus_IntVz_l - m_Sus_Tirvz_l;
 	m_adjusted_toe_l = (abs(m_Strg_str_l) * m_toe_strg_slp_l + m_toe_l + 
 	m_roll_strg_H_slp_l * m_Sus_hgt_l);//左边是正的，右边是负的
 	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;
@@ -108,13 +113,14 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	m_Sus_r_r  = m_Veh_r;
 	m_Sus_vx_r = m_Veh_vx_r;
 	m_Sus_vy_r = m_Veh_vy_r;
-	m_Sus_vz_r = m_Sus_Tirvz_r;
-	m_Sus_VehPz_r = m_Veh_Pz_r - m_Veh_hgt_cg;
-	m_Veh_hgt_r = -(abs(m_Strg_str_r) * m_strg_hgt_slp_r - m_Sus_TirPz_r + m_Sus_VehPz_r);
+	m_Sus_vz_r = m_Veh_vz_r;
+	m_Sus_IntPz_r = m_Int_Pz_r - m_Veh_hgt_cg;
+	m_Sus_IntVz_r = m_Int_Vz_r;
+	m_Veh_hgt_r = -(abs(m_Strg_str_r) * m_strg_hgt_slp_r - m_Sus_TirPz_r + m_Sus_IntPz_r);
 	m_Sus_hgt_r = -(m_F0z_r / m_Kz_r - m_Veh_hgt_r);
 	m_x_minus_hmax_r = -m_Sus_hgt_r - m_Hmax_r;
 	m_x_plus_hmax_r  = -m_Sus_hgt_r + m_Hmax_r;
-	m_x_dot_r 	     = m_Veh_vz_r - m_Sus_Tirvz_r;
+	m_x_dot_r 	     = m_Sus_IntVz_r - m_Sus_Tirvz_r;
 	m_adjusted_toe_r = -(abs(m_Strg_str_r) * m_toe_strg_slp_r + m_toe_r + \
 	m_roll_strg_H_slp_r * m_Sus_hgt_r);//右边是负的
 	m_Sus_str_r = m_adjusted_toe_r - m_toe_r + m_Strg_str_r;
@@ -180,7 +186,7 @@ void NMSPC::Sus_Ind_2Tracks::pull_fm_z() {
 
 	if (m_has_anti_sway)
 		calculate_anti_sway_force_in_position(m_Sus_Fz_l, m_Sus_Fz_r, m_Sus_VehFz_l, m_Sus_VehFz_r, \
-		m_Sus_TirPz_l, m_Sus_TirPz_r, m_Sus_VehPz_l, m_Sus_VehPz_r);
+		m_Sus_TirPz_l, m_Sus_TirPz_r, m_Sus_IntPz_l, m_Sus_IntPz_r);// 第七，第八个形参：m_Veh_Pz_l -> m_Sus_VehPz_r
 
 }
 

@@ -61,9 +61,11 @@ public:
 
 	void pull_pv (const double &Veh_hgt_cg, const double &Veh_r, \
 	const double &Strg_str_l, const double &Sus_TirPz_l, const double &Sus_Tirvz_l,	const double &Tir_Re_l, \
-	const double &Veh_Pz_l, const double &Veh_vx_l, const double &Veh_vy_l, const double &Veh_vz_l, \
+	const double &Int_Pz_l, const double &Int_Vz_l, \
+	const double &Veh_vx_l, const double &Veh_vy_l, const double &Veh_vz_l, \
 	const double &Strg_str_r, const double &Sus_TirPz_r, const double &Sus_Tirvz_r,	const double &Tir_Re_r, \
-	const double &Veh_Pz_r, const double &Veh_vx_r, const double &Veh_vy_r, const double &Veh_vz_r);
+	const double &Int_Pz_r, const double &Int_Vz_r, \
+	const double &Veh_vx_r, const double &Veh_vy_r, const double &Veh_vz_r);
 	void push_pv (double &Sus_str_l, double &Sus_gamma_l, double &Sus_caster_l, double &Sus_r_l, double &Sus_vx_l, double &Sus_vy_l, double &Sus_vz_l, \
 	double &Sus_str_r, double &Sus_gamma_r, double &Sus_caster_r, double &Sus_r_r, double &Sus_vx_r, double &Sus_vy_r, double &Sus_vz_r);
 	void pull_fm_z ();
@@ -113,7 +115,8 @@ private:
 	double m_Sus_TirPz_l	= NaN;
 	double m_Sus_Tirvz_l	= NaN;
 	double m_Tir_Re_l		= NaN;
-	double m_Veh_Pz_l		= NaN;
+	double m_Int_Pz_l		= NaN;
+	double m_Int_Vz_l		= NaN;
 	double m_Veh_vx_l		= NaN;
 	double m_Veh_vy_l		= NaN;
 	double m_Veh_vz_l		= NaN;
@@ -127,7 +130,8 @@ private:
 	double m_Sus_TirPz_r	= NaN;
 	double m_Sus_Tirvz_r	= NaN;
 	double m_Tir_Re_r		= NaN;
-	double m_Veh_Pz_r		= NaN;
+	double m_Int_Pz_r		= NaN;
+	double m_Int_Vz_r		= NaN;
 	double m_Veh_vx_r		= NaN;
 	double m_Veh_vy_r		= NaN;
 	double m_Veh_vz_r		= NaN;
@@ -171,7 +175,8 @@ private:
 
 	//middle variables
 	//--left
-	double m_Sus_VehPz_l = NaN;
+	double m_Sus_IntPz_l = NaN;
+	double m_Sus_IntVz_l = NaN;
 	double m_Sus_Pz_l	= NaN;
 	double m_Veh_hgt_l  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
 	double m_Sus_hgt_l = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.
@@ -183,7 +188,8 @@ private:
 	double m_adjusted_toe_l = NaN;
 	double m_arm_l = NaN;
 	//--right
-	double m_Sus_VehPz_r = NaN;
+	double m_Sus_IntPz_r = NaN;
+	double m_Sus_IntVz_r = NaN;
 	double m_Sus_Pz_r	= NaN;
 	double m_Veh_hgt_r  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
 	double m_Sus_hgt_r = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.

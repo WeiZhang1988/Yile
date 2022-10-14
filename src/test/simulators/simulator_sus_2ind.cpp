@@ -30,7 +30,7 @@ Simulator_Sus_2Ind::Simulator_Sus_2Ind(double t_start, double t_end, double t_st
 }
 
 void Simulator_Sus_2Ind::run () {
-	io::CSVReader<54> m_inputs("sus_test_result/sus_2ind_inputs10140837.csv");
+	io::CSVReader<58> m_inputs("sus_test_result/sus_2ind_inputs10141457.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	double t = m_t_start;
@@ -63,11 +63,15 @@ void Simulator_Sus_2Ind::run () {
 		m_sptr_interface->m_Tir_Re_rl, 
 		m_sptr_interface->m_Tir_Re_rr, 
 		
-		m_sptr_interface->m_Veh_Pz_fl, 
-		m_sptr_interface->m_Veh_Pz_fr,
-		m_sptr_interface->m_Veh_Pz_rl,
-		m_sptr_interface->m_Veh_Pz_rr,
+		m_sptr_interface->m_Int_Pz_fl, 
+		m_sptr_interface->m_Int_Pz_fr,
+		m_sptr_interface->m_Int_Pz_rl,
+		m_sptr_interface->m_Int_Pz_rr,
 
+		m_sptr_interface->m_Int_Vz_fl, 
+		m_sptr_interface->m_Int_Vz_fr,
+		m_sptr_interface->m_Int_Vz_rl,
+		m_sptr_interface->m_Int_Vz_rr,
 
 		m_sptr_interface->m_Veh_vx_fl, 
 		m_sptr_interface->m_Veh_vx_fr, 
