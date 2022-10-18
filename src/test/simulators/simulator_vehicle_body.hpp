@@ -28,7 +28,7 @@ using namespace Yile;
 
 class Simulator_Vehicle_Body {
 public:
-	Simulator_Vehicle_Body(double t_start, double t_end, double t_step);
+	Simulator_Vehicle_Body(real_Y t_start, real_Y t_end, real_Y t_step);
 	void run ();
 
     shared_ptr<Sys_Vehicle_Body> m_sptr_sys;
@@ -43,8 +43,9 @@ public:
 private:
     void spin(const int &steps);
 
-	double m_t_start, m_t_end, m_t_step, m_t_step_micros;
-    runge_kutta4<d_vec> m_stepper;
+	real_Y m_t_start, m_t_end, m_t_step, m_t_step_micros;
+    //runge_kutta4<d_vec> m_stepper;
+    euler<d_vec> m_stepper;
     steady_clock::time_point m_tp_start = steady_clock::now();
     steady_clock::time_point m_tp_end = steady_clock::now();
 

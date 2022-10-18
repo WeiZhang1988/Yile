@@ -24,33 +24,35 @@
 #include <filesystem>
 #include <boost/property_tree/json_parser.hpp>
 
+//typedef _Float64x real_Y;
+typedef double real_Y;
 namespace NMSPC{
-typedef std::vector< double > d_vec;
+typedef std::vector< real_Y > d_vec;
 typedef std::vector< bool > b_vec;
 typedef std::vector< d_vec > d_v_vec;
 
-constexpr double inf = std::numeric_limits<double>::infinity();
-constexpr double eps = std::numeric_limits<double>::epsilon();
-constexpr double NaN = std::numeric_limits<double>::quiet_NaN();
-constexpr double g = 9.81;
-constexpr double pi = 2.0 * acos(0.0);
-//constexpr double pi = 3.141592653589793;
+constexpr real_Y inf = std::numeric_limits<real_Y>::infinity();
+constexpr real_Y eps = std::numeric_limits<real_Y>::epsilon();
+constexpr real_Y NaN = std::numeric_limits<real_Y>::quiet_NaN();
+constexpr real_Y g = 9.81;
+constexpr real_Y pi = 2.0 * acos(0.0);
+//constexpr real_Y pi = 3.141592653589793;
 struct push_back_state_and_time {
 	d_v_vec &m_states;
 	d_vec &m_times;
 	
 	push_back_state_and_time(d_v_vec &states,d_vec &times) : m_states(states),m_times(times){}
 	
-	void operator()(const d_vec &x, double t) {
+	void operator()(const d_vec &x, real_Y t) {
 		m_states.push_back(x);
 		m_times.push_back(t);
 	}
 };
 
-extern double saturation(const double &in_data, const double &lower, const double &upper);
-extern double dead_zone(const double &in_data, const double &lower, const double &upper);
-extern double div0protect(const double &in_data, const double &thresh);
-extern double div0protect_abs(const double &in_data, const double &thresh);
+extern real_Y saturation(const real_Y &in_data, const real_Y &lower, const real_Y &upper);
+extern real_Y dead_zone(const real_Y &in_data, const real_Y &lower, const real_Y &upper);
+extern real_Y div0protect(const real_Y &in_data, const real_Y &thresh);
+extern real_Y div0protect_abs(const real_Y &in_data, const real_Y &thresh);
 extern void printvec(const d_vec &in_data,const char &l, const char &r);
 
 class piece_wise_linear {
@@ -58,7 +60,7 @@ public:
 	piece_wise_linear(const d_vec &x, const d_vec &y):m_x(x),m_y(y) {
 		m_n = m_x.size();
 	}
-	double operator() (const double &x_in) const;
+	real_Y operator() (const real_Y &x_in) const;
 private:
 	d_vec m_x, m_y;
 	int m_n;

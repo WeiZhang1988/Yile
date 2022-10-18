@@ -12,7 +12,7 @@
 // =============================================================================
 #include "simulator_chassis_2ind_disk_fiala.hpp"
 
-Simulator_Chassis_2Ind_Disk_Fiala::Simulator_Chassis_2Ind_Disk_Fiala(double t_start, double t_end, double t_step) {
+Simulator_Chassis_2Ind_Disk_Fiala::Simulator_Chassis_2Ind_Disk_Fiala(real_Y t_start, real_Y t_end, real_Y t_step) {
 	m_steps         = 0;
 	m_t_start       = t_start;
 	m_t_end         = t_end;
@@ -40,14 +40,14 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
 	io::CSVReader<38> m_inputs("chassis_2ind_wheels/PassVeh14DOF_inputs10091343.csv"); //need modification
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
-	double t = m_t_start;
+	real_Y t = m_t_start;
 
 	m_tp_start = steady_clock::now();
 	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
 		m_times.push_back(t);
-		m_inputs.read_row(
+		/*m_inputs.read_row(
 						//1-WhlAng 0000
 						m_sptr_interface->m_Strg_str_fl, 
 						m_sptr_interface->m_Strg_str_fr, 
@@ -106,7 +106,64 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
 						m_sptr_interface->m_Ext_Mx_ext, 
 						m_sptr_interface->m_Ext_My_ext,
 						m_sptr_interface->m_Ext_Mz_ext\
-		);
+		);*/
+		m_sptr_interface->m_Strg_str_fl=eps;
+		m_sptr_interface->m_Strg_str_fr=eps;
+		m_sptr_interface->m_Strg_str_rl=eps;
+		m_sptr_interface->m_Strg_str_rr=eps;
+		
+		//2-AxlTrq 0000
+		m_sptr_interface->m_Axl_Trq_fl=10000.0;
+		m_sptr_interface->m_Axl_Trq_fr=10000.0;
+		m_sptr_interface->m_Axl_Trq_rl=100.0;
+		m_sptr_interface->m_Axl_Trq_rr=100.0;
+		
+		//3-BrkPrs 0000
+		m_sptr_interface->m_Brk_Prs_fl=eps;
+		m_sptr_interface->m_Brk_Prs_fr=eps;
+		m_sptr_interface->m_Brk_Prs_rl=eps;
+		m_sptr_interface->m_Brk_Prs_rr=eps;
+		
+		//4-WindXYZ 000
+		m_sptr_interface->m_Air_Wx=eps;
+		m_sptr_interface->m_Air_Wy=eps;
+		m_sptr_interface->m_Air_Wz=eps;
+		
+		//5-Ground 0000
+		m_sptr_interface->m_Gnd_Pz_fl=eps;
+		m_sptr_interface->m_Gnd_Pz_fr=eps;
+		m_sptr_interface->m_Gnd_Pz_rl=eps;
+		m_sptr_interface->m_Gnd_Pz_rr=eps;
+		
+		//6-Friction 1
+		m_sptr_interface->m_Gnd_scale_fl=1;
+		m_sptr_interface->m_Gnd_scale_fr=1;
+		m_sptr_interface->m_Gnd_scale_rl=1;
+		m_sptr_interface->m_Gnd_scale_rr=1;
+		
+		//Other-parameters 220000
+		m_sptr_interface->m_Tir_Prs_fl=220000;
+		m_sptr_interface->m_Tir_Prs_fr=220000;
+		m_sptr_interface->m_Tir_Prs_rl=220000;
+		m_sptr_interface->m_Tir_Prs_rr=220000;
+		
+		// Air temperature Constant: Tair=273
+		m_sptr_interface->m_Air_Tair=273;
+		
+		// Tire temperature Constant: Tamb=0
+		m_sptr_interface->m_Air_Tamb_fl=eps;
+		m_sptr_interface->m_Air_Tamb_fr=eps;
+		m_sptr_interface->m_Air_Tamb_rl=eps;
+		m_sptr_interface->m_Air_Tamb_rr=eps;
+		
+		//000
+		m_sptr_interface->m_Ext_Fx_ext=eps;
+		m_sptr_interface->m_Ext_Fy_ext=eps;
+		m_sptr_interface->m_Ext_Fz_ext=eps;
+		//000
+		m_sptr_interface->m_Ext_Mx_ext=eps;
+		m_sptr_interface->m_Ext_My_ext=eps;
+		m_sptr_interface->m_Ext_Mz_ext=eps;
 			
 		/*(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr, \
     	m_sptr_interface->m_Gnd_scale_fl, m_sptr_interface->m_Tir_Prs_fl, m_sptr_interface->m_Air_Tamb_fl, \
@@ -120,8 +177,9 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
         m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fr, m_sptr_interface->m_Brk_Prs_fr, \
         m_sptr_interface->m_Axl_Trq_rl, m_sptr_interface->m_Brk_Prs_rl, m_sptr_interface->m_Axl_Trq_rr, m_sptr_interface->m_Brk_Prs_rr, \
         m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Strg_str_rl, m_sptr_interface->m_Strg_str_rr);*/ 
-		m_sptr_sys->push_con_states_omega_only(m_sptr_sys->m_con_states);
+		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
 
 		t += m_t_step;
 		//spin(m_steps);

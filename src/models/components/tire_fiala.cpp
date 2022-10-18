@@ -55,8 +55,8 @@ void NMSPC::Tire_Fiala::pull_con_states(const d_vec &con_states) {
 	m_Sus_lpf_Fz = con_states[5];
 }
 
-void NMSPC::Tire_Fiala::pull_pv(const double &Tir_omega, const double &Tir_rhoz, const double &Tir_Re, const double &Sus_vx, const double &Sus_vy, const double &Sus_vz,\
-const double &Sus_gamma, const double &Sus_str, const double &Sus_r) {
+void NMSPC::Tire_Fiala::pull_pv(const real_Y &Tir_omega, const real_Y &Tir_rhoz, const real_Y &Tir_Re, const real_Y &Sus_vx, const real_Y &Sus_vy, const real_Y &Sus_vz,\
+const real_Y &Sus_gamma, const real_Y &Sus_str, const real_Y &Sus_r) {
 	//pull inputs
 	m_Tir_omega = Tir_omega;
 	m_Tir_rhoz = Tir_rhoz;
@@ -94,7 +94,7 @@ const double &Sus_gamma, const double &Sus_str, const double &Sus_r) {
 	m_Tir_vz = m_DCM_20 * m_Sus_vx + m_DCM_21 * m_Sus_vy + m_DCM_22 * m_Sus_vz;
 }
 
-void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, const double &Tir_Prs, const double &Air_Tamb) {
+void NMSPC::Tire_Fiala::pull_fm (const real_Y &Sus_Fz, const real_Y &Gnd_scale, const real_Y &Tir_Prs, const real_Y &Air_Tamb) {
 	//pull inputs
 	m_Sus_Fz = Sus_Fz;
 	m_Gnd_scale = Gnd_scale;
@@ -142,16 +142,16 @@ void NMSPC::Tire_Fiala::pull_fm (const double &Sus_Fz, const double &Gnd_scale, 
     m_Tir_My = m_Mroll;
 
 	//frame transfer
-	double dead_zone_Tir_Fx = dead_zone(m_Tir_Fx,-5.0,5.0);
-	double dead_zone_Tir_Fy = dead_zone(m_Tir_Fy,-10.0,10.0);
+	real_Y dead_zone_Tir_Fx = dead_zone(m_Tir_Fx,-5.0,5.0);
+	real_Y dead_zone_Tir_Fy = dead_zone(m_Tir_Fy,-10.0,10.0);
 	m_Sus_TirFx = m_DCM_00 * dead_zone_Tir_Fx + m_DCM_01 * dead_zone_Tir_Fy + m_DCM_02 * m_Tir_Fz;
 	m_Sus_TirFy = m_DCM_10 * dead_zone_Tir_Fx + m_DCM_11 * dead_zone_Tir_Fy + m_DCM_12 * m_Tir_Fz;
 	m_Sus_TirFz = m_DCM_20 * dead_zone_Tir_Fx + m_DCM_21 * dead_zone_Tir_Fy + m_DCM_22 * m_Tir_Fz;
     
 }
 
-void NMSPC::Tire_Fiala::push_fm (double &Sus_TirFx, double &Sus_TirFy, double &Sus_TirFz, \
-double &Tir_Fx, double &Tir_Fy, double &Tir_Fz, double &Tir_Mx, double &Tir_My, double &Tir_Mz) {
+void NMSPC::Tire_Fiala::push_fm (real_Y &Sus_TirFx, real_Y &Sus_TirFy, real_Y &Sus_TirFz, \
+real_Y &Tir_Fx, real_Y &Tir_Fy, real_Y &Tir_Fz, real_Y &Tir_Mx, real_Y &Tir_My, real_Y &Tir_Mz) {
     Sus_TirFx = m_Sus_TirFx;
     Sus_TirFy = m_Sus_TirFy;
     Sus_TirFz = m_Sus_TirFz;

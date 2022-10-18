@@ -12,7 +12,7 @@
 // =============================================================================
 #include "simulator_vehicle_body.hpp"
 
-Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, double t_step) {
+Simulator_Vehicle_Body::Simulator_Vehicle_Body(real_Y t_start, real_Y t_end, real_Y t_step) {
 	m_steps = 0;
 	m_t_start = t_start;
 	m_t_end = t_end;
@@ -31,16 +31,15 @@ Simulator_Vehicle_Body::Simulator_Vehicle_Body(double t_start, double t_end, dou
 }
 
 void Simulator_Vehicle_Body::run() {
-	io::CSVReader<34> m_inputs("veh_test_result/veh_vb_inputs10081615.csv");
+	io::CSVReader<34> m_inputs("veh_test_result/veh_vb_inputs10181709.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
-	double t = m_t_start;
+	real_Y t = m_t_start;
 	
 	m_tp_start = steady_clock::now();
-	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
-	
+	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states); // from component pass to system
 	for (int i=0; i<steps_num; i++) {
-		m_sptr_store_states.push_back(m_sptr_sys->m_con_states);
+		//m_sptr_store_states.push_back(m_sptr_sys->m_con_states);
 		m_steps++;	
 		m_times.push_back(t);
 		m_inputs.read_row(
@@ -86,7 +85,9 @@ void Simulator_Vehicle_Body::run() {
 		m_sptr_interface->m_Ext_My_ext, 
 		m_sptr_interface->m_Ext_Mz_ext
 		); 
+		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
 	
 		t += m_t_step;
 		//spin(m_steps);

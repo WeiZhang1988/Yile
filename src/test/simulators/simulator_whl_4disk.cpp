@@ -12,7 +12,7 @@
 // =============================================================================
 #include "simulator_whl_4disk.hpp"
 
-Simulator_Whl_4Disk::Simulator_Whl_4Disk(double t_start, double t_end, double t_step) {
+Simulator_Whl_4Disk::Simulator_Whl_4Disk(real_Y t_start, real_Y t_end, real_Y t_step) {
 	m_steps = 0;
 	m_t_start = t_start;
 	m_t_end = t_end;
@@ -34,7 +34,7 @@ void Simulator_Whl_4Disk::run () {
 	io::CSVReader<28> m_inputs("wheel_test_result/whl_inputs_10121430.csv");
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
-	double t = m_t_start;
+	real_Y t = m_t_start;
 
 	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	m_tp_start = steady_clock::now();

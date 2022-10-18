@@ -43,8 +43,9 @@ public:
 	void add_store(std::shared_ptr<d_v_vec> sptr_store) 									{m_sptr_store=sptr_store;}
 	
 	void push_con_states(d_vec &con_states);
-	void push_con_states_omega_only(d_vec &con_states);
+	void push_con_states_whl_only(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
+	void pull_con_states_whl_only(const d_vec &con_states);
 
 	void update_pv();
 	void update_fm();
@@ -53,7 +54,7 @@ public:
 
 	void store_data();
 
-	void operator() (const d_vec &x, d_vec &dxdt, const double &t);
+	void operator() (const d_vec &x, d_vec &dxdt, const real_Y &t);
 	
 
 private:

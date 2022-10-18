@@ -23,16 +23,16 @@ public:
 	static const int m_dis_states_num = Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num + Wheel_Disk::m_dis_states_num;
 
     Subsys_Wheel_4Disk (\
-	double unloaded_radius_f=0.309384029954441, double IYY_f=0.740633832792491, double mass_f=5.0,\
-	double br_f=1e-3, double disk_abore_f=0.05, double num_pads_f=2.0, \
-	double Rm_f=0.177, double mu_kinetic_f=0.2, double mu_static_f=0.3, \
-	double init_omega_f=0.0, double init_Pz_f=0.0, double init_vz_f=0.0, \
+	real_Y unloaded_radius_f=0.309384029954441, real_Y IYY_f=0.740633832792491, real_Y mass_f=5.0,\
+	real_Y br_f=1e-3, real_Y disk_abore_f=0.05, real_Y num_pads_f=2.0, \
+	real_Y Rm_f=0.177, real_Y mu_kinetic_f=0.2, real_Y mu_static_f=0.3, \
+	real_Y init_omega_f=0.0, real_Y init_Pz_f=0.0, real_Y init_vz_f=0.0, \
 	bool init_locked_flag_f=false, \
     bool init_locked_state_f=false, \
-    double unloaded_radius_r=0.309384029954441, double IYY_r=0.740633832792491, double mass_r=5.0,\
-	double br_r=1e-3, double disk_abore_r=0.05, double num_pads_r=2.0, \
-	double Rm_r=0.177, double mu_kinetic_r=0.2, double mu_static_r=0.3, \
-	double init_omega_r=0.0, double init_Pz_r=0.0, double init_vz_r=0.0, \
+    real_Y unloaded_radius_r=0.309384029954441, real_Y IYY_r=0.740633832792491, real_Y mass_r=5.0,\
+	real_Y br_r=1e-3, real_Y disk_abore_r=0.05, real_Y num_pads_r=2.0, \
+	real_Y Rm_r=0.177, real_Y mu_kinetic_r=0.2, real_Y mu_static_r=0.3, \
+	real_Y init_omega_r=0.0, real_Y init_Pz_r=0.0, real_Y init_vz_r=0.0, \
 	bool init_locked_flag_r=false, \
     bool init_locked_state_r=false) 
     {
@@ -53,16 +53,16 @@ public:
     void push_dis_states (b_vec &dis_states);
     void pull_dis_states (const b_vec &dis_states);
 
-	void pull_pv (const double &Gnd_Pz_fl, const double &Gnd_Pz_fr, const double &Gnd_Pz_rl, const double &Gnd_Pz_rr);
-    void push_pv (double &Tir_omega_fl, double &Sus_TirPz_fl, double &Sus_Tirvz_fl, double &Tir_Pz_fl, double &Tir_vz_fl, double &Tir_rhoz_fl, double &Tir_Re_fl, \
-    double &Tir_omega_fr, double &Sus_TirPz_fr, double &Sus_Tirvz_fr, double &Tir_Pz_fr, double &Tir_vz_fr, double &Tir_rhoz_fr, double &Tir_Re_fr, \
-    double &Tir_omega_rl, double &Sus_TirPz_rl, double &Sus_Tirvz_rl, double &Tir_Pz_rl, double &Tir_vz_rl, double &Tir_rhoz_rl, double &Tir_Re_rl, \
-    double &Tir_omega_rr, double &Sus_TirPz_rr, double &Sus_Tirvz_rr, double &Tir_Pz_rr, double &Tir_vz_rr, double &Tir_rhoz_rr, double &Tir_Re_rr);
-	void pull_fm (const double &Axl_Trq_fl, const double &Brk_Prs_fl, const double &Tir_Fx_fl, const double &Tir_My_fl, const double &Tir_Fz_fl, const double &Sus_Fz_fl,\
-    const double &Axl_Trq_fr, const double &Brk_Prs_fr, const double &Tir_Fx_fr, const double &Tir_My_fr, const double &Tir_Fz_fr, const double &Sus_Fz_fr,\
-    const double &Axl_Trq_rl, const double &Brk_Prs_rl, const double &Tir_Fx_rl, const double &Tir_My_rl, const double &Tir_Fz_rl, const double &Sus_Fz_rl,\
-    const double &Axl_Trq_rr, const double &Brk_Prs_rr, const double &Tir_Fx_rr, const double &Tir_My_rr, const double &Tir_Fz_rr, const double &Sus_Fz_rr);
-    void push_fm (double &Brk_Trq_fl, double &Brk_Trq_fr, double &Brk_Trq_rl, double &Brk_Trq_rr);
+	void pull_pv (const real_Y &Gnd_Pz_fl, const real_Y &Gnd_Pz_fr, const real_Y &Gnd_Pz_rl, const real_Y &Gnd_Pz_rr);
+    void push_pv (real_Y &Tir_omega_fl, real_Y &Sus_TirPz_fl, real_Y &Sus_Tirvz_fl, real_Y &Tir_Pz_fl, real_Y &Tir_vz_fl, real_Y &Tir_rhoz_fl, real_Y &Tir_Re_fl, \
+    real_Y &Tir_omega_fr, real_Y &Sus_TirPz_fr, real_Y &Sus_Tirvz_fr, real_Y &Tir_Pz_fr, real_Y &Tir_vz_fr, real_Y &Tir_rhoz_fr, real_Y &Tir_Re_fr, \
+    real_Y &Tir_omega_rl, real_Y &Sus_TirPz_rl, real_Y &Sus_Tirvz_rl, real_Y &Tir_Pz_rl, real_Y &Tir_vz_rl, real_Y &Tir_rhoz_rl, real_Y &Tir_Re_rl, \
+    real_Y &Tir_omega_rr, real_Y &Sus_TirPz_rr, real_Y &Sus_Tirvz_rr, real_Y &Tir_Pz_rr, real_Y &Tir_vz_rr, real_Y &Tir_rhoz_rr, real_Y &Tir_Re_rr);
+	void pull_fm (const real_Y &Axl_Trq_fl, const real_Y &Brk_Prs_fl, const real_Y &Tir_Fx_fl, const real_Y &Tir_My_fl, const real_Y &Tir_Fz_fl, const real_Y &Sus_Fz_fl,\
+    const real_Y &Axl_Trq_fr, const real_Y &Brk_Prs_fr, const real_Y &Tir_Fx_fr, const real_Y &Tir_My_fr, const real_Y &Tir_Fz_fr, const real_Y &Sus_Fz_fr,\
+    const real_Y &Axl_Trq_rl, const real_Y &Brk_Prs_rl, const real_Y &Tir_Fx_rl, const real_Y &Tir_My_rl, const real_Y &Tir_Fz_rl, const real_Y &Sus_Fz_rl,\
+    const real_Y &Axl_Trq_rr, const real_Y &Brk_Prs_rr, const real_Y &Tir_Fx_rr, const real_Y &Tir_My_rr, const real_Y &Tir_Fz_rr, const real_Y &Sus_Fz_rr);
+    void push_fm (real_Y &Brk_Trq_fl, real_Y &Brk_Trq_fr, real_Y &Brk_Trq_rl, real_Y &Brk_Trq_rr);
 
 	void push_drv (d_vec &derivatives);
 

@@ -22,15 +22,15 @@ public:
 	static const int m_dis_states_num = 0;									//amount of discrete states;
 
 	Tire_Fiala (\
-	double Lrelx=0.05, double Lrely=0.15, \
-	double alpha_min=-1.50806269049027, double alpha_max=1.47424202250808, double mu_min=0.5, \
-	double mu_max=0.8, double aMy=8e-4, double bMy=1e-3, \
-	double cMy=1.6e-4, double alphaMy=-3e-3, double betaMy=0.97, \
-	double Fz_min=100.0, double Fz_max=1e4, double cKappa=1e7, \
-	double cAlpha=4.5e4, double bMz=0.0, double width=0.209045013245853, \
-	double cGamma=0.0, \
-	double init_kappa=0.0, double init_alpha=0.0, \
-	double init_Mroll=0.0) :
+	real_Y Lrelx=0.05, real_Y Lrely=0.15, \
+	real_Y alpha_min=-1.50806269049027, real_Y alpha_max=1.47424202250808, real_Y mu_min=0.5, \
+	real_Y mu_max=0.8, real_Y aMy=8e-4, real_Y bMy=1e-3, \
+	real_Y cMy=1.6e-4, real_Y alphaMy=-3e-3, real_Y betaMy=0.97, \
+	real_Y Fz_min=100.0, real_Y Fz_max=1e4, real_Y cKappa=1e7, \
+	real_Y cAlpha=4.5e4, real_Y bMz=0.0, real_Y width=0.209045013245853, \
+	real_Y cGamma=0.0, \
+	real_Y init_kappa=0.0, real_Y init_alpha=0.0, \
+	real_Y init_Mroll=0.0) :
 	m_Lrelx(Lrelx), m_Lrely(Lrely), \
 	m_alpha_min(alpha_min), m_alpha_max(alpha_max), \
 	m_mu_min(mu_min), m_mu_max(mu_max), \
@@ -46,102 +46,102 @@ public:
 	void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
 
-	void pull_pv (const double &Tir_omega, const double &Tir_rhoz, const double &Tir_Re, const double &Sus_vx, const double &Sus_vy, const double &Sus_vz,\
-	const double &Sus_gamma, const double &Sus_str, const double &Sus_r);
+	void pull_pv (const real_Y &Tir_omega, const real_Y &Tir_rhoz, const real_Y &Tir_Re, const real_Y &Sus_vx, const real_Y &Sus_vy, const real_Y &Sus_vz,\
+	const real_Y &Sus_gamma, const real_Y &Sus_str, const real_Y &Sus_r);
 	void push_pv () {};
-	void pull_fm (const double &Sus_Fz, const double &Gnd_scale, const double &Tir_Prs, const double &Air_Tamb);
-	void push_fm (double &Sus_TirFx, double &Sus_TirFy, double &Sus_TirFz, \
-	double &Tir_Fx, double &Tir_Fy, double &Tir_Fz, double &Tir_Mx, double &Tir_My, double &Tir_Mz);
+	void pull_fm (const real_Y &Sus_Fz, const real_Y &Gnd_scale, const real_Y &Tir_Prs, const real_Y &Air_Tamb);
+	void push_fm (real_Y &Sus_TirFx, real_Y &Sus_TirFy, real_Y &Sus_TirFz, \
+	real_Y &Tir_Fx, real_Y &Tir_Fy, real_Y &Tir_Fz, real_Y &Tir_Mx, real_Y &Tir_My, real_Y &Tir_Mz);
 
 	void push_drv (d_vec &derivatives);
 
 private:
 	//built-in parameters
-	const double m_lpf_wc = 200.0 * pi;
-	const double m_lpf_init = 0.0;
+	const real_Y m_lpf_wc = 200.0 * pi;
+	const real_Y m_lpf_init = 0.0;
 	const piece_wise_linear low_speed = piece_wise_linear(d_vec{0.0,1.0},d_vec{1.0,0.0});
 	//configurable parameters
-	double m_Lrelx, m_Lrely, m_alpha_min, m_alpha_max, \
+	real_Y m_Lrelx, m_Lrely, m_alpha_min, m_alpha_max, \
 	m_mu_min, m_mu_max, m_aMy, m_bMy, m_cMy, \
 	m_alphaMy, m_betaMy, m_Fz_min, m_Fz_max, \
 	m_cKappa, m_cAlpha, m_bMz, m_width, m_cGamma;
 	//inputs
-	double m_Tir_omega = NaN;
-	double m_Tir_rhoz = NaN;
-	double m_Tir_Re = NaN;
-	double m_Sus_vx = NaN;
-	double m_Sus_vy = NaN;
-	double m_Sus_vz = NaN;
-	double m_Sus_gamma = NaN;
-	double m_Sus_str = NaN;
-	double m_Sus_r = NaN;
+	real_Y m_Tir_omega = NaN;
+	real_Y m_Tir_rhoz = NaN;
+	real_Y m_Tir_Re = NaN;
+	real_Y m_Sus_vx = NaN;
+	real_Y m_Sus_vy = NaN;
+	real_Y m_Sus_vz = NaN;
+	real_Y m_Sus_gamma = NaN;
+	real_Y m_Sus_str = NaN;
+	real_Y m_Sus_r = NaN;
 
-	double m_Sus_Fz = NaN;
-	double m_Gnd_scale = NaN;
-	double m_Tir_Prs = NaN;
-	double m_Air_Tamb = NaN;
+	real_Y m_Sus_Fz = NaN;
+	real_Y m_Gnd_scale = NaN;
+	real_Y m_Tir_Prs = NaN;
+	real_Y m_Air_Tamb = NaN;
 	//continuous states
-	double m_kappa, m_alpha_prime, m_Mroll;
-	double m_Sus_lpf_str = m_lpf_init;
-	double m_Sus_lpf_gamma = m_lpf_init;
-	double m_Sus_lpf_Fz = m_lpf_init;
+	real_Y m_kappa, m_alpha_prime, m_Mroll;
+	real_Y m_Sus_lpf_str = m_lpf_init;
+	real_Y m_Sus_lpf_gamma = m_lpf_init;
+	real_Y m_Sus_lpf_Fz = m_lpf_init;
 	//continuous states derivatives
-	double m_drv_kappa, m_drv_alpha_prime, m_drv_Mroll;
-	double m_drv_Sus_lpf_str, m_drv_Sus_lpf_gamma, m_drv_Sus_lpf_Fz;
+	real_Y m_drv_kappa, m_drv_alpha_prime, m_drv_Mroll;
+	real_Y m_drv_Sus_lpf_str, m_drv_Sus_lpf_gamma, m_drv_Sus_lpf_Fz;
 	//discrete states
 	//middle variables
-	double m_Tir_vx = NaN;
-	double m_Tir_vy = NaN;
-	double m_Tir_vz = NaN;
-	double m_Tir_r = NaN;
-	double m_Tir_gamma = NaN;
-	double m_Tir_str = NaN;
+	real_Y m_Tir_vx = NaN;
+	real_Y m_Tir_vy = NaN;
+	real_Y m_Tir_vz = NaN;
+	real_Y m_Tir_r = NaN;
+	real_Y m_Tir_gamma = NaN;
+	real_Y m_Tir_str = NaN;
 
-	double m_Tir_Fx = NaN;
-	double m_Tir_Fy = NaN;
-	double m_Tir_Fz = NaN;
+	real_Y m_Tir_Fx = NaN;
+	real_Y m_Tir_Fy = NaN;
+	real_Y m_Tir_Fz = NaN;
 
-	double m_sat_Fz = NaN;
-	double m_My = NaN;
-	double m_mu = NaN;
-	double m_kappa_critical = NaN;
-	double m_Fx1 = NaN;
-	double m_Fx2 = NaN;
-	double m_Fx_stick = NaN;
-	double m_Fx_slide = NaN;
-	double m_alpha = NaN;
-	double m_tan_alpha = NaN;
-	double m_alpha_critical = NaN;
-	double m_H = NaN;
-	double m_Mz_stick = NaN;
-	double m_Fy_stick = NaN;
-	double m_Mz_slide = NaN;
-	double m_Fy_slide = NaN;
-	double m_cos_a = NaN;
-	double m_cos_b = NaN;
-	double m_cos_c = NaN;
-	double m_sin_a = NaN;
-	double m_sin_b = NaN;
-	double m_sin_c = NaN;
-	double m_DCM_00	= NaN;
-	double m_DCM_01	= NaN;
-	double m_DCM_02	= NaN;
-	double m_DCM_10	= NaN;
-	double m_DCM_11	= NaN;
-	double m_DCM_12	= NaN;
-	double m_DCM_20	= NaN;
-	double m_DCM_21	= NaN;
-	double m_DCM_22	= NaN;
+	real_Y m_sat_Fz = NaN;
+	real_Y m_My = NaN;
+	real_Y m_mu = NaN;
+	real_Y m_kappa_critical = NaN;
+	real_Y m_Fx1 = NaN;
+	real_Y m_Fx2 = NaN;
+	real_Y m_Fx_stick = NaN;
+	real_Y m_Fx_slide = NaN;
+	real_Y m_alpha = NaN;
+	real_Y m_tan_alpha = NaN;
+	real_Y m_alpha_critical = NaN;
+	real_Y m_H = NaN;
+	real_Y m_Mz_stick = NaN;
+	real_Y m_Fy_stick = NaN;
+	real_Y m_Mz_slide = NaN;
+	real_Y m_Fy_slide = NaN;
+	real_Y m_cos_a = NaN;
+	real_Y m_cos_b = NaN;
+	real_Y m_cos_c = NaN;
+	real_Y m_sin_a = NaN;
+	real_Y m_sin_b = NaN;
+	real_Y m_sin_c = NaN;
+	real_Y m_DCM_00	= NaN;
+	real_Y m_DCM_01	= NaN;
+	real_Y m_DCM_02	= NaN;
+	real_Y m_DCM_10	= NaN;
+	real_Y m_DCM_11	= NaN;
+	real_Y m_DCM_12	= NaN;
+	real_Y m_DCM_20	= NaN;
+	real_Y m_DCM_21	= NaN;
+	real_Y m_DCM_22	= NaN;
 	//outputs
-	double m_Sus_TirFx = NaN;
-	double m_Sus_TirFy = NaN;
-	double m_Sus_TirFz = NaN;
-	//double m_Tir_Fx = NaN;
-	//double m_Tir_Fy = NaN;
-	//double m_Tir_Fz = NaN;
-	double m_Tir_Mx = NaN;
-	double m_Tir_My = NaN;
-	double m_Tir_Mz = NaN;
+	real_Y m_Sus_TirFx = NaN;
+	real_Y m_Sus_TirFy = NaN;
+	real_Y m_Sus_TirFz = NaN;
+	//real_Y m_Tir_Fx = NaN;
+	//real_Y m_Tir_Fy = NaN;
+	//real_Y m_Tir_Fz = NaN;
+	real_Y m_Tir_Mx = NaN;
+	real_Y m_Tir_My = NaN;
+	real_Y m_Tir_Mz = NaN;
 };
 
 }	//end of name space

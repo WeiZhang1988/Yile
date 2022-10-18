@@ -103,7 +103,7 @@ void NMSPC::Sys_Sus_2Ind::store_data() {
 									});
 }
 
-void NMSPC::Sys_Sus_2Ind::operator() (const d_vec &x, d_vec &dxdt, const double &t) {
+void NMSPC::Sys_Sus_2Ind::operator() (const d_vec &x, d_vec &dxdt, const real_Y &t) {
 	pull_con_states(x);
 	update_pv();
 	update_fm();

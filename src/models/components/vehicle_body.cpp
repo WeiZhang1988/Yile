@@ -12,19 +12,19 @@
 // =============================================================================
 #include "vehicle_body.hpp"
 
-void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {
+void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {  //1
 	int q = int(floor((m_phai + pi) / (2.0 * pi)));
-	if (q) {
+	if (q!=0) {
 		m_phai -= q * 2.0 * pi;
 	}
 
 	q = int(floor((m_theta + pi) / (2.0 * pi)));
-	if (q) {
+	if (q!=0) {
 		m_theta -= q * 2.0 * pi;
 	}
 
 	q = int(floor((m_psi + pi) / (2.0 * pi)));
-	if (q) {
+	if (q!=0) {
 		m_psi -= q * 2.0 * pi;
 	}
 
@@ -42,7 +42,7 @@ void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {
 	con_states[11] = m_r;
 }
 
-void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {
+void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {  //2
 	m_xe_x	= con_states[0];
 	m_xe_y	= con_states[1];
 	m_xe_z	= con_states[2];
@@ -57,22 +57,22 @@ void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {
 	m_r		= con_states[11];
 
 	int q = int(floor((m_phai + pi) / (2.0 * pi)));
-	if (q) {
+	if (q!=0) {
 		m_phai -= q * 2.0 * pi;
 	}
 
 	q = int(floor((m_theta + pi) / (2.0 * pi)));
-	if (q) {
+	if (q!=0) {
 		m_theta -= q * 2.0 * pi;
 	}
 
 	q = int(floor((m_psi + pi) / (2.0 * pi)));
-	if (q) {
+	if (q!=0) {
 		m_psi -= q * 2.0 * pi;
 	}
 }
 
-void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, const double &Air_Wz) {
+void NMSPC::Vehicle_Body::pull_pv(const real_Y &Air_Wx, const real_Y &Air_Wy, const real_Y &Air_Wz) { //3
 	m_Air_Wx = Air_Wx;
 	m_Air_Wy = Air_Wy;
 	m_Air_Wz = Air_Wz;
@@ -95,8 +95,6 @@ void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, co
 	m_DCM_21	= m_cos_phai * m_sin_theta * m_sin_psi - m_sin_phai * m_cos_psi;
 	m_DCM_22	= m_cos_phai * m_cos_theta;
 
-
-
 	m_ve_x = m_DCM_00 * m_vb_x + m_DCM_10 * m_vb_y + m_DCM_20 * m_vb_z;
 	m_ve_y = m_DCM_01 * m_vb_x + m_DCM_11 * m_vb_y + m_DCM_21 * m_vb_z;
 	m_ve_z = m_DCM_02 * m_vb_x + m_DCM_12 * m_vb_y + m_DCM_22 * m_vb_z;
@@ -118,9 +116,9 @@ void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, co
 	m_r_c = m_r;
 	m_beta_c = atan(m_vb_y_c / div0protect_abs(m_vb_x_c, m_xdot_tol));
 	
-	double tmpR_x,    tmpR_y,    tmpR_z;
-	double tmpRes1_x, tmpRes1_y, tmpRes1_z;
-	double tmpRes2_x, tmpRes2_y, tmpRes2_z;
+	real_Y tmpR_x,    tmpR_y,    tmpR_z;
+	real_Y tmpRes1_x, tmpRes1_y, tmpRes1_z;
+	real_Y tmpRes2_x, tmpRes2_y, tmpRes2_z;
 	
 	tmpR_x = m_Rbar_x + m_longOff;
 	tmpR_y = m_Rbar_y + m_latOff;
@@ -250,18 +248,18 @@ void NMSPC::Vehicle_Body::pull_pv(const double &Air_Wx, const double &Air_Wy, co
 
 }
 
-void NMSPC::Vehicle_Body::push_pv(double &h_c, double &xe_x_c, double &xe_y_c, double &xe_z_c, double &ve_x_c, double &ve_y_c, double &ve_z_c, \
-double &vb_x_c, double &vb_y_c, double &vb_z_c, double &phai_c, double &theta_c, double &psi_c, double &p_c, double &q_c, double &r_c, double &beta_c, \
-double &xe_x_o, double &xe_y_o, double &xe_z_o, double &ve_x_o, double &ve_y_o, double &ve_z_o, \
-double &xb_x_o, double &xb_y_o, double &xb_z_o, double &vb_x_o, double &vb_y_o, double &vb_z_o, double &beta_o, \
-double &xe_x_fl, double &xe_y_fl, double &xe_z_fl, double &ve_x_fl, double &ve_y_fl, double &ve_z_fl, \
-double &xb_x_fl, double &xb_y_fl, double &xb_z_fl, double &vb_x_fl, double &vb_y_fl, double &vb_z_fl, \
-double &xe_x_fr, double &xe_y_fr, double &xe_z_fr, double &ve_x_fr, double &ve_y_fr, double &ve_z_fr, \
-double &xb_x_fr, double &xb_y_fr, double &xb_z_fr, double &vb_x_fr, double &vb_y_fr, double &vb_z_fr, \
-double &xe_x_rl, double &xe_y_rl, double &xe_z_rl, double &ve_x_rl, double &ve_y_rl, double &ve_z_rl, \
-double &xb_x_rl, double &xb_y_rl, double &xb_z_rl, double &vb_x_rl, double &vb_y_rl, double &vb_z_rl, \
-double &xe_x_rr, double &xe_y_rr, double &xe_z_rr, double &ve_x_rr, double &ve_y_rr, double &ve_z_rr, \
-double &xb_x_rr, double &xb_y_rr, double &xb_z_rr, double &vb_x_rr, double &vb_y_rr, double &vb_z_rr) { 
+void NMSPC::Vehicle_Body::push_pv(real_Y &h_c, real_Y &xe_x_c, real_Y &xe_y_c, real_Y &xe_z_c, real_Y &ve_x_c, real_Y &ve_y_c, real_Y &ve_z_c, \
+real_Y &vb_x_c, real_Y &vb_y_c, real_Y &vb_z_c, real_Y &phai_c, real_Y &theta_c, real_Y &psi_c, real_Y &p_c, real_Y &q_c, real_Y &r_c, real_Y &beta_c, \
+real_Y &xe_x_o, real_Y &xe_y_o, real_Y &xe_z_o, real_Y &ve_x_o, real_Y &ve_y_o, real_Y &ve_z_o, \
+real_Y &xb_x_o, real_Y &xb_y_o, real_Y &xb_z_o, real_Y &vb_x_o, real_Y &vb_y_o, real_Y &vb_z_o, real_Y &beta_o, \
+real_Y &xe_x_fl, real_Y &xe_y_fl, real_Y &xe_z_fl, real_Y &ve_x_fl, real_Y &ve_y_fl, real_Y &ve_z_fl, \
+real_Y &xb_x_fl, real_Y &xb_y_fl, real_Y &xb_z_fl, real_Y &vb_x_fl, real_Y &vb_y_fl, real_Y &vb_z_fl, \
+real_Y &xe_x_fr, real_Y &xe_y_fr, real_Y &xe_z_fr, real_Y &ve_x_fr, real_Y &ve_y_fr, real_Y &ve_z_fr, \
+real_Y &xb_x_fr, real_Y &xb_y_fr, real_Y &xb_z_fr, real_Y &vb_x_fr, real_Y &vb_y_fr, real_Y &vb_z_fr, \
+real_Y &xe_x_rl, real_Y &xe_y_rl, real_Y &xe_z_rl, real_Y &ve_x_rl, real_Y &ve_y_rl, real_Y &ve_z_rl, \
+real_Y &xb_x_rl, real_Y &xb_y_rl, real_Y &xb_z_rl, real_Y &vb_x_rl, real_Y &vb_y_rl, real_Y &vb_z_rl, \
+real_Y &xe_x_rr, real_Y &xe_y_rr, real_Y &xe_z_rr, real_Y &ve_x_rr, real_Y &ve_y_rr, real_Y &ve_z_rr, \
+real_Y &xb_x_rr, real_Y &xb_y_rr, real_Y &xb_z_rr, real_Y &vb_x_rr, real_Y &vb_y_rr, real_Y &vb_z_rr) { //4
 	//push outputs
 	h_c = m_h;
 	xe_x_c = m_xe_x_c;
@@ -344,15 +342,15 @@ double &xb_x_rr, double &xb_y_rr, double &xb_z_rr, double &vb_x_rr, double &vb_y
 	
 }
 
-void NMSPC::Vehicle_Body::pull_fm(const double &Air_Tair, \
-const double &Sus_Fx_fl,  const double &Sus_Fx_fr,  const double &Sus_Fx_rl, const double &Sus_Fx_rr, \
-const double &Sus_Fy_fl,  const double &Sus_Fy_fr,  const double &Sus_Fy_rl, const double &Sus_Fy_rr, \
-const double &Sus_Fz_fl,  const double &Sus_Fz_fr,  const double &Sus_Fz_rl, const double &Sus_Fz_rr, \
-const double &Sus_Mx_fl,  const double &Sus_Mx_fr,  const double &Sus_Mx_rl, const double &Sus_Mx_rr ,\
-const double &Sus_My_fl,  const double &Sus_My_fr,  const double &Sus_My_rl, const double &Sus_My_rr, \
-const double &Sus_Mz_fl,  const double &Sus_Mz_fr,  const double &Sus_Mz_rl, const double &Sus_Mz_rr, \
-const double &Ext_Fx_ext, const double &Ext_Fy_ext, const double &Ext_Fz_ext, \
-const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext) {
+void NMSPC::Vehicle_Body::pull_fm(const real_Y &Air_Tair, \
+const real_Y &Sus_Fx_fl,  const real_Y &Sus_Fx_fr,  const real_Y &Sus_Fx_rl, const real_Y &Sus_Fx_rr, \
+const real_Y &Sus_Fy_fl,  const real_Y &Sus_Fy_fr,  const real_Y &Sus_Fy_rl, const real_Y &Sus_Fy_rr, \
+const real_Y &Sus_Fz_fl,  const real_Y &Sus_Fz_fr,  const real_Y &Sus_Fz_rl, const real_Y &Sus_Fz_rr, \
+const real_Y &Sus_Mx_fl,  const real_Y &Sus_Mx_fr,  const real_Y &Sus_Mx_rl, const real_Y &Sus_Mx_rr ,\
+const real_Y &Sus_My_fl,  const real_Y &Sus_My_fr,  const real_Y &Sus_My_rl, const real_Y &Sus_My_rr, \
+const real_Y &Sus_Mz_fl,  const real_Y &Sus_Mz_fr,  const real_Y &Sus_Mz_rl, const real_Y &Sus_Mz_rr, \
+const real_Y &Ext_Fx_ext, const real_Y &Ext_Fy_ext, const real_Y &Ext_Fz_ext, \
+const real_Y &Ext_Mx_ext, const real_Y &Ext_My_ext, const real_Y &Ext_Mz_ext) {//5
 	//pull inputs
 	m_Air_Tair   = Air_Tair;
 	m_Sus_Fx_fl  = Sus_Fx_fl;
@@ -417,10 +415,10 @@ const double &Ext_Mx_ext, const double &Ext_My_ext, const double &Ext_Mz_ext) {
 	
 }
 
-void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
-	m_drv_xe_x = m_ve_x_c;
-	m_drv_xe_y = m_ve_y_c;
-	m_drv_xe_z = m_ve_z_c;
+void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {//6
+	m_drv_xe_x = m_ve_x;
+	m_drv_xe_y = m_ve_y;
+	m_drv_xe_z = m_ve_z;
 
 	m_drv_vb_x = m_Fb_x/m_Mbar + m_vb_y * m_r - m_vb_z * m_q;
 	m_drv_vb_y = m_Fb_y/m_Mbar + m_vb_z * m_p - m_vb_x * m_r;
@@ -430,26 +428,16 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_phai  = m_p + (m_q * m_sin_phai + m_r * m_cos_phai) * m_sin_theta / m_cos_theta;
 	m_drv_theta = m_q * m_cos_phai - m_r * m_sin_phai;
 	m_drv_psi   = (m_q * m_sin_phai + m_r * m_cos_phai) / m_cos_theta;
-	double tmpRes1_x = m_Ibar_xx * m_p + m_Ibar_xy * m_q + m_Ibar_xz * m_r;
-	double tmpRes1_y = m_Ibar_yx * m_p + m_Ibar_yy * m_q + m_Ibar_yz * m_r;
-	double tmpRes1_z = m_Ibar_zx * m_p + m_Ibar_zy * m_q + m_Ibar_zz * m_r;
-	double tmpRes2_x = m_Mb_x - m_q * tmpRes1_z + m_r * tmpRes1_y;
-	double tmpRes2_y = m_Mb_y - m_r * tmpRes1_x + m_p * tmpRes1_z;
-	double tmpRes2_z = m_Mb_z - m_p * tmpRes1_y + m_q * tmpRes1_x;
-	double deno = m_Ibar_xx*m_Ibar_yy*m_Ibar_zz - m_Ibar_xx*m_Ibar_yz*m_Ibar_zy - m_Ibar_xy*m_Ibar_yx*m_Ibar_zz + m_Ibar_xy*m_Ibar_yz*m_Ibar_zx + m_Ibar_xz*m_Ibar_yx*m_Ibar_zy - m_Ibar_xz*m_Ibar_yy*m_Ibar_zx;
-	double invIbar_xx = (m_Ibar_yy*m_Ibar_zz - m_Ibar_yz*m_Ibar_zy)/deno;
-	double invIbar_xy =-(m_Ibar_xy*m_Ibar_zz - m_Ibar_xz*m_Ibar_zy)/deno;
-	double invIbar_xz = (m_Ibar_xy*m_Ibar_yz - m_Ibar_xz*m_Ibar_yy)/deno;
-	double invIbar_yx =-(m_Ibar_yx*m_Ibar_zz - m_Ibar_yz*m_Ibar_zx)/deno;
-	double invIbar_yy = (m_Ibar_xx*m_Ibar_zz - m_Ibar_xz*m_Ibar_zx)/deno;
-	double invIbar_yz =-(m_Ibar_xx*m_Ibar_yz - m_Ibar_xz*m_Ibar_yx)/deno;
-	double invIbar_zx = (m_Ibar_yx*m_Ibar_zy - m_Ibar_yy*m_Ibar_zx)/deno;
-	double invIbar_zy =-(m_Ibar_xx*m_Ibar_zy - m_Ibar_xy*m_Ibar_zx)/deno;
-	double invIbar_zz = (m_Ibar_xx*m_Ibar_yy - m_Ibar_xy*m_Ibar_yx)/deno;
+	real_Y tmpRes1_x = m_Ibar_xx * m_p + m_Ibar_xy * m_q + m_Ibar_xz * m_r;
+	real_Y tmpRes1_y = m_Ibar_yx * m_p + m_Ibar_yy * m_q + m_Ibar_yz * m_r;
+	real_Y tmpRes1_z = m_Ibar_zx * m_p + m_Ibar_zy * m_q + m_Ibar_zz * m_r;
+	real_Y tmpRes2_x = m_Mb_x - m_q * tmpRes1_z + m_r * tmpRes1_y;
+	real_Y tmpRes2_y = m_Mb_y - m_r * tmpRes1_x + m_p * tmpRes1_z;
+	real_Y tmpRes2_z = m_Mb_z - m_p * tmpRes1_y + m_q * tmpRes1_x;
 
-	m_drv_p = invIbar_xx * tmpRes2_x + invIbar_yx * tmpRes2_y + invIbar_zx * tmpRes2_z;
-	m_drv_q = invIbar_xy * tmpRes2_x + invIbar_yy * tmpRes2_y + invIbar_zy * tmpRes2_z;
-	m_drv_r = invIbar_xz * tmpRes2_x + invIbar_yz * tmpRes2_y + invIbar_zz * tmpRes2_z;
+	m_drv_p = m_invIbar_xx * tmpRes2_x + m_invIbar_yx * tmpRes2_y + m_invIbar_zx * tmpRes2_z;
+	m_drv_q = m_invIbar_xy * tmpRes2_x + m_invIbar_yy * tmpRes2_y + m_invIbar_zy * tmpRes2_z;
+	m_drv_r = m_invIbar_xz * tmpRes2_x + m_invIbar_yz * tmpRes2_y + m_invIbar_zz * tmpRes2_z;
 	
 	//push outputs
 	derivatives[0] 	= m_drv_xe_x;
@@ -464,25 +452,16 @@ void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	derivatives[9] 	= m_drv_p;
 	derivatives[10] = m_drv_q;
 	derivatives[11] = m_drv_r;
-
-	static int step = 0;
-	
-	if(step%4==0){
-		//printf("%d step.\n",step/4);
-	}
-
-
-	step++;
 	
 }
 
 void NMSPC::Vehicle_Body::calculate_bar() {
 	m_Mbar = m_mass + m_z1m + m_z2m + m_z3m + m_z4m + m_z5m + m_z6m + m_z7m;
-	double A = (m_mass*m_a + m_z1m*m_z1R_x + m_z2m*m_z2R_x + m_z3m*m_z3R_x + \
+	real_Y A = (m_mass*m_a + m_z1m*m_z1R_x + m_z2m*m_z2R_x + m_z3m*m_z3R_x + \
 	m_z4m*m_z4R_x + m_z5m*m_z5R_x + m_z6m*m_z6R_x + m_z7m*m_z7R_x) / m_Mbar;
-	double D = (m_mass*m_d + m_z1m*m_z1R_y + m_z2m*m_z2R_y + m_z3m*m_z3R_y + \
+	real_Y D = (m_mass*m_d + m_z1m*m_z1R_y + m_z2m*m_z2R_y + m_z3m*m_z3R_y + \
 	m_z4m*m_z4R_y + m_z5m*m_z5R_y + m_z6m*m_z6R_y + m_z7m*m_z7R_y) / m_Mbar;
-	double H = (m_mass*m_h + m_z1m*m_z1R_z + m_z2m*m_z2R_z + m_z3m*m_z3R_z + \
+	real_Y H = (m_mass*m_h + m_z1m*m_z1R_z + m_z2m*m_z2R_z + m_z3m*m_z3R_z + \
 	m_z4m*m_z4R_z + m_z5m*m_z5R_z + m_z6m*m_z6R_z + m_z7m*m_z7R_z) / m_Mbar;
 	m_Rbar_x = m_a - A;
 	m_Rbar_y = D - m_d;
@@ -506,27 +485,27 @@ void NMSPC::Vehicle_Body::calculate_bar() {
 	m_HPbar_fr_z = H;
 	m_HPbar_rl_z = H;
 	m_HPbar_rr_z = H;
-	double lx1 = A-m_z1R_x;
-	double lx2 = A-m_z2R_x;
-	double lx3 = A-m_z3R_x;
-	double lx4 = A-m_z4R_x;
-	double lx5 = A-m_z5R_x;
-	double lx6 = A-m_z6R_x;
-	double lx7 = A-m_z7R_x;
-	double ly1 = D-m_z1R_y;
-	double ly2 = D-m_z2R_y;
-	double ly3 = D-m_z3R_y;
-	double ly4 = D-m_z4R_y;
-	double ly5 = D-m_z5R_y;
-	double ly6 = D-m_z6R_y;
-	double ly7 = D-m_z7R_y;
-	double lz1 = H-m_z1R_z;
-	double lz2 = H-m_z2R_z;
-	double lz3 = H-m_z3R_z;
-	double lz4 = H-m_z4R_z;
-	double lz5 = H-m_z5R_z;
-	double lz6 = H-m_z6R_z;
-	double lz7 = H-m_z7R_z;
+	real_Y lx1 = A-m_z1R_x;
+	real_Y lx2 = A-m_z2R_x;
+	real_Y lx3 = A-m_z3R_x;
+	real_Y lx4 = A-m_z4R_x;
+	real_Y lx5 = A-m_z5R_x;
+	real_Y lx6 = A-m_z6R_x;
+	real_Y lx7 = A-m_z7R_x;
+	real_Y ly1 = D-m_z1R_y;
+	real_Y ly2 = D-m_z2R_y;
+	real_Y ly3 = D-m_z3R_y;
+	real_Y ly4 = D-m_z4R_y;
+	real_Y ly5 = D-m_z5R_y;
+	real_Y ly6 = D-m_z6R_y;
+	real_Y ly7 = D-m_z7R_y;
+	real_Y lz1 = H-m_z1R_z;
+	real_Y lz2 = H-m_z2R_z;
+	real_Y lz3 = H-m_z3R_z;
+	real_Y lz4 = H-m_z4R_z;
+	real_Y lz5 = H-m_z5R_z;
+	real_Y lz6 = H-m_z6R_z;
+	real_Y lz7 = H-m_z7R_z;
 	//--
 	m_Ibar_xx = m_mass * (pow(m_d - D, 2.0) + pow(m_h - H, 2.0)) + \
 	m_z1m * (pow(ly1, 2.0)+pow(lz1, 2.0)) + \
@@ -588,6 +567,17 @@ void NMSPC::Vehicle_Body::calculate_bar() {
 	m_Izz + m_z1I_zz + m_z2I_zz + m_z3I_zz + \
 	m_z4I_zz + m_z5I_zz + m_z6I_zz + m_z7I_zz;
 
+	real_Y deno = m_Ibar_xx*m_Ibar_yy*m_Ibar_zz - m_Ibar_xx*m_Ibar_yz*m_Ibar_zy - m_Ibar_xy*m_Ibar_yx*m_Ibar_zz + m_Ibar_xy*m_Ibar_yz*m_Ibar_zx + m_Ibar_xz*m_Ibar_yx*m_Ibar_zy - m_Ibar_xz*m_Ibar_yy*m_Ibar_zx;
+	m_invIbar_xx = (m_Ibar_yy*m_Ibar_zz - m_Ibar_yz*m_Ibar_zy)/deno;
+	m_invIbar_xy =-(m_Ibar_xy*m_Ibar_zz - m_Ibar_xz*m_Ibar_zy)/deno;
+	m_invIbar_xz = (m_Ibar_xy*m_Ibar_yz - m_Ibar_xz*m_Ibar_yy)/deno;
+	m_invIbar_yx =-(m_Ibar_yx*m_Ibar_zz - m_Ibar_yz*m_Ibar_zx)/deno;
+	m_invIbar_yy = (m_Ibar_xx*m_Ibar_zz - m_Ibar_xz*m_Ibar_zx)/deno;
+	m_invIbar_yz =-(m_Ibar_xx*m_Ibar_yz - m_Ibar_xz*m_Ibar_yx)/deno;
+	m_invIbar_zx = (m_Ibar_yx*m_Ibar_zy - m_Ibar_yy*m_Ibar_zx)/deno;
+	m_invIbar_zy =-(m_Ibar_xx*m_Ibar_zy - m_Ibar_xy*m_Ibar_zx)/deno;
+	m_invIbar_zz = (m_Ibar_xx*m_Ibar_yy - m_Ibar_xy*m_Ibar_yx)/deno;
+
 }
 
 void NMSPC::Vehicle_Body::calculate_gravity() {
@@ -598,21 +588,23 @@ void NMSPC::Vehicle_Body::calculate_gravity() {
 
 
 void NMSPC::Vehicle_Body::calculate_aero_drag() {
-	double vdb_x = m_vb_x - (m_DCM_00 * m_Air_Wx + m_DCM_01 * m_Air_Wy + m_DCM_02 * m_Air_Wz);
-	double vdb_y = m_vb_y - (m_DCM_10 * m_Air_Wx + m_DCM_11 * m_Air_Wy + m_DCM_12 * m_Air_Wz);
-	double vdb_z = m_vb_z - (m_DCM_20 * m_Air_Wx + m_DCM_21 * m_Air_Wy + m_DCM_22 * m_Air_Wz);
-	double sum = pow(vdb_x,2) + pow(vdb_y,2) + pow(vdb_z,2);
-	double wdir_x = tanh(4.0 * vdb_x);
-	double wdir_y = tanh(4.0 * vdb_y);
-	double wdir_z = tanh(4.0 * vdb_z);
-	double gain = sum *0.5 * m_Af * m_Pabs / m_Cg / div0protect(m_Air_Tair,1e-5);
-	double ata2 = atan2(vdb_y,vdb_x);
+	real_Y vdb_x = m_vb_x - (m_DCM_00 * m_Air_Wx + m_DCM_01 * m_Air_Wy + m_DCM_02 * m_Air_Wz);
+	real_Y vdb_y = m_vb_y - (m_DCM_10 * m_Air_Wx + m_DCM_11 * m_Air_Wy + m_DCM_12 * m_Air_Wz);
+	real_Y vdb_z = m_vb_z - (m_DCM_20 * m_Air_Wx + m_DCM_21 * m_Air_Wy + m_DCM_22 * m_Air_Wz);
+	real_Y sum = pow(vdb_x,2.0) + pow(vdb_y,2.0) + pow(vdb_z,2.0);
+	sum=pow(sqrt(sum),2.0);
+	real_Y wdir_x = tanh(4.0 * vdb_x);
+	real_Y wdir_y = tanh(4.0 * vdb_y);
+	real_Y wdir_z = tanh(4.0 * vdb_z);
+	real_Y gain = sum *0.5 * m_Af * m_Pabs / m_Cg / div0protect(m_Air_Tair,1e-5);
+	real_Y ata2 = atan2(vdb_y,vdb_x);
 
 	m_Fd_x = m_Cd * gain * wdir_x;
 	m_Fd_y = m_pwl_Cs(ata2) * gain * wdir_y;
 	m_Fd_z = m_Cl * gain * wdir_z;
 	m_Md_x = 0.0;
 	m_Md_y = wdir_x * m_Cpm * gain * (m_a + m_b);
-	m_Md_z = m_pwl_Cym(ata2) * gain * (m_a + m_b);
+	//m_Md_z = m_pwl_Cym(ata2) * gain * (m_a + m_b);
+	m_Md_z = ata2 * gain * (m_a + m_b);
 
 }

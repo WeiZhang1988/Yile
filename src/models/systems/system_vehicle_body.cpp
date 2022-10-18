@@ -88,6 +88,8 @@ void NMSPC::Sys_Vehicle_Body::store_data() {
 		m_sptr_interface->m_ve_y_c, \
 		m_sptr_interface->m_ve_z_c, \
 
+		
+
 		m_sptr_interface->m_beta_c, \
 		m_sptr_interface->m_xe_x_o, 
 		m_sptr_interface->m_xe_y_o, 
@@ -159,18 +161,19 @@ void NMSPC::Sys_Vehicle_Body::store_data() {
 		m_sptr_interface->m_Veh_vx_rr, 
 		m_sptr_interface->m_Veh_vy_rr, 
 		m_sptr_interface->m_Veh_vz_rr,
-/*
+
 		m_sptr_interface->m_drv_phai,
 		m_sptr_interface->m_drv_theta,
 		m_sptr_interface->m_drv_psi,
 
 		m_sptr_interface->m_phai,
 		m_sptr_interface->m_theta,
-		m_sptr_interface->m_psi*/
+		m_sptr_interface->m_psi
+		
 		});
 }
 
-void NMSPC::Sys_Vehicle_Body::operator() (const d_vec &x, d_vec &dxdt, const double &t) {
+void NMSPC::Sys_Vehicle_Body::operator() (const d_vec &x, d_vec &dxdt, const real_Y &t) {
 	pull_con_states(x);
 	update_pv();
 	update_fm();

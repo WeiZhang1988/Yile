@@ -50,7 +50,7 @@ void NMSPC::Wheel_Disk::pull_con_states(const d_vec &con_states) {
     }
 }
 
-void NMSPC::Wheel_Disk::pull_pv(const double &Gnd_Pz) {
+void NMSPC::Wheel_Disk::pull_pv(const real_Y &Gnd_Pz) {
 	//pull inputs
 	m_Gnd_Pz = Gnd_Pz;
     //process
@@ -66,7 +66,7 @@ void NMSPC::Wheel_Disk::pull_pv(const double &Gnd_Pz) {
     m_Tir_Re = m_unloaded_radius - m_Tir_rhoz;
 }
 
-void NMSPC::Wheel_Disk::push_pv(double &Tir_omega, double &Sus_TirPz, double &Sus_Tirvz, double &Tir_Pz, double &Tir_vz, double &Tir_rhoz, double &Tir_Re) {
+void NMSPC::Wheel_Disk::push_pv(real_Y &Tir_omega, real_Y &Sus_TirPz, real_Y &Sus_Tirvz, real_Y &Tir_Pz, real_Y &Tir_vz, real_Y &Tir_rhoz, real_Y &Tir_Re) {
     Tir_omega = m_Tir_omega;
     Tir_Pz = m_Tir_Pz;
     Tir_vz = m_Tir_vz;
@@ -76,7 +76,7 @@ void NMSPC::Wheel_Disk::push_pv(double &Tir_omega, double &Sus_TirPz, double &Su
     Tir_Re = m_Tir_Re;
 }
 
-void NMSPC::Wheel_Disk::pull_fm(const double &Axl_Trq, const double &Brk_Prs, const double &Tir_Fx, const double &Tir_My, const double &Tir_Fz, const double &Sus_Fz) {
+void NMSPC::Wheel_Disk::pull_fm(const real_Y &Axl_Trq, const real_Y &Brk_Prs, const real_Y &Tir_Fx, const real_Y &Tir_My, const real_Y &Tir_Fz, const real_Y &Sus_Fz) {
 	//pull inputs
 	m_Axl_Trq = Axl_Trq;
 	m_Brk_Prs = Brk_Prs;
@@ -91,7 +91,7 @@ void NMSPC::Wheel_Disk::pull_fm(const double &Axl_Trq, const double &Brk_Prs, co
     m_Tir_Brk_Trq = m_Tfmaxk;
 }
 
-void NMSPC::Wheel_Disk::push_fm(double &Brk_Trq) {
+void NMSPC::Wheel_Disk::push_fm(real_Y &Brk_Trq) {
     Brk_Trq = m_Tir_Brk_Trq;
 }
 

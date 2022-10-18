@@ -12,7 +12,7 @@
 // =============================================================================
 #include "common.hpp"
 
-double NMSPC::saturation(const double &in_data, const double &lower, const double &upper) {
+real_Y NMSPC::saturation(const real_Y &in_data, const real_Y &lower, const real_Y &upper) {
     if (in_data > upper) 
         return upper;
     else if (in_data < lower)
@@ -21,7 +21,7 @@ double NMSPC::saturation(const double &in_data, const double &lower, const doubl
         return in_data;
 }
 
-double NMSPC::dead_zone(const double &in_data, const double &lower, const double &upper) {
+real_Y NMSPC::dead_zone(const real_Y &in_data, const real_Y &lower, const real_Y &upper) {
 	if (in_data > upper)
 		return in_data - upper;
 	else if (in_data < lower)
@@ -30,7 +30,7 @@ double NMSPC::dead_zone(const double &in_data, const double &lower, const double
 		return 0.0;
 }
 
-double NMSPC::div0protect(const double &in_data, const double &thresh) {
+real_Y NMSPC::div0protect(const real_Y &in_data, const real_Y &thresh) {
 	if (in_data >= -thresh && in_data <= thresh) {
 		if (in_data >= 0.0) {
 			return 2.0 * thresh / (3.0 - pow(in_data / thresh, 2.0));
@@ -42,7 +42,7 @@ double NMSPC::div0protect(const double &in_data, const double &thresh) {
 	}
 }
 
-double NMSPC::div0protect_abs(const double &in_data, const double &thresh) {
+real_Y NMSPC::div0protect_abs(const real_Y &in_data, const real_Y &thresh) {
 	if (in_data >= -thresh && in_data <= thresh) {
 		return 2.0 * thresh / (3.0 - pow(in_data / thresh, 2.0));
 	} else {
@@ -57,7 +57,7 @@ void NMSPC::printvec(const d_vec &in_data, const char &l, const char &r) {
 	std::cout<<std::endl;
 }
 
-double NMSPC::piece_wise_linear::operator() (const double &x_in)  const{
+real_Y NMSPC::piece_wise_linear::operator() (const real_Y &x_in)  const{
 	assert(m_n == m_y.size() && m_n>1);
 	if (x_in <= m_x[0]) {
 		return m_y[0];

@@ -22,10 +22,10 @@ public:
 	static const int m_dis_states_num  = 1;									//amount of discrete states;
 
 	Wheel_Disk (\
-	double unloaded_radius=0.309384029954441, double IYY=0.740633832792491, double mass = 5.0,\
-	double br=1e-3, double disk_abore=0.05, double num_pads=2.0, \
-	double Rm=0.177, double mu_kinetic=0.2, double mu_static=0.3, \
-	double init_omega=0.0, double init_Pz=0.0, double init_vz=0.0, \
+	real_Y unloaded_radius=0.309384029954441, real_Y IYY=0.740633832792491, real_Y mass = 5.0,\
+	real_Y br=1e-3, real_Y disk_abore=0.05, real_Y num_pads=2.0, \
+	real_Y Rm=0.177, real_Y mu_kinetic=0.2, real_Y mu_static=0.3, \
+	real_Y init_omega=0.0, real_Y init_Pz=0.0, real_Y init_vz=0.0, \
 	bool init_locked_flag=false, \
 	bool init_locked_state=false) :
 	m_unloaded_radius(unloaded_radius),m_IYY(IYY), m_mass(mass), \
@@ -41,55 +41,55 @@ public:
 	void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
 
-	void pull_pv (const double &Gnd_Pz);
-	void push_pv (double &Tir_omega, double &Sus_TirPz, double &Sus_Tirvz, double &Tir_Pz, double &Tir_vz, double &Tir_rhoz, double &Tir_Re);
-	void pull_fm (const double &Axl_Trq, const double &Brk_Prs, const double &Tir_Fx, const double &Tir_My, const double &Tir_Fz, const double &Sus_Fz);
-	void push_fm (double &Brk_Trq);
+	void pull_pv (const real_Y &Gnd_Pz);
+	void push_pv (real_Y &Tir_omega, real_Y &Sus_TirPz, real_Y &Sus_Tirvz, real_Y &Tir_Pz, real_Y &Tir_vz, real_Y &Tir_rhoz, real_Y &Tir_Re);
+	void pull_fm (const real_Y &Axl_Trq, const real_Y &Brk_Prs, const real_Y &Tir_Fx, const real_Y &Tir_My, const real_Y &Tir_Fz, const real_Y &Sus_Fz);
+	void push_fm (real_Y &Brk_Trq);
 
 	void push_drv (d_vec &derivatives);
 private:
 	//built in table
 	const int m_truth_table[8] = {0,1,0,0,1,1,1,0};	//for lock logic
 	//built in parameters
-	const double m_lpf_wc = 200.0 * pi;
-	const double m_lpf_init = 0.0;
+	const real_Y m_lpf_wc = 200.0 * pi;
+	const real_Y m_lpf_init = 0.0;
 	//configurable parameters
-	double m_unloaded_radius, m_IYY, m_mass, m_br, m_disk_abore, \
+	real_Y m_unloaded_radius, m_IYY, m_mass, m_br, m_disk_abore, \
 	m_num_pads, m_Rm, m_mu_kinetic, m_mu_static;
 	//inputs
-	double m_Gnd_Pz = NaN;
-	double m_Axl_Trq = NaN;
-	double m_Brk_Prs = NaN;
-	double m_Tir_Fx = NaN;
-	double m_Tir_My = NaN;
-	double m_Sus_Fz = NaN;
-	double m_Tir_Fz = NaN;
+	real_Y m_Gnd_Pz = NaN;
+	real_Y m_Axl_Trq = NaN;
+	real_Y m_Brk_Prs = NaN;
+	real_Y m_Tir_Fx = NaN;
+	real_Y m_Tir_My = NaN;
+	real_Y m_Sus_Fz = NaN;
+	real_Y m_Tir_Fz = NaN;
 	//continuous states
-	double m_unlocked_omega;
-	double m_Tir_Pz;
-	double m_Tir_vz;
-	double m_Sus_lpf_Fz = m_lpf_init;
+	real_Y m_unlocked_omega;
+	real_Y m_Tir_Pz;
+	real_Y m_Tir_vz;
+	real_Y m_Sus_lpf_Fz = m_lpf_init;
 	//continuous states derivative
-	double m_drv_unlocked_omega;
-	double m_drv_Tir_Pz;
-	double m_drv_Tir_vz;
-	double m_drv_Sus_lfp_Fz;
+	real_Y m_drv_unlocked_omega;
+	real_Y m_drv_Tir_Pz;
+	real_Y m_drv_Tir_vz;
+	real_Y m_drv_Sus_lfp_Fz;
 	//pre omega
-	double m_unlocked_omega_pre;
+	real_Y m_unlocked_omega_pre;
 	//discrete states
 	bool m_locked_flag;
 	bool m_locked_state;
 	//middle variables
-	double m_Tout = NaN;
-	double m_Tfmaxk = NaN;
-	double m_Tfmaxs = NaN;
+	real_Y m_Tout = NaN;
+	real_Y m_Tfmaxk = NaN;
+	real_Y m_Tfmaxs = NaN;
 	//outputs
-	double m_Tir_omega = NaN;
-	double m_Tir_Re = NaN;
-	double m_Sus_TirPz = NaN;
-	double m_Sus_Tirvz = NaN;
-	double m_Tir_rhoz = NaN;
-	double m_Tir_Brk_Trq = NaN;
+	real_Y m_Tir_omega = NaN;
+	real_Y m_Tir_Re = NaN;
+	real_Y m_Sus_TirPz = NaN;
+	real_Y m_Sus_Tirvz = NaN;
+	real_Y m_Tir_rhoz = NaN;
+	real_Y m_Tir_Brk_Trq = NaN;
 };
 
 }	//end of name space

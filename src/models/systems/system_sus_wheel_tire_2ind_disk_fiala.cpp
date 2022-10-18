@@ -174,7 +174,7 @@ void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::store_data() {
 		});
 }
 
-void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::operator() (const d_vec &x, d_vec &dxdt, const double &t) {
+void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::operator() (const d_vec &x, d_vec &dxdt, const real_Y &t) {
 	pull_con_states(x);
 	update_pv();
 	update_fm();

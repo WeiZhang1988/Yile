@@ -53,12 +53,12 @@ NMSPC::Sus_Ind_2Tracks &NMSPC::Sus_Ind_2Tracks::operator= (const Sus_Ind_2Tracks
     return *this;
 }
 
-void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Veh_r, const double &Strg_str_l, const double &Sus_TirPz_l, const double &Sus_Tirvz_l,	const double &Tir_Re_l, \
-	const double &Int_Pz_l, const double &Int_Vz_l, \
-	const double &Veh_vx_l, const double &Veh_vy_l, const double &Veh_vz_l, \
-	const double &Strg_str_r, const double &Sus_TirPz_r, const double &Sus_Tirvz_r,	const double &Tir_Re_r, \
-	const double &Int_Pz_r, const double &Int_Vz_r, \
-	const double &Veh_vx_r, const double &Veh_vy_r, const double &Veh_vz_r) {
+void NMSPC::Sus_Ind_2Tracks::pull_pv (const real_Y &Veh_hgt_cg, const real_Y &Veh_r, const real_Y &Strg_str_l, const real_Y &Sus_TirPz_l, const real_Y &Sus_Tirvz_l,	const real_Y &Tir_Re_l, \
+	const real_Y &Int_Pz_l, const real_Y &Int_Vz_l, \
+	const real_Y &Veh_vx_l, const real_Y &Veh_vy_l, const real_Y &Veh_vz_l, \
+	const real_Y &Strg_str_r, const real_Y &Sus_TirPz_r, const real_Y &Sus_Tirvz_r,	const real_Y &Tir_Re_r, \
+	const real_Y &Int_Pz_r, const real_Y &Int_Vz_r, \
+	const real_Y &Veh_vx_r, const real_Y &Veh_vy_r, const real_Y &Veh_vz_r) {
 	//pull inputs
 	m_Veh_hgt_cg = Veh_hgt_cg;
 	m_Veh_r 	 = Veh_r;
@@ -132,8 +132,8 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const double &Veh_hgt_cg, const double &Ve
 	
 }
 
-void NMSPC::Sus_Ind_2Tracks::push_pv(double &Sus_str_l, double &Sus_gamma_l, double &Sus_caster_l, double &Sus_r_l, double &Sus_vx_l, double &Sus_vy_l, double &Sus_vz_l, \
-double &Sus_str_r, double &Sus_gamma_r, double &Sus_caster_r, double &Sus_r_r, double &Sus_vx_r, double &Sus_vy_r, double &Sus_vz_r) {
+void NMSPC::Sus_Ind_2Tracks::push_pv(real_Y &Sus_str_l, real_Y &Sus_gamma_l, real_Y &Sus_caster_l, real_Y &Sus_r_l, real_Y &Sus_vx_l, real_Y &Sus_vy_l, real_Y &Sus_vz_l, \
+real_Y &Sus_str_r, real_Y &Sus_gamma_r, real_Y &Sus_caster_r, real_Y &Sus_r_r, real_Y &Sus_vx_r, real_Y &Sus_vy_r, real_Y &Sus_vz_r) {
 	Sus_str_l = m_Sus_str_l;
 	Sus_gamma_l = m_Sus_gamma_l;
 	Sus_caster_l = m_Sus_caster_l;
@@ -190,8 +190,8 @@ void NMSPC::Sus_Ind_2Tracks::pull_fm_z() {
 
 }
 
-void NMSPC::Sus_Ind_2Tracks::pull_fm_o(const double &Sus_TirFx_l, const double &Sus_TirFy_l, const double &Tir_Mx_l, const double &Tir_My_l, const double &Tir_Mz_l, \
-const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, const double &Tir_My_r, const double &Tir_Mz_r) {
+void NMSPC::Sus_Ind_2Tracks::pull_fm_o(const real_Y &Sus_TirFx_l, const real_Y &Sus_TirFy_l, const real_Y &Tir_Mx_l, const real_Y &Tir_My_l, const real_Y &Tir_Mz_l, \
+const real_Y &Sus_TirFx_r, const real_Y &Sus_TirFy_r, const real_Y &Tir_Mx_r, const real_Y &Tir_My_r, const real_Y &Tir_Mz_r) {
 	//pull inputs
 	//--left
 	m_Sus_TirFx_l   = Sus_TirFx_l;
@@ -221,21 +221,21 @@ const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, co
 
 }
 
-void NMSPC::Sus_Ind_2Tracks::pull_fm(const double &Sus_TirFx_l, const double &Sus_TirFy_l, const double &Tir_Mx_l, const double &Tir_My_l, const double &Tir_Mz_l, \
-const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, const double &Tir_My_r, const double &Tir_Mz_r) {
+void NMSPC::Sus_Ind_2Tracks::pull_fm(const real_Y &Sus_TirFx_l, const real_Y &Sus_TirFy_l, const real_Y &Tir_Mx_l, const real_Y &Tir_My_l, const real_Y &Tir_Mz_l, \
+const real_Y &Sus_TirFx_r, const real_Y &Sus_TirFy_r, const real_Y &Tir_Mx_r, const real_Y &Tir_My_r, const real_Y &Tir_Mz_r) {
 	pull_fm_z();
 	pull_fm_o(Sus_TirFx_l, Sus_TirFy_l, Tir_Mx_l, Tir_My_l, Tir_Mz_l, Sus_TirFx_r, Sus_TirFy_r, Tir_Mx_r, Tir_My_r, Tir_Mz_r);
 }
 
-void NMSPC::Sus_Ind_2Tracks::push_fm_z(double &Sus_VehFz_l, double &Sus_Fz_l, double &Sus_VehFz_r, double &Sus_Fz_r) {
+void NMSPC::Sus_Ind_2Tracks::push_fm_z(real_Y &Sus_VehFz_l, real_Y &Sus_Fz_l, real_Y &Sus_VehFz_r, real_Y &Sus_Fz_r) {
 	Sus_VehFz_l = m_Sus_VehFz_l;
 	Sus_Fz_l 	= m_Sus_Fz_l;
 	Sus_VehFz_r = m_Sus_VehFz_r;
 	Sus_Fz_r 	= m_Sus_Fz_r;
 }
 
-void NMSPC::Sus_Ind_2Tracks::push_fm_o(double &Sus_VehFx_l, double &Sus_VehFy_l, double &Sus_VehMx_l, double &Sus_VehMy_l, double &Sus_VehMz_l, \
-double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehMx_r, double &Sus_VehMy_r, double &Sus_VehMz_r) {
+void NMSPC::Sus_Ind_2Tracks::push_fm_o(real_Y &Sus_VehFx_l, real_Y &Sus_VehFy_l, real_Y &Sus_VehMx_l, real_Y &Sus_VehMy_l, real_Y &Sus_VehMz_l, \
+real_Y &Sus_VehFx_r, real_Y &Sus_VehFy_r, real_Y &Sus_VehMx_r, real_Y &Sus_VehMy_r, real_Y &Sus_VehMz_r) {
 	Sus_VehFx_l = m_Sus_VehFx_l;
 	Sus_VehFy_l = m_Sus_VehFy_l;
 	Sus_VehMx_l = m_Sus_VehMx_l;
@@ -249,36 +249,36 @@ double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehMx_r, double &Sus_VehMy
 	
 }
 
-void NMSPC::Sus_Ind_2Tracks::push_fm(double &Sus_VehFx_l, double &Sus_VehFy_l, double &Sus_VehFz_l, double &Sus_VehMx_l, double &Sus_VehMy_l, double &Sus_VehMz_l, double &Sus_Fz_l, \
-double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehFz_r, double &Sus_VehMx_r, double &Sus_VehMy_r, double &Sus_VehMz_r, double &Sus_Fz_r) {
+void NMSPC::Sus_Ind_2Tracks::push_fm(real_Y &Sus_VehFx_l, real_Y &Sus_VehFy_l, real_Y &Sus_VehFz_l, real_Y &Sus_VehMx_l, real_Y &Sus_VehMy_l, real_Y &Sus_VehMz_l, real_Y &Sus_Fz_l, \
+real_Y &Sus_VehFx_r, real_Y &Sus_VehFy_r, real_Y &Sus_VehFz_r, real_Y &Sus_VehMx_r, real_Y &Sus_VehMy_r, real_Y &Sus_VehMz_r, real_Y &Sus_Fz_r) {
 	push_fm_z(Sus_VehFz_l, Sus_Fz_l, Sus_VehFz_r, Sus_Fz_r);
 	push_fm_o(Sus_VehFx_l, Sus_VehFy_l, Sus_VehMx_l, Sus_VehMy_l, Sus_VehMz_l, \
 	Sus_VehFx_r, Sus_VehFy_r, Sus_VehMx_r, Sus_VehMy_r, Sus_VehMz_r);
 }
 
 
-double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_max_stop(const double \
-&x_minus_hmax, const double &x_dot, const double &Hmax, const double &Kz, const double &Cz){
-     double tmp = saturation(abs(4.0 * x_minus_hmax / (0.05 * Hmax)), \
+real_Y NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_max_stop(const real_Y \
+&x_minus_hmax, const real_Y &x_dot, const real_Y &Hmax, const real_Y &Kz, const real_Y &Cz){
+     real_Y tmp = saturation(abs(4.0 * x_minus_hmax / (0.05 * Hmax)), \
      0.0, 4.0);
 	 return (tanh(tmp) * pow(tmp, 3.0) * Kz * (x_minus_hmax) + tanh(tmp) \
      * Cz * x_dot * 3.0) * uhsbm(x_minus_hmax);
 }
 
-double NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_min_stop(const double \
-&x_plus_hmax, const double &x_dot, const double &Hmax, const double &Kz, const double &Cz){
-     double tmp = saturation(abs(4.0 * x_plus_hmax / (0.05 * Hmax)), \
+real_Y NMSPC::Sus_Ind_2Tracks::calculate_hard_stop_force_min_stop(const real_Y \
+&x_plus_hmax, const real_Y &x_dot, const real_Y &Hmax, const real_Y &Kz, const real_Y &Cz){
+     real_Y tmp = saturation(abs(4.0 * x_plus_hmax / (0.05 * Hmax)), \
      0.0, 4.0);
 	  return (tanh(tmp) * pow(tmp, 3.0) * Kz * (x_plus_hmax) + tanh(tmp) \
      * Cz * x_dot * 3.0) * lhsbm(x_plus_hmax);
 }
 
 
-void NMSPC::Sus_Ind_2Tracks::calculate_anti_sway_force_in_position(double &whlFz_l, double &whlFz_r, double &vehFz_l, double &vehFz_r, \
-	const double &whlZ_l, const double &whlZ_r, const double &vehZ_l, const double &vehZ_r) {
-	double ang_l = m_as_ntrl_ang - atan(ang_tan_lmt((m_as_R * tan(m_as_ntrl_ang) - (whlZ_l - vehZ_l)) / m_as_R));
-	double ang_r = m_as_ntrl_ang - atan(ang_tan_lmt((m_as_R * tan(m_as_ntrl_ang) - (whlZ_r - vehZ_r)) / m_as_R));
-	double tmp = (ang_l - ang_r) * m_as_trsK / m_as_R;
+void NMSPC::Sus_Ind_2Tracks::calculate_anti_sway_force_in_position(real_Y &whlFz_l, real_Y &whlFz_r, real_Y &vehFz_l, real_Y &vehFz_r, \
+	const real_Y &whlZ_l, const real_Y &whlZ_r, const real_Y &vehZ_l, const real_Y &vehZ_r) {
+	real_Y ang_l = m_as_ntrl_ang - atan(ang_tan_lmt((m_as_R * tan(m_as_ntrl_ang) - (whlZ_l - vehZ_l)) / m_as_R));
+	real_Y ang_r = m_as_ntrl_ang - atan(ang_tan_lmt((m_as_R * tan(m_as_ntrl_ang) - (whlZ_r - vehZ_r)) / m_as_R));
+	real_Y tmp = (ang_l - ang_r) * m_as_trsK / m_as_R;
 	whlFz_l -= tmp * cos(ang_l);
 	whlFz_r -= tmp * cos(ang_r);
 	vehFz_l += tmp * cos(ang_l);

@@ -21,13 +21,13 @@ public:
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
 
-	Sus_Ind_2Tracks (double F0z=2886.0, double Kz=52451.006579283188, double Cz=5565.224638019838, \
-	double Hmax=0.25, double roll_strg_H_slp=-0.2269, \
-	double toe=0.0349, double toe_strg_slp=0.01, \
-	double caster=0.0698, double caster_H_slp=-0.2269, double caster_strg_slp=0.01, \
-	double camber=0.0698, double camber_H_slp=-0.2269, double camber_strg_slp=0.01, \
-	double strg_hgt_slp=0.1432,\
-	double as_R=0.2, double as_ntrl_ang=0.5236, double as_trsK=8e2, \
+	Sus_Ind_2Tracks (real_Y F0z=2886.0, real_Y Kz=52451.006579283188, real_Y Cz=5565.224638019838, \
+	real_Y Hmax=0.25, real_Y roll_strg_H_slp=-0.2269, \
+	real_Y toe=0.0349, real_Y toe_strg_slp=0.01, \
+	real_Y caster=0.0698, real_Y caster_H_slp=-0.2269, real_Y caster_strg_slp=0.01, \
+	real_Y camber=0.0698, real_Y camber_H_slp=-0.2269, real_Y camber_strg_slp=0.01, \
+	real_Y strg_hgt_slp=0.1432,\
+	real_Y as_R=0.2, real_Y as_ntrl_ang=0.5236, real_Y as_trsK=8e2, \
 	bool has_anti_sway=true, bool is_strg=true) :
 	m_F0z_l(F0z), m_Kz_l(Kz), m_Cz_l(Cz), m_Hmax_l(Hmax), \
 	m_roll_strg_H_slp_l(roll_strg_H_slp), \
@@ -59,25 +59,25 @@ public:
 	void push_con_states (d_vec &con_states) {};
 	void pull_con_states (const d_vec &con_states) {};
 
-	void pull_pv (const double &Veh_hgt_cg, const double &Veh_r, \
-	const double &Strg_str_l, const double &Sus_TirPz_l, const double &Sus_Tirvz_l,	const double &Tir_Re_l, \
-	const double &Int_Pz_l, const double &Int_Vz_l, \
-	const double &Veh_vx_l, const double &Veh_vy_l, const double &Veh_vz_l, \
-	const double &Strg_str_r, const double &Sus_TirPz_r, const double &Sus_Tirvz_r,	const double &Tir_Re_r, \
-	const double &Int_Pz_r, const double &Int_Vz_r, \
-	const double &Veh_vx_r, const double &Veh_vy_r, const double &Veh_vz_r);
-	void push_pv (double &Sus_str_l, double &Sus_gamma_l, double &Sus_caster_l, double &Sus_r_l, double &Sus_vx_l, double &Sus_vy_l, double &Sus_vz_l, \
-	double &Sus_str_r, double &Sus_gamma_r, double &Sus_caster_r, double &Sus_r_r, double &Sus_vx_r, double &Sus_vy_r, double &Sus_vz_r);
+	void pull_pv (const real_Y &Veh_hgt_cg, const real_Y &Veh_r, \
+	const real_Y &Strg_str_l, const real_Y &Sus_TirPz_l, const real_Y &Sus_Tirvz_l,	const real_Y &Tir_Re_l, \
+	const real_Y &Int_Pz_l, const real_Y &Int_Vz_l, \
+	const real_Y &Veh_vx_l, const real_Y &Veh_vy_l, const real_Y &Veh_vz_l, \
+	const real_Y &Strg_str_r, const real_Y &Sus_TirPz_r, const real_Y &Sus_Tirvz_r,	const real_Y &Tir_Re_r, \
+	const real_Y &Int_Pz_r, const real_Y &Int_Vz_r, \
+	const real_Y &Veh_vx_r, const real_Y &Veh_vy_r, const real_Y &Veh_vz_r);
+	void push_pv (real_Y &Sus_str_l, real_Y &Sus_gamma_l, real_Y &Sus_caster_l, real_Y &Sus_r_l, real_Y &Sus_vx_l, real_Y &Sus_vy_l, real_Y &Sus_vz_l, \
+	real_Y &Sus_str_r, real_Y &Sus_gamma_r, real_Y &Sus_caster_r, real_Y &Sus_r_r, real_Y &Sus_vx_r, real_Y &Sus_vy_r, real_Y &Sus_vz_r);
 	void pull_fm_z ();
-	void push_fm_z (double &Sus_VehFz_l, double &Sus_Fz_l, double &Sus_VehFz_r, double &Sus_Fz_r);
-	void pull_fm_o (const double &Sus_TirFx_l, const double &Sus_TirFy_l, const double &Tir_Mx_l, const double &Tir_My_l, const double &Tir_Mz_l, \
-	const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, const double &Tir_My_r, const double &Tir_Mz_r);
-	void push_fm_o (double &Sus_VehFx_l, double &Sus_VehFy_l, double &Sus_VehMx_l, double &Sus_VehMy_l, double &Sus_VehMz_l, \
-	double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehMx_r, double &Sus_VehMy_r, double &Sus_VehMz_r);
-	void pull_fm (const double &Sus_TirFx_l, const double &Sus_TirFy_l, const double &Tir_Mx_l, const double &Tir_My_l, const double &Tir_Mz_l, \
-	const double &Sus_TirFx_r, const double &Sus_TirFy_r, const double &Tir_Mx_r, const double &Tir_My_r, const double &Tir_Mz_r);
-	void push_fm (double &Sus_VehFx_l, double &Sus_VehFy_l, double &Sus_VehFz_l, double &Sus_VehMx_l, double &Sus_VehMy_l, double &Sus_VehMz_l, double &Sus_Fz_l, \
-	double &Sus_VehFx_r, double &Sus_VehFy_r, double &Sus_VehFz_r, double &Sus_VehMx_r, double &Sus_VehMy_r, double &Sus_VehMz_r, double &Sus_Fz_r);
+	void push_fm_z (real_Y &Sus_VehFz_l, real_Y &Sus_Fz_l, real_Y &Sus_VehFz_r, real_Y &Sus_Fz_r);
+	void pull_fm_o (const real_Y &Sus_TirFx_l, const real_Y &Sus_TirFy_l, const real_Y &Tir_Mx_l, const real_Y &Tir_My_l, const real_Y &Tir_Mz_l, \
+	const real_Y &Sus_TirFx_r, const real_Y &Sus_TirFy_r, const real_Y &Tir_Mx_r, const real_Y &Tir_My_r, const real_Y &Tir_Mz_r);
+	void push_fm_o (real_Y &Sus_VehFx_l, real_Y &Sus_VehFy_l, real_Y &Sus_VehMx_l, real_Y &Sus_VehMy_l, real_Y &Sus_VehMz_l, \
+	real_Y &Sus_VehFx_r, real_Y &Sus_VehFy_r, real_Y &Sus_VehMx_r, real_Y &Sus_VehMy_r, real_Y &Sus_VehMz_r);
+	void pull_fm (const real_Y &Sus_TirFx_l, const real_Y &Sus_TirFy_l, const real_Y &Tir_Mx_l, const real_Y &Tir_My_l, const real_Y &Tir_Mz_l, \
+	const real_Y &Sus_TirFx_r, const real_Y &Sus_TirFy_r, const real_Y &Tir_Mx_r, const real_Y &Tir_My_r, const real_Y &Tir_Mz_r);
+	void push_fm (real_Y &Sus_VehFx_l, real_Y &Sus_VehFy_l, real_Y &Sus_VehFz_l, real_Y &Sus_VehMx_l, real_Y &Sus_VehMy_l, real_Y &Sus_VehMz_l, real_Y &Sus_Fz_l, \
+	real_Y &Sus_VehFx_r, real_Y &Sus_VehFy_r, real_Y &Sus_VehFz_r, real_Y &Sus_VehMx_r, real_Y &Sus_VehMy_r, real_Y &Sus_VehMz_r, real_Y &Sus_Fz_r);
 
 	void update_drv (d_vec &outputs) {};
 
@@ -88,126 +88,126 @@ private:
 	piece_wise_linear ang_tan_lmt = piece_wise_linear({-1.0, 1.0},{-1.0, 1.0});
 	//parameters	
 	// preload , spring constant , damping , maximum height
-	double m_F0z_l, m_Kz_l, m_Cz_l, m_Hmax_l, \
+	real_Y m_F0z_l, m_Kz_l, m_Cz_l, m_Hmax_l, \
 	m_F0z_r, m_Kz_r, m_Cz_r, m_Hmax_r; 		
 	// rolling steering angle vs suspension height
-	double m_roll_strg_H_slp_l, \
+	real_Y m_roll_strg_H_slp_l, \
 	m_roll_strg_H_slp_r; 
-	double m_toe_l, m_toe_strg_slp_l, \
+	real_Y m_toe_l, m_toe_strg_slp_l, \
 	m_toe_r, m_toe_strg_slp_r; 		//
-	double m_caster_l, m_caster_H_slp_l, m_caster_strg_slp_l, \
+	real_Y m_caster_l, m_caster_H_slp_l, m_caster_strg_slp_l, \
 	m_caster_r, m_caster_H_slp_r, m_caster_strg_slp_r; 
-	double m_camber_l, m_camber_H_slp_l, m_camber_strg_slp_l, \
+	real_Y m_camber_l, m_camber_H_slp_l, m_camber_strg_slp_l, \
 	m_camber_r, m_camber_H_slp_r, m_camber_strg_slp_r; 
 	//suspension height vs steering angle
-	double m_strg_hgt_slp_l, m_strg_hgt_slp_r;
+	real_Y m_strg_hgt_slp_l, m_strg_hgt_slp_r;
 	//anti sway
-	double m_as_R, m_as_ntrl_ang, m_as_trsK;
+	real_Y m_as_R, m_as_ntrl_ang, m_as_trsK;
 	bool m_has_anti_sway;
 	// is steering 			
 	bool m_is_strg; 				
 	
 	//inputs
-	double m_Veh_hgt_cg		= NaN;
-	double m_Veh_r			= NaN;
+	real_Y m_Veh_hgt_cg		= NaN;
+	real_Y m_Veh_r			= NaN;
 	//--left
-	double m_Strg_str_l		= NaN;
-	double m_Sus_TirPz_l	= NaN;
-	double m_Sus_Tirvz_l	= NaN;
-	double m_Tir_Re_l		= NaN;
-	double m_Int_Pz_l		= NaN;
-	double m_Int_Vz_l		= NaN;
-	double m_Veh_vx_l		= NaN;
-	double m_Veh_vy_l		= NaN;
-	double m_Veh_vz_l		= NaN;
-	double m_Sus_TirFx_l	= NaN;
-	double m_Sus_TirFy_l	= NaN;
-	double m_Tir_Mx_l		= NaN;
-	double m_Tir_My_l		= NaN;
-	double m_Tir_Mz_l		= NaN;
+	real_Y m_Strg_str_l		= NaN;
+	real_Y m_Sus_TirPz_l	= NaN;
+	real_Y m_Sus_Tirvz_l	= NaN;
+	real_Y m_Tir_Re_l		= NaN;
+	real_Y m_Int_Pz_l		= NaN;
+	real_Y m_Int_Vz_l		= NaN;
+	real_Y m_Veh_vx_l		= NaN;
+	real_Y m_Veh_vy_l		= NaN;
+	real_Y m_Veh_vz_l		= NaN;
+	real_Y m_Sus_TirFx_l	= NaN;
+	real_Y m_Sus_TirFy_l	= NaN;
+	real_Y m_Tir_Mx_l		= NaN;
+	real_Y m_Tir_My_l		= NaN;
+	real_Y m_Tir_Mz_l		= NaN;
 	//--right
-	double m_Strg_str_r		= NaN;
-	double m_Sus_TirPz_r	= NaN;
-	double m_Sus_Tirvz_r	= NaN;
-	double m_Tir_Re_r		= NaN;
-	double m_Int_Pz_r		= NaN;
-	double m_Int_Vz_r		= NaN;
-	double m_Veh_vx_r		= NaN;
-	double m_Veh_vy_r		= NaN;
-	double m_Veh_vz_r		= NaN;
-	double m_Sus_TirFx_r	= NaN;
-	double m_Sus_TirFy_r	= NaN;
-	double m_Tir_Mx_r		= NaN;
-	double m_Tir_My_r		= NaN;
-	double m_Tir_Mz_r		= NaN;
+	real_Y m_Strg_str_r		= NaN;
+	real_Y m_Sus_TirPz_r	= NaN;
+	real_Y m_Sus_Tirvz_r	= NaN;
+	real_Y m_Tir_Re_r		= NaN;
+	real_Y m_Int_Pz_r		= NaN;
+	real_Y m_Int_Vz_r		= NaN;
+	real_Y m_Veh_vx_r		= NaN;
+	real_Y m_Veh_vy_r		= NaN;
+	real_Y m_Veh_vz_r		= NaN;
+	real_Y m_Sus_TirFx_r	= NaN;
+	real_Y m_Sus_TirFy_r	= NaN;
+	real_Y m_Tir_Mx_r		= NaN;
+	real_Y m_Tir_My_r		= NaN;
+	real_Y m_Tir_Mz_r		= NaN;
 
 	//outputs
 	//--left
-	double m_Sus_str_l   = NaN;
-	double m_Sus_gamma_l = NaN;
-	double m_Sus_caster_l = NaN;
-	double m_Sus_r_l = NaN;
-	double m_Sus_vx_l = NaN;
-	double m_Sus_vy_l = NaN;
-	double m_Sus_vz_l = NaN;	//note: vx vy are vehicle hardpoint velocity, vz is tire vz in suspension frame
-	double m_Sus_VehFx_l = NaN;
-	double m_Sus_VehFy_l = NaN;	
-	double m_Sus_VehFz_l = NaN;
-	double m_Sus_VehMx_l = NaN;
-	double m_Sus_VehMy_l = NaN;	
-	double m_Sus_VehMz_l = NaN;	
-	double m_Sus_Fz_l = NaN;
+	real_Y m_Sus_str_l   = NaN;
+	real_Y m_Sus_gamma_l = NaN;
+	real_Y m_Sus_caster_l = NaN;
+	real_Y m_Sus_r_l = NaN;
+	real_Y m_Sus_vx_l = NaN;
+	real_Y m_Sus_vy_l = NaN;
+	real_Y m_Sus_vz_l = NaN;	//note: vx vy are vehicle hardpoint velocity, vz is tire vz in suspension frame
+	real_Y m_Sus_VehFx_l = NaN;
+	real_Y m_Sus_VehFy_l = NaN;	
+	real_Y m_Sus_VehFz_l = NaN;
+	real_Y m_Sus_VehMx_l = NaN;
+	real_Y m_Sus_VehMy_l = NaN;	
+	real_Y m_Sus_VehMz_l = NaN;	
+	real_Y m_Sus_Fz_l = NaN;
 	//--right
-	double m_Sus_str_r   = NaN;
-	double m_Sus_gamma_r = NaN;
-	double m_Sus_caster_r = NaN;
-	double m_Sus_r_r = NaN;
-	double m_Sus_vx_r = NaN;
-	double m_Sus_vy_r = NaN;
-	double m_Sus_vz_r = NaN;
-	double m_Sus_VehFx_r = NaN;
-	double m_Sus_VehFy_r = NaN;	
-	double m_Sus_VehFz_r = NaN;
-	double m_Sus_VehMx_r = NaN;
-	double m_Sus_VehMy_r = NaN;	
-	double m_Sus_VehMz_r = NaN;	
-	double m_Sus_Fz_r = NaN;
+	real_Y m_Sus_str_r   = NaN;
+	real_Y m_Sus_gamma_r = NaN;
+	real_Y m_Sus_caster_r = NaN;
+	real_Y m_Sus_r_r = NaN;
+	real_Y m_Sus_vx_r = NaN;
+	real_Y m_Sus_vy_r = NaN;
+	real_Y m_Sus_vz_r = NaN;
+	real_Y m_Sus_VehFx_r = NaN;
+	real_Y m_Sus_VehFy_r = NaN;	
+	real_Y m_Sus_VehFz_r = NaN;
+	real_Y m_Sus_VehMx_r = NaN;
+	real_Y m_Sus_VehMy_r = NaN;	
+	real_Y m_Sus_VehMz_r = NaN;	
+	real_Y m_Sus_Fz_r = NaN;
 
 	//middle variables
 	//--left
-	double m_Sus_IntPz_l = NaN;
-	double m_Sus_IntVz_l = NaN;
-	double m_Sus_Pz_l	= NaN;
-	double m_Veh_hgt_l  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
-	double m_Sus_hgt_l = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.
-	double m_x_dot_l = NaN;
-	double m_x_minus_hmax_l = NaN;
-	double m_x_plus_hmax_l = NaN;
-	double m_hard_stop_force_l = NaN;
-	double m_total_effort_l = NaN;
-	double m_adjusted_toe_l = NaN;
-	double m_arm_l = NaN;
+	real_Y m_Sus_IntPz_l = NaN;
+	real_Y m_Sus_IntVz_l = NaN;
+	real_Y m_Sus_Pz_l	= NaN;
+	real_Y m_Veh_hgt_l  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
+	real_Y m_Sus_hgt_l = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.
+	real_Y m_x_dot_l = NaN;
+	real_Y m_x_minus_hmax_l = NaN;
+	real_Y m_x_plus_hmax_l = NaN;
+	real_Y m_hard_stop_force_l = NaN;
+	real_Y m_total_effort_l = NaN;
+	real_Y m_adjusted_toe_l = NaN;
+	real_Y m_arm_l = NaN;
 	//--right
-	double m_Sus_IntPz_r = NaN;
-	double m_Sus_IntVz_r = NaN;
-	double m_Sus_Pz_r	= NaN;
-	double m_Veh_hgt_r  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
-	double m_Sus_hgt_r = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.
-	double m_x_dot_r = NaN;
-	double m_x_minus_hmax_r = NaN;
-	double m_x_plus_hmax_r = NaN;
-	double m_hard_stop_force_r = NaN;
-	double m_total_effort_r = NaN;
-	double m_adjusted_toe_r = NaN;
-	double m_arm_r = NaN;
+	real_Y m_Sus_IntPz_r = NaN;
+	real_Y m_Sus_IntVz_r = NaN;
+	real_Y m_Sus_Pz_r	= NaN;
+	real_Y m_Veh_hgt_r  = NaN;	//ambiguous name. actually it means the suppression amount without Fz0
+	real_Y m_Sus_hgt_r = NaN;	//ambiguous name. actually it means the total suppresion amount of suspension.
+	real_Y m_x_dot_r = NaN;
+	real_Y m_x_minus_hmax_r = NaN;
+	real_Y m_x_plus_hmax_r = NaN;
+	real_Y m_hard_stop_force_r = NaN;
+	real_Y m_total_effort_r = NaN;
+	real_Y m_adjusted_toe_r = NaN;
+	real_Y m_arm_r = NaN;
 
 	//
-	double calculate_hard_stop_force_max_stop(const double &x_minus_hmax, \
-	const double &x_dot, const double &Hmax, const double &Kz, const double &Cz);	
-	double calculate_hard_stop_force_min_stop(const double &x_plus_hmax, \
-	const double &x_dot, const double &Hmax, const double &Kz, const double &Cz);
-	void calculate_anti_sway_force_in_position(double &whlFz_l, double &whlFz_r, double &vehFz_l, double &vehFz_r, \
-	const double &whlZ_l, const double &whlZ_r, const double &vehZ_l, const double &vehZ_r);
+	real_Y calculate_hard_stop_force_max_stop(const real_Y &x_minus_hmax, \
+	const real_Y &x_dot, const real_Y &Hmax, const real_Y &Kz, const real_Y &Cz);	
+	real_Y calculate_hard_stop_force_min_stop(const real_Y &x_plus_hmax, \
+	const real_Y &x_dot, const real_Y &Hmax, const real_Y &Kz, const real_Y &Cz);
+	void calculate_anti_sway_force_in_position(real_Y &whlFz_l, real_Y &whlFz_r, real_Y &vehFz_l, real_Y &vehFz_r, \
+	const real_Y &whlZ_l, const real_Y &whlZ_r, const real_Y &vehZ_l, const real_Y &vehZ_r);
 };
 
 }	//end of name space

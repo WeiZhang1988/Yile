@@ -12,7 +12,7 @@
 // =============================================================================
 #include "simulator_sus_wheel_tire_2ind_disk_fiala.hpp"
 
-Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala(double t_start, double t_end, double t_step) {
+Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala(real_Y t_start, real_Y t_end, real_Y t_step) {
 	m_steps         = 0;
 	m_t_start       = t_start;
 	m_t_end         = t_end;
@@ -38,7 +38,7 @@ void Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::run () {
 	io::CSVReader<50> m_inputs("wheel_tire_sus_test_result/Wheel_tire_sus_inputs10141615.csv"); //need modification
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
-	double t = m_t_start;
+	real_Y t = m_t_start;
 
 	m_tp_start = steady_clock::now();
 	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);

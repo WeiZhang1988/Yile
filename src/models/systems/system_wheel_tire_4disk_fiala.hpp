@@ -44,11 +44,11 @@ public:
 
 	void store_data();
 
-	void operator() (const d_vec &x, d_vec &dxdt, const double &t);
+	void operator() (const d_vec &x, d_vec &dxdt, const real_Y &t);
 	
 
 private:
-	double m_t = 0.0;
+	real_Y m_t = 0.0;
 	std::shared_ptr<Subsys_Wheel_4Disk> 			m_sptr_subsys_whl_4disk;
 	std::shared_ptr<Subsys_Tire_4Fiala> 			m_sptr_subsys_tir_4fiala;
 	std::shared_ptr<Int_Chassis_2Ind_Disk_Fiala> 	m_sptr_interface;

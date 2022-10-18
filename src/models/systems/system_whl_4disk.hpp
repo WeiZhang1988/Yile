@@ -39,7 +39,7 @@ public:
 
 	void store_data();
 	
-	void operator() (const d_vec &x, d_vec &dxdt, const double &t);
+	void operator() (const d_vec &x, d_vec &dxdt, const real_Y &t);
 
 private:
 	std::shared_ptr<Subsys_Wheel_4Disk> m_sptr_subsys_whl_4disk;
