@@ -37,9 +37,8 @@ void Simulator_Vehicle_Body::run() {
 	real_Y t = m_t_start;
 	
 	m_tp_start = steady_clock::now();
-	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states); // from component pass to system
+	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states); 
 	for (int i=0; i<steps_num; i++) {
-		//m_sptr_store_states.push_back(m_sptr_sys->m_con_states);
 		m_steps++;	
 		m_times.push_back(t);
 		m_inputs.read_row(

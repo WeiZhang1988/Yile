@@ -33,7 +33,7 @@ Simulator_Wheel_Tire_4Disk_Fiala::Simulator_Wheel_Tire_4Disk_Fiala(real_Y t_star
 }
 
 void Simulator_Wheel_Tire_4Disk_Fiala::run () {
-	io::CSVReader<52> m_inputs("wheel_tire_test_result/Wheel_Tire_4Disk_inputs10131429.csv"); 
+	io::CSVReader<52> m_inputs("wheel_disk_tire_test_result/Wheel_Tire_4Disk_inputs10131429.csv"); 
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	real_Y t = m_t_start;
@@ -112,10 +112,9 @@ void Simulator_Wheel_Tire_4Disk_Fiala::run () {
 			m_sptr_interface->m_Gnd_scale_rl,
 			m_sptr_interface->m_Gnd_scale_rr
 			); 
-		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states); //接 line 117 : 然后将components中的数据传递到simulator中
+		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states); 
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states); //如果dostep计算结果Omega在阈值内，则通过一步pull的操作，将components内数据修改为0 
-
+		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states); 
 		t += m_t_step;
 		//spin(m_steps);
 	}

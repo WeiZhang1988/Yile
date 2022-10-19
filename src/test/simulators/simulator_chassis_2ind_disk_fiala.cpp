@@ -48,82 +48,68 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
 		m_steps++;	
 		m_times.push_back(t);
 		m_inputs.read_row(
-						//1-WhlAng 0000
-						m_sptr_interface->m_Strg_str_fl, 
-						m_sptr_interface->m_Strg_str_fr, 
-						m_sptr_interface->m_Strg_str_rl, 
-						m_sptr_interface->m_Strg_str_rr,\
-						
-						//2-AxlTrq 0000
-						m_sptr_interface->m_Axl_Trq_fl, 
-						m_sptr_interface->m_Axl_Trq_fr, 
-						m_sptr_interface->m_Axl_Trq_rl,
-						m_sptr_interface->m_Axl_Trq_rr, \
-						
-						//3-BrkPrs 0000
-						m_sptr_interface->m_Brk_Prs_fl, 
-						m_sptr_interface->m_Brk_Prs_fr, 
-						m_sptr_interface->m_Brk_Prs_rl, 
-						m_sptr_interface->m_Brk_Prs_rr, \
-						
-						//4-WindXYZ 000
-						m_sptr_interface->m_Air_Wx, 
-						m_sptr_interface->m_Air_Wy, 
-						m_sptr_interface->m_Air_Wz, \
-						
-						//5-Ground 0000
-						m_sptr_interface->m_Gnd_Pz_fl, 
-						m_sptr_interface->m_Gnd_Pz_fr, 
-						m_sptr_interface->m_Gnd_Pz_rl, 
-						m_sptr_interface->m_Gnd_Pz_rr, \
-						
-						//6-Friction 1
-						m_sptr_interface->m_Gnd_scale_fl,
-						m_sptr_interface->m_Gnd_scale_fr, 
-						m_sptr_interface->m_Gnd_scale_rl, 
-						m_sptr_interface->m_Gnd_scale_rr, \
-						
-						//Other-parameters 220000
-						m_sptr_interface->m_Tir_Prs_fl, 
-						m_sptr_interface->m_Tir_Prs_fr, 
-						m_sptr_interface->m_Tir_Prs_rl, 
-						m_sptr_interface->m_Tir_Prs_rr, \
-						
-						// Air temperature Constant: Tair=273
-						m_sptr_interface->m_Air_Tair,
-						
-						// Tire temperature Constant: Tamb=0
-						m_sptr_interface->m_Air_Tamb_fl, 
-						m_sptr_interface->m_Air_Tamb_fr, 
-						m_sptr_interface->m_Air_Tamb_rl, 
-						m_sptr_interface->m_Air_Tamb_rr, \
-						
-						//000
-						m_sptr_interface->m_Ext_Fx_ext, 
-						m_sptr_interface->m_Ext_Fy_ext, 
-						m_sptr_interface->m_Ext_Fz_ext, 
-						//000
-						m_sptr_interface->m_Ext_Mx_ext, 
-						m_sptr_interface->m_Ext_My_ext,
-						m_sptr_interface->m_Ext_Mz_ext\
-		);
+			//1-WhlAng 0000
+			m_sptr_interface->m_Strg_str_fl, 
+			m_sptr_interface->m_Strg_str_fr, 
+			m_sptr_interface->m_Strg_str_rl, 
+			m_sptr_interface->m_Strg_str_rr,\
 			
-		/*(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr, \
-    	m_sptr_interface->m_Gnd_scale_fl, m_sptr_interface->m_Tir_Prs_fl, m_sptr_interface->m_Air_Tamb_fl, \
-        m_sptr_interface->m_Gnd_scale_fr, m_sptr_interface->m_Tir_Prs_fr, m_sptr_interface->m_Air_Tamb_fr, \
-        m_sptr_interface->m_Gnd_scale_rl, m_sptr_interface->m_Tir_Prs_rl, m_sptr_interface->m_Air_Tamb_rl, \
-        m_sptr_interface->m_Gnd_scale_rr, m_sptr_interface->m_Tir_Prs_rr, m_sptr_interface->m_Air_Tamb_rr, \
-        m_sptr_interface->m_Air_Wx, m_sptr_interface->m_Air_Wy, m_sptr_interface->m_Air_Wz, \
-        m_sptr_interface->m_Air_Tair, \
-        m_sptr_interface->m_Ext_Fx_ext, m_sptr_interface->m_Ext_Fy_ext, m_sptr_interface->m_Ext_Fz_ext, \
-        m_sptr_interface->m_Ext_Mx_ext, m_sptr_interface->m_Ext_My_ext, m_sptr_interface->m_Ext_Mz_ext, \
-        m_sptr_interface->m_Axl_Trq_fl, m_sptr_interface->m_Brk_Prs_fl, m_sptr_interface->m_Axl_Trq_fr, m_sptr_interface->m_Brk_Prs_fr, \
-        m_sptr_interface->m_Axl_Trq_rl, m_sptr_interface->m_Brk_Prs_rl, m_sptr_interface->m_Axl_Trq_rr, m_sptr_interface->m_Brk_Prs_rr, \
-        m_sptr_interface->m_Strg_str_fl, m_sptr_interface->m_Strg_str_fr, m_sptr_interface->m_Strg_str_rl, m_sptr_interface->m_Strg_str_rr);*/ 
-		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states);
+			//2-AxlTrq 0000
+			m_sptr_interface->m_Axl_Trq_fl, 
+			m_sptr_interface->m_Axl_Trq_fr, 
+			m_sptr_interface->m_Axl_Trq_rl,
+			m_sptr_interface->m_Axl_Trq_rr, \
+			
+			//3-BrkPrs 0000
+			m_sptr_interface->m_Brk_Prs_fl, 
+			m_sptr_interface->m_Brk_Prs_fr, 
+			m_sptr_interface->m_Brk_Prs_rl, 
+			m_sptr_interface->m_Brk_Prs_rr, \
+			
+			//4-WindXYZ 000
+			m_sptr_interface->m_Air_Wx, 
+			m_sptr_interface->m_Air_Wy, 
+			m_sptr_interface->m_Air_Wz, \
+			
+			//5-Ground 0000
+			m_sptr_interface->m_Gnd_Pz_fl, 
+			m_sptr_interface->m_Gnd_Pz_fr, 
+			m_sptr_interface->m_Gnd_Pz_rl, 
+			m_sptr_interface->m_Gnd_Pz_rr, \
+			
+			//6-Friction 1
+			m_sptr_interface->m_Gnd_scale_fl,
+			m_sptr_interface->m_Gnd_scale_fr, 
+			m_sptr_interface->m_Gnd_scale_rl, 
+			m_sptr_interface->m_Gnd_scale_rr, \
+			
+			//Other-parameters 220000
+			m_sptr_interface->m_Tir_Prs_fl, 
+			m_sptr_interface->m_Tir_Prs_fr, 
+			m_sptr_interface->m_Tir_Prs_rl, 
+			m_sptr_interface->m_Tir_Prs_rr, \
+			
+			// Air temperature Constant: Tair=273
+			m_sptr_interface->m_Air_Tair,
+			
+			// Tire temperature Constant: Tamb=0
+			m_sptr_interface->m_Air_Tamb_fl, 
+			m_sptr_interface->m_Air_Tamb_fr, 
+			m_sptr_interface->m_Air_Tamb_rl, 
+			m_sptr_interface->m_Air_Tamb_rr, \
+			
+			//000
+			m_sptr_interface->m_Ext_Fx_ext, 
+			m_sptr_interface->m_Ext_Fy_ext, 
+			m_sptr_interface->m_Ext_Fz_ext, 
+			//000
+			m_sptr_interface->m_Ext_Mx_ext, 
+			m_sptr_interface->m_Ext_My_ext,
+			m_sptr_interface->m_Ext_Mz_ext\
+		);
+		m_sptr_sys->push_con_states_whl_veh(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states);
-
+		m_sptr_sys->pull_con_states_whl_veh(m_sptr_sys->m_con_states);
 		t += m_t_step;
 		//spin(m_steps);
 	}

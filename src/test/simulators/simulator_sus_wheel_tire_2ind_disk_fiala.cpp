@@ -41,6 +41,7 @@ void Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::run () {
 	real_Y t = m_t_start;
 
 	m_tp_start = steady_clock::now();
+
 	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
@@ -112,7 +113,6 @@ void Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::run () {
 			m_sptr_interface->m_Veh_vz_fr,
 			m_sptr_interface->m_Veh_vz_rl,
 			m_sptr_interface->m_Veh_vz_rr
-
 		);
 		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states); // if the omegas in tolerance range, push them to system for next loop
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);

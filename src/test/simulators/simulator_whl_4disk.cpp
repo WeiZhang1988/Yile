@@ -35,8 +35,6 @@ void Simulator_Whl_4Disk::run () {
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	real_Y t = m_t_start;
-
-	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	m_tp_start = steady_clock::now();
 	for (int i=0; i<steps_num; i++) {
 		m_steps++;	
