@@ -7,12 +7,12 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "vehicle_body.hpp"
 
-void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {  //1
+void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {  
 	int q = int(floor((m_phai + pi) / (2.0 * pi)));
 	if (q!=0) {
 		m_phai -= q * 2.0 * pi;
@@ -42,7 +42,7 @@ void NMSPC::Vehicle_Body::push_con_states (d_vec &con_states) {  //1
 	con_states[11] = m_r;
 }
 
-void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {  //2
+void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {  
 	m_xe_x	= con_states[0];
 	m_xe_y	= con_states[1];
 	m_xe_z	= con_states[2];
@@ -72,7 +72,7 @@ void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {  //2
 	}
 }
 
-void NMSPC::Vehicle_Body::pull_pv(const real_Y &Air_Wx, const real_Y &Air_Wy, const real_Y &Air_Wz) { //3
+void NMSPC::Vehicle_Body::pull_pv(const real_Y &Air_Wx, const real_Y &Air_Wy, const real_Y &Air_Wz) { 
 	m_Air_Wx = Air_Wx;
 	m_Air_Wy = Air_Wy;
 	m_Air_Wz = Air_Wz;
@@ -259,7 +259,7 @@ real_Y &xb_x_fr, real_Y &xb_y_fr, real_Y &xb_z_fr, real_Y &vb_x_fr, real_Y &vb_y
 real_Y &xe_x_rl, real_Y &xe_y_rl, real_Y &xe_z_rl, real_Y &ve_x_rl, real_Y &ve_y_rl, real_Y &ve_z_rl, \
 real_Y &xb_x_rl, real_Y &xb_y_rl, real_Y &xb_z_rl, real_Y &vb_x_rl, real_Y &vb_y_rl, real_Y &vb_z_rl, \
 real_Y &xe_x_rr, real_Y &xe_y_rr, real_Y &xe_z_rr, real_Y &ve_x_rr, real_Y &ve_y_rr, real_Y &ve_z_rr, \
-real_Y &xb_x_rr, real_Y &xb_y_rr, real_Y &xb_z_rr, real_Y &vb_x_rr, real_Y &vb_y_rr, real_Y &vb_z_rr) { //4
+real_Y &xb_x_rr, real_Y &xb_y_rr, real_Y &xb_z_rr, real_Y &vb_x_rr, real_Y &vb_y_rr, real_Y &vb_z_rr) { 
 	//push outputs
 	h_c = m_h;
 	xe_x_c = m_xe_x_c;
@@ -350,7 +350,7 @@ const real_Y &Sus_Mx_fl,  const real_Y &Sus_Mx_fr,  const real_Y &Sus_Mx_rl, con
 const real_Y &Sus_My_fl,  const real_Y &Sus_My_fr,  const real_Y &Sus_My_rl, const real_Y &Sus_My_rr, \
 const real_Y &Sus_Mz_fl,  const real_Y &Sus_Mz_fr,  const real_Y &Sus_Mz_rl, const real_Y &Sus_Mz_rr, \
 const real_Y &Ext_Fx_ext, const real_Y &Ext_Fy_ext, const real_Y &Ext_Fz_ext, \
-const real_Y &Ext_Mx_ext, const real_Y &Ext_My_ext, const real_Y &Ext_Mz_ext) {//5
+const real_Y &Ext_Mx_ext, const real_Y &Ext_My_ext, const real_Y &Ext_Mz_ext) {
 	//pull inputs
 	m_Air_Tair   = Air_Tair;
 	m_Sus_Fx_fl  = Sus_Fx_fl;
@@ -415,7 +415,7 @@ const real_Y &Ext_Mx_ext, const real_Y &Ext_My_ext, const real_Y &Ext_Mz_ext) {/
 	
 }
 
-void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {//6
+void NMSPC::Vehicle_Body::push_drv (d_vec &derivatives) {
 	m_drv_xe_x = m_ve_x;
 	m_drv_xe_y = m_ve_y;
 	m_drv_xe_z = m_ve_z;
@@ -604,7 +604,6 @@ void NMSPC::Vehicle_Body::calculate_aero_drag() {
 	m_Fd_z = m_Cl * gain * wdir_z;
 	m_Md_x = 0.0;
 	m_Md_y = wdir_x * m_Cpm * gain * (m_a + m_b);
-	//m_Md_z = m_pwl_Cym(ata2) * gain * (m_a + m_b);
 	m_Md_z = ata2 * gain * (m_a + m_b);
 
 }

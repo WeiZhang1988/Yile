@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #ifndef TIRE_FIALA_HPP
@@ -136,9 +136,6 @@ private:
 	real_Y m_Sus_TirFx = NaN;
 	real_Y m_Sus_TirFy = NaN;
 	real_Y m_Sus_TirFz = NaN;
-	//real_Y m_Tir_Fx = NaN;
-	//real_Y m_Tir_Fy = NaN;
-	//real_Y m_Tir_Fz = NaN;
 	real_Y m_Tir_Mx = NaN;
 	real_Y m_Tir_My = NaN;
 	real_Y m_Tir_Mz = NaN;

@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #ifndef VEHICLE_BODY_HPP
@@ -20,7 +20,6 @@ public:
 	static const int m_con_states_num = 12;									//amount of continuous states;
 	static const int m_derivatives_num = m_con_states_num;					//amount of derivatives;
 	static const int m_dis_states_num = 0;									//amount of discrete states;
-	//real_Y a=1.515, real_Y b=1.504, real_Y d=0.0, real_Y h=0.134, 
 	Vehicle_Body (\
 	//chassis
 	real_Y mass=1181.0, \
@@ -66,7 +65,6 @@ public:
 	real_Y z7I_yx=0.0, real_Y z7I_yy=0.0, real_Y z7I_yz=0.0, 
 	real_Y z7I_zx=0.0, real_Y z7I_zy=0.0, real_Y z7I_zz=0.0, \
 	//aerodynamics
-	//real_Y Pabs=101325.0, real_Y Cg=287.058;
 	real_Y Pabs=101325.0, real_Y Cg=287.058, \
 	real_Y Af=2.110, real_Y Cd=0.3, real_Y Cl=0.1, real_Y Cpm=0.1, \
 	d_vec beta_w={0.0,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,\

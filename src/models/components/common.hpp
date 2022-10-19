@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #ifndef COMMON_HPP
@@ -28,15 +28,14 @@
 typedef double real_Y;
 namespace NMSPC{
 typedef std::vector< real_Y > d_vec;
-typedef std::vector< bool > b_vec;
-typedef std::vector< d_vec > d_v_vec;
+typedef std::vector< bool >   b_vec;
+typedef std::vector< d_vec >  d_v_vec;
 
 constexpr real_Y inf = std::numeric_limits<real_Y>::infinity();
 constexpr real_Y eps = std::numeric_limits<real_Y>::epsilon();
 constexpr real_Y NaN = std::numeric_limits<real_Y>::quiet_NaN();
 constexpr real_Y g = 9.81;
 constexpr real_Y pi = 2.0 * acos(0.0);
-//constexpr real_Y pi = 3.141592653589793;
 struct push_back_state_and_time {
 	d_v_vec &m_states;
 	d_vec &m_times;
@@ -48,7 +47,6 @@ struct push_back_state_and_time {
 		m_times.push_back(t);
 	}
 };
-
 extern real_Y saturation(const real_Y &in_data, const real_Y &lower, const real_Y &upper);
 extern real_Y dead_zone(const real_Y &in_data, const real_Y &lower, const real_Y &upper);
 extern real_Y div0protect(const real_Y &in_data, const real_Y &thresh);

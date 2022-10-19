@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #ifndef SIMULATOR_WHEEL_4DISK_HPP

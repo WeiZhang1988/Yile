@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "system_sus_wheel_tire_2ind_disk_fiala.hpp"
@@ -126,8 +126,8 @@ void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::update_drv() {
 void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::store_data() {
 	m_sptr_store->push_back(d_vec{
 
-		/*m_sptr_interface->m_Sus_VehFx_fl, 
-		m_sptr_interface->m_Sus_VehFy_fl, */
+		m_sptr_interface->m_Sus_VehFx_fl, 
+		m_sptr_interface->m_Sus_VehFy_fl, // Fx and Fy are useless
 		m_sptr_interface->m_Sus_VehFz_fl, 
 		m_sptr_interface->m_Sus_VehMx_fl, 
 		m_sptr_interface->m_Sus_VehMy_fl, 
@@ -137,8 +137,8 @@ void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_Sus_caster_fl,
 		m_sptr_interface->m_Sus_str_fl,
 		
-		/*m_sptr_interface->m_Sus_VehFx_fr, 
-		m_sptr_interface->m_Sus_VehFy_fr, */
+		m_sptr_interface->m_Sus_VehFx_fr, 
+		m_sptr_interface->m_Sus_VehFy_fr, // Fx and Fy are useless
 		m_sptr_interface->m_Sus_VehFz_fr, 
 		m_sptr_interface->m_Sus_VehMx_fr, 
 		m_sptr_interface->m_Sus_VehMy_fr, 
@@ -148,8 +148,8 @@ void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_Sus_caster_fr,
 		m_sptr_interface->m_Sus_str_fr,
 
-		/*m_sptr_interface->m_Sus_VehFx_rl, 
-		m_sptr_interface->m_Sus_VehFy_rl, */
+		m_sptr_interface->m_Sus_VehFx_rl, 
+		m_sptr_interface->m_Sus_VehFy_rl, // Fx and Fy are useless
 		m_sptr_interface->m_Sus_VehFz_rl, 
 		m_sptr_interface->m_Sus_VehMx_rl, 
 		m_sptr_interface->m_Sus_VehMy_rl, 
@@ -159,9 +159,8 @@ void NMSPC::Sys_Sus_Wheel_Tire_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_Sus_caster_rl,
 		m_sptr_interface->m_Sus_str_rl,
 
-		/*m_sptr_interface->m_Sus_VehFx_rr, 
-		m_sptr_interface->m_Sus_VehFy_rr, */
-
+		m_sptr_interface->m_Sus_VehFx_rr, 
+		m_sptr_interface->m_Sus_VehFy_rr, // Fx and Fy are useless
 		m_sptr_interface->m_Sus_VehFz_rr, 
 		m_sptr_interface->m_Sus_VehMx_rr, 
 		m_sptr_interface->m_Sus_VehMy_rr, 

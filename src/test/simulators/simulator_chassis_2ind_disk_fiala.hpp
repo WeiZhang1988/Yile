@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #ifndef SIMULATOR_CHASSIS_2IND_DISK_FIALA_HPP
@@ -43,6 +43,7 @@ private:
 
 	real_Y m_t_start, m_t_end, m_t_step, m_t_step_micros;
     runge_kutta4<d_vec> m_stepper;
+    //euler<d_vec> m_stepper;
     steady_clock::time_point m_tp_start = steady_clock::now();
     steady_clock::time_point m_tp_end = steady_clock::now();
 

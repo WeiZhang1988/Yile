@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "sus_ind_2tracks.hpp"
@@ -102,7 +102,7 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const real_Y &Veh_hgt_cg, const real_Y &Ve
 	m_x_plus_hmax_l  = -m_Sus_hgt_l + m_Hmax_l;
 	m_x_dot_l 	     = m_Sus_IntVz_l - m_Sus_Tirvz_l;
 	m_adjusted_toe_l = (abs(m_Strg_str_l) * m_toe_strg_slp_l + m_toe_l + 
-	m_roll_strg_H_slp_l * m_Sus_hgt_l);//左边是正的，右边是负的
+	m_roll_strg_H_slp_l * m_Sus_hgt_l);
 	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;
 	m_Sus_gamma_l = abs(m_Strg_str_l) * m_camber_strg_slp_l + m_camber_l + \
 	m_camber_H_slp_l * m_Sus_hgt_l;
@@ -122,7 +122,7 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const real_Y &Veh_hgt_cg, const real_Y &Ve
 	m_x_plus_hmax_r  = -m_Sus_hgt_r + m_Hmax_r;
 	m_x_dot_r 	     = m_Sus_IntVz_r - m_Sus_Tirvz_r;
 	m_adjusted_toe_r = -(abs(m_Strg_str_r) * m_toe_strg_slp_r + m_toe_r + \
-	m_roll_strg_H_slp_r * m_Sus_hgt_r);//右边是负的
+	m_roll_strg_H_slp_r * m_Sus_hgt_r);
 	m_Sus_str_r = m_adjusted_toe_r - m_toe_r + m_Strg_str_r;
 	m_Sus_gamma_r = abs(m_Strg_str_r) * m_camber_strg_slp_r + m_camber_r + \
 	m_camber_H_slp_r * m_Sus_hgt_r;
@@ -186,7 +186,7 @@ void NMSPC::Sus_Ind_2Tracks::pull_fm_z() {
 
 	if (m_has_anti_sway)
 		calculate_anti_sway_force_in_position(m_Sus_Fz_l, m_Sus_Fz_r, m_Sus_VehFz_l, m_Sus_VehFz_r, \
-		m_Sus_TirPz_l, m_Sus_TirPz_r, m_Sus_IntPz_l, m_Sus_IntPz_r);// 第七，第八个形参：m_Veh_Pz_l -> m_Sus_VehPz_r
+		m_Sus_TirPz_l, m_Sus_TirPz_r, m_Sus_IntPz_l, m_Sus_IntPz_r);
 
 }
 

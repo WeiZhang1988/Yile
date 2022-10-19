@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "system_chassis_2ind_disk_fiala.hpp"
@@ -180,8 +180,8 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_ve_x_c, \
 		m_sptr_interface->m_ve_y_c, \
 		m_sptr_interface->m_ve_z_c, \
-
-		/*m_sptr_interface->m_beta_c, \
+		// outputs from 184 to 197 are useless 
+		m_sptr_interface->m_beta_c, \
 		m_sptr_interface->m_xe_x_o, 
 		m_sptr_interface->m_xe_y_o, 
 		m_sptr_interface->m_xe_z_o, 
@@ -251,7 +251,7 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_xb_z_rr, 
 		m_sptr_interface->m_Veh_vx_rr, 
 		m_sptr_interface->m_Veh_vy_rr, 
-		m_sptr_interface->m_Veh_vz_rr, */
+		m_sptr_interface->m_Veh_vz_rr, 
 		});
 }
 
@@ -262,7 +262,4 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::operator() (const d_vec &x, d_vec &dxdt
 	update_drv();
 	store_data();
 	dxdt = m_drvs;
-
-	static int i = 0;
-	i++;
 }

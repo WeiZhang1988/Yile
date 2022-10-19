@@ -1,2 +1,2 @@
 # Yile
-vehicle dynamics library in C++
+Vehicle dynamics library in C++

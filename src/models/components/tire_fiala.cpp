@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "tire_fiala.hpp"
@@ -168,10 +168,6 @@ void NMSPC::Tire_Fiala::push_drv (d_vec &derivatives) {
 	m_drv_kappa = (m_Tir_omega * m_Tir_Re - m_Tir_vx - abs(m_Tir_vx) * \
     m_kappa) / m_Lrelx;
     m_drv_alpha_prime = (m_Tir_vy - abs(m_Tir_vx) * m_tan_alpha) / m_Lrely;
-    // m_drv_Mroll = ((1.0 - abs(m_Tir_vx)) * 2 * pi + abs(m_Tir_vx - \
-    // m_Tir_omega * m_Tir_Re) / saturation(m_Lrelx, 0.01, 10.0)) * \
-    // (m_My - m_Mroll);
-
 	m_drv_Mroll = (low_speed(abs(m_Tir_vx)) * 2 * pi + abs(m_Tir_vx - \
     m_Tir_omega * m_Tir_Re) / saturation(m_Lrelx, 0.01, 10.0)) * \
     (m_My - m_Mroll);

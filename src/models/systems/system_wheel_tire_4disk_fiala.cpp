@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "system_wheel_tire_4disk_fiala.hpp"
@@ -120,19 +120,8 @@ void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::store_data() {
             m_sptr_interface->m_Sus_TirFy_rr, 
             m_sptr_interface->m_Tir_Mx_rr,    
             m_sptr_interface->m_Tir_My_rr,    
-            m_sptr_interface->m_Tir_Mz_rr
-/*
-            m_subsys_tir_4fiala_con_states[5],
-            m_subsys_tir_4fiala_con_states[11],
-            m_subsys_tir_4fiala_con_states[17],
-            m_subsys_tir_4fiala_con_states[23],
-
-            m_sptr_interface->m_Brk_Trq_fl,
-            m_sptr_interface->m_Brk_Trq_fr,
-            m_sptr_interface->m_Brk_Trq_rl,
-            m_sptr_interface->m_Brk_Trq_rr
-            */
-		});
+            m_sptr_interface->m_Tir_Mz_rr}
+            );
 }
 
 void NMSPC::Sys_Wheel_Tire_4Disk_Fiala::operator() (const d_vec &x, d_vec &dxdt, const real_Y &t) {

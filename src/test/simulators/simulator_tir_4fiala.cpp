@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "simulator_tir_4fiala.hpp"
@@ -30,8 +30,6 @@ Simulator_Tir_4Fiala::Simulator_Tir_4Fiala(real_Y t_start, real_Y t_end, real_Y 
 }
 
 void Simulator_Tir_4Fiala::run () {
-
-	//io::CSVReader<13> m_inputs("data/inputs/tir_4fiala_inputs.csv");
 
 	io::CSVReader<52> m_inputs("tir_test_result/tirfiala_inputs9280920.csv");
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
@@ -110,8 +108,6 @@ void Simulator_Tir_4Fiala::run () {
 		m_sptr_interface->m_Air_Tamb_rr
 	); 
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		
-		
 		t += m_t_step;
 		//spin(m_steps);
 	}

@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "simulator_sus_wheel_tire_2ind_disk_fiala.hpp"
@@ -114,9 +114,9 @@ void Simulator_Sus_Wheel_Tire_2Ind_Disk_Fiala::run () {
 			m_sptr_interface->m_Veh_vz_rr
 
 		);
-		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states);
+		m_sptr_sys->push_con_states_whl_only(m_sptr_sys->m_con_states); // if the omegas in tolerance range, push them to system for next loop
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states);
+		m_sptr_sys->pull_con_states_whl_only(m_sptr_sys->m_con_states); // pull to judge if the omegas in tolerance range or not
 
 		t += m_t_step;
 		//spin(m_steps);

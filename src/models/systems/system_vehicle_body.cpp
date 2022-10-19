@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "system_vehicle_body.hpp"
@@ -81,8 +81,6 @@ void NMSPC::Sys_Vehicle_Body::store_data() {
 		m_sptr_interface->m_ve_x_c, \
 		m_sptr_interface->m_ve_y_c, \
 		m_sptr_interface->m_ve_z_c, \
-
-		
 
 		/*m_sptr_interface->m_beta_c, \
 		m_sptr_interface->m_xe_x_o, 

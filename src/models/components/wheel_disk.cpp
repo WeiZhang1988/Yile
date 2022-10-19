@@ -7,7 +7,7 @@
 // Use of this source code is governed by a GPL-3.0 license that can be found
 // in the LICENSE file
 //
-// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com
+// Author of this file	Wei ZHANG wei_zhang_1988@outlook.com,ChangMeng Hou 945881625@qq.com
 //
 // =============================================================================
 #include "wheel_disk.hpp"
@@ -128,11 +128,5 @@ void NMSPC::Wheel_Disk::push_drv(d_vec &derivatives) {
     derivatives[2] = m_drv_Tir_vz; 
     derivatives[3] = m_drv_Sus_lfp_Fz;   
 
-    static int i = 0;
-    if (i >= 4609*4)
-    {
-        int j = 0;
-    }
-    i++;
 
 }
