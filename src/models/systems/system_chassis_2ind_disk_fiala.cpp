@@ -48,7 +48,7 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::pull_con_states (const d_vec &con_state
 }
 
 void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::pull_con_states_whl_only (const d_vec &con_states) {
-    std::copy(con_states.begin(), con_states.begin() + Vehicle_Body::m_con_states_num, m_subsys_whl_4disk_con_states.begin());
+    std::copy(con_states.begin() + Vehicle_Body::m_con_states_num, con_states.begin() + Vehicle_Body::m_con_states_num + Subsys_Wheel_4Disk::m_con_states_num, m_subsys_whl_4disk_con_states.begin());
 	m_sptr_subsys_whl_4disk->pull_con_states(m_subsys_whl_4disk_con_states);
 }
 
@@ -60,11 +60,11 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::update_pv() {
 	m_sptr_interface->m_xb_x_o,  m_sptr_interface->m_xb_y_o,  m_sptr_interface->m_xb_z_o,    m_sptr_interface->m_vb_x_o,    m_sptr_interface->m_vb_y_o,    m_sptr_interface->m_vb_z_o,   m_sptr_interface->m_beta_o, \
 	m_sptr_interface->m_xe_x_fl, m_sptr_interface->m_xe_y_fl, m_sptr_interface->m_Int_Pz_fl,   m_sptr_interface->m_ve_x_fl,   m_sptr_interface->m_ve_y_fl,   m_sptr_interface->m_Int_Vz_fl, \
 	m_sptr_interface->m_xb_x_fl, m_sptr_interface->m_xb_y_fl, m_sptr_interface->m_xb_z_fl, m_sptr_interface->m_Veh_vx_fl, m_sptr_interface->m_Veh_vy_fl, m_sptr_interface->m_Veh_vz_fl, \
-	m_sptr_interface->m_xe_x_fr, m_sptr_interface->m_xe_y_fr, m_sptr_interface->m_Int_Pz_fr,   m_sptr_interface->m_ve_x_fr,   m_sptr_interface->m_ve_y_fr,   m_sptr_interface->m_Veh_vz_fr, \
+	m_sptr_interface->m_xe_x_fr, m_sptr_interface->m_xe_y_fr, m_sptr_interface->m_Int_Pz_fr,   m_sptr_interface->m_ve_x_fr,   m_sptr_interface->m_ve_y_fr,   m_sptr_interface->m_Int_Vz_fr, \
 	m_sptr_interface->m_xb_x_fr, m_sptr_interface->m_xb_y_fr, m_sptr_interface->m_xb_z_fr, m_sptr_interface->m_Veh_vx_fr, m_sptr_interface->m_Veh_vy_fr, m_sptr_interface->m_Veh_vz_fr, \
-	m_sptr_interface->m_xe_x_rl, m_sptr_interface->m_xe_y_rl, m_sptr_interface->m_Int_Pz_rl,   m_sptr_interface->m_ve_x_rl,   m_sptr_interface->m_ve_y_rl,   m_sptr_interface->m_Veh_vz_rl, \
+	m_sptr_interface->m_xe_x_rl, m_sptr_interface->m_xe_y_rl, m_sptr_interface->m_Int_Pz_rl,   m_sptr_interface->m_ve_x_rl,   m_sptr_interface->m_ve_y_rl,   m_sptr_interface->m_Int_Vz_rl, \
 	m_sptr_interface->m_xb_x_rl, m_sptr_interface->m_xb_y_rl, m_sptr_interface->m_xb_z_rl, m_sptr_interface->m_Veh_vx_rl, m_sptr_interface->m_Veh_vy_rl, m_sptr_interface->m_Veh_vz_rl, \
-	m_sptr_interface->m_xe_x_rr, m_sptr_interface->m_xe_y_rr, m_sptr_interface->m_Int_Pz_rr,   m_sptr_interface->m_ve_x_rr,   m_sptr_interface->m_ve_y_rr,   m_sptr_interface->m_Veh_vz_rr, \
+	m_sptr_interface->m_xe_x_rr, m_sptr_interface->m_xe_y_rr, m_sptr_interface->m_Int_Pz_rr,   m_sptr_interface->m_ve_x_rr,   m_sptr_interface->m_ve_y_rr,   m_sptr_interface->m_Int_Vz_rr, \
 	m_sptr_interface->m_xb_x_rr, m_sptr_interface->m_xb_y_rr, m_sptr_interface->m_xb_z_rr, m_sptr_interface->m_Veh_vx_rr, m_sptr_interface->m_Veh_vy_rr, m_sptr_interface->m_Veh_vz_rr);
 
     m_sptr_subsys_whl_4disk->pull_pv(m_sptr_interface->m_Gnd_Pz_fl, m_sptr_interface->m_Gnd_Pz_fr, m_sptr_interface->m_Gnd_Pz_rl, m_sptr_interface->m_Gnd_Pz_rr);
@@ -181,7 +181,7 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_ve_y_c, \
 		m_sptr_interface->m_ve_z_c, \
 
-		m_sptr_interface->m_beta_c, \
+		/*m_sptr_interface->m_beta_c, \
 		m_sptr_interface->m_xe_x_o, 
 		m_sptr_interface->m_xe_y_o, 
 		m_sptr_interface->m_xe_z_o, 
@@ -251,7 +251,7 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::store_data() {
 		m_sptr_interface->m_xb_z_rr, 
 		m_sptr_interface->m_Veh_vx_rr, 
 		m_sptr_interface->m_Veh_vy_rr, 
-		m_sptr_interface->m_Veh_vz_rr, 
+		m_sptr_interface->m_Veh_vz_rr, */
 		});
 }
 
@@ -262,4 +262,7 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::operator() (const d_vec &x, d_vec &dxdt
 	update_drv();
 	store_data();
 	dxdt = m_drvs;
+
+	static int i = 0;
+	i++;
 }

@@ -115,7 +115,7 @@ void run_Vehicle_Body() {
 
 void run_Chassis_2Ind_Disk_Fiala() {
 	std::ofstream of;
-	Simulator_Chassis_2Ind_Disk_Fiala sim1 = Simulator_Chassis_2Ind_Disk_Fiala(0.0,40.0,1e-3);
+	Simulator_Chassis_2Ind_Disk_Fiala sim1 = Simulator_Chassis_2Ind_Disk_Fiala(0.0,100.0,5e-4);
 	steady_clock::time_point start = steady_clock::now();
 	sim1.run();
 	steady_clock::time_point end = steady_clock::now();
@@ -178,10 +178,10 @@ int main(){
 	//run_Whl_Disk_Tir_Fiala();
 	//run_Tir_4Fiala();
 	//run_Sus_2Ind();
-	run_Vehicle_Body();
+	//run_Vehicle_Body();
 	//run_Whl_4Disk();
 	//run_LPF();
-	//run_Chassis_2Ind_Disk_Fiala();
+	run_Chassis_2Ind_Disk_Fiala();
 	//run_Wheel_Tire_4Disk_Fiala();
 	//run_Sus_Wheel_Tire_2Ind_Disk_Fiala();
 	return 0;
