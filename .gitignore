@@ -2,3 +2,9 @@
 build/*
 dep/*
 houtest/*
+src/models/components/obsloete/*
+src/models/subsystems/obsloete/*
+src/models/systems/obsloete/*
+src/models/systems/obsloete/*
+test/simulators/obsloete/*
+
