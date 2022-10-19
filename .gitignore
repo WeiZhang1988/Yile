@@ -2,9 +2,8 @@
 build/*
 dep/*
 houtest/*
-src/models/components/obsloete/*
-src/models/subsystems/obsloete/*
-src/models/systems/obsloete/*
-src/models/systems/obsloete/*
-test/simulators/obsloete/*
+src/models/components/obsolete/*
+src/models/subsystems/obsolete/*
+src/models/systems/obsolete/*
+src/test/simulators/obsolete/*
 
