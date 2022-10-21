@@ -147,6 +147,10 @@ void NMSPC::Tire_Fiala::pull_fm (const real_Y &Sus_Fz, const real_Y &Gnd_scale, 
 	m_Sus_TirFx = m_DCM_00 * dead_zone_Tir_Fx + m_DCM_01 * dead_zone_Tir_Fy + m_DCM_02 * m_Tir_Fz;
 	m_Sus_TirFy = m_DCM_10 * dead_zone_Tir_Fx + m_DCM_11 * dead_zone_Tir_Fy + m_DCM_12 * m_Tir_Fz;
 	m_Sus_TirFz = m_DCM_20 * dead_zone_Tir_Fx + m_DCM_21 * dead_zone_Tir_Fy + m_DCM_22 * m_Tir_Fz;
+
+	static int i = 0;
+
+	i++;
     
 }
 

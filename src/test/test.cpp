@@ -18,6 +18,7 @@
 #include "simulators/simulator_chassis_2ind_disk_fiala.hpp"
 #include "simulators/simulator_wheel_tire_4disk_fiala.hpp"
 #include "simulators/simulator_sus_wheel_tire_2ind_disk_fiala.hpp"
+#include "simulator_pass14dof.hpp"
 
 using namespace Yile;
 
@@ -174,13 +175,34 @@ void run_Sus_Wheel_Tire_2Ind_Disk_Fiala() {
 	of.close();
 }
 
+void run_Pass14DOF() {
+	std::ofstream of;
+	Simulator_Pass14DOF sim1 = Simulator_Pass14DOF(0.0,100.0,5e-4);
+	steady_clock::time_point start = steady_clock::now();
+	sim1.run();
+	steady_clock::time_point end = steady_clock::now();
+	milliseconds dur= duration_cast<milliseconds>(end - start);
+	cout<<"time elapsed in milliseconds: "<<dur.count()<<"ms"<<endl;
+	
+	of.open("res_pass14dof.csv");
+	std::cout<<"total: "<<sim1.m_steps<<" steps"<<std::endl;
+	for (auto items : *sim1.m_sptr_store) {
+		for (auto item : items) {
+			of<<std::setprecision(7)<<item<<',';
+		}
+		of<<std::endl;
+	}
+	of.close();
+}
+
 int main(){
 	//run_Whl_4Disk();
 	//run_Tir_4Fiala();
 	//run_Sus_2Ind();
 	//run_Vehicle_Body();
-	run_Wheel_Tire_4Disk_Fiala();
+	//run_Wheel_Tire_4Disk_Fiala();
 	//run_Sus_Wheel_Tire_2Ind_Disk_Fiala();
 	//run_Chassis_2Ind_Disk_Fiala();
+	run_Pass14DOF();
 	return 0;
 }

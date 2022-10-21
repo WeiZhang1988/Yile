@@ -43,9 +43,9 @@ public:
 	void add_store(std::shared_ptr<d_v_vec> sptr_store) 									{m_sptr_store=sptr_store;}
 	
 	void push_con_states(d_vec &con_states);
-	void push_con_states_whl_veh(d_vec &con_states);
+	void push_con_states_veh_whl(d_vec &con_states);
 	void pull_con_states(const d_vec &con_states);
-	void pull_con_states_whl_veh(const d_vec &con_states);
+	void pull_con_states_veh_whl(const d_vec &con_states);
 
 	void update_pv();
 	void update_fm();

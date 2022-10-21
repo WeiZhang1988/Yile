@@ -37,7 +37,7 @@ Simulator_Chassis_2Ind_Disk_Fiala::Simulator_Chassis_2Ind_Disk_Fiala(real_Y t_st
 }
 
 void Simulator_Chassis_2Ind_Disk_Fiala::run () {
-	io::CSVReader<38> m_inputs("chassis_2ind_wheels/PassVeh14DOF_inputs10191410.csv"); //need modification
+	io::CSVReader<38> m_inputs("chassis_2ind_wheels/PassVeh14DOF_inputs10211330.csv"); //need modification
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	real_Y t = m_t_start;
@@ -107,9 +107,9 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
 			m_sptr_interface->m_Ext_My_ext,
 			m_sptr_interface->m_Ext_Mz_ext\
 		);
-		m_sptr_sys->push_con_states_whl_veh(m_sptr_sys->m_con_states);
+		m_sptr_sys->push_con_states_veh_whl(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
-		m_sptr_sys->pull_con_states_whl_veh(m_sptr_sys->m_con_states);
+		m_sptr_sys->pull_con_states_veh_whl(m_sptr_sys->m_con_states);
 		t += m_t_step;
 		//spin(m_steps);
 	}
