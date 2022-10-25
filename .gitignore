@@ -1,9 +1,5 @@
 .vscode/*
-build/*
-dep/*
+dep/boost_1_80_0/*
+dep/boost_1_80_0.tar.bz2
 houtest/*
-src/models/components/obsolete/*
-src/models/subsystems/obsolete/*
-src/models/systems/obsolete/*
-src/test/simulators/obsolete/*
 
