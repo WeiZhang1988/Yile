@@ -14,26 +14,17 @@
 #ifndef SIMULATOR_PASS14DOF_FIALA_HPP
 #define SIMULATOR_PASS14DOF_FIALA_HPP
 
-#include <atomic>
 #include <boost/numeric/odeint.hpp>
 #include <iostream>
 #include <string>
 #include <filesystem>
 #include <boost/property_tree/json_parser.hpp>
+#include <atomic>
 #include <mutex>
 #include <thread>
-#include <sys/types.h>   
-#include <sys/socket.h>   
-#include <netinet/in.h>   
-#include <arpa/inet.h>    
-#include <errno.h>    
-#include <stdlib.h>  
 #include "csv.hpp"
-//#include "systems/system_chassis_2ind_disk_fiala.hpp"
+#include "communicators/udp_server.hpp"
 #include "yile.hpp"
-
-#define PULL_SERV_PORT   9000 
-#define PUSH_SERV_PORT   9001
 
 namespace pt = boost::property_tree;
 using namespace boost::numeric::odeint;
@@ -56,8 +47,8 @@ public:
     real_Y m_t_current;
 	
 private:
-    void udp_pull_server();
-    void udp_push_server();
+    void udp_pull();
+    void udp_push();
     void do_simulation();
 	void spin(const int &steps);
     d_vec read_json_list(const pt::ptree &in);
@@ -66,6 +57,25 @@ private:
     std::atomic<bool> m_simulation_done = false;
     std::atomic<bool> m_enable_output = false;
     std::mutex m_mu;
+
+    double m_udp_pull_send_buf[6] = {0.0,0.0,0.0,0.0,0.0,0.0};  
+  	double m_udp_pull_recv_buf[Int_Chassis_2Ind_Disk_Fiala::m_inputs_nums] = {
+		0.0,0.0,0.0,0.0,  //1-StrgAng 0000
+		0.0,0.0,0.0,0.0,  //2-AxlTrq 0000
+		0.0,0.0,0.0,0.0,  //3-BrkPrs 0000
+		0.0,0.0,0.0,	  //4-WindXYZ 000
+		0.0,0.0,0.0,0.0,  //5-Ground 0000
+		1.0,1.0,1.0,1.0,  //6-Friction 111
+		2.2e5,2.2e5,2.2e5,2.2e5, //Tire Pressure 220000
+		273.0,// Air temperature Constant: Tair=273
+		0.0,0.0,0.0,0.0,// Tire temperature Constant: Tamb=0
+		0.0,0.0,0.0,//Extern Fx, Fy, Fz
+		0.0,0.0,0.0 //Extern Mx, My, Mz
+	};
+    UDP_Server m_udp_pull_server = UDP_Server(9000);
+    double m_udp_push_send_buf[6] = {0.0,0.0,0.0,0.0,0.0,0.0};  
+  	double m_udp_push_recv_buf[1] = {0.0};
+    UDP_Server m_udp_push_server = UDP_Server(9001);
 
     string m_par_file;
 	real_Y m_t_start, m_t_end, m_t_step, m_t_step_micros;

@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
         if(recv_num < 0)  
         {  
             perror("recvfrom error:");  
-            exit(1);  
+            //exit(1);  
         }  
             
         printf("client receive %d: \n", recv_num);  
