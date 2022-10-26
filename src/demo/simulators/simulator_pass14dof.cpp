@@ -262,7 +262,7 @@ void Simulator_Pass14DOF::udp_pull() {
 		locker.unlock();
 
 		m_enable_do_sim = true;
-		//if (m_enable_output) {
+		if (m_enable_output) {
 			m_udp_pull_send_buf[0] = m_sptr_interface->m_xe_x_c;
 			m_udp_pull_send_buf[1] = m_sptr_interface->m_xe_y_c;
 			m_udp_pull_send_buf[2] = m_sptr_interface->m_xe_z_c;
@@ -271,7 +271,7 @@ void Simulator_Pass14DOF::udp_pull() {
 			m_udp_pull_send_buf[5] = m_sptr_interface->m_psi_c;
 
 			m_udp_pull_server.respond(m_udp_pull_send_buf,sizeof(m_udp_pull_send_buf));
-		//}
+		}
 		
 	}  
     

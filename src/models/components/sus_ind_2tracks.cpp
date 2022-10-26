@@ -104,7 +104,7 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const real_Y &Veh_hgt_cg, const real_Y &Ve
 	m_x_dot_l 	     = m_Sus_IntVz_l - m_Sus_Tirvz_l;
 	m_adjusted_toe_l = (abs(m_Strg_str_l) * m_toe_strg_slp_l + m_toe_l + 
 	m_roll_strg_H_slp_l * m_Sus_hgt_l);
-	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;
+	m_Sus_str_l = m_adjusted_toe_l - m_toe_l + m_Strg_str_l;									//-m_toe_l because it is left
 	m_Sus_gamma_l = abs(m_Strg_str_l) * m_camber_strg_slp_l + m_camber_l + \
 	m_camber_H_slp_l * m_Sus_hgt_l;
 	m_Sus_caster_l = abs(m_Strg_str_l) * m_caster_strg_slp_l + m_caster_l + \
@@ -124,9 +124,9 @@ void NMSPC::Sus_Ind_2Tracks::pull_pv (const real_Y &Veh_hgt_cg, const real_Y &Ve
 	m_x_dot_r 	     = m_Sus_IntVz_r - m_Sus_Tirvz_r;
 	m_adjusted_toe_r = -(abs(m_Strg_str_r) * m_toe_strg_slp_r + m_toe_r + \
 	m_roll_strg_H_slp_r * m_Sus_hgt_r);
-	m_Sus_str_r = m_adjusted_toe_r - m_toe_r + m_Strg_str_r;
-	m_Sus_gamma_r = abs(m_Strg_str_r) * m_camber_strg_slp_r + m_camber_r + \
-	m_camber_H_slp_r * m_Sus_hgt_r;
+	m_Sus_str_r = m_adjusted_toe_r + m_toe_r + m_Strg_str_r;									//+m_toe_r because it is right
+	m_Sus_gamma_r = -(abs(m_Strg_str_r) * m_camber_strg_slp_r + m_camber_r + \
+	m_camber_H_slp_r * m_Sus_hgt_r);
 	m_Sus_caster_r = abs(m_Strg_str_r) * m_caster_strg_slp_r + m_caster_r + \
 	m_caster_H_slp_r * m_Sus_hgt_r;
 	m_arm_r = m_Veh_hgt_r + m_Tir_Re_r;

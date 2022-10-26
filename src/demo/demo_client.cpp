@@ -34,7 +34,7 @@ using namespace Yile;
 int main(int argc, char *argv[])  
 {  
     std::string ip_addr = "127.0.0.1";
-    std::string input_file = "data/inputs/pass14dof.csv";
+    std::string input_file = "data/inputs/pass14dof_reversedriving.csv";
     if(argc>2) {
         ip_addr = argv[1];
         input_file= argv[2];
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
             exit(1);  
         }  
             
-        recv_num = recvfrom(sock_fd, recv_buf, sizeof(recv_buf), 0, (struct sockaddr *)&addr_serv, (socklen_t *)&len);  
+        recv_num = recvfrom(sock_fd, recv_buf, sizeof(recv_buf), MSG_DONTWAIT, (struct sockaddr *)&addr_serv, (socklen_t *)&len);  
             
         if(recv_num < 0)  
         {  

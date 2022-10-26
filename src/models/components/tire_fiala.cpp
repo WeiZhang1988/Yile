@@ -52,7 +52,7 @@ void NMSPC::Tire_Fiala::pull_con_states(const d_vec &con_states) {
 	m_alpha_prime = con_states[1];
 	m_Mroll = con_states[2];
 	m_Sus_lpf_str = con_states[3];
-	m_Sus_lpf_gamma = 0.0;//con_states[4];
+	m_Sus_lpf_gamma = con_states[4];
 	m_Sus_lpf_Fz = con_states[5];
 }
 

@@ -55,7 +55,7 @@ public:
 	real_Y z5I_yx=0.0, real_Y z5I_yy=0.0, real_Y z5I_yz=0.0, 
 	real_Y z5I_zx=0.0, real_Y z5I_zy=0.0, real_Y z5I_zz=0.0, \
 	//z6
-	real_Y z6m=0.0, real_Y z6R_x=1.25, real_Y z6R_y=-0.5, real_Y z6R_z = 0.4, 
+	real_Y z6m=0.0, real_Y z6R_x=1.25, real_Y z6R_y=0.5, real_Y z6R_z = 0.4, 
 	real_Y z6I_xx=0.0, real_Y z6I_xy=0.0, real_Y z6I_xz=0.0, 
 	real_Y z6I_yx=0.0, real_Y z6I_yy=0.0, real_Y z6I_yz=0.0, 
 	real_Y z6I_zx=0.0, real_Y z6I_zy=0.0, real_Y z6I_zz=0.0, \
@@ -79,7 +79,7 @@ public:
 	//simulation
 	real_Y xdot_tol=0.1, real_Y longOff=0.0, real_Y latOff=0.0, real_Y vertOff=0.0112, \
 	//init states
-	real_Y init_xe_x=0.0, real_Y init_xe_y=3.125, real_Y init_xe_z=0.0, \
+	real_Y init_xe_x=0.0, real_Y init_xe_y=0.0, real_Y init_xe_z=0.0, \
 	real_Y init_vb_x=0.0, real_Y init_vb_y=0.0, real_Y init_vb_z=0.0, \
 	real_Y init_phai=0.0, real_Y init_theta=0.0, real_Y init_psi=0.0, \
 	real_Y init_p=0.0, real_Y init_q=0.0, real_Y init_r=0.0) :
