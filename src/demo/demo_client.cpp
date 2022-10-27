@@ -33,11 +33,13 @@ using namespace Yile;
   
 int main(int argc, char *argv[])  
 {  
+    uint16_t port = 9000;
     std::string ip_addr = "127.0.0.1";
     std::string input_file = "data/inputs/pass14dof_reversedriving.csv";
     if(argc>2) {
-        ip_addr = argv[1];
-        input_file= argv[2];
+        port = atoi(argv[1]);
+        ip_addr = argv[2];
+        input_file= argv[3];
     } else {
 		std::cout<<"arguments less than 2 so the default is used."<<std::endl;
 	}
@@ -60,7 +62,7 @@ int main(int argc, char *argv[])
     memset(&addr_serv, 0, sizeof(addr_serv));  
     addr_serv.sin_family = AF_INET;  
     addr_serv.sin_addr.s_addr = inet_addr(ip_addr.c_str());  
-    addr_serv.sin_port = htons(DFLT_DEST_PORT);  
+    addr_serv.sin_port = htons(port);  
     len = sizeof(addr_serv);  
     
         

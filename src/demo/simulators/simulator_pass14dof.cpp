@@ -13,14 +13,15 @@
 // =============================================================================
 #include "simulator_pass14dof.hpp"
 
-Simulator_Pass14DOF::Simulator_Pass14DOF(string par_file, real_Y t_start, real_Y t_end, real_Y t_step) {
-	m_par_file = par_file;
+Simulator_Pass14DOF::Simulator_Pass14DOF(int ID) {
+	std::cout<<"my ID is "<<ID<<std::endl;
+	m_ID = ID;
+	m_par_file = m_par_file_start + to_string(m_ID) + m_par_file_end;
 	m_steps         = 0;
-	m_t_start       = t_start;
-	m_t_end         = t_end;
-	m_t_step        = t_step;
+	m_t_start       = 0.0;
+	m_t_end         = inf;
+	m_t_step        = 5e-4;
 	m_t_step_micros = m_t_step/1e-6;
-	m_t_current     = m_t_start;
 	m_sptr_sys          = make_shared<Sys_Chassis_2Ind_Disk_Fiala>();
 	m_sptr_store        = make_shared<d_v_vec>();
 	m_sptr_interface    = make_shared<Int_Chassis_2Ind_Disk_Fiala>();
@@ -28,10 +29,12 @@ Simulator_Pass14DOF::Simulator_Pass14DOF(string par_file, real_Y t_start, real_Y
     shared_ptr<Subsys_Wheel_4Disk> sptr_sub_whl_4disk;
 	shared_ptr<Subsys_Sus_2Ind> sptr_sub_sus_2ind;
     shared_ptr<Subsys_Tire_4Fiala> sptr_sub_tir_4fiala;
+	m_sptr_udp_pull_server = make_shared<UDP_Server>(9000+m_ID);
+	m_sptr_udp_push_server = make_shared<UDP_Server>(10000+m_ID);
 
 	if (std::filesystem::exists(m_par_file)) {
-		pt::ptree tree, \
-		pt_parameters, \
+		pt::ptree pt_tree, \
+		pt_parameters, pt_sim_config, \
 		pt_vehicle_body, \
 		pt_wheels, \
 		pt_front_two_wheels, \
@@ -42,8 +45,14 @@ Simulator_Pass14DOF::Simulator_Pass14DOF(string par_file, real_Y t_start, real_Y
 		pt_tires, \
 		pt_front_two_tires, \
 		pt_rear_two_tires;
-		pt::read_json(m_par_file,tree);
-		pt_parameters = tree.get_child("parameters");
+		pt::read_json(m_par_file,pt_tree);
+		pt_parameters = pt_tree.get_child("parameters");
+		pt_sim_config = pt_tree.get_child("sim_config");
+
+		//set simulation configuration
+		m_t_start = pt_sim_config.get<double>("t_start");
+		m_t_end = pt_sim_config.get<double>("t_end");
+		m_t_step = pt_sim_config.get<double>("t_step");
 		
 		//create vehicle body
 		pt_vehicle_body = pt_parameters.get_child("vehicle_body");
@@ -217,9 +226,8 @@ d_vec Simulator_Pass14DOF::read_json_list(const pt::ptree &in) {
 
 void Simulator_Pass14DOF::udp_pull() {
 	
-	while(!m_simulation_done)  
-	{  
-		m_udp_pull_server.get_request(m_udp_pull_recv_buf,sizeof(m_udp_pull_recv_buf)); 
+	while(!m_simulation_done)  {   
+		m_sptr_udp_pull_server->get_request(m_udp_pull_recv_buf,sizeof(m_udp_pull_recv_buf)); 
 		std::unique_lock<std::mutex> locker(m_mu); 
 		m_sptr_interface->m_Strg_str_fl  = m_udp_pull_recv_buf[0];
 		m_sptr_interface->m_Strg_str_fr  = m_udp_pull_recv_buf[1];
@@ -270,7 +278,7 @@ void Simulator_Pass14DOF::udp_pull() {
 			m_udp_pull_send_buf[4] = m_sptr_interface->m_theta_c;
 			m_udp_pull_send_buf[5] = m_sptr_interface->m_psi_c;
 
-			m_udp_pull_server.respond(m_udp_pull_send_buf,sizeof(m_udp_pull_send_buf));
+			m_sptr_udp_pull_server->respond(m_udp_pull_send_buf,sizeof(m_udp_pull_send_buf));
 		}
 		
 	}  
@@ -278,9 +286,8 @@ void Simulator_Pass14DOF::udp_pull() {
 }
 
 void Simulator_Pass14DOF::udp_push() {
-	while(!m_simulation_done)  
-	{  
-		m_udp_push_server.get_request(m_udp_push_recv_buf,sizeof(m_udp_push_recv_buf));
+	while(!m_simulation_done)  {  
+		m_sptr_udp_push_server->get_request(m_udp_push_recv_buf,sizeof(m_udp_push_recv_buf));
 		
 		m_udp_push_send_buf[0] = m_sptr_interface->m_xe_x_c;
 		m_udp_push_send_buf[1] = m_sptr_interface->m_xe_y_c;
@@ -289,19 +296,18 @@ void Simulator_Pass14DOF::udp_push() {
 		m_udp_push_send_buf[4] = m_sptr_interface->m_theta_c;
 		m_udp_push_send_buf[5] = m_sptr_interface->m_psi_c;
 
-		m_udp_push_server.respond(m_udp_push_send_buf,sizeof(m_udp_push_send_buf));
+		m_sptr_udp_push_server->respond(m_udp_push_send_buf,sizeof(m_udp_push_send_buf));
 	}   
 }
 
 
 void Simulator_Pass14DOF::do_simulation() {
-	
-	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	real_Y t = m_t_start;
 	while(!m_enable_do_sim);
 	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 	m_tp_start = steady_clock::now();
-	for (int i=0; i<steps_num; i++) {
+
+	while(t<m_t_end) {
 		m_steps++;	
 		m_times.push_back(t);
 		std::unique_lock<std::mutex> locker(m_mu); 
@@ -312,8 +318,7 @@ void Simulator_Pass14DOF::do_simulation() {
 		m_enable_output = true;
 		t += m_t_step;
 		spin(m_steps);
-		if (i%1000==0)
-			std::cout<<"run "<< i << " steps"<<std::endl;
+		//std::cout<<"running time "<< t <<" secs"<<std::endl;
 	}
 	m_times.push_back(t);
 	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
@@ -321,14 +326,15 @@ void Simulator_Pass14DOF::do_simulation() {
 	m_sptr_sys->update_fm();
 	m_sptr_sys->store_data();
 	m_simulation_done = true;
-	//exit(0);
 }
 
 void Simulator_Pass14DOF::run () {
 	std::thread t1(&Simulator_Pass14DOF::udp_pull,this);
 	std::thread t2(&Simulator_Pass14DOF::do_simulation,this);
-	//std::thread t3(&Simulator_Pass14DOF::udp_push,this);
+	std::thread t3(&Simulator_Pass14DOF::udp_push,this);
 	t1.join();
 	t2.join();
-	//t3.join();
+	t3.join();
+	std::cout<<"simulation done"<<std::endl;
+	//exit(0);
 }

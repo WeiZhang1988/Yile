@@ -23,7 +23,8 @@
 #include <mutex>
 #include <thread>
 #include "csv.hpp"
-#include "communicators/udp_server.hpp"
+#include "auxiliary/udp_server.hpp"
+#include "auxiliary/task.hpp"
 #include "yile.hpp"
 
 namespace pt = boost::property_tree;
@@ -32,9 +33,9 @@ using namespace std::chrono;
 using namespace std;
 using namespace Yile;
 
-class Simulator_Pass14DOF {
+class Simulator_Pass14DOF : public Task{
 public:
-	Simulator_Pass14DOF(string par_file, real_Y t_start, real_Y t_end, real_Y t_step);
+	Simulator_Pass14DOF(int ID=0);
     void run ();
     
     shared_ptr<Sys_Chassis_2Ind_Disk_Fiala>     m_sptr_sys;
@@ -44,7 +45,6 @@ public:
     int m_steps;
     d_v_vec m_states, m_outputs;
     d_vec m_times;
-    real_Y m_t_current;
 	
 private:
     void udp_pull();
@@ -52,6 +52,10 @@ private:
     void do_simulation();
 	void spin(const int &steps);
     d_vec read_json_list(const pt::ptree &in);
+
+    int m_ID = 0;
+    string m_par_file_start = "data/parameters/parameters_";
+    string m_par_file_end = ".json";
 
     std::atomic<bool> m_enable_do_sim = false;
     std::atomic<bool> m_simulation_done = false;
@@ -72,10 +76,10 @@ private:
 		0.0,0.0,0.0,//Extern Fx, Fy, Fz
 		0.0,0.0,0.0 //Extern Mx, My, Mz
 	};
-    UDP_Server m_udp_pull_server = UDP_Server(9000);
+    shared_ptr<UDP_Server> m_sptr_udp_pull_server;
     double m_udp_push_send_buf[6] = {0.0,0.0,0.0,0.0,0.0,0.0};  
   	double m_udp_push_recv_buf[1] = {0.0};
-    UDP_Server m_udp_push_server = UDP_Server(9001);
+    shared_ptr<UDP_Server> m_sptr_udp_push_server;
 
     string m_par_file;
 	real_Y m_t_start, m_t_end, m_t_step, m_t_step_micros;

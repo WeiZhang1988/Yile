@@ -9,7 +9,7 @@ add_executable(demo_server
  			   simulators/simulator_wheel_tire_4disk_fiala.cpp
  			   simulators/simulator_sus_wheel_tire_2ind_disk_fiala.cpp
 			   simulators/simulator_pass14dof.cpp
-			   simulators/communicators/udp_server.cpp
+			   simulators/auxiliary/udp_server.cpp
 			   )
 add_executable(demo_client
 			   demo_client.cpp	
