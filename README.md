@@ -4,7 +4,7 @@ dependent on boost-1.80.0 library
 
 demo with carla
 
-[!["co-sim with carla"](./pics/demo_with_carla.gif "demo with carla")](https://www.youtube.com/watch?v=cFAeuJHYPG4)
+[!["demo with carla"](./pics/demo_with_carla.gif "demo with carla")](https://youtu.be/lJ6hxr0JoPs)
 
 simulation results compared to simulink model of vehicle dynamics blocks
 
