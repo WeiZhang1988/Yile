@@ -83,7 +83,11 @@ void Simulator_Vehicle_Body::run() {
 		m_sptr_interface->m_Ext_Fz_ext, \
 		m_sptr_interface->m_Ext_Mx_ext, 
 		m_sptr_interface->m_Ext_My_ext, 
-		m_sptr_interface->m_Ext_Mz_ext
+		m_sptr_interface->m_Ext_Mz_ext, \
+
+		m_sptr_interface->m_Gnd_Grade_phai, 
+		m_sptr_interface->m_Gnd_Grade_theta, 
+		m_sptr_interface->m_Gnd_Grade_psi
 		); 
 		m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
 		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);

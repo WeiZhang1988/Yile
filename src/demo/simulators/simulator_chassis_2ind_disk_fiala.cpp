@@ -71,8 +71,13 @@ void Simulator_Chassis_2Ind_Disk_Fiala::run () {
 			m_sptr_interface->m_Air_Wx, 
 			m_sptr_interface->m_Air_Wy, 
 			m_sptr_interface->m_Air_Wz, \
+
+			//4-GroundGrade 000
+			m_sptr_interface->m_Gnd_Grade_phai, 
+			m_sptr_interface->m_Gnd_Grade_theta, 
+			m_sptr_interface->m_Gnd_Grade_psi, \
 			
-			//5-Ground 0000
+			//5-GroundPz 0000
 			m_sptr_interface->m_Gnd_Pz_fl, 
 			m_sptr_interface->m_Gnd_Pz_fr, 
 			m_sptr_interface->m_Gnd_Pz_rl, 

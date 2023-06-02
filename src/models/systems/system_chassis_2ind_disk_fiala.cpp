@@ -57,7 +57,8 @@ void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::pull_con_states_veh_whl (const d_vec &c
 }
 
 void NMSPC::Sys_Chassis_2Ind_Disk_Fiala::update_pv() {
-    m_sptr_vhl_bdy->pull_pv(m_sptr_interface->m_Air_Wx, m_sptr_interface->m_Air_Wy, m_sptr_interface->m_Air_Wz);
+    m_sptr_vhl_bdy->pull_pv(m_sptr_interface->m_Air_Wx, m_sptr_interface->m_Air_Wy, m_sptr_interface->m_Air_Wz, \
+	m_sptr_interface->m_Gnd_Grade_phai, m_sptr_interface->m_Gnd_Grade_theta, m_sptr_interface->m_Gnd_Grade_psi);
 	m_sptr_vhl_bdy->push_pv(m_sptr_interface->m_Veh_hgt_cg, m_sptr_interface->m_xe_x_c, m_sptr_interface->m_xe_y_c, m_sptr_interface->m_xe_z_c, m_sptr_interface->m_ve_x_c, m_sptr_interface->m_ve_y_c, m_sptr_interface->m_ve_z_c, \
 	m_sptr_interface->m_vb_x_c,  m_sptr_interface->m_vb_y_c,  m_sptr_interface->m_vb_z_c,    m_sptr_interface->m_phai_c,    m_sptr_interface->m_theta_c,   m_sptr_interface->m_psi_c,    m_sptr_interface->m_p_c, m_sptr_interface->m_q_c, m_sptr_interface->m_Veh_r, m_sptr_interface->m_beta_c, \
 	m_sptr_interface->m_xe_x_o,  m_sptr_interface->m_xe_y_o,  m_sptr_interface->m_xe_z_o,    m_sptr_interface->m_ve_x_o,    m_sptr_interface->m_ve_y_o,    m_sptr_interface->m_ve_z_o, \

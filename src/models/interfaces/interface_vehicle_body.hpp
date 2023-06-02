@@ -22,6 +22,9 @@ public:
     real_Y m_Air_Wx = NaN;            //from Env.Air
     real_Y m_Air_Wy = NaN;            //from Env.Air
     real_Y m_Air_Wz = NaN;            //from Env.Air
+    real_Y m_Gnd_Grade_phai = NaN;    //Env.Gnd
+    real_Y m_Gnd_Grade_theta = NaN;   //Env.Gnd
+    real_Y m_Gnd_Grade_psi = NaN;     //Env.Gnd
 
     //vb pv push
     real_Y m_Veh_hgt_cg = NaN;        //to suspension; origin: m_h_c

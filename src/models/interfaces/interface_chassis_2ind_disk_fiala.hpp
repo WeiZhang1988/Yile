@@ -45,6 +45,9 @@ public:
     real_Y m_Air_Wx = NaN;                  //Env.Air to vehicle body
     real_Y m_Air_Wy = NaN;                  //Env.Air to vehicle body
     real_Y m_Air_Wz = NaN;                  //Env.Air to vehicle body
+    real_Y m_Gnd_Grade_phai = NaN;          //Env.Gnd to vehicle body
+    real_Y m_Gnd_Grade_theta = NaN;         //Env.Gnd to vehicle body
+    real_Y m_Gnd_Grade_psi = NaN;           //Env.Gnd to vehicle body
     //vb fm pull
     real_Y m_Air_Tair  = NaN;               //Env.Air to vehicle body
     real_Y m_Ext_Fx_ext = NaN;              //Env to vehicle body

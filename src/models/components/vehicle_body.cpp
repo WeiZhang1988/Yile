@@ -73,18 +73,21 @@ void NMSPC::Vehicle_Body::pull_con_states (const d_vec &con_states) {
 	}
 }
 
-void NMSPC::Vehicle_Body::pull_pv(const real_Y &Air_Wx, const real_Y &Air_Wy, const real_Y &Air_Wz) { 
+void NMSPC::Vehicle_Body::pull_pv(const real_Y &Air_Wx, const real_Y &Air_Wy, const real_Y &Air_Wz, const real_Y &Gnd_Grade_phai, const real_Y &Gnd_Grade_theta, const real_Y &Gnd_Grade_psi) { 
 	m_Air_Wx = Air_Wx;
 	m_Air_Wy = Air_Wy;
 	m_Air_Wz = Air_Wz;
+	m_Gnd_Grade_phai = Gnd_Grade_phai;
+	m_Gnd_Grade_theta = Gnd_Grade_theta;
+	m_Gnd_Grade_psi = Gnd_Grade_psi;
 
 	//process
-	m_cos_phai 	= cos(m_phai);
-	m_cos_theta	= cos(m_theta);
-	m_cos_psi	= cos(m_psi);
-	m_sin_phai 	= sin(m_phai);
-	m_sin_theta	= sin(m_theta);
-	m_sin_psi	= sin(m_psi);
+	m_cos_phai 	= cos(m_phai + m_Gnd_Grade_phai);
+	m_cos_theta	= cos(m_theta - Gnd_Grade_theta);
+	m_cos_psi	= cos(m_psi - Gnd_Grade_psi);
+	m_sin_phai 	= sin(m_phai + m_Gnd_Grade_phai);
+	m_sin_theta	= sin(m_theta - Gnd_Grade_theta);
+	m_sin_psi	= sin(m_psi - Gnd_Grade_psi);
 
 	m_DCM_00	= m_cos_theta * m_cos_psi;
 	m_DCM_01	= m_cos_theta * m_sin_psi;
@@ -474,7 +477,7 @@ void NMSPC::Vehicle_Body::calculate_bar() {
 	m_Wbar_fr = m_w_f / 2.0 - D;
 	m_Wbar_rl = m_w_r / 2.0 + D;
 	m_Wbar_rr = m_w_r / 2.0 - D;
-	m_HPbar_fl_x = A;;
+	m_HPbar_fl_x = A;
 	m_HPbar_fr_x = A;
 	m_HPbar_rl_x = A - (m_a + m_b);
 	m_HPbar_rr_x = A - (m_a + m_b);

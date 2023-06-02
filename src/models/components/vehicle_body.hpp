@@ -131,7 +131,7 @@ public:
 	void push_con_states (d_vec &con_states);
 	void pull_con_states (const d_vec &con_states);
 
-	void pull_pv (const real_Y &Air_Wx, const real_Y &Air_Wy, const real_Y &Air_Wz);
+	void pull_pv (const real_Y &Air_Wx, const real_Y &Air_Wy, const real_Y &Air_Wz, const real_Y &Gnd_Grade_phai, const real_Y &Gnd_Grade_theta, const real_Y &Gnd_Grade_psi);
 	void push_pv(real_Y &h_c, real_Y &xe_x_c, real_Y &xe_y_c, real_Y &xe_z_c, real_Y &ve_x_c, real_Y &ve_y_c, real_Y &ve_z_c, \
 	real_Y &vb_x_c, real_Y &vb_y_c, real_Y &vb_z_c, real_Y &phai_c, real_Y &theta_c, real_Y &psi_c, real_Y &p_c, real_Y &q_c, real_Y &r_c, real_Y &beta_c, \
 	real_Y &xe_x_o, real_Y &xe_y_o, real_Y &xe_z_o, real_Y &ve_x_o, real_Y &ve_y_o, real_Y &ve_z_o, \
@@ -214,6 +214,8 @@ private:
 	real_Y m_Ext_Fx_ext = NaN, m_Ext_Fy_ext = NaN, m_Ext_Fz_ext = NaN;
 	//MExt
 	real_Y m_Ext_Mx_ext = NaN, m_Ext_My_ext = NaN, m_Ext_Mz_ext = NaN;
+	//GradeGnd
+	real_Y m_Gnd_Grade_phai = NaN, m_Gnd_Grade_theta = NaN, m_Gnd_Grade_psi = NaN;
 	//continuous states
 	real_Y m_xe_x, m_xe_y, m_xe_z, \
 	m_vb_x, m_vb_y, m_vb_z, \
