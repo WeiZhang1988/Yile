@@ -38,7 +38,7 @@ Simulator_Chassis_2Ind_Disk_Fiala::Simulator_Chassis_2Ind_Disk_Fiala(real_Y t_st
 }
 
 void Simulator_Chassis_2Ind_Disk_Fiala::run () {
-	io::CSVReader<38> m_inputs("chassis_2ind_wheels/PassVeh14DOF_inputs10211330.csv"); //need modification
+	io::CSVReader<41> m_inputs("chassis_2ind_wheels/PassVeh14DOF_inputs10211330.csv"); //need modification
 
 	int steps_num = static_cast<int>((m_t_end - m_t_start) / m_t_step);
 	real_Y t = m_t_start;
