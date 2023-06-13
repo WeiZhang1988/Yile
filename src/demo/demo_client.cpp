@@ -22,49 +22,22 @@
 #include <iostream>
 #include "interfaces/interface_chassis_2ind_disk_fiala.hpp"
 #include "components/common.hpp"
+#include "simulators/auxiliary/udp_server_client.hpp"
 #include <chrono>
 #include <unistd.h>
 #include "simulators/csv.hpp"
 
 using namespace Yile;
    
-#define DFLT_DEST_PORT 9000   
+#define DFLT_DEST_PORT 9000
+#define DFLT_DEST_IP "127.0.0.1"
    
   
-int main(int argc, char *argv[])  
+int main()  
 {  
-    uint16_t port = 9000;
-    std::string ip_addr = "127.0.0.1";
-    std::string input_file = "data/inputs/pass14dof_reversedriving.csv";
-    if(argc>2) {
-        port = atoi(argv[1]);
-        ip_addr = argv[2];
-        input_file= argv[3];
-    } else {
-		std::cout<<"arguments less than 2 so the default is used."<<std::endl;
-	}
-        
+    std::string input_file = "data/inputs/pass14dof_reversedriving.csv";    
 
-    /* socket file discreptor */  
-    int sock_fd;  
-    
-    /* create udp socket */  
-    sock_fd = socket(AF_INET, SOCK_DGRAM, 0);  
-    if(sock_fd < 0)  
-    {  
-        perror("socket");  
-        exit(1);  
-    }  
-        
-    /* set address */  
-    struct sockaddr_in addr_serv;  
-    int len;  
-    memset(&addr_serv, 0, sizeof(addr_serv));  
-    addr_serv.sin_family = AF_INET;  
-    addr_serv.sin_addr.s_addr = inet_addr(ip_addr.c_str());  
-    addr_serv.sin_port = htons(port);  
-    len = sizeof(addr_serv);  
-    
+    std::shared_ptr<UDP_Client> udp_sptr_client = std::make_shared<UDP_Client>(DFLT_DEST_IP,DFLT_DEST_PORT);  
         
     int send_num;  
     int recv_num;  
@@ -73,8 +46,9 @@ int main(int argc, char *argv[])
         eps,eps,eps,eps,  //2-AxlTrq 0000
         eps,eps,eps,eps,  //3-BrkPrs 0000
         eps,eps,eps,	  //4-WindXYZ 000
-        eps,eps,eps,eps,  //5-Ground 0000
-        1.0,1.0,1.0,1.0,  //6-Friction 111
+        eps,eps,eps,      //5-Grade 000
+        eps,eps,eps,eps,  //6-Ground 0000
+        1.0,1.0,1.0,1.0,  //7-Friction 111
         2.2e5,2.2e5,2.2e5,2.2e5, //Tire Pressure 220000
         273.0,// Air temperature Constant: Tair=273
         eps,eps,eps,eps,// Tire temperature Constant: Tamb=0
@@ -84,7 +58,7 @@ int main(int argc, char *argv[])
     double recv_buf[6];  
         
 
-    io::CSVReader<38> m_inputs(input_file); //need modification
+    io::CSVReader<41> m_inputs(input_file); //need modification
     while(true) {
 
         m_inputs.read_row(
@@ -110,68 +84,58 @@ int main(int argc, char *argv[])
 			send_buf[12], 
 			send_buf[13],
             send_buf[14], \
+
+            //5-Grade 0000
+            send_buf[15], 
+			send_buf[16],
+            send_buf[17], \
 			
 			//5-Ground 0000
-			send_buf[15], 
-			send_buf[16],
-            send_buf[17],
-            send_buf[18], \
+			send_buf[18], 
+			send_buf[19],
+            send_buf[20],
+            send_buf[21], \
 			
 			//6-Friction 1
-			send_buf[19], 
-			send_buf[20],
-            send_buf[21],
-            send_buf[22], \
+			send_buf[22], 
+			send_buf[23],
+            send_buf[24],
+            send_buf[25], \
 			
 			//Other-parameters 220000
-			send_buf[23], 
-			send_buf[24],
-            send_buf[25],
-            send_buf[26], \
+			send_buf[26], 
+			send_buf[27],
+            send_buf[28],
+            send_buf[29], \
 		
 			// Air temperature Constant: Tair=273
-			send_buf[27],
+			send_buf[30],
 			
 			// Tire temperature Constant: Tamb=0
-			send_buf[28], 
-			send_buf[29],
-            send_buf[30],
-            send_buf[31], \
+			send_buf[31], 
+			send_buf[32],
+            send_buf[33],
+            send_buf[34], \
 			
-			//000
-			send_buf[32], 
-			send_buf[33],
-            send_buf[34],
 			//000
 			send_buf[35], 
 			send_buf[36],
-            send_buf[37]
+            send_buf[37],
+			//000
+			send_buf[38], 
+			send_buf[39],
+            send_buf[40]
 		);
-
-        send_num = sendto(sock_fd, send_buf, sizeof(send_buf), 0, (struct sockaddr *)&addr_serv, len);  
-        printf("send ....\n");
+        udp_sptr_client->request(send_buf, sizeof(send_buf));
         usleep(500);
-        if(send_num < 0)  
-        {  
-            perror("sendto error:");  
-            exit(1);  
-        }  
             
-        recv_num = recvfrom(sock_fd, recv_buf, sizeof(recv_buf), MSG_DONTWAIT, (struct sockaddr *)&addr_serv, (socklen_t *)&len);  
+        udp_sptr_client->get_response(recv_buf, sizeof(recv_buf));  
             
-        if(recv_num < 0)  
-        {  
-            perror("recvfrom error:");  
-            //exit(1);  
-        }  
-            
-        printf("client receive %d: \n", recv_num);  
         for (auto item : recv_buf) {
             std::cout<< item << ", ";
         }
         std::cout<<std::endl;
-    }
-    close(sock_fd);  
+    } 
         
     return 0;  
 }

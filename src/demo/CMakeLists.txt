@@ -9,10 +9,11 @@ add_executable(demo_server
  			   simulators/simulator_wheel_tire_4disk_fiala.cpp
  			   simulators/simulator_sus_wheel_tire_2ind_disk_fiala.cpp
 			   simulators/simulator_pass14dof.cpp
-			   simulators/auxiliary/udp_server.cpp
+			   simulators/auxiliary/udp_server_client.cpp
 			   )
 add_executable(demo_client
 			   demo_client.cpp	
+			   simulators/auxiliary/udp_server_client.cpp
 			  )		
 add_executable(demo
 			   demo.cpp	
@@ -21,4 +22,5 @@ target_link_libraries(demo_server PRIVATE models pthread)
 target_link_libraries(demo_client PRIVATE models pthread)
 target_link_libraries(demo PRIVATE models pthread)
 target_include_directories(demo_server PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/simulators)
+target_include_directories(demo_client PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 install(TARGETS demo_server demo_client demo DESTINATION ${PROJECT_SOURCE_DIR}/install)

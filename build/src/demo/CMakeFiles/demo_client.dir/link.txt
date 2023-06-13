@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/demo_client.dir/demo_client.cpp.o CMakeFiles/demo_client.dir/simulators/auxiliary/udp_server_client.cpp.o  -o demo_client  -Wl,-rpath,/home/ubuntu/Documents/PROJECT_YILE_GRADE/build/src/models: ../models/libmodels.so -lpthread 

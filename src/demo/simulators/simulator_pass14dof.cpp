@@ -29,8 +29,7 @@ Simulator_Pass14DOF::Simulator_Pass14DOF(int ID) {
     shared_ptr<Subsys_Wheel_4Disk> sptr_sub_whl_4disk;
 	shared_ptr<Subsys_Sus_2Ind> sptr_sub_sus_2ind;
     shared_ptr<Subsys_Tire_4Fiala> sptr_sub_tir_4fiala;
-	m_sptr_udp_pull_server = make_shared<UDP_Server>(9000+m_ID);
-	m_sptr_udp_push_server = make_shared<UDP_Server>(10000+m_ID);
+	m_sptr_udp_server = make_shared<UDP_Server>(9000);
 
 	if (std::filesystem::exists(m_par_file)) {
 		pt::ptree pt_tree, \
@@ -225,86 +224,77 @@ d_vec Simulator_Pass14DOF::read_json_list(const pt::ptree &in) {
 }
 
 void Simulator_Pass14DOF::udp_pull() {
-	
-	while(!m_simulation_done)  {   
-		m_sptr_udp_pull_server->get_request(m_udp_pull_recv_buf,sizeof(m_udp_pull_recv_buf)); 
-		std::unique_lock<std::mutex> locker(m_mu); 
-		m_sptr_interface->m_Strg_str_fl  		= m_udp_pull_recv_buf[0];
-		m_sptr_interface->m_Strg_str_fr  		= m_udp_pull_recv_buf[1];
-		m_sptr_interface->m_Strg_str_rl  		= m_udp_pull_recv_buf[2];
-		m_sptr_interface->m_Strg_str_rr  		= m_udp_pull_recv_buf[3];
-		m_sptr_interface->m_Axl_Trq_fl   		= m_udp_pull_recv_buf[4];
-		m_sptr_interface->m_Axl_Trq_fr   		= m_udp_pull_recv_buf[5];
-		m_sptr_interface->m_Axl_Trq_rl   		= m_udp_pull_recv_buf[6];
-		m_sptr_interface->m_Axl_Trq_rr   		= m_udp_pull_recv_buf[7];
-		m_sptr_interface->m_Brk_Prs_fl   		= m_udp_pull_recv_buf[8];
-		m_sptr_interface->m_Brk_Prs_fr   		= m_udp_pull_recv_buf[9];
-		m_sptr_interface->m_Brk_Prs_rl   		= m_udp_pull_recv_buf[10];
-		m_sptr_interface->m_Brk_Prs_rr   		= m_udp_pull_recv_buf[11];
-		m_sptr_interface->m_Air_Wx 		 		= m_udp_pull_recv_buf[12];
-		m_sptr_interface->m_Air_Wy 		 		= m_udp_pull_recv_buf[13];
-		m_sptr_interface->m_Air_Wz 		 		= m_udp_pull_recv_buf[14];
-		m_sptr_interface->m_Gnd_Grade_phai  	= m_udp_pull_recv_buf[15];
-		m_sptr_interface->m_Gnd_Grade_theta 	= m_udp_pull_recv_buf[16];
-		m_sptr_interface->m_Gnd_Grade_psi 		= m_udp_pull_recv_buf[17];
-		m_sptr_interface->m_Gnd_Pz_fl    		= m_udp_pull_recv_buf[18];
-		m_sptr_interface->m_Gnd_Pz_fr    		= m_udp_pull_recv_buf[19];
-		m_sptr_interface->m_Gnd_Pz_rl    		= m_udp_pull_recv_buf[20];
-		m_sptr_interface->m_Gnd_Pz_rr    		= m_udp_pull_recv_buf[21];
-		m_sptr_interface->m_Gnd_scale_fl 		= m_udp_pull_recv_buf[22];
-		m_sptr_interface->m_Gnd_scale_fr 		= m_udp_pull_recv_buf[23];
-		m_sptr_interface->m_Gnd_scale_rl 		= m_udp_pull_recv_buf[24];
-		m_sptr_interface->m_Gnd_scale_rr 		= m_udp_pull_recv_buf[25];
-		m_sptr_interface->m_Tir_Prs_fl   		= m_udp_pull_recv_buf[26];
-		m_sptr_interface->m_Tir_Prs_fr   		= m_udp_pull_recv_buf[27];
-		m_sptr_interface->m_Tir_Prs_rl   		= m_udp_pull_recv_buf[28];
-		m_sptr_interface->m_Tir_Prs_rr   		= m_udp_pull_recv_buf[29];
-		m_sptr_interface->m_Air_Tair     		= m_udp_pull_recv_buf[30];
-		m_sptr_interface->m_Air_Tamb_fl  		= m_udp_pull_recv_buf[31];
-		m_sptr_interface->m_Air_Tamb_fr  		= m_udp_pull_recv_buf[32];
-		m_sptr_interface->m_Air_Tamb_rl  		= m_udp_pull_recv_buf[33];
-		m_sptr_interface->m_Air_Tamb_rr  		= m_udp_pull_recv_buf[34];
-		m_sptr_interface->m_Ext_Fx_ext   		= m_udp_pull_recv_buf[35];
-		m_sptr_interface->m_Ext_Fy_ext   		= m_udp_pull_recv_buf[36];
-		m_sptr_interface->m_Ext_Fz_ext   		= m_udp_pull_recv_buf[37];
-		m_sptr_interface->m_Ext_Mx_ext   		= m_udp_pull_recv_buf[38]; 
-		m_sptr_interface->m_Ext_My_ext   		= m_udp_pull_recv_buf[39];
-		m_sptr_interface->m_Ext_Mz_ext   		= m_udp_pull_recv_buf[40];
-		locker.unlock();
+	m_sptr_udp_server->get_request(m_udp_pull_recv_buf,sizeof(m_udp_pull_recv_buf));
+	m_sptr_interface->m_Strg_str_fl  		= m_udp_pull_recv_buf[0];
+	m_sptr_interface->m_Strg_str_fr  		= m_udp_pull_recv_buf[1];
+	m_sptr_interface->m_Strg_str_rl  		= m_udp_pull_recv_buf[2];
+	m_sptr_interface->m_Strg_str_rr  		= m_udp_pull_recv_buf[3];
+	m_sptr_interface->m_Axl_Trq_fl   		= m_udp_pull_recv_buf[4];
+	m_sptr_interface->m_Axl_Trq_fr   		= m_udp_pull_recv_buf[5];
+	m_sptr_interface->m_Axl_Trq_rl   		= m_udp_pull_recv_buf[6];
+	m_sptr_interface->m_Axl_Trq_rr   		= m_udp_pull_recv_buf[7];
+	m_sptr_interface->m_Brk_Prs_fl   		= m_udp_pull_recv_buf[8];
+	m_sptr_interface->m_Brk_Prs_fr   		= m_udp_pull_recv_buf[9];
+	m_sptr_interface->m_Brk_Prs_rl   		= m_udp_pull_recv_buf[10];
+	m_sptr_interface->m_Brk_Prs_rr   		= m_udp_pull_recv_buf[11];
+	m_sptr_interface->m_Air_Wx 		 		= m_udp_pull_recv_buf[12];
+	m_sptr_interface->m_Air_Wy 		 		= m_udp_pull_recv_buf[13];
+	m_sptr_interface->m_Air_Wz 		 		= m_udp_pull_recv_buf[14];
+	m_sptr_interface->m_Gnd_Grade_phai  	= m_udp_pull_recv_buf[15];
+	m_sptr_interface->m_Gnd_Grade_theta 	= m_udp_pull_recv_buf[16];
+	m_sptr_interface->m_Gnd_Grade_psi 		= m_udp_pull_recv_buf[17];
+	m_sptr_interface->m_Gnd_Pz_fl    		= m_udp_pull_recv_buf[18];
+	m_sptr_interface->m_Gnd_Pz_fr    		= m_udp_pull_recv_buf[19];
+	m_sptr_interface->m_Gnd_Pz_rl    		= m_udp_pull_recv_buf[20];
+	m_sptr_interface->m_Gnd_Pz_rr    		= m_udp_pull_recv_buf[21];
+	m_sptr_interface->m_Gnd_scale_fl 		= m_udp_pull_recv_buf[22];
+	m_sptr_interface->m_Gnd_scale_fr 		= m_udp_pull_recv_buf[23];
+	m_sptr_interface->m_Gnd_scale_rl 		= m_udp_pull_recv_buf[24];
+	m_sptr_interface->m_Gnd_scale_rr 		= m_udp_pull_recv_buf[25];
+	m_sptr_interface->m_Tir_Prs_fl   		= m_udp_pull_recv_buf[26];
+	m_sptr_interface->m_Tir_Prs_fr   		= m_udp_pull_recv_buf[27];
+	m_sptr_interface->m_Tir_Prs_rl   		= m_udp_pull_recv_buf[28];
+	m_sptr_interface->m_Tir_Prs_rr   		= m_udp_pull_recv_buf[29];
+	m_sptr_interface->m_Air_Tair     		= m_udp_pull_recv_buf[30];
+	m_sptr_interface->m_Air_Tamb_fl  		= m_udp_pull_recv_buf[31];
+	m_sptr_interface->m_Air_Tamb_fr  		= m_udp_pull_recv_buf[32];
+	m_sptr_interface->m_Air_Tamb_rl  		= m_udp_pull_recv_buf[33];
+	m_sptr_interface->m_Air_Tamb_rr  		= m_udp_pull_recv_buf[34];
+	m_sptr_interface->m_Ext_Fx_ext   		= m_udp_pull_recv_buf[35];
+	m_sptr_interface->m_Ext_Fy_ext   		= m_udp_pull_recv_buf[36];
+	m_sptr_interface->m_Ext_Fz_ext   		= m_udp_pull_recv_buf[37];
+	m_sptr_interface->m_Ext_Mx_ext   		= m_udp_pull_recv_buf[38]; 
+	m_sptr_interface->m_Ext_My_ext   		= m_udp_pull_recv_buf[39];
+	m_sptr_interface->m_Ext_Mz_ext   		= m_udp_pull_recv_buf[40];
 
-		m_enable_do_sim = true;
-		if (m_enable_output) {
-			m_udp_pull_send_buf[0] = m_sptr_interface->m_xe_x_c;
-			m_udp_pull_send_buf[1] = m_sptr_interface->m_xe_y_c;
-			m_udp_pull_send_buf[2] = m_sptr_interface->m_xe_z_c;
-			m_udp_pull_send_buf[3] = m_sptr_interface->m_phai_c;
-			m_udp_pull_send_buf[4] = m_sptr_interface->m_theta_c;
-			m_udp_pull_send_buf[5] = m_sptr_interface->m_psi_c;
+	/*m_enable_do_sim = true;
+	if (m_enable_output) {
+		m_udp_pull_send_buf[0] = m_sptr_interface->m_xe_x_c;
+		m_udp_pull_send_buf[1] = m_sptr_interface->m_xe_y_c;
+		m_udp_pull_send_buf[2] = m_sptr_interface->m_xe_z_c;
+		m_udp_pull_send_buf[3] = m_sptr_interface->m_phai_c;
+		m_udp_pull_send_buf[4] = m_sptr_interface->m_theta_c;
+		m_udp_pull_send_buf[5] = m_sptr_interface->m_psi_c;
 
-			m_sptr_udp_pull_server->respond(m_udp_pull_send_buf,sizeof(m_udp_pull_send_buf));
-		}
-		
-	}  
+		m_sptr_udp_server->respond(m_udp_pull_send_buf,sizeof(m_udp_pull_send_buf));
+	}*/
     
 }
 
 void Simulator_Pass14DOF::udp_push() {
-	while(!m_simulation_done)  {  
-		m_sptr_udp_push_server->get_request(m_udp_push_recv_buf,sizeof(m_udp_push_recv_buf));
-		
-		m_udp_push_send_buf[0] = m_sptr_interface->m_xe_x_c;
-		m_udp_push_send_buf[1] = m_sptr_interface->m_xe_y_c;
-		m_udp_push_send_buf[2] = m_sptr_interface->m_xe_z_c;
-		m_udp_push_send_buf[3] = m_sptr_interface->m_phai_c;
-		m_udp_push_send_buf[4] = m_sptr_interface->m_theta_c;
-		m_udp_push_send_buf[5] = m_sptr_interface->m_psi_c;
+	m_udp_push_send_buf[0] = m_sptr_interface->m_xe_x_c;
+	m_udp_push_send_buf[1] = m_sptr_interface->m_xe_y_c;
+	m_udp_push_send_buf[2] = m_sptr_interface->m_xe_z_c;
+	m_udp_push_send_buf[3] = m_sptr_interface->m_phai_c;
+	m_udp_push_send_buf[4] = m_sptr_interface->m_theta_c;
+	m_udp_push_send_buf[5] = m_sptr_interface->m_psi_c;
 
-		m_sptr_udp_push_server->respond(m_udp_push_send_buf,sizeof(m_udp_push_send_buf));
-	}   
+	m_sptr_udp_server->respond(m_udp_push_send_buf,sizeof(m_udp_push_send_buf));
 }
 
 
 void Simulator_Pass14DOF::do_simulation() {
+	std::cout<<"do simulation"<<std::endl;
 	real_Y t = m_t_start;
 	while(!m_enable_do_sim);
 	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
@@ -321,7 +311,7 @@ void Simulator_Pass14DOF::do_simulation() {
 		m_enable_output = true;
 		t += m_t_step;
 		spin(m_steps);
-		//std::cout<<"running time "<< t <<" secs"<<std::endl;
+		std::cout<<"running time "<< t <<" secs"<<std::endl;
 	}
 	m_times.push_back(t);
 	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
@@ -332,12 +322,29 @@ void Simulator_Pass14DOF::do_simulation() {
 }
 
 void Simulator_Pass14DOF::run () {
-	std::thread t1(&Simulator_Pass14DOF::udp_pull,this);
-	std::thread t2(&Simulator_Pass14DOF::do_simulation,this);
-	std::thread t3(&Simulator_Pass14DOF::udp_push,this);
-	t1.join();
-	t2.join();
-	t3.join();
-	std::cout<<"simulation done"<<std::endl;
+	std::cout<<"do simulation"<<std::endl;
+	real_Y t = m_t_start;
+	m_sptr_sys->push_con_states(m_sptr_sys->m_con_states);
+	m_tp_start = steady_clock::now();
+	udp_pull();
+
+	while(t<m_t_end) {
+		m_steps++;	
+		m_times.push_back(t);
+		m_sptr_sys->push_con_states_veh_whl(m_sptr_sys->m_con_states);
+		m_stepper.do_step(*m_sptr_sys,m_sptr_sys->m_con_states,t,m_t_step);
+		m_sptr_sys->pull_con_states_veh_whl(m_sptr_sys->m_con_states);
+		t += m_t_step;
+		udp_push();
+		udp_pull();
+		spin(m_steps);
+		std::cout<<"running time "<< t <<" secs"<<std::endl;
+	}
+	udp_push();
+	m_times.push_back(t);
+	m_sptr_sys->pull_con_states(m_sptr_sys->m_con_states);
+	m_sptr_sys->update_pv();
+	m_sptr_sys->update_fm();
+	m_sptr_sys->store_data();
 	//exit(0);
 }

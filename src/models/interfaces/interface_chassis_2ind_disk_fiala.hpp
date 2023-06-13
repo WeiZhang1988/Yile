@@ -21,7 +21,7 @@
 namespace NMSPC{
 class Int_Chassis_2Ind_Disk_Fiala {
 public:
-    static const int m_inputs_nums = 38;
+    static const int m_inputs_nums = 41;
     //////////G E N E R A T E D  B Y   E N V & E X T E R N A L//////////////////////////
     //whl pv pull
 	real_Y m_Gnd_Pz_fl = NaN;               //Env.Gnd to wheel

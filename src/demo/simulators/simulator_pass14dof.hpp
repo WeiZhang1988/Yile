@@ -23,7 +23,7 @@
 #include <mutex>
 #include <thread>
 #include "csv.hpp"
-#include "auxiliary/udp_server.hpp"
+#include "auxiliary/udp_server_client.hpp"
 #include "auxiliary/task.hpp"
 #include "yile.hpp"
 
@@ -68,18 +68,18 @@ private:
 		0.0,0.0,0.0,0.0,  //2-AxlTrq 0000
 		0.0,0.0,0.0,0.0,  //3-BrkPrs 0000
 		0.0,0.0,0.0,	  //4-WindXYZ 000
-		0.0,0.0,0.0,0.0,  //5-Ground 0000
-		1.0,1.0,1.0,1.0,  //6-Friction 111
+        0.0,0.0,0.0,      //5-Grade
+		0.0,0.0,0.0,0.0,  //6-Ground 0000
+		1.0,1.0,1.0,1.0,  //7-Friction 1111
 		2.2e5,2.2e5,2.2e5,2.2e5, //Tire Pressure 220000
 		273.0,// Air temperature Constant: Tair=273
 		0.0,0.0,0.0,0.0,// Tire temperature Constant: Tamb=0
 		0.0,0.0,0.0,//Extern Fx, Fy, Fz
 		0.0,0.0,0.0 //Extern Mx, My, Mz
 	};
-    shared_ptr<UDP_Server> m_sptr_udp_pull_server;
+    shared_ptr<UDP_Server> m_sptr_udp_server;
     double m_udp_push_send_buf[6] = {0.0,0.0,0.0,0.0,0.0,0.0};  
   	double m_udp_push_recv_buf[1] = {0.0};
-    shared_ptr<UDP_Server> m_sptr_udp_push_server;
 
     string m_par_file;
 	real_Y m_t_start, m_t_end, m_t_step, m_t_step_micros;
