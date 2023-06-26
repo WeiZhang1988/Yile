@@ -328,6 +328,8 @@ void Simulator_Pass14DOF::run () {
 	m_tp_start = steady_clock::now();
 	udp_pull();
 
+	std::cout << "end time " << m_t_end << std::endl;
+
 	while(t<m_t_end) {
 		m_steps++;	
 		m_times.push_back(t);
@@ -346,5 +348,5 @@ void Simulator_Pass14DOF::run () {
 	m_sptr_sys->update_pv();
 	m_sptr_sys->update_fm();
 	m_sptr_sys->store_data();
-	//exit(0);
+	exit(0);
 }

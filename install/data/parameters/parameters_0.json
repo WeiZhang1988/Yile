@@ -275,7 +275,7 @@
 	"sim_config" : 
 	{
 		"t_start" : 0.0,
-		"t_end" : 1e100,
+		"t_end" : 1.0,
 		"t_step" : 5e-4
 	}
 }

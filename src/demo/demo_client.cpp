@@ -57,7 +57,6 @@ int main()
     };  
     double recv_buf[6];  
         
-
     io::CSVReader<41> m_inputs(input_file); //need modification
     while(true) {
 
